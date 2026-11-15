@@ -30,6 +30,7 @@ export type Marker = {
 export type Layers = {
   trails: boolean;
   bounds: boolean;
+  hitboxes: boolean;
   sourceVideo: boolean;
   hiddenVehicles: string[];
 };
@@ -78,7 +79,7 @@ function clampWidth(value: number, limits: { default: number; min: number; max: 
   return Math.round(Math.min(limits.max, Math.max(limits.min, Math.min(value, room))));
 }
 
-const DEFAULT_LAYERS: Layers = { trails: false, bounds: true, sourceVideo: false, hiddenVehicles: [] };
+const DEFAULT_LAYERS: Layers = { trails: false, bounds: true, hitboxes: false, sourceVideo: false, hiddenVehicles: [] };
 
 type Store = {
   scenes: SceneInfo[];

@@ -33,7 +33,7 @@ export type CameraPose = { position: Point3; target: Point3 };
 export type SceneMarker = { id: string; label: string; point: Point3; entityId?: string };
 
 /** Overlays the user (or the assistant) can switch on and off. */
-export type SceneLayers = { trails: boolean; bounds: boolean; hiddenVehicles: string[] };
+export type SceneLayers = { trails: boolean; bounds: boolean; hitboxes: boolean; hiddenVehicles: string[] };
 
 export type SceneHandle = {
   showProxy: (layoutId: string, vehicles: VehicleVisual[], environment: SceneEnvironment, duration: number) => void;
@@ -240,7 +240,7 @@ export async function mountScene(
   let movers: Mover[] = [];
   let duration = 0;
   let viewBounds: ViewBounds = { min: [-150, BOUNDS_FLOOR, -150], max: [150, BOUNDS_HEIGHT, 150] };
-  let layers: SceneLayers = { trails: false, bounds: true, hiddenVehicles: [] };
+  let layers: SceneLayers = { trails: false, bounds: true, hitboxes: false, hiddenVehicles: [] };
   let markers: SceneMarker[] = [];
   let markerObjects = new Map<string, THREE.Group>();
   let follow: string | null = null;
@@ -521,7 +521,11 @@ export async function mountScene(
   };
 
   const applyVehicleVisibility = () => {
-    for (const mover of movers) mover.rig.root.visible = !layers.hiddenVehicles.includes(mover.id) && pov !== mover.id;
+    for (const mover of movers) {
+      mover.rig.root.visible = !layers.hiddenVehicles.includes(mover.id) && pov !== mover.id;
+      const hitbox = mover.rig.root.getObjectByName("vehicle-hitbox");
+      if (hitbox) hitbox.visible = layers.hitboxes;
+    }
     for (const line of trailsGroup.children) {
       const id = line.name.slice("trail:".length);
       line.visible = !layers.hiddenVehicles.includes(id);

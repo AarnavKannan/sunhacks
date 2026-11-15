@@ -267,6 +267,7 @@ export function SidePanel() {
           <Section title="Show">
             <Toggle icon={<Route size={15} />} label="Vehicle paths" checked={layers.trails} disabled={scene.vehicles.length === 0} onChange={(trails) => setLayers({ trails })} />
             <Toggle icon={<Square size={15} />} label="Scene boundary" checked={layers.bounds} onChange={(bounds) => setLayers({ bounds })} />
+            <Toggle icon={<Crosshair size={15} />} label="Vehicle hitboxes" checked={layers.hitboxes} disabled={scene.vehicles.length === 0} onChange={(hitboxes) => setLayers({ hitboxes })} />
             <Toggle
               icon={<Film size={15} />}
               label="Original footage"
