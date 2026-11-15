@@ -56,7 +56,7 @@ export function KinematicsPanel() {
   const [time, setTime] = useState("1");
   const scene = useAppStore((state) => state.scenes.find((item) => item.id === state.selectedId));
   const layout = scene ? getLayout(scene.id) : undefined;
-  const collisionVehicleIds = layout?.skidMarks?.vehicleIds;
+  const collisionVehicleIds = layout?.collision?.vehicleIds;
   const vehicles = scene
     ? collisionVehicleIds
       ? scene.vehicles.filter((vehicle) => collisionVehicleIds.includes(vehicle.id))

@@ -3,6 +3,7 @@ import { putSplatFile } from "@/lib/splatFiles";
 import type { FootageAnalysis } from "@/lib/analyzeFootage";
 import { CAMERA_ADJUSTMENT_BASE, type CameraAdjustments } from "@/scene/camera";
 import { DEFAULT_ENVIRONMENT } from "@/scene/environment";
+import { getLayout } from "@/scene/layouts";
 import type { Point3 } from "@/scene/mountScene";
 import { create } from "zustand";
 
@@ -146,7 +147,25 @@ type Store = {
   addSplatScene: (file: { fileName: string; bytes: Uint8Array }) => void;
 };
 
-const initial = BUILTIN_SCENES[0];
+const scenesWithDetectedCollisions = BUILTIN_SCENES.map((scene) => {
+  const layout = getLayout(scene.id);
+  if (!layout || scene.impactTime === null) return scene;
+
+  const collision = layout.collision;
+  if (!collision) {
+    return { ...scene, impactTime: null, crashEnd: null, crashVehicles: [] };
+  }
+  const beforeCrash = scene.impactTime - scene.startTime;
+  return {
+    ...scene,
+    impactTime: collision.impactTime,
+    crashEnd: Math.min(scene.duration, collision.endTime),
+    crashVehicles: collision.vehicleIds,
+    startTime: Math.max(0, collision.impactTime - beforeCrash),
+  };
+});
+
+const initial = scenesWithDetectedCollisions[0];
 
 function clampTime(time: number, duration: number) {
   if (!Number.isFinite(time)) return 0;
@@ -167,7 +186,7 @@ function sameCameraAdjustments(a: CameraAdjustments, b: CameraAdjustments) {
 let markerCount = 0;
 
 export const useAppStore = create<Store>((set, get) => ({
-  scenes: BUILTIN_SCENES,
+  scenes: scenesWithDetectedCollisions,
   uploads: [],
   view: "home",
   homeFolder: null,

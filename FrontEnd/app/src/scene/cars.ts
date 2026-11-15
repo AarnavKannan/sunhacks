@@ -4,7 +4,7 @@ import * as THREE from "three";
 export type VehicleKind = "car" | "van" | "truck";
 
 /** Passenger-car body styles seen in the reference traffic photos. */
-type CarStyle = "sedan" | "hatchback" | "suv";
+export type CarStyle = "sedan" | "hatchback" | "suv";
 
 /**
  * A vehicle built for animation: the scene moves and yaws `root`; `body` tilts on the
@@ -250,6 +250,21 @@ const CAR_STYLES: Record<CarStyle, { body: Profile; glass: Profile; roof: Profil
   },
 };
 
+export function carHitboxDimensions(style: CarStyle) {
+  const spec = CAR_STYLES[style];
+  const profile = [...spec.body, ...spec.glass, ...spec.roof];
+  const front = Math.max(...profile.map(([z]) => z));
+  const back = Math.min(...profile.map(([z]) => z));
+  const height = Math.max(...profile.map(([, y]) => y));
+  const padding = style === "suv" ? 0.2 : 0.12;
+  return {
+    radiusX: (spec.width + padding * 2) / 2,
+    radiusY: (height + padding) / 2,
+    radiusZ: (front - back + padding * 2) / 2,
+    centerZ: (front + back) / 2,
+  };
+}
+
 function makeCar(m: Materials, style: CarStyle) {
   const spec = CAR_STYLES[style];
   const rig = newRig();
@@ -266,6 +281,30 @@ function makeCar(m: Materials, style: CarStyle) {
   addMirrors(rig.body, m, spec.glass[0][0] - 0.25, spec.glass[0][1] + 0.08, spec.width / 2);
   shadowed(rig.body);
   addWheels(rig, m, spec.wheel, spec.width - 0.24, spec.axles);
+
+  const { radiusX, radiusY, radiusZ, centerZ } = carHitboxDimensions(style);
+  const hitbox = new THREE.Group();
+  hitbox.name = "vehicle-hitbox";
+  hitbox.position.set(0, radiusY, centerZ);
+  const material = new THREE.LineBasicMaterial({
+    color: style === "suv" ? 0xffa726 : 0x00d8ff,
+    depthTest: false,
+    depthWrite: false,
+    fog: false,
+    toneMapped: false,
+  });
+  const ellipses = [
+    (angle: number) => new THREE.Vector3(radiusX * Math.cos(angle), radiusY * Math.sin(angle), 0),
+    (angle: number) => new THREE.Vector3(radiusX * Math.cos(angle), 0, radiusZ * Math.sin(angle)),
+    (angle: number) => new THREE.Vector3(0, radiusY * Math.cos(angle), radiusZ * Math.sin(angle)),
+  ];
+  for (const pointAt of ellipses) {
+    const points = Array.from({ length: 64 }, (_, i) => pointAt((i / 64) * Math.PI * 2));
+    const ellipse = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), material);
+    ellipse.renderOrder = 10;
+    hitbox.add(ellipse);
+  }
+  rig.root.add(hitbox);
   return rig;
 }
 
