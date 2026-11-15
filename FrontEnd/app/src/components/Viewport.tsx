@@ -45,7 +45,9 @@ export function Viewport() {
     };
 
     void (async () => {
-      const handle = await mountScene(container);
+      const handle = await mountScene(container, (adjustments) =>
+        useAppStore.getState().setCameraAdjustments(adjustments),
+      );
       if (disposed) {
         handle.dispose();
         return;
@@ -72,6 +74,9 @@ export function Viewport() {
       const handle = handleRef.current;
       if (!handle) return;
       if (state.selectedId !== previous.selectedId) void applySelection(handle);
+      if (state.cameraAdjustments !== previous.cameraAdjustments) {
+        handle.setCameraAdjustments(state.cameraAdjustments);
+      }
       if (state.cameraResetToken !== previous.cameraResetToken) handle.resetCamera();
     });
 

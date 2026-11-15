@@ -12,6 +12,7 @@ import {
   type SceneEnvironment,
 } from "@/scene/environment";
 import { getLayout, type Layout, type Pose } from "@/scene/layouts";
+import { type CameraAdjustments } from "@/scene/camera";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
@@ -26,6 +27,7 @@ export type SceneHandle = {
   showProxy: (layoutId: string, vehicles: VehicleVisual[], environment: SceneEnvironment) => void;
   showSplat: (bytes: Uint8Array, fileName: string, environment: SceneEnvironment) => Promise<void>;
   setTime: (time: number) => void;
+  setCameraAdjustments: (adjustments: CameraAdjustments) => void;
   resetCamera: () => void;
   resize: () => void;
   render: () => void;
@@ -48,7 +50,10 @@ type SplatMeshLike = THREE.Object3D & {
 
 const LOADING_BACKGROUND = 0x9aa4b2;
 
-export async function mountScene(container: HTMLElement): Promise<SceneHandle> {
+export async function mountScene(
+  container: HTMLElement,
+  onCameraChange: (adjustments: CameraAdjustments) => void,
+): Promise<SceneHandle> {
   // No default-framebuffer MSAA: the composer below renders into its own multisampled
   // target, so built-in antialiasing would only cost memory (~65 MB at 1080p).
   const renderer = new THREE.WebGLRenderer({ antialias: false });
@@ -134,6 +139,46 @@ export async function mountScene(container: HTMLElement): Promise<SceneHandle> {
     target: new THREE.Vector3(-2, 0, 2),
   };
 
+  const readCameraAdjustments = (): CameraAdjustments => {
+    const baseOffset = home.position.clone().sub(home.target);
+    const base = new THREE.Spherical().setFromVector3(baseOffset);
+    const offset = camera.position.clone().sub(controls.target);
+    const current = new THREE.Spherical().setFromVector3(offset);
+    const round = (value: number) => Math.round(value * 1000) / 1000;
+    return {
+      panX: round(controls.target.x - home.target.x),
+      panY: round(controls.target.y - home.target.y),
+      panZ: round(controls.target.z - home.target.z),
+      zoom: round(current.radius / base.radius),
+      tilt: round(THREE.MathUtils.radToDeg(current.phi - base.phi)),
+      rotate: round(THREE.MathUtils.radToDeg(wrapAngle(current.theta - base.theta))),
+    };
+  };
+
+  const setCameraAdjustments = (adjustments: CameraAdjustments) => {
+    const baseOffset = home.position.clone().sub(home.target);
+    const base = new THREE.Spherical().setFromVector3(baseOffset);
+    const target = home.target.clone().add(
+      new THREE.Vector3(adjustments.panX, adjustments.panY, adjustments.panZ),
+    );
+    const minZoom = controls.minDistance / base.radius;
+    const maxZoom = controls.maxDistance / base.radius;
+    const radius = base.radius * THREE.MathUtils.clamp(adjustments.zoom, minZoom, maxZoom);
+    const phi = THREE.MathUtils.clamp(
+      base.phi + THREE.MathUtils.degToRad(adjustments.tilt),
+      0.001,
+      controls.maxPolarAngle,
+    );
+    const theta = base.theta + THREE.MathUtils.degToRad(adjustments.rotate);
+    camera.position.copy(target).add(new THREE.Vector3().setFromSpherical(new THREE.Spherical(radius, phi, theta)));
+    controls.target.copy(target);
+    controls.saveState();
+    controls.reset();
+    onCameraChange(readCameraAdjustments());
+  };
+
+  controls.addEventListener("change", () => onCameraChange(readCameraAdjustments()));
+
   const placeSun = () => {
     const center = currentLayout ? new THREE.Vector3(0, 0, 0) : controls.target.clone();
     const extent = currentLayout ? Math.max(currentLayout.site.width, currentLayout.site.depth) * 0.55 : 70;
@@ -197,7 +242,9 @@ export async function mountScene(container: HTMLElement): Promise<SceneHandle> {
   const applyHome = () => {
     camera.position.copy(home.position);
     controls.target.copy(home.target);
-    controls.update();
+    controls.saveState();
+    controls.reset();
+    onCameraChange(readCameraAdjustments());
   };
 
   const disposeObject = (object: THREE.Object3D) => {
@@ -332,6 +379,7 @@ export async function mountScene(container: HTMLElement): Promise<SceneHandle> {
     showProxy,
     showSplat,
     setTime,
+    setCameraAdjustments,
     resetCamera: applyHome,
     resize,
     render: () => {

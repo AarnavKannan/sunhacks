@@ -2,19 +2,26 @@ import { SceneArt } from "@/components/SceneArt";
 import { formatBytes, formatClock } from "@/lib/time";
 import { ingestFiles } from "@/lib/ingest";
 import { describeEnvironment } from "@/scene/environment";
+import type { CameraAdjustments } from "@/scene/camera";
 import { useAppStore } from "@/store/useAppStore";
-import { Clock, CloudSun, Film, LocateFixed, MapPin, PanelLeftClose, PanelLeftOpen, Play, Search, Upload, X, Zap } from "lucide-react";
-import { useRef, useState, type ReactNode } from "react";
+import { Clock, CloudSun, Film, GripVertical, LocateFixed, MapPin, PanelLeftClose, PanelLeftOpen, Play, Search, Upload, X, Zap } from "lucide-react";
+import { useRef, useState, type DragEvent as ReactDragEvent, type ReactNode } from "react";
 
 export function SidePanel({ dragOver }: { dragOver: boolean }) {
+  const dragStartRef = useRef<{ pointerX: number; x: number } | null>(null);
+  const dragXRef = useRef<number | null>(null);
+  const [dragX, setDragX] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const panelOpen = useAppStore((state) => state.panelOpen);
   const scenes = useAppStore((state) => state.scenes);
   const uploads = useAppStore((state) => state.uploads);
   const selectedId = useAppStore((state) => state.selectedId);
   const search = useAppStore((state) => state.search);
+  const cameraAdjustments = useAppStore((state) => state.cameraAdjustments);
   const playing = useAppStore((state) => state.playing);
   const impactTime = useAppStore((state) => state.impactTime);
   const setSearch = useAppStore((state) => state.setSearch);
+  const setCameraAdjustments = useAppStore((state) => state.setCameraAdjustments);
   const selectScene = useAppStore((state) => state.selectScene);
   const togglePlay = useAppStore((state) => state.togglePlay);
   const jumpToImpact = useAppStore((state) => state.jumpToImpact);
@@ -24,6 +31,39 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isStaging, setIsStaging] = useState(false);
   const [stageMessage, setStageMessage] = useState("");
+
+  const startPanelDrag = (event: ReactDragEvent<HTMLButtonElement>) => {
+    const x = panelOpen ? 0 : -340;
+    dragStartRef.current = { pointerX: event.clientX, x };
+    dragXRef.current = x;
+    setDragX(x);
+    setIsDragging(true);
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", "scene-panel");
+  };
+
+  const dragPanel = (event: ReactDragEvent<HTMLButtonElement>) => {
+    const start = dragStartRef.current;
+    if (!start || event.clientX === 0) return;
+    const x = Math.min(0, Math.max(-340, start.x + event.clientX - start.pointerX));
+    dragXRef.current = x;
+    setDragX(x);
+  };
+
+  const finishPanelDrag = () => {
+    const start = dragStartRef.current;
+    if (!start) return;
+    setPanelOpen((dragXRef.current ?? start.x) > -170);
+    dragStartRef.current = null;
+    dragXRef.current = null;
+    setDragX(null);
+    setIsDragging(false);
+  };
+
+  const updateCamera = (field: keyof CameraAdjustments, value: number) => {
+    if (!Number.isFinite(value)) return;
+    setCameraAdjustments({ ...cameraAdjustments, [field]: value });
+  };
 
   const stageUploads = async () => {
     if (!window.reconstruct?.stageVideos) {
@@ -56,10 +96,32 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
   });
 
   return (
-    <aside className={`absolute inset-y-0 left-0 z-30 flex w-[400px] flex-col bg-white shadow-[4px_0_24px_rgba(0,0,0,0.18)] transition-transform duration-200 ease-in-out ${panelOpen ? "translate-x-0" : "-translate-x-[340px]"}`}>
-      <div className={`flex items-center gap-3 px-4 pt-4 ${panelOpen ? "" : "justify-end"}`}>
+    <aside
+      style={{
+        transform: `translateX(${dragX ?? (panelOpen ? 0 : -340)}px)`,
+      }}
+      className={`absolute inset-y-0 left-0 z-30 flex w-[400px] flex-col bg-white shadow-[4px_0_24px_rgba(0,0,0,0.18)] ${
+        isDragging ? "" : "transition-transform duration-200 ease-in-out"
+      }`}
+    >
+      <div
+        title="Drag left or right to move the panel"
+        className={`flex items-center gap-3 px-4 pt-4 ${panelOpen ? "" : "justify-end"}`}
+      >
         {panelOpen && (
           <>
+            <button
+              type="button"
+              draggable
+              aria-label="Drag scenes panel horizontally"
+              title="Drag left or right to slide the panel"
+              className="grid h-8 w-6 shrink-0 cursor-ew-resize place-items-center rounded text-slate-300 hover:bg-slate-100"
+              onDragStart={startPanelDrag}
+              onDrag={dragPanel}
+              onDragEnd={finishPanelDrag}
+            >
+              <GripVertical size={16} aria-hidden="true" />
+            </button>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1a73e8] text-sm font-semibold text-white">
               R
             </div>
@@ -73,11 +135,15 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
         )}
         <button
           type="button"
+          draggable={!panelOpen}
           className="rounded-full p-2 text-slate-500 hover:bg-slate-100"
           aria-label={panelOpen ? "Hide scenes panel" : "Show scenes panel"}
           onClick={() => setPanelOpen(!panelOpen)}
+          onDragStart={panelOpen ? undefined : startPanelDrag}
+          onDrag={panelOpen ? undefined : dragPanel}
+          onDragEnd={panelOpen ? undefined : finishPanelDrag}
         >
-          {panelOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
+          {panelOpen ? <PanelLeftClose size={10} /> : <PanelLeftOpen size={10} />}
         </button>
       </div>
 
@@ -128,6 +194,30 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
       </div>
 
       <div className="mt-3 flex-1 overflow-y-auto px-4 pb-4">
+        <section className="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-3">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <h2 className="text-xs font-medium tracking-wide text-slate-600 uppercase">Camera controls</h2>
+            <button
+              type="button"
+              onClick={resetCamera}
+              className="rounded-md bg-white px-2 py-1 text-xs font-medium text-[#1a73e8] shadow-sm"
+            >
+              Base view
+            </button>
+          </div>
+          <p className="mb-2 text-[11px] leading-relaxed text-slate-500">
+            Relative to the scene base: pan, tilt, rotate = 0; zoom = 1×.
+          </p>
+          <div className="grid grid-cols-3 gap-2">
+            <CameraField label="Pan X (m)" value={cameraAdjustments.panX} step="0.1" onChange={(value) => updateCamera("panX", value)} />
+            <CameraField label="Pan Y (m)" value={cameraAdjustments.panY} step="0.1" onChange={(value) => updateCamera("panY", value)} />
+            <CameraField label="Pan Z (m)" value={cameraAdjustments.panZ} step="0.1" onChange={(value) => updateCamera("panZ", value)} />
+            <CameraField label="Zoom (×)" value={cameraAdjustments.zoom} step="0.01" min="0.1" onChange={(value) => updateCamera("zoom", value)} />
+            <CameraField label="Tilt (°)" value={cameraAdjustments.tilt} step="0.1" onChange={(value) => updateCamera("tilt", value)} />
+            <CameraField label="Rotate (°)" value={cameraAdjustments.rotate} step="0.1" onChange={(value) => updateCamera("rotate", value)} />
+          </div>
+        </section>
+
         {uploads.length > 0 && (
           <section className="mb-4">
             <div className="mb-2 flex items-center justify-between gap-2">
@@ -262,6 +352,34 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
         </>
       )}
     </aside>
+  );
+}
+
+function CameraField({
+  label,
+  value,
+  step,
+  min,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  step: string;
+  min?: string;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <label className="flex min-w-0 flex-col gap-1 text-[11px] font-medium text-slate-600">
+      {label}
+      <input
+        type="number"
+        value={value}
+        step={step}
+        min={min}
+        onChange={(event) => onChange(event.currentTarget.valueAsNumber)}
+        className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm text-slate-900 outline-none focus:border-[#1a73e8]"
+      />
+    </label>
   );
 }
 

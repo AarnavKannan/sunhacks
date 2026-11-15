@@ -1,6 +1,7 @@
 import { BUILTIN_SCENES, type SceneInfo } from "@/data/scenes";
 import { putSplatFile } from "@/lib/splatFiles";
 import type { FootageAnalysis } from "@/lib/analyzeFootage";
+import { CAMERA_ADJUSTMENT_BASE, type CameraAdjustments } from "@/scene/camera";
 import { DEFAULT_ENVIRONMENT } from "@/scene/environment";
 import { create } from "zustand";
 
@@ -25,6 +26,7 @@ type Store = {
   scrubbing: boolean;
   panelOpen: boolean;
   search: string;
+  cameraAdjustments: CameraAdjustments;
   cameraResetToken: number;
   selectScene: (id: string) => void;
   setTime: (time: number) => void;
@@ -33,6 +35,7 @@ type Store = {
   setScrubbing: (scrubbing: boolean) => void;
   setPanelOpen: (open: boolean) => void;
   setSearch: (search: string) => void;
+  setCameraAdjustments: (adjustments: CameraAdjustments) => void;
   jumpToImpact: () => void;
   resetCamera: () => void;
   addUploads: (files: { id: string; name: string; size: number; file: File }[]) => void;
@@ -48,6 +51,17 @@ function clampTime(time: number, duration: number) {
   return Math.min(duration, Math.max(0, time));
 }
 
+function sameCameraAdjustments(a: CameraAdjustments, b: CameraAdjustments) {
+  return (
+    Math.abs(a.panX - b.panX) < 0.001 &&
+    Math.abs(a.panY - b.panY) < 0.001 &&
+    Math.abs(a.panZ - b.panZ) < 0.001 &&
+    Math.abs(a.zoom - b.zoom) < 0.001 &&
+    Math.abs(a.tilt - b.tilt) < 0.001 &&
+    Math.abs(a.rotate - b.rotate) < 0.001
+  );
+}
+
 export const useAppStore = create<Store>((set, get) => ({
   scenes: BUILTIN_SCENES,
   uploads: [],
@@ -59,6 +73,7 @@ export const useAppStore = create<Store>((set, get) => ({
   scrubbing: false,
   panelOpen: true,
   search: "",
+  cameraAdjustments: CAMERA_ADJUSTMENT_BASE,
   cameraResetToken: 0,
   selectScene: (id) => {
     const scene = get().scenes.find((item) => item.id === id);
@@ -69,6 +84,7 @@ export const useAppStore = create<Store>((set, get) => ({
       impactTime: scene.impactTime,
       time: scene.startTime,
       playing: false,
+      cameraAdjustments: CAMERA_ADJUSTMENT_BASE,
     });
   },
 
@@ -88,6 +104,8 @@ export const useAppStore = create<Store>((set, get) => ({
   setScrubbing: (scrubbing) => set({ scrubbing }),
   setPanelOpen: (panelOpen) => set({ panelOpen }),
   setSearch: (search) => set({ search }),
+  setCameraAdjustments: (cameraAdjustments) =>
+    set((state) => (sameCameraAdjustments(state.cameraAdjustments, cameraAdjustments) ? state : { cameraAdjustments })),
 
   jumpToImpact: () => {
     const { impactTime, duration } = get();
@@ -95,7 +113,11 @@ export const useAppStore = create<Store>((set, get) => ({
     set({ time: clampTime(impactTime, duration), playing: false });
   },
 
-  resetCamera: () => set((state) => ({ cameraResetToken: state.cameraResetToken + 1 })),
+  resetCamera: () =>
+    set((state) => ({
+      cameraResetToken: state.cameraResetToken + 1,
+      cameraAdjustments: CAMERA_ADJUSTMENT_BASE,
+    })),
 
   addUploads: (files) =>
     set((state) => ({
