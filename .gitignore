@@ -1,2 +1,15 @@
 # Mac generated
 **/.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+venv/
+
+# Step cache. The generated scene package is kept.
+pipeline/.cache/

@@ -38,3 +38,9 @@ The output contains `background.splat`, `manifest.json`, and the COLMAP project 
 The Electron app currently stages selected source videos locally; it does not transfer them to Sol or submit this job automatically. Transfer inputs to Sol, submit the Slurm job, and download `background.splat` to the desktop. In the app, choose **Load splat output** to view it.
 
 The local `TestData` folder currently contains one MP4. Copy it to Sol before submitting; COLMAP still needs enough camera motion/parallax and visual overlap to estimate poses and geometry. A fixed-camera clip may not produce a usable 3D reconstruction, while overlapping views from multiple cameras are more suitable.
+
+## Built-in proxy collision motion
+
+The roundabout and Apache proxy scenes use collision trajectories exported by the Python pipeline. Install the pipeline package, then run `export-collision-trajectories` from the repository root to regenerate `FrontEnd/app/src/data/impactTrajectories.json`. The solver uses SymPy to solve vector momentum conservation and Newton's restitution equation along the impact normal, NumPy for the vector response and sampled motion, and Coulomb friction to bring each vehicle to rest.
+
+These are illustrative point-mass collisions, not measured crash reconstructions: masses are 1,950 kg (roundabout SUV), 1,500 kg (roundabout sedan), 1,600 kg (Apache sedan), and 2,000 kg (Apache SUV); both built-in collision pairs approach at about 20 m/s. Restitution is 0.15 and dry-asphalt friction is 0.75, matching the viewer's road specification. Since the proxy scenes contain no contact-point geometry, the impact normal is estimated opposite the incoming relative velocity. Real reconstruction should use measured vehicle masses, contact geometry, and tracked pre-impact velocities.
