@@ -8,6 +8,7 @@ export type UploadItem = {
   id: string;
   name: string;
   size: number;
+  file: File;
   status: "queued";
   /** Environment read from the footage; scenes reconstructed from it inherit it. */
   analysis: { state: "analyzing" } | { state: "done"; result: FootageAnalysis } | { state: "failed"; error: string };
@@ -34,7 +35,7 @@ type Store = {
   setSearch: (search: string) => void;
   jumpToImpact: () => void;
   resetCamera: () => void;
-  addUploads: (files: { id: string; name: string; size: number }[]) => void;
+  addUploads: (files: { id: string; name: string; size: number; file: File }[]) => void;
   setUploadAnalysis: (id: string, analysis: UploadItem["analysis"]) => void;
   removeUpload: (id: string) => void;
   addSplatScene: (file: { fileName: string; bytes: Uint8Array }) => void;
@@ -103,6 +104,7 @@ export const useAppStore = create<Store>((set, get) => ({
           id: file.id,
           name: file.name,
           size: file.size,
+          file: file.file,
           status: "queued" as const,
           analysis: { state: "analyzing" as const },
         })),

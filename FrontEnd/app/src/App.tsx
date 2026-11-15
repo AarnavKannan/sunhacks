@@ -1,468 +1,77 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import {
-  AlertCircle,
-  ArrowDownToLine,
-  ArrowUpRight,
-  Check,
-  ChevronDown,
-  ChevronLeft,
-  Clock3,
-  FileVideo2,
-  Focus,
-  Gauge,
-  Layers3,
-  MapPin,
-  Maximize2,
-  MoreHorizontal,
-  Pause,
-  Play,
-  Plus,
-  RotateCcw,
-  Search,
-  Settings2,
-  ShieldCheck,
-  SlidersHorizontal,
-  Upload,
-  X,
-} from "lucide-react";
-import SceneViewer from "./SceneViewer";
-import { useSceneStore, type SceneId } from "./store";
-import type { StagedIncident } from "./electron";
-
-const demoScenes: Array<{
-  id: SceneId;
-  title: string;
-  subtitle: string;
-  time: string;
-}> = [
-  { id: "intersection", title: "East Mesa intersection", subtitle: "2 vehicles · 12.0 sec", time: "Today" },
-  { id: "parking", title: "Parking lot incident", subtitle: "2 vehicles · 08.4 sec", time: "Yesterday" },
-];
-
-function formatTime(seconds: number) {
-  const minutes = Math.floor(seconds / 60);
-  const remainder = (seconds % 60).toFixed(2).padStart(5, "0");
-  return `${minutes}:${remainder}`;
-}
+import { SidePanel } from "@/components/SidePanel";
+import { Timeline } from "@/components/Timeline";
+import { Viewport } from "@/components/Viewport";
+import { ingestFiles } from "@/lib/ingest";
+import { useAppStore } from "@/store/useAppStore";
+import { useEffect, useState } from "react";
 
 export default function App() {
-  const sceneId = useSceneStore((state) => state.sceneId);
-  const currentTime = useSceneStore((state) => state.currentTime);
-  const duration = useSceneStore((state) => state.duration);
-  const isPlaying = useSceneStore((state) => state.isPlaying);
-  const setSceneId = useSceneStore((state) => state.setSceneId);
-  const setCurrentTime = useSceneStore((state) => state.setCurrentTime);
-  const setIsPlaying = useSceneStore((state) => state.setIsPlaying);
-  const [footage, setFootage] = useState<File[]>([]);
-  const [stagedIncident, setStagedIncident] = useState<StagedIncident | null>(null);
-  const [splatFile, setSplatFile] = useState<File | null>(null);
-  const [uploadMessage, setUploadMessage] = useState("");
-  const [isStaging, setIsStaging] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [viewerError, setViewerError] = useState("");
-  const [showDetails, setShowDetails] = useState(true);
-  const [isDrawerCollapsed, setIsDrawerCollapsed] = useState(false);
-  const [cameraPreset, setCameraPreset] = useState<"iso" | "top">("iso");
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const splatInputRef = useRef<HTMLInputElement>(null);
-  const scene = useMemo(() => demoScenes.find((item) => item.id === sceneId) ?? demoScenes[0], [sceneId]);
+  const [dragOver, setDragOver] = useState(false);
 
-  const reportViewerError = useCallback((message: string) => {
-    setViewerError(message);
+  useEffect(() => {
+    let depth = 0;
+    const hasFiles = (event: DragEvent) => [...(event.dataTransfer?.types ?? [])].includes("Files");
+
+    const onEnter = (event: DragEvent) => {
+      if (!hasFiles(event)) return;
+      event.preventDefault();
+      depth += 1;
+      setDragOver(true);
+    };
+    const onOver = (event: DragEvent) => {
+      if (!hasFiles(event)) return;
+      event.preventDefault();
+    };
+    const onLeave = (event: DragEvent) => {
+      if (!hasFiles(event)) return;
+      depth -= 1;
+      if (depth <= 0) {
+        depth = 0;
+        setDragOver(false);
+      }
+    };
+    const onDrop = (event: DragEvent) => {
+      event.preventDefault();
+      depth = 0;
+      setDragOver(false);
+      if (event.dataTransfer?.files?.length) void ingestFiles(event.dataTransfer.files);
+    };
+
+    window.addEventListener("dragenter", onEnter);
+    window.addEventListener("dragover", onOver);
+    window.addEventListener("dragleave", onLeave);
+    window.addEventListener("drop", onDrop);
+    return () => {
+      window.removeEventListener("dragenter", onEnter);
+      window.removeEventListener("dragover", onOver);
+      window.removeEventListener("dragleave", onLeave);
+      window.removeEventListener("drop", onDrop);
+    };
   }, []);
 
   useEffect(() => {
-    if (!isPlaying) return;
-    const timer = window.setInterval(() => {
-      const next = useSceneStore.getState().currentTime + 0.04;
-      if (next >= duration) {
-        setCurrentTime(duration);
-        setIsPlaying(false);
-      } else {
-        setCurrentTime(next);
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
+      const store = useAppStore.getState();
+      if (event.key === " ") {
+        event.preventDefault();
+        store.togglePlay();
+      } else if (event.key === "ArrowRight") {
+        store.setTime(store.time + (event.shiftKey ? 1 : 0.1));
+      } else if (event.key === "ArrowLeft") {
+        store.setTime(store.time - (event.shiftKey ? 1 : 0.1));
       }
-    }, 40);
-    return () => window.clearInterval(timer);
-  }, [duration, isPlaying, setCurrentTime, setIsPlaying]);
-
-  const addFiles = (files: FileList | File[]) => {
-    const selected = Array.from(files).filter((file) => /\.(mp4|mov|m4v|mkv|avi|webm)$/i.test(file.name));
-    if (!selected.length) {
-      setUploadMessage("Choose a video file to add footage.");
-      return;
-    }
-    setStagedIncident(null);
-    setFootage((current) => [...current, ...selected]);
-    setUploadMessage(`${selected.length} video${selected.length === 1 ? "" : "s"} selected.`);
-  };
-
-  const stageFootage = async () => {
-    if (!window.reconstruct?.stageVideos) {
-      setUploadMessage("Local staging is available in the Electron desktop app.");
-      return;
-    }
-
-    setIsStaging(true);
-    setUploadMessage("Copying videos and recording SHA-256 hashes…");
-    try {
-      const incident = await window.reconstruct.stageVideos(footage);
-      setStagedIncident(incident);
-      setUploadMessage(`${incident.videos.length} video${incident.videos.length === 1 ? "" : "s"} copied and hashed.`);
-    } catch (error) {
-      setUploadMessage(error instanceof Error ? `Could not stage footage: ${error.message}` : "Could not stage footage.");
-    } finally {
-      setIsStaging(false);
-    }
-  };
-
-  const seekToImpact = () => setCurrentTime(6.4);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
-    <main className={`app-shell ${isDrawerCollapsed ? "drawer-collapsed" : ""}`}>
-      <aside className="scene-drawer">
-        <div className="brand-row">
-          <div className="brand-mark"><Layers3 size={18} strokeWidth={2.2} /></div>
-          <div className="brand-copy">
-            <span className="brand-name">reconstruct</span>
-            <span className="brand-caption">INCIDENT VIEWER</span>
-          </div>
-          <button
-            className="icon-button drawer-collapse"
-            aria-label={isDrawerCollapsed ? "Expand scene panel" : "Collapse scene panel"}
-            aria-expanded={!isDrawerCollapsed}
-            title={isDrawerCollapsed ? "Expand scene panel" : "Collapse scene panel"}
-            onClick={() => setIsDrawerCollapsed((collapsed) => !collapsed)}
-          >
-            <ChevronLeft size={17} />
-          </button>
-        </div>
-
-        <div className="drawer-heading">
-          <div>
-            <p className="eyebrow">YOUR WORKSPACE</p>
-            <h1>Scenes</h1>
-          </div>
-          <button className="icon-button" aria-label="Scene settings"><MoreHorizontal size={19} /></button>
-        </div>
-
-        <div className="search-box">
-          <Search size={16} />
-          <input aria-label="Search scenes" placeholder="Search scenes" />
-          <span className="search-shortcut">⌘ K</span>
-        </div>
-
-        <section className="upload-section">
-          <div className="section-title-row">
-            <h2>New reconstruction</h2>
-            <span className="local-tag"><ShieldCheck size={12} /> LOCAL</span>
-          </div>
-          <div
-            className={`upload-dropzone ${isDragging ? "drag-active" : ""}`}
-            onDragOver={(event) => {
-              event.preventDefault();
-              setIsDragging(true);
-            }}
-            onDragLeave={() => setIsDragging(false)}
-            onDrop={(event) => {
-              event.preventDefault();
-              setIsDragging(false);
-              addFiles(event.dataTransfer.files);
-            }}
-          >
-            <div className="upload-icon"><Upload size={17} /></div>
-            <strong>Upload incident footage</strong>
-            <span>Drag videos here or browse files</span>
-            <button className="browse-button" onClick={() => fileInputRef.current?.click()}>
-              <Plus size={14} /> Add videos
-            </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="video/*"
-              multiple
-              hidden
-              onChange={(event) => {
-                if (event.currentTarget.files) addFiles(event.currentTarget.files);
-                event.currentTarget.value = "";
-              }}
-            />
-          </div>
-          {footage.length > 0 && (
-            <div className="staged-files">
-              <div className="staged-header"><span>SELECTED FOOTAGE</span><span>{footage.length}</span></div>
-              {footage.map((file, index) => (
-                <div className="staged-file" key={`${file.name}-${index}`}>
-                  <FileVideo2 size={15} />
-                  <span title={file.name}>{file.name}</span>
-                  <button
-                    className="file-remove"
-                    aria-label={`Remove ${file.name}`}
-                    onClick={() => {
-                      setStagedIncident(null);
-                      setFootage((files) => files.filter((_, fileIndex) => fileIndex !== index));
-                    }}
-                  >
-                    <X size={14} />
-                  </button>
-                </div>
-              ))}
-              <button
-                className="prepare-button"
-                disabled={isStaging}
-                onClick={() => void stageFootage()}
-              >
-                {isStaging ? "Staging footage…" : "Stage footage"} <ArrowUpRight size={14} />
-              </button>
-              <p className="upload-note">Copies and hashes the source videos on this device. Sol submission is not connected yet.</p>
-              {stagedIncident && (
-                <p className="upload-note">
-                  Incident {stagedIncident.incidentId.slice(0, 8)} · SHA-256 recorded for each source.
-                </p>
-              )}
-            </div>
-          )}
-          {uploadMessage && <p className="upload-feedback" role="status">{uploadMessage}</p>}
-          <div className="splat-import">
-            <input
-              ref={splatInputRef}
-              type="file"
-              accept=".splat,.ply,.spz,application/octet-stream"
-              hidden
-              onChange={(event) => {
-                const file = event.currentTarget.files?.[0];
-                if (!file) return;
-                const extension = file.name.split(".").pop()?.toLowerCase();
-                if (!extension || !["splat", "ply", "spz"].includes(extension)) {
-                  setUploadMessage("Choose an OpenSplat .splat, .ply, or .spz output.");
-                } else {
-                  setSplatFile(file);
-                  setIsPlaying(false);
-                  setViewerError("");
-                  setUploadMessage(`Loaded scene output: ${file.name}`);
-                }
-                event.currentTarget.value = "";
-              }}
-            />
-            <button className="load-splat-button" onClick={() => splatInputRef.current?.click()}>
-              <Layers3 size={14} /> Load splat output
-            </button>
-            {splatFile && (
-              <div className="loaded-splat">
-                <span className="ready-dot" />
-                <span title={splatFile.name}>{splatFile.name}</span>
-                <button
-                  className="file-remove"
-                  aria-label={`Unload ${splatFile.name}`}
-                  onClick={() => setSplatFile(null)}
-                >
-                  <X size={14} />
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
-
-        <div className="saved-heading">
-          <div className="section-title-row">
-            <h2>Ready to explore</h2>
-            <span className="scene-count">02</span>
-          </div>
-          <span className="saved-subtitle">Pre-reconstructed scenes</span>
-        </div>
-
-        <div className="scene-list">
-          {demoScenes.map((item, index) => (
-            <button
-              className={`scene-card ${sceneId === item.id ? "scene-card-active" : ""}`}
-              key={item.id}
-              onClick={() => setSceneId(item.id)}
-            >
-              <span className={`scene-thumb scene-thumb-${index + 1}`}>
-                <span className="thumb-road" />
-                <span className="thumb-car thumb-car-one" />
-                <span className="thumb-car thumb-car-two" />
-                <span className="thumb-splat thumb-splat-one" />
-                <span className="thumb-splat thumb-splat-two" />
-                {sceneId === item.id && <span className="thumb-check"><Check size={12} /></span>}
-              </span>
-              <span className="scene-card-copy">
-                <strong>{item.title}</strong>
-                <span>{item.subtitle}</span>
-                <small><span className="ready-dot" /> Ready <span className="scene-time">{item.time}</span></small>
-              </span>
-              <ChevronDown className="scene-card-chevron" size={15} />
-            </button>
-          ))}
-        </div>
-
-        <div className="drawer-footer">
-          <div className="profile-avatar">AK</div>
-          <div className="profile-copy"><strong>Analyst workspace</strong><span>Local session</span></div>
-          <button className="icon-button" aria-label="Workspace settings"><Settings2 size={17} /></button>
-        </div>
-      </aside>
-
-      <section className="viewer-shell">
-        <SceneViewer onRendererError={reportViewerError} cameraPreset={cameraPreset} splatFile={splatFile} />
-        <div className="viewer-vignette" />
-
-        <header className="viewer-topbar">
-          <div className="breadcrumbs">
-            <span className="crumb-muted">Scenes</span>
-            <span className="crumb-divider">/</span>
-            <strong title={splatFile?.name}>{splatFile ? splatFile.name : scene.title}</strong>
-            <span className={`demo-badge ${splatFile ? "splat-loaded-badge" : ""}`}>
-              <span /> {splatFile ? "STATIC SPLAT" : "DEMO SCENE"}
-            </span>
-          </div>
-          <div className="topbar-actions">
-            <button className="topbar-button"><ArrowDownToLine size={15} /> Export <ChevronDown size={13} /></button>
-            <button className="avatar-button" aria-label="Account menu">AK</button>
-          </div>
-        </header>
-
-        {viewerError && (
-          <div className="viewer-error" role="alert">
-            <AlertCircle size={16} /> {viewerError}
-          </div>
-        )}
-
-        <div className="scene-label">
-          <div className="label-icon"><MapPin size={16} /></div>
-          <div>
-            <span>{splatFile ? "SCENE OUTPUT" : "INCIDENT LOCATION"}</span>
-            <strong title={splatFile?.name}>{splatFile ? splatFile.name : "East Mesa · Arizona"}</strong>
-          </div>
-          <button className="icon-button label-more" aria-label="Location details"><MoreHorizontal size={17} /></button>
-        </div>
-
-        <div className="viewer-toolbar">
-          <button className="tool-button tool-button-active" title="Select"><Focus size={17} /></button>
-          <button className="tool-button" title="Measure"><SlidersHorizontal size={17} /></button>
-          <span className="tool-divider" />
-          <button className="tool-button" title="Reset view" onClick={() => setCameraPreset("iso")}>
-            <RotateCcw size={16} />
-          </button>
-        </div>
-
-        <div className="view-controls">
-          <button className="view-cube" title="Isometric view" onClick={() => setCameraPreset("iso")}>
-            <span>3D</span><small>ISO</small>
-          </button>
-          <button className="view-control-button" title="Top view" onClick={() => setCameraPreset("top")}>
-            <Maximize2 size={15} />
-          </button>
-        </div>
-
-        {!splatFile && (
-          <div className="scene-info-card">
-            <div className="info-card-heading"><span className="status-live" /> RECONSTRUCTION OVERVIEW</div>
-            <div className="info-card-title">Impact sequence</div>
-            <button className="impact-jump" onClick={seekToImpact}>
-              <span className="impact-icon"><MapPin size={14} /></span>
-              <span><strong>Impact detected</strong><small>Jump to 00:06.40</small></span>
-              <ArrowUpRight size={15} />
-            </button>
-            <div className="info-card-stats">
-              <div><span>VEHICLES</span><strong>02</strong></div>
-              <div><span>DURATION</span><strong>{duration.toFixed(1)} <small>s</small></strong></div>
-              <div><span>CONFIDENCE</span><strong>84<small>%</small></strong></div>
-            </div>
-          </div>
-        )}
-
-        {!splatFile && (
-          <button className="details-toggle" onClick={() => setShowDetails((value) => !value)}>
-            <ChevronDown size={14} className={showDetails ? "" : "rotate-chevron"} />
-            {showDetails ? "Hide scene details" : "Show scene details"}
-          </button>
-        )}
-
-        <div className="timeline-stack">
-          {!splatFile && showDetails && (
-            <div className="quick-stats">
-              <span><i className="entity-dot red-dot" /> Toyota · <b>38 mph</b></span>
-              <span><i className="entity-dot gold-dot" /> Sedan · <b>22 mph</b></span>
-            </div>
-          )}
-
-          <section className="timeline-panel" aria-label="Scene timeline">
-            {splatFile ? (
-              <div className="static-scene-notice">
-                <span className="timeline-icon"><Layers3 size={16} /></span>
-                <div>
-                  <strong>Static reconstruction</strong>
-                  <span>Timeline playback requires vehicle tracks and time-varying scene assets.</span>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="timeline-topline">
-                  <div className="timeline-title">
-                    <span className="timeline-icon"><Clock3 size={16} /></span>
-                    <div><strong>Incident timeline</strong><span>Drag to explore the reconstruction</span></div>
-                  </div>
-                  <div className="timeline-options">
-                    <button className="speed-button" onClick={() => setCurrentTime(0)} title="Jump to start"><RotateCcw size={14} /></button>
-                    <button className="speed-button">1× <ChevronDown size={12} /></button>
-                    <button className="speed-button" title="Timeline settings"><Settings2 size={14} /></button>
-                  </div>
-                </div>
-                <div className="time-readout">
-                  <span className="current-time">{formatTime(currentTime)}</span>
-                  <span className="time-relative">{currentTime < 6.4 ? `T−${(6.4 - currentTime).toFixed(2)}s` : `T+${(currentTime - 6.4).toFixed(2)}s`}</span>
-                  <span className="time-total">{formatTime(duration)}</span>
-                </div>
-                <div className="slider-wrap">
-                  <button
-                    className="play-button"
-                    aria-label={isPlaying ? "Pause timeline" : "Play timeline"}
-                    onClick={() => {
-                      if (currentTime >= duration) setCurrentTime(0);
-                      setIsPlaying(!isPlaying);
-                    }}
-                  >
-                    {isPlaying ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}
-                  </button>
-                  <div className="range-area">
-                    <div className="range-markers">
-                      <span className="impact-marker" style={{ left: `${(6.4 / duration) * 100}%` }}>
-                        <i /><b>IMPACT</b>
-                      </span>
-                      <span className="braking-marker" style={{ left: `${(4.2 / duration) * 100}%` }} title="Braking starts" />
-                    </div>
-                    <input
-                      aria-label="Timeline position"
-                      className="timeline-range"
-                      type="range"
-                      min={0}
-                      max={duration}
-                      step={0.01}
-                      value={currentTime}
-                      style={{ "--range-progress": `${(currentTime / duration) * 100}%` } as CSSProperties}
-                      onPointerDown={() => setIsPlaying(false)}
-                      onChange={(event) => setCurrentTime(Number(event.currentTarget.value))}
-                    />
-                    <div className="timeline-ticks" aria-hidden="true">
-                      <span>00:00</span><span>00:03</span><span>00:06</span><span>00:09</span><span>00:12</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="timeline-footer">
-                  <span><i className="legend-impact" /> Impact</span>
-                  <span><i className="legend-brake" /> Braking begins</span>
-                  <button onClick={() => setCurrentTime(6.4)}><Gauge size={13} /> View kinematics</button>
-                </div>
-              </>
-            )}
-          </section>
-        </div>
-
-        <div className="viewer-bottom-note">
-          <span className="note-dot" />
-          {splatFile ? "Static splat output · No temporal reconstruction" : "Demonstrative reconstruction · Not original footage"}
-        </div>
-      </section>
-    </main>
+    <div className="relative h-full w-full overflow-hidden">
+      <Viewport />
+      <SidePanel dragOver={dragOver} />
+      <Timeline />
+    </div>
   );
 }

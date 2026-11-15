@@ -3,10 +3,11 @@ import { formatBytes, formatClock } from "@/lib/time";
 import { ingestFiles } from "@/lib/ingest";
 import { describeEnvironment } from "@/scene/environment";
 import { useAppStore } from "@/store/useAppStore";
-import { Clock, CloudSun, Film, LocateFixed, MapPin, PanelLeftClose, Play, Search, Upload, X, Zap } from "lucide-react";
-import { useRef, type ReactNode } from "react";
+import { Clock, CloudSun, Film, LocateFixed, MapPin, PanelLeftClose, PanelLeftOpen, Play, Search, Upload, X, Zap } from "lucide-react";
+import { useRef, useState, type ReactNode } from "react";
 
 export function SidePanel({ dragOver }: { dragOver: boolean }) {
+  const panelOpen = useAppStore((state) => state.panelOpen);
   const scenes = useAppStore((state) => state.scenes);
   const uploads = useAppStore((state) => state.uploads);
   const selectedId = useAppStore((state) => state.selectedId);
@@ -21,6 +22,28 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
   const setPanelOpen = useAppStore((state) => state.setPanelOpen);
   const removeUpload = useAppStore((state) => state.removeUpload);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isStaging, setIsStaging] = useState(false);
+  const [stageMessage, setStageMessage] = useState("");
+
+  const stageUploads = async () => {
+    if (!window.reconstruct?.stageVideos) {
+      setStageMessage("Local video staging is available in the Electron desktop app.");
+      return;
+    }
+
+    setIsStaging(true);
+    setStageMessage("Copying videos and recording SHA-256 hashes…");
+    try {
+      const incident = await window.reconstruct.stageVideos(uploads.map((upload) => upload.file));
+      setStageMessage(
+        `Incident ${incident.incidentId.slice(0, 8)} · ${incident.videos.length} video${incident.videos.length === 1 ? "" : "s"} copied and hashed.`,
+      );
+    } catch (error) {
+      setStageMessage(error instanceof Error ? `Could not stage footage: ${error.message}` : "Could not stage footage.");
+    } finally {
+      setIsStaging(false);
+    }
+  };
 
   const query = search.trim().toLowerCase();
   const visible = scenes.filter((scene) => {
@@ -33,27 +56,33 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
   });
 
   return (
-    <aside className="absolute inset-y-0 left-0 z-30 flex w-[400px] flex-col bg-white shadow-[4px_0_24px_rgba(0,0,0,0.18)]">
-      <div className="flex items-center gap-3 px-4 pt-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1a73e8] text-sm font-semibold text-white">
-          R
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="text-[15px] font-medium leading-tight text-slate-900">Reconstruct</div>
-          <div className="text-xs text-slate-500">
-            {window.reconstruct?.isDesktop ? "Desktop viewer" : "Incident viewer"}
-          </div>
-        </div>
+    <aside className={`absolute inset-y-0 left-0 z-30 flex w-[400px] flex-col bg-white shadow-[4px_0_24px_rgba(0,0,0,0.18)] transition-transform duration-200 ${panelOpen ? "translate-x-0" : "-translate-x-[340px]"}`}>
+      <div className={`flex items-center gap-3 px-4 pt-4 ${panelOpen ? "" : "justify-end"}`}>
+        {panelOpen && (
+          <>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1a73e8] text-sm font-semibold text-white">
+              R
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[15px] font-medium leading-tight text-slate-900">Reconstruct</div>
+              <div className="text-xs text-slate-500">
+                {window.reconstruct?.isDesktop ? "Desktop viewer" : "Incident viewer"}
+              </div>
+            </div>
+          </>
+        )}
         <button
           type="button"
           className="rounded-full p-2 text-slate-500 hover:bg-slate-100"
-          aria-label="Hide scenes panel"
-          onClick={() => setPanelOpen(false)}
+          aria-label={panelOpen ? "Hide scenes panel" : "Show scenes panel"}
+          onClick={() => setPanelOpen(!panelOpen)}
         >
-          <PanelLeftClose size={18} />
+          {panelOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
         </button>
       </div>
 
+      {panelOpen && (
+        <>
       <div className="px-4 pt-3">
         <label className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2.5 shadow-sm focus-within:border-[#1a73e8] focus-within:bg-white">
           <Search size={18} className="text-slate-500" />
@@ -101,7 +130,18 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
       <div className="mt-3 flex-1 overflow-y-auto px-4 pb-4">
         {uploads.length > 0 && (
           <section className="mb-4">
-            <h2 className="mb-2 text-xs font-medium tracking-wide text-slate-500 uppercase">Upload queue</h2>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <h2 className="text-xs font-medium tracking-wide text-slate-500 uppercase">Upload queue</h2>
+              <button
+                type="button"
+                disabled={isStaging}
+                onClick={() => void stageUploads()}
+                className="rounded-md bg-[#e8f0fe] px-2 py-1 text-xs font-medium text-[#1a73e8] disabled:opacity-50"
+              >
+                {isStaging ? "Staging…" : "Stage footage"}
+              </button>
+            </div>
+            {stageMessage && <p className="mb-2 text-xs text-slate-600" role="status">{stageMessage}</p>}
             <ul className="space-y-2">
               {uploads.map((upload) => (
                 <li key={upload.id} className="flex items-center gap-3 rounded-xl border border-slate-200 px-3 py-2">
@@ -219,6 +259,8 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
           </ul>
         )}
       </div>
+        </>
+      )}
     </aside>
   );
 }
