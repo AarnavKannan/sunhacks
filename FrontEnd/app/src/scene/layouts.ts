@@ -213,6 +213,15 @@ const APACHE = resolveRoadSpec({ region: "US", roadClass: "arterial" });
 const APACHE_CROSS = resolveRoadSpec({ region: "US", roadClass: "collector" });
 const APACHE_LANES = crossSection(APACHE);
 const APACHE_TRAJECTORY = impactTrajectories.scenes.apache;
+/** The blue SUV's late swerve to its right (-z) before impact (m). */
+const APACHE_SWERVE = 0.35;
+/**
+ * Centre-to-centre lateral gap when the two cars sideswipe: half the sedan (1.82 m) plus half
+ * the scaled SUV (1.92 m x 1.08), less ~10 cm so the bodies visibly touch.
+ */
+const APACHE_CONTACT_GAP = 1.85;
+/** Where the silver sedan's centre has to be at impact to reach the blue SUV. */
+const APACHE_CONTACT_Z = APACHE_LANES.backwardLaneCenters[0] - APACHE_SWERVE + APACHE_CONTACT_GAP;
 
 const apache: Layout = {
   id: "apache",
@@ -229,7 +238,8 @@ const apache: Layout = {
       poseAt: withCollisionTrajectory(APACHE_TRAJECTORY.impact_time_s, APACHE_TRAJECTORY.vehicles.silver, (time) => {
         const impact = 8;
         const lane = APACHE_LANES.forwardLaneCenters[0];
-        const drift = 1.05 * smoothstep((time - 5.5) / 2.5);
+        // Derived from the lane geometry, so the cars still meet if the road spec changes.
+        const driftAt = (t: number) => (lane - APACHE_CONTACT_Z) * smoothstep((t - 5.5) / 2.5);
         if (time < impact) {
           const x = COLLISION_APPROACH_SPEED_MPS * (time - impact);
           const z = lane - drift;
@@ -246,7 +256,7 @@ const apache: Layout = {
       poseAt: withCollisionTrajectory(APACHE_TRAJECTORY.impact_time_s, APACHE_TRAJECTORY.vehicles.blue, (time) => {
         const impact = 8;
         const lane = APACHE_LANES.backwardLaneCenters[0];
-        const swerve = -0.35 * smoothstep((time - 7) / 1);
+        const swerve = -APACHE_SWERVE * smoothstep((time - 7) / 1);
         if (time < impact) {
           return { x: -COLLISION_APPROACH_SPEED_MPS * (time - impact), z: lane + swerve, yaw: -Math.PI / 2 };
         }

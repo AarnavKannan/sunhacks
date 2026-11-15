@@ -4,3 +4,4 @@ dist-electron
 *.tsbuildinfo
 *.local
 .DS_Store
+electron/assistant.bundle.cjs

@@ -1,0 +1,11 @@
+export * from "./types";
+export { createIpcSceneController, type SceneController, type SceneControllerMethod } from "./controller";
+export { matchEntities } from "./entity-match";
+export { matchFastPath, type FastPathAction } from "./fastpath";
+export { buildSystemPrompt, type SystemPromptContext } from "./prompt/system-prompt";
+export { TOOLS, callTool, toolJsonSchema, type ToolDef, type ToolCallResult } from "./tools/registry";
+export { startMcpServer, MCP_SERVER_NAME, type RunningMcpServer } from "./mcp/server";
+export { checkAllProviders, pickDefaultProvider, DEFAULT_PROVIDER_ORDER } from "./providers/health";
+export type { AssistantEvent, Effort, ProviderAdapter, ProviderHealth, ProviderKind, AuthStatus } from "./providers/types";
+export { AssistantSession, type AssistantSessionOptions, type SessionEvent } from "./session";
+export { MockSceneController } from "./mock/mock-scene";

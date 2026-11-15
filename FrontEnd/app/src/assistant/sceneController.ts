@@ -1,0 +1,542 @@
+/**
+ * The app's implementation of the assistant's SceneController (packages/assistant/src/controller.ts).
+ *
+ * Every MCP tool, the fast path and the API-key adapters end up here, so the assistant can
+ * only do what these functions allow: navigate, query the scene description, annotate and
+ * export. Nothing here can change the reconstruction.
+ *
+ * Coordinates: the assistant's world frame is meters with +x east, +y up, -z north and the
+ * origin at the crash point. The three.js scene uses the same axes but its own origin, so
+ * every point crossing this boundary is shifted by `origin()`.
+ *
+ * Per-frame kinematics (positions, speeds, accelerations, forces) come from the MongoDB
+ * frames collection in the main process (electron/kinematics.ts, src/kinematics/*), never
+ * from the renderer's animation, so the assistant reports exactly what's stored.
+ */
+import type { SceneController } from "@assistant/controller";
+import { matchEntities } from "@assistant/entity-match";
+import {
+  CAMERA_PRESETS,
+  type CameraPreset,
+  type CameraState,
+  type CrashPhase,
+  type Entity,
+  type ExportJob,
+  type KinematicsField,
+  type KinematicsReading,
+  type KinematicsSeries,
+  type LibraryState,
+  type Marker as AssistantMarker,
+  type MeasureTarget,
+  type SceneEvent,
+  type SceneSummary,
+  type SeekRequest,
+  type TimelineState,
+  type TimeRef,
+  type ToggleTarget,
+  type Vec3,
+} from "@assistant/types";
+import type { SceneInfo } from "@/data/scenes";
+import type { KinematicsFrame } from "@/electron.d";
+import { crashOrigin } from "@/kinematics/derive";
+import { incidentMeta, sampleKinematics } from "@/kinematics/store";
+import { startExport } from "@/lib/exportVideo";
+import { whenSceneReady } from "@/scene/activeScene";
+import type { Point3, SceneHandle } from "@/scene/mountScene";
+import { MAX_SPEED, MIN_SPEED, useAppStore } from "@/store/useAppStore";
+
+const RAD = Math.PI / 180;
+const DEFAULT_FOCUS_DISTANCE = 12;
+const FOLLOW_DISTANCE = 18;
+
+const COMPASS = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
+const MAX_SERIES_SAMPLES = 61;
+
+const EVENT_ALIASES: Record<string, string> = {
+  impact: "crash_start",
+  crash: "crash_start",
+  collision: "crash_start",
+  hit: "crash_start",
+  crash_start: "crash_start",
+  start_of_crash: "crash_start",
+  crash_end: "crash_end",
+  end_of_crash: "crash_end",
+  rest: "crash_end",
+};
+
+const round = (n: number, digits = 2) => Math.round(n * 10 ** digits) / 10 ** digits;
+const add = (a: Vec3, b: Vec3): Vec3 => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const sub = (a: Vec3, b: Vec3): Vec3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const scale = (a: Vec3, k: number): Vec3 => [a[0] * k, a[1] * k, a[2] * k];
+const len = (a: Vec3) => Math.hypot(a[0], a[1], a[2]);
+const norm = (a: Vec3): Vec3 => scale(a, 1 / (len(a) || 1));
+const cross = (a: Vec3, b: Vec3): Vec3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const r3 = (v: Vec3): Vec3 => [round(v[0]), round(v[1]), round(v[2])];
+
+const store = () => useAppStore.getState();
+
+function openScene(): SceneInfo {
+  const state = store();
+  if (state.view !== "viewer") {
+    throw new Error("No incident is open. The user is on the home screen; open one from the library first.");
+  }
+  const scene = state.scenes.find((item) => item.id === state.selectedId);
+  if (!scene) throw new Error("No incident is open. The user is on the home screen; open one from the library first.");
+  return scene;
+}
+
+function phaseAt(scene: SceneInfo, t: number): CrashPhase | null {
+  if (scene.impactTime == null) return null;
+  if (t < scene.impactTime) return "before_crash";
+  if (scene.crashEnd == null || t <= scene.crashEnd) return "during_crash";
+  return "after_crash";
+}
+
+function events(scene: SceneInfo): SceneEvent[] {
+  const out: SceneEvent[] = [];
+  if (scene.impactTime != null) {
+    out.push({ t: scene.impactTime, type: "crash_start", vehicles: scene.crashVehicles, note: "First contact between the vehicles" });
+  }
+  if (scene.crashEnd != null) {
+    out.push({ t: scene.crashEnd, type: "crash_end", vehicles: scene.crashVehicles, note: "The vehicles involved have come to rest" });
+  }
+  return out;
+}
+
+function eventTime(scene: SceneInfo, name: string): number {
+  const key = name.trim().toLowerCase().replace(/[\s-]+/g, "_");
+  const type = EVENT_ALIASES[key] ?? key;
+  const event = events(scene).find((item) => item.type === type);
+  if (!event) {
+    const known = events(scene).map((item) => item.type);
+    throw new Error(known.length ? `No "${name}" event. Events in this reconstruction: ${known.join(", ")}.` : "This reconstruction has no crash or other events.");
+  }
+  return event.t;
+}
+
+function resolveTime(scene: SceneInfo, at: TimeRef | undefined): number {
+  if (!at) return store().time;
+  const t = "t_s" in at ? at.t_s : eventTime(scene, at.event) + (at.offset_s ?? 0);
+  if (!Number.isFinite(t) || t < 0 || t > scene.duration) {
+    throw new Error(`That's ${round(t)} s, outside the footage (0 to ${scene.duration} s).`);
+  }
+  return t;
+}
+
+function timeline(scene: SceneInfo): TimelineState {
+  const state = store();
+  return {
+    t_s: round(state.time, 3),
+    duration_s: scene.duration,
+    playing: state.playing,
+    speed: state.speed,
+    t_rel_crash_s: scene.impactTime == null ? null : round(state.time - scene.impactTime, 3),
+    phase: phaseAt(scene, state.time),
+  };
+}
+
+/** The crash point in scene coordinates (shared with the stored kinematics). */
+function origin(scene: SceneInfo): Vec3 {
+  return crashOrigin(scene);
+}
+
+const toWorld = (p: Point3, o: Vec3): Vec3 => r3(sub(p, o));
+const toScene = (p: Vec3, o: Vec3): Point3 => add(p, o);
+
+function entities(scene: SceneInfo): Entity[] {
+  return scene.vehicles.map((vehicle) => {
+    const color = vehicle.label.split(/[\s-]/)[0]?.toLowerCase();
+    return {
+      id: vehicle.id,
+      label: vehicle.label,
+      color,
+      type: vehicle.type,
+      aliases: vehicle.aliases,
+    };
+  });
+}
+
+function requireEntity(scene: SceneInfo, id: string) {
+  const vehicle = scene.vehicles.find((item) => item.id === id);
+  if (!vehicle) {
+    const known = scene.vehicles.map((item) => `${item.id} (${item.label})`).join(", ");
+    throw new Error(known ? `No vehicle with id "${id}". Vehicles: ${known}.` : "This reconstruction has no tracked vehicles.");
+  }
+  return vehicle;
+}
+
+async function context() {
+  const scene = openScene();
+  const handle = await whenSceneReady();
+  return { scene, handle, o: origin(scene) };
+}
+
+function cameraState(handle: SceneHandle, o: Vec3, clamped = false): CameraState {
+  const pose = handle.getCamera();
+  const state = store();
+  return {
+    position: toWorld(pose.position, o),
+    target: toWorld(pose.target, o),
+    distance_m: round(len(sub(pose.position, pose.target))),
+    following: state.following,
+    pov: state.pov,
+    clamped,
+  };
+}
+
+/** Moves the camera in scene coordinates and reports the result in world coordinates. */
+function commit(handle: SceneHandle, o: Vec3, position: Vec3, target: Vec3, keepFollow = false): CameraState {
+  store().setCameraMode({ pov: null, ...(keepFollow ? {} : { following: null }) });
+  const placed = handle.setCamera({ position, target });
+  return cameraState(handle, o, placed.clamped);
+}
+
+function angles(handle: SceneHandle) {
+  const pose = handle.getCamera();
+  const d = sub(pose.position, pose.target);
+  const r = len(d) || 1;
+  return { yaw: Math.atan2(d[0], d[2]) / RAD, pitch: Math.asin(d[1] / r) / RAD, distance: r, target: pose.target, position: pose.position };
+}
+
+/** Camera position around `target`: yaw 0 = south of it looking north, 90 = east; pitch 90 = above. */
+function around(target: Vec3, distance: number, yawDeg: number, pitchDeg: number): Vec3 {
+  const yaw = yawDeg * RAD;
+  const pitch = Math.max(-89.9, Math.min(89.9, pitchDeg)) * RAD;
+  return [
+    target[0] + distance * Math.cos(pitch) * Math.sin(yaw),
+    target[1] + distance * Math.sin(pitch),
+    target[2] + distance * Math.cos(pitch) * Math.cos(yaw),
+  ];
+}
+
+function vehiclePoint(handle: SceneHandle, id: string): Vec3 {
+  const pose = handle.vehiclePose(id, store().time);
+  if (!pose) throw new Error(`Vehicle "${id}" isn't in the 3D scene.`);
+  return add(pose.position, [0, 0.8, 0]);
+}
+
+function reading(scene: SceneInfo, frame: KinematicsFrame, fields: KinematicsField[], basis: string, type: string): KinematicsReading {
+  const want = new Set<KinematicsField>(fields.length ? fields : ["speed", "acceleration", "heading"]);
+  const sigma = frame.sigma ?? {};
+  const out: KinematicsReading = {
+    entity_id: frame.entity_id,
+    t_s: round(frame.t, 3),
+    t_rel_crash_s: scene.impactTime == null ? null : round(frame.t - scene.impactTime, 3),
+    phase: phaseAt(scene, frame.t),
+    source: "reconstruction",
+    basis,
+  };
+  if (want.has("position")) out.position = { value: r3(frame.position), unit: "m" };
+  if (want.has("velocity")) out.velocity = { value: r3(frame.velocity), unit: "m/s" };
+  if (want.has("speed")) {
+    const s = sigma.speed_mps;
+    out.speed = {
+      mps: { value: round(frame.speed), unit: "m/s", ...(s !== undefined ? { sigma: round(s) } : {}) },
+      mph: { value: round(frame.speed * 2.23694, 1), unit: "mph", ...(s !== undefined ? { sigma: round(s * 2.23694, 1) } : {}) },
+      kmh: { value: round(frame.speed * 3.6, 1), unit: "km/h", ...(s !== undefined ? { sigma: round(s * 3.6, 1) } : {}) },
+    };
+  }
+  if (want.has("acceleration")) {
+    out.acceleration = {
+      value: round(frame.accel_long),
+      unit: "m/s²",
+      g: round(frame.accel_long / 9.80665),
+      ...(sigma.accel_mps2 !== undefined ? { sigma: round(sigma.accel_mps2) } : {}),
+    };
+  }
+  if (want.has("heading")) {
+    out.heading = { value: round(frame.heading_deg, 1), unit: "deg", compass: COMPASS[Math.round(frame.heading_deg / 45) % 8]! };
+  }
+  if (want.has("yaw_rate")) out.yaw_rate = { value: round(frame.yaw_rate_dps, 1), unit: "deg/s" };
+  if (want.has("forces")) {
+    out.forces = {
+      mass_kg: frame.mass_kg,
+      net: { vector: [Math.round(frame.force_net[0]), Math.round(frame.force_net[1]), Math.round(frame.force_net[2])], magnitude: { value: Math.round(len(frame.force_net)), unit: "N" } },
+      model: `net force = mass × acceleration, using a nominal ${frame.mass_kg} kg for a ${type}; air drag and friction not modeled separately`,
+    };
+  }
+  return out;
+}
+
+async function kinematicsAt(scene: SceneInfo, entityId: string, t: number) {
+  const vehicle = requireEntity(scene, entityId);
+  const [frame] = await sampleKinematics(scene, entityId, [t]);
+  if (!frame) throw new Error(`The ${vehicle.label} isn't in the scene at ${round(t)} s.`);
+  return frame;
+}
+
+function library(): LibraryState {
+  const state = store();
+  const folders = new Map<string, LibraryState["folders"][number]>();
+  for (const scene of state.scenes) {
+    const folder = folders.get(scene.folder) ?? { name: scene.folder, incidents: [] };
+    folder.incidents.push({ id: scene.id, title: scene.title, duration_s: scene.duration, created: scene.created });
+    folders.set(scene.folder, folder);
+  }
+  return { folders: [...folders.values()], open: state.view === "viewer" ? state.selectedId : null };
+}
+
+async function summary(): Promise<SceneSummary> {
+  const { scene, handle, o } = await context();
+  const bounds = handle.bounds();
+  return {
+    incident_id: scene.id,
+    title: scene.title,
+    duration_s: scene.duration,
+    entities: entities(scene),
+    events: events(scene),
+    crash:
+      scene.impactTime == null
+        ? null
+        : { start_s: scene.impactTime, end_s: scene.crashEnd ?? scene.impactTime, vehicles: scene.crashVehicles },
+    bounds: { min: toWorld(bounds.min, o), max: toWorld(bounds.max, o) },
+    source_videos: scene.sourceVideo ? 1 : 0,
+    timeline: timeline(scene),
+    camera: cameraState(handle, o),
+  };
+}
+
+export const appSceneController: SceneController = {
+  async listLibrary() {
+    return library();
+  },
+
+  async openIncident(incidentId) {
+    const scene = store().scenes.find((item) => item.id === incidentId || item.title.toLowerCase() === incidentId.toLowerCase());
+    if (!scene) throw new Error(`No reconstruction "${incidentId}" in the library.`);
+    store().openScene(scene.id);
+    return summary();
+  },
+
+  async closeIncident() {
+    store().closeScene();
+    return library();
+  },
+
+  describe: summary,
+
+  async findEntities(query) {
+    const scene = openScene();
+    return matchEntities(entities(scene), query);
+  },
+
+  async focus(entityId, distanceM = DEFAULT_FOCUS_DISTANCE) {
+    const { scene, handle, o } = await context();
+    requireEntity(scene, entityId);
+    const target = vehiclePoint(handle, entityId);
+    const { yaw, pitch } = angles(handle);
+    const keep = store().following === entityId;
+    return commit(handle, o, around(target, distanceM, yaw, Math.max(pitch, 15)), target, keep);
+  },
+
+  async panTo(target) {
+    const { scene, handle, o } = await context();
+    let point: Vec3;
+    if ("entity_id" in target) {
+      requireEntity(scene, target.entity_id);
+      point = vehiclePoint(handle, target.entity_id);
+    } else {
+      point = toScene(target.point, o);
+    }
+    const pose = handle.getCamera();
+    const delta = sub(point, pose.target);
+    return commit(handle, o, add(pose.position, delta), point);
+  },
+
+  async orbit(yawDeg, pitchDeg) {
+    const { handle, o } = await context();
+    const { yaw, pitch, distance, target } = angles(handle);
+    return commit(handle, o, around(target, distance, yaw + yawDeg, pitch + pitchDeg), target, true);
+  },
+
+  async rotate(yawDeg, pitchDeg) {
+    const { handle, o } = await context();
+    const pose = handle.getCamera();
+    // View direction is camera → target; swing the target around the camera.
+    const dir = sub(pose.target, pose.position);
+    const r = len(dir) || 1;
+    const yaw = Math.atan2(dir[0], dir[2]) - yawDeg * RAD; // positive = look right (clockwise from above)
+    const pitch = Math.max(-89 * RAD, Math.min(89 * RAD, Math.asin(dir[1] / r) + pitchDeg * RAD));
+    const target = add(pose.position, [r * Math.cos(pitch) * Math.sin(yaw), r * Math.sin(pitch), r * Math.cos(pitch) * Math.cos(yaw)]);
+    return commit(handle, o, pose.position, target);
+  },
+
+  async move(rightM, upM, forwardM) {
+    const { handle, o } = await context();
+    const pose = handle.getCamera();
+    const fwd = norm(sub(pose.target, pose.position));
+    let right = cross(fwd, [0, 1, 0]);
+    right = len(right) < 1e-6 ? [1, 0, 0] : norm(right);
+    const up = norm(cross(right, fwd));
+    const delta = add(add(scale(right, rightM), scale(up, upM)), scale(fwd, forwardM));
+    return commit(handle, o, add(pose.position, delta), add(pose.target, delta));
+  },
+
+  async zoom(opts) {
+    const { handle, o } = await context();
+    const { yaw, pitch, distance, target } = angles(handle);
+    const next = opts.distance_m ?? distance / (opts.factor ?? 1.5);
+    return commit(handle, o, around(target, Math.max(1, next), yaw, pitch), target, true);
+  },
+
+  async setCamera(opts) {
+    const { handle, o } = await context();
+    const pose = handle.getCamera();
+    const position = opts.position ? toScene(opts.position, o) : pose.position;
+    const target = opts.target ? toScene(opts.target, o) : pose.target;
+    return commit(handle, o, position, target);
+  },
+
+  async preset(preset: CameraPreset) {
+    const { handle, o } = await context();
+    const view = CAMERA_PRESETS[preset];
+    if (!view) throw new Error(`Unknown view "${preset}". Use ${Object.keys(CAMERA_PRESETS).join(", ")}.`);
+    const { distance, target } = angles(handle);
+    return commit(handle, o, around(target, distance, view.yaw_deg, view.pitch_deg), target);
+  },
+
+  async follow(entityId) {
+    const { scene, handle, o } = await context();
+    if (entityId) {
+      requireEntity(scene, entityId);
+      const { yaw, pitch, distance } = angles(handle);
+      const target = vehiclePoint(handle, entityId);
+      // Bring it into frame first if the camera is far away.
+      const d = distance > 45 ? FOLLOW_DISTANCE : distance;
+      store().setCameraMode({ following: null, pov: null });
+      handle.setCamera({ position: around(target, d, yaw, Math.max(pitch, 15)), target });
+    }
+    store().setCameraMode({ following: entityId, pov: null });
+    return cameraState(handle, o);
+  },
+
+  async pov(entityId) {
+    const { scene, handle, o } = await context();
+    if (entityId) requireEntity(scene, entityId);
+    store().setCameraMode({ pov: entityId, following: null });
+    handle.render();
+    return cameraState(handle, o);
+  },
+
+  async resetView() {
+    const { handle, o } = await context();
+    store().resetCamera();
+    return cameraState(handle, o);
+  },
+
+  async seek(req: SeekRequest) {
+    const scene = openScene();
+    const state = store();
+    if ("relative_s" in req) state.setTime(state.time + req.relative_s);
+    else state.setTime(resolveTime(scene, req));
+    return timeline(scene);
+  },
+
+  async play(speed) {
+    const scene = openScene();
+    if (speed !== undefined && (speed < MIN_SPEED || speed > MAX_SPEED)) {
+      throw new Error(`Playback speed must be between ${MIN_SPEED}× and ${MAX_SPEED}×.`);
+    }
+    const state = store();
+    if (speed !== undefined) state.setSpeed(speed);
+    if (!state.playing) state.togglePlay();
+    return timeline(scene);
+  },
+
+  async pause() {
+    const scene = openScene();
+    store().setPlaying(false);
+    return timeline(scene);
+  },
+
+  async queryKinematics(entityId, at, fields) {
+    const scene = openScene();
+    const meta = await incidentMeta(scene);
+    const t = resolveTime(scene, at);
+    const frame = await kinematicsAt(scene, entityId, t);
+    return reading(scene, frame, fields, meta.basis, requireEntity(scene, entityId).type);
+  },
+
+  async querySeries(entityId, fromS, toS, stepS, fields): Promise<KinematicsSeries> {
+    const scene = openScene();
+    const vehicle = requireEntity(scene, entityId);
+    const meta = await incidentMeta(scene);
+    const from = Math.max(0, fromS);
+    const to = Math.min(scene.duration, toS);
+    if (to < from) throw new Error(`That window is outside the footage (0 to ${scene.duration} s).`);
+    const times: number[] = [];
+    for (let i = 0; i < MAX_SERIES_SAMPLES && from + i * stepS <= to + 1e-9; i++) times.push(round(from + i * stepS, 6));
+    const frames = await sampleKinematics(scene, entityId, times);
+    const samples = frames.filter((frame) => frame !== null).map((frame) => reading(scene, frame, fields, meta.basis, vehicle.type));
+    if (!samples.length) throw new Error(`The ${vehicle.label} isn't in the scene between ${round(from)} and ${round(to)} s.`);
+    return { entity_id: entityId, step_s: stepS, samples };
+  },
+
+  async measureDistance(a: MeasureTarget, b: MeasureTarget, at?: TimeRef) {
+    const scene = openScene();
+    const t = resolveTime(scene, at);
+    const point = async (target: MeasureTarget): Promise<Vec3> => (typeof target === "string" ? (await kinematicsAt(scene, target, t)).position : target);
+    const m = len(sub(await point(a), await point(b)));
+    return { t_s: round(t, 3), distance: { m: round(m), ft: round(m * 3.28084, 1) }, a, b };
+  },
+
+  async addMarker(label, target) {
+    const { scene, handle, o } = await context();
+    let point: Point3;
+    let entityId: string | undefined;
+    if ("entity_id" in target) {
+      requireEntity(scene, target.entity_id);
+      const pose = handle.vehiclePose(target.entity_id, store().time);
+      if (!pose) throw new Error(`Vehicle "${target.entity_id}" isn't in the 3D scene.`);
+      point = pose.position;
+      entityId = target.entity_id;
+    } else {
+      point = toScene(target.point, o);
+      const bounds = handle.bounds();
+      const inside = point.every((v, i) => i === 1 || (v >= bounds.min[i] - 1e-6 && v <= bounds.max[i] + 1e-6));
+      if (!inside) throw new Error("That point is outside the scene boundary.");
+    }
+    const marker = store().addMarker({ label, point, entityId });
+    const out: AssistantMarker = { id: marker.id, label, point: toWorld(point, o), ...(entityId ? { entity_id: entityId } : {}) };
+    return out;
+  },
+
+  async toggle(target: ToggleTarget, visible?: boolean) {
+    const scene = openScene();
+    const state = store();
+    if (target === "frustums") {
+      throw new Error("This reconstruction doesn't include the source camera positions, so there's nothing to show.");
+    }
+    if (target === "source_video") {
+      if (!scene.sourceVideo) throw new Error("This reconstruction has no source video attached.");
+      const next = visible ?? !state.layers.sourceVideo;
+      state.setLayers({ sourceVideo: next });
+      return { target, visible: next };
+    }
+    if (target === "trails" || target === "bounds") {
+      if (target === "trails" && scene.vehicles.length === 0) throw new Error("This reconstruction has no vehicle paths to show.");
+      const next = visible ?? !state.layers[target];
+      state.setLayers({ [target]: next });
+      return { target, visible: next };
+    }
+    const id = target.slice("vehicle:".length);
+    requireEntity(scene, id);
+    const hidden = state.layers.hiddenVehicles.includes(id);
+    const next = visible ?? hidden;
+    state.setVehicleHidden(id, !next);
+    return { target, visible: next };
+  },
+
+  async exportVideo(opts): Promise<ExportJob> {
+    const scene = openScene();
+    if (opts.camera_path) throw new Error("Named camera paths aren't available yet. I can export the current view instead.");
+    const range: [number, number] = opts.range ?? [0, scene.duration];
+    if (range[0] < 0 || range[1] > scene.duration || range[1] <= range[0]) {
+      throw new Error(`Give a range inside the footage (0 to ${scene.duration} s), with the end after the start.`);
+    }
+    const job = await startExport(range);
+    return { job_id: job.id, status: "rendering" };
+  },
+};
+
+export type { Vec3 };
