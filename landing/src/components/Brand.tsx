@@ -14,11 +14,11 @@ export function Mark({ className = "", size = 28 }: MarkProps) {
       className={className}
       aria-hidden="true"
     >
-      <rect width="32" height="32" rx="4" fill="#0a0612" stroke="currentColor" strokeOpacity=".18" />
+      <rect width="32" height="32" rx="4" fill="#1d1f23" stroke="currentColor" strokeOpacity=".18" />
       <path
         d="M16 6.2 26.2 24.4H5.8L16 6.2Z"
-        fill="#ffe34d"
-        stroke="#ffe34d"
+        fill="currentColor"
+        stroke="currentColor"
         strokeWidth="1.2"
         strokeLinejoin="round"
       />

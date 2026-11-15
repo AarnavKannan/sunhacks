@@ -41,8 +41,8 @@ export function Footer() {
             </p>
             <a href="mailto:hello@crashvzn.us" className="footer-email">hello@crashvzn.us</a>
             <div className="footer-badges">
-              <span>SUNHACKS 2026</span>
-              <span>LOCAL-FIRST</span>
+              <span>Sunhacks 2026</span>
+              <span>Local-first</span>
             </div>
           </div>
 
@@ -74,7 +74,6 @@ export function Footer() {
             Reconstruction estimates only. Not a substitute for a certified forensic investigation.
           </span>
           <div className="footer-bottom-right">
-            <img className="footer-mini" src="/mini.png" alt="" aria-hidden="true" width={36} height={36} />
             <a href="https://github.com/AarnavKannan/sunhacks" target="_blank" rel="noreferrer">
               <Github size={13} /> Source
             </a>

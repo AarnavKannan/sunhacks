@@ -1,82 +1,45 @@
-import { DownloadButton, DownloadMeta } from "@/components/DownloadButton";
-import { InstallCommands } from "@/components/InstallCommands";
+﻿import { DownloadButton } from "@/components/DownloadButton";
 import { motion, useReducedMotion } from "@/components/Motion";
 import { heroItem, heroStagger } from "@/lib/motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export function Hero() {
   const reduce = useReducedMotion();
 
   return (
     <section className="hero" id="top">
-      <div className="hero-backdrop" aria-hidden="true">
-        <div className="hero-glow" />
-        <div className="hero-ring" />
-        <div className="hero-grid" />
-        <div className="hero-hazard" />
-      </div>
-
-      <motion.div
-        className="container-x hero-inner"
-        variants={heroStagger}
-        initial={reduce ? false : "hidden"}
-        animate="show"
-      >
-        <motion.div className="hero-brand-lockup" variants={heroItem}>
-          <div className="hero-logo-bloom" aria-hidden="true" />
-          <img
-            className="hero-logo"
-            src="/logo-neon.png"
-            alt="CRASHVZN"
-            width={220}
-            height={220}
-          />
-        </motion.div>
-
+      <motion.div className="container-x" variants={heroStagger} initial={reduce ? false : "hidden"} animate="show">
+        <motion.h1 className="hero-title" variants={heroItem}>
+          Every moment.<br />Every angle.
+        </motion.h1>
         <motion.p className="hero-sub" variants={heroItem}>
-          Traffic-incident footage becomes an explorable 4D scene — every vehicle path, speed, and
-          heading measured frame by frame. Local-first. Built for investigators.
+          Turn incident footage into an explorable 4D reconstruction. Built to investigate,
+          understand, and explain.
         </motion.p>
-
-        <motion.div className="hero-actions" variants={heroItem}>
-          <motion.div whileHover={reduce ? undefined : { scale: 1.03, y: -2 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
-            <DownloadButton label="Download CRASHVZN" />
-          </motion.div>
+        <motion.div className="hero-action-row" variants={heroItem}>
+          <div className="hero-actions">
+            <DownloadButton label="Get CRASHVZN" />
+            <span className="hero-availability">Free during beta. Runs locally.</span>
+          </div>
+          <a className="hero-feature-link" href="#assistant">Meet your scene assistant <ArrowUpRight size={16} /></a>
         </motion.div>
-
-        <motion.div className="hero-note" variants={heroItem}>
-          <DownloadMeta />
-          <span className="hero-note-dot" />
-          <span>macOS · Windows · Linux</span>
-          <span className="hero-note-dot" />
-          <span>No account. No upload.</span>
-        </motion.div>
-
-        <motion.div className="hero-install" variants={heroItem}>
-          <InstallCommands />
-          <motion.img
-            className="hero-mini"
-            src="/mini.png"
-            alt=""
-            aria-hidden="true"
-            width={88}
-            height={88}
-            animate={
-              reduce
-                ? undefined
-                : {
-                    y: [0, -6, 0],
-                    rotate: [-8, -4, -8],
-                  }
-            }
-            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        <motion.figure className="hero-preview" variants={heroItem}>
+          <iframe
+            className="hero-demo-slot"
+            src="https://www.youtube-nocookie.com/embed/LqIvZDEZVqY?rel=0"
+            title="CRASHVZN demo video"
+            width={1280}
+            height={720}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           />
-        </motion.div>
-
-        <motion.a className="hero-scroll" href="#workflow" variants={heroItem}>
-          <ArrowDown size={14} />
-          <span>See how it works</span>
-        </motion.a>
+          <figcaption>
+            <span>A new perspective on what happened.</span>
+            <a href="#workflow">Explore the workflow <ArrowDown size={14} /></a>
+          </figcaption>
+        </motion.figure>
       </motion.div>
     </section>
   );

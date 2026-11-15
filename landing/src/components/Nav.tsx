@@ -73,14 +73,12 @@ export function Nav() {
 
       <div id="mobile-menu" className={`mobile-menu ${open ? "is-open" : ""}`} aria-hidden={!open} inert={!open}>
         <nav aria-label="Mobile navigation">
-          {links.map((link, index) => (
+          {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              style={{ transitionDelay: `${index * 40}ms` }}
             >
-              <span>0{index + 1}</span>
               {link.label}
             </a>
           ))}

@@ -1,6 +1,6 @@
 import { motion, Reveal, useReducedMotion } from "@/components/Motion";
 import { AnimatePresence } from "motion/react";
-import { ArrowUpRight, Command, Mic, Sparkles, Volume2 } from "lucide-react";
+import { Mic, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 type Prompt = {
@@ -60,29 +60,22 @@ export function AssistantSection() {
       <div className="container-x">
         <Reveal className="assistant-panel">
           <div className="assistant-copy">
-            <div className="section-kicker">
-              <span className="section-index">02</span>
-              <span>SCENE ASSISTANT</span>
-              <span className="section-rule" />
-            </div>
-            <h2 className="neon-title">
-              The fastest way into a 3D scene
-              <span className="neon-accent"> is to ask.</span>
-            </h2>
+            <h2>A new angle.
+              <br />Just ask.</h2>
             <p>
               A local MCP server gives your LLM read-only eyes on the reconstruction. It can move
               the camera, query kinematics, and explain what it found — but it can never rewrite
               the evidence.
             </p>
             <p className="assistant-copy-small">
-              Use the CLI you already pay for. CRASHVZN connects to Claude Code, Codex, or Gemini —
-              or works without an assistant at all.
+              Connect a signed-in Claude Code, Codex, or Gemini CLI. A provider subscription is required
+              for the scene assistant and the video-rendering workflow.
             </p>
 
             <div className="provider-row">
-              <span><Command size={13} /> Claude Code</span>
-              <span><Command size={13} /> Codex</span>
-              <span><Command size={13} /> Gemini</span>
+              <span>Claude Code</span>
+              <span>Codex</span>
+              <span>Gemini</span>
             </div>
 
             <div className="voice-note">
@@ -91,23 +84,22 @@ export function AssistantSection() {
                 <strong>Push to talk, too.</strong>
                 <span>Local speech-to-text feeds the same tool loop. No audio leaves the machine.</span>
               </div>
-              <Volume2 size={15} className="voice-note-wave" />
             </div>
           </div>
 
-          <div className="assistant-demo">
+          <div className="assistant-demo" data-ui>
             <div className="assistant-demo-bar">
               <span className="assistant-demo-title"><Sparkles size={14} /> Scene assistant</span>
-              <span className="assistant-demo-status"><i /> MCP · local</span>
+              <span className="assistant-demo-status">Interactive example</span>
             </div>
 
-            <div className="assistant-demo-thread">
+            <div className="assistant-demo-thread" aria-live="polite">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active.id}
-                  initial={reduce ? false : { opacity: 0, y: 12, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={reduce ? undefined : { opacity: 0, y: -8, filter: "blur(4px)" }}
+                  initial={reduce ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? undefined : { opacity: 0, y: -8 }}
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                 >
                   <div className="demo-user-bubble">{active.prompt}</div>
@@ -127,16 +119,17 @@ export function AssistantSection() {
             </div>
 
             <div className="assistant-prompts">
-              <span>TRY A PROMPT</span>
+              <span>Try a sample prompt</span>
               <div>
                 {prompts.map((prompt) => (
                   <motion.button
                     type="button"
                     key={prompt.id}
                     className={prompt.id === active.id ? "is-active" : ""}
+                    aria-pressed={prompt.id === active.id}
                     onClick={() => setActive(prompt)}
-                    whileHover={reduce ? undefined : { scale: 1.04 }}
-                    whileTap={reduce ? undefined : { scale: 0.97 }}
+                    whileHover={reduce ? undefined : { scale: 1.02 }}
+                    whileTap={reduce ? undefined : { scale: 0.98 }}
                   >
                     {prompt.short}
                   </motion.button>
@@ -144,14 +137,6 @@ export function AssistantSection() {
               </div>
             </div>
 
-            <div className="assistant-composer">
-              <span>Ask anything about this scene…</span>
-              <span className="assistant-composer-actions">
-                <kbd>⌘ K</kbd>
-                <span className="assistant-composer-mic"><Mic size={14} /></span>
-                <span className="assistant-composer-send"><ArrowUpRight size={14} /></span>
-              </span>
-            </div>
           </div>
         </Reveal>
       </div>

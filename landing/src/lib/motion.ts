@@ -2,9 +2,9 @@ import type { Transition, Variants } from "motion/react";
 
 export const springSoft: Transition = {
   type: "spring",
-  stiffness: 120,
-  damping: 22,
-  mass: 0.9,
+  stiffness: 200,
+  damping: 30,
+  mass: 0.7,
 };
 
 export const springSnappy: Transition = {
@@ -15,11 +15,10 @@ export const springSnappy: Transition = {
 };
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: springSoft,
   },
 };
@@ -54,11 +53,10 @@ export const heroStagger: Variants = {
 };
 
 export const heroItem: Variants = {
-  hidden: { opacity: 0, y: 34, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: springSoft,
   },
 };

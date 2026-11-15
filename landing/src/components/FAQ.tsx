@@ -15,7 +15,7 @@ const faqs = [
   {
     question: "Do I need a Claude, Codex, or Gemini subscription?",
     answer:
-      "Only if you want the assistant. CRASHVZN can connect to a signed-in Claude Code, Codex, or Gemini CLI on your machine. The viewer, timeline, kinematics, source video, measurements, and export all work without an assistant or an API key.",
+      "Yes. You need a subscription that provides access to Claude Code, Codex, or Gemini CLI, signed in on your machine. CRASHVZN uses the connected LLM for both the scene assistant and the video-rendering workflow. Your provider subscription is separate from CRASHVZN.",
   },
   {
     question: "Where does my footage go?",
@@ -30,7 +30,7 @@ const faqs = [
   {
     question: "Is it free?",
     answer:
-      "Yes — CRASHVZN is free during the beta. The app is built on open-source projects including OpenSplat, Spark, Three.js, React, and Electron. See the repository's CREDITS.md for the full list of licenses and assets.",
+      "The CRASHVZN app is free during beta. A separate Claude, Codex, or Gemini subscription is required for the LLM-powered assistant and video-rendering workflow. The app is built on open-source projects including OpenSplat, Spark, Three.js, React, and Electron. See the repository's CREDITS.md for licenses and assets.",
   },
 ];
 
@@ -39,15 +39,7 @@ export function FAQ() {
     <section className="section-pad faq-section" id="faq">
       <div className="container-x faq-grid">
         <Reveal className="faq-intro">
-          <div className="section-kicker">
-            <span className="section-index">04</span>
-            <span>QUESTIONS</span>
-            <span className="section-rule" />
-          </div>
-          <h2 className="neon-title">
-            The fine print,
-            <span className="neon-accent"> in plain language.</span>
-          </h2>
+          <h2>A little more clarity.</h2>
           <p>
             Reconstruction is a tool for understanding, not a verdict. Here’s what the app does,
             what it doesn’t, and where your evidence lives.
@@ -61,7 +53,6 @@ export function FAQ() {
           {faqs.map((faq, index) => (
             <details className="faq-item" key={faq.question} open={index === 0}>
               <summary>
-                <span className="faq-index">{String(index + 1).padStart(2, "0")}</span>
                 <span className="faq-question">{faq.question}</span>
                 <span className="faq-plus"><Plus size={16} /></span>
               </summary>
