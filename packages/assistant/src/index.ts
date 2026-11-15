@@ -1,5 +1,6 @@
 export * from "./types";
 export { createIpcSceneController, type SceneController, type SceneControllerMethod } from "./controller";
+export { computeCrashForces, compassOf, type CrashSample } from "./crash-forces";
 export { matchEntities } from "./entity-match";
 export { matchFastPath, type FastPathAction } from "./fastpath";
 export { buildSystemPrompt, type SystemPromptContext } from "./prompt/system-prompt";

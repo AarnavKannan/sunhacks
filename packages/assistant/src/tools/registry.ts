@@ -250,7 +250,7 @@ export const TOOLS: ToolDef[] = [
     name: "kinematics_query",
     title: "kinematics.query",
     description:
-      'Read one object\'s reconstructed motion at one moment from the per-frame database: position, velocity (vector), speed (m/s, mph, km/h), acceleration (negative = slowing, also in g), heading (compass), yaw_rate, forces (mass and net force). Time: t_s, or event + offset_s ("3 s before the crash" → event "crash_start", offset_s -3), or omit for the playhead. Doesn\'t move the playhead. This and kinematics_series are the ONLY sources for motion numbers you tell the user.',
+      'Read one object\'s reconstructed motion at one moment from the per-frame database: position, velocity (vector), speed (m/s, mph, km/h), acceleration (negative = slowing, also in g), heading (compass), yaw_rate, forces (mass, net force and, where available, its breakdown: tyre_road = braking/accelerating/steering through the tyres, drag = air incl. wind, rolling, grade = slope, contact = the impact; plus what Gemini itself read off the footage). Time: t_s, or event + offset_s ("3 s before the crash" → event "crash_start", offset_s -3), or omit for the playhead. Doesn\'t move the playhead. This and kinematics_series are the ONLY sources for motion numbers you tell the user.',
     input: z
       .object({ entity_id: z.string(), ...timeRefShape, fields: fields.default(["speed"]) })
       .refine(timeRefOk, TIME_REF_MSG),
@@ -274,6 +274,15 @@ export const TOOLS: ToolDef[] = [
       .refine((v) => (v.to_s - v.from_s) / v.step_s <= 60, "Too many samples; use a larger step_s (max 60 samples)"),
     readOnly: true,
     run: (ctl, a) => ctl.querySeries(a.entity_id, a.from_s, a.to_s, a.step_s, a.fields as KinematicsField[]),
+  }),
+  tool({
+    name: "crash_forces",
+    title: "crash.forces",
+    description:
+      "The crash in forces and momentum, for every vehicle involved: speed just before and just after the impact, change in velocity (delta-v), impulse (N·s) and the direction it pushed, average impact force over an assumed contact pulse, the slide afterwards (distance, time, mean tyre force), the closing speed, and the forces Gemini read off the footage. Use for 'how hard did they hit', 'what force hit the Toyota', 'delta-v', 'how far did it slide after'. The only source for crash-force numbers.",
+    input: z.object({}),
+    readOnly: true,
+    run: (ctl) => ctl.crashForces(),
   }),
   tool({
     name: "measure_distance",

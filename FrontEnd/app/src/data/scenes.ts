@@ -9,6 +9,16 @@ export type VehicleInfo = {
   type: string;
   /** Other names people use: "car 1", "the SUV". */
   aliases?: string[];
+  /**
+   * Precision tier. "crash": involved in the crash, reconstructed precisely. "background": other
+   * traffic, approximate (it may differ slightly between builds, but never touches the crash).
+   */
+  involvement?: "crash" | "background";
+  /** Estimated mass (kg); falls back to a class default. */
+  massKg?: number;
+  /** When it is on the road (seconds); outside this it hasn't entered yet or has left. Absent = whole clip. */
+  visibleFrom?: number;
+  visibleTo?: number;
 };
 
 export type SceneInfo = {
@@ -36,6 +46,12 @@ export type SceneInfo = {
   environment: SceneEnvironment;
   /** The footage the environment was read from, when known. */
   environmentSource?: string;
+  /** Where the motion comes from, stored with the kinematics and passed on to the assistant. */
+  basis?: string;
+  /** Road and air for the force breakdown: wind (scene frame, m/s), grade (%), surface and friction. */
+  physics?: { wind: [number, number, number]; gradePercent: number; surface: string; mu: number };
+  /** Forces Gemini read off the footage per vehicle (scene frame, N), stored next to the derived ones. */
+  reportedForces?: Record<string, { t: number; force: [number, number, number]; cause: string; note: string }[]>;
 };
 
 const R05_ENVIRONMENT: SceneEnvironment = { sky: "overcast", snow: 0.44, vegetation: "dormant", road: "dry" };

@@ -1,0 +1,519 @@
+{
+  "usage": {
+    "model": "gpt-6.1-terra",
+    "auth": "chatgpt",
+    "usage": {
+      "input_tokens": 66478,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3188,
+      "reasoning_output_tokens": 516
+    }
+  },
+  "spec": {
+    "prompt_version": "codex-scene-v6",
+    "title": "Divided highway traffic in winter conditions",
+    "location_guess": "European motorway; exact location unknown",
+    "summary": "Four fixed highway camera tiles show traffic on a divided motorway. No physical contact is established in the sampled frames. The objects listed are a selection of vehicles that can be followed across multiple samples.",
+    "duration_s": 60,
+    "views": [
+      {
+        "video_index": 1,
+        "description": "Upper-left mosaic tile: approaching traffic on the near carriageway and opposing traffic beyond the median.",
+        "camera_kind": "fixed traffic camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "toward_camera"
+      },
+      {
+        "video_index": 1,
+        "description": "Upper-right mosaic tile: approaching traffic on the near carriageway and traffic beyond the median.",
+        "camera_kind": "fixed traffic camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "toward_camera"
+      },
+      {
+        "video_index": 1,
+        "description": "Lower-left mosaic tile: traffic recedes on the right-hand side of the image and approaches on the opposite carriageway.",
+        "camera_kind": "fixed traffic camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "away_from_camera"
+      },
+      {
+        "video_index": 1,
+        "description": "Lower-right mosaic tile: traffic recedes on the right-hand side of the image and approaches on the opposite carriageway.",
+        "camera_kind": "fixed traffic camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "away_from_camera"
+      }
+    ],
+    "environment_preset": "clear_winter",
+    "road": {
+      "kind": "divided_highway",
+      "region": "EU",
+      "road_class": "motorway",
+      "lanes_each_way": 3,
+      "cross_lanes_each_way": 1,
+      "surface": "dry",
+      "grade_percent": 0,
+      "speed_limit_mps": null
+    },
+    "wind": {
+      "toward_deg": 0,
+      "speed_mps": 0
+    },
+    "crash": null,
+    "objects": [
+      {
+        "id": "v1",
+        "label": "White car approaching in the upper-left tile",
+        "category": "sedan",
+        "color_name": "white",
+        "color_hex": "#e9eded",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 4.7,
+        "width_m": 1.8,
+        "mass_kg": 1500,
+        "visible_from_s": 1.997,
+        "visible_to_s": 3.495,
+        "keyframes": [
+          {
+            "t_s": 1.997,
+            "x_m": -45,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 24
+          },
+          {
+            "t_s": 3.495,
+            "x_m": -9,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 24
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.65
+      },
+      {
+        "id": "v2",
+        "label": "Dark car approaching in the upper-left tile",
+        "category": "sedan",
+        "color_name": "dark gray",
+        "color_hex": "#333d43",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 4.7,
+        "width_m": 1.8,
+        "mass_kg": 1500,
+        "visible_from_s": 4.494,
+        "visible_to_s": 5.992,
+        "keyframes": [
+          {
+            "t_s": 4.494,
+            "x_m": -43,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 5.992,
+            "x_m": -9,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 23
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.6
+      },
+      {
+        "id": "v3",
+        "label": "White van approaching in the upper-left tile",
+        "category": "van",
+        "color_name": "white",
+        "color_hex": "#e7ebea",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 5.2,
+        "width_m": 2,
+        "mass_kg": 2300,
+        "visible_from_s": 8.489,
+        "visible_to_s": 10.486,
+        "keyframes": [
+          {
+            "t_s": 8.489,
+            "x_m": -54,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 10.486,
+            "x_m": -8,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 23
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.7
+      },
+      {
+        "id": "v4",
+        "label": "White box truck approaching in the upper-left tile",
+        "category": "truck",
+        "color_name": "white",
+        "color_hex": "#e7ece8",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 9,
+        "width_m": 2.5,
+        "mass_kg": 12000,
+        "visible_from_s": 13.981,
+        "visible_to_s": 15.979,
+        "keyframes": [
+          {
+            "t_s": 13.981,
+            "x_m": -48,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 20
+          },
+          {
+            "t_s": 15.979,
+            "x_m": -8,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 20
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.75
+      },
+      {
+        "id": "v5",
+        "label": "White tanker truck approaching in the upper-left tile",
+        "category": "truck",
+        "color_name": "white",
+        "color_hex": "#e1e5e2",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 11.899999999999999,
+        "width_m": 2.5,
+        "mass_kg": 18000,
+        "visible_from_s": 21.971,
+        "visible_to_s": 23.968,
+        "keyframes": [
+          {
+            "t_s": 21.971,
+            "x_m": -51,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 21
+          },
+          {
+            "t_s": 23.968,
+            "x_m": -9,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 21
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.75
+      },
+      {
+        "id": "v6",
+        "label": "Orange work truck approaching in the upper-left tile",
+        "category": "truck",
+        "color_name": "orange",
+        "color_hex": "#a76d38",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 8,
+        "width_m": 2.5,
+        "mass_kg": 12000,
+        "visible_from_s": 46.937,
+        "visible_to_s": 47.936,
+        "keyframes": [
+          {
+            "t_s": 46.937,
+            "x_m": -36,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 21
+          },
+          {
+            "t_s": 47.936,
+            "x_m": -15,
+            "y_m": -10,
+            "heading_deg": 0,
+            "speed_mps": 21
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.75
+      },
+      {
+        "id": "v7",
+        "label": "Red car beside the orange truck in the upper-left tile",
+        "category": "hatchback",
+        "color_name": "red",
+        "color_hex": "#c72d37",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 4.2,
+        "width_m": 1.8,
+        "mass_kg": 1400,
+        "visible_from_s": 46.937,
+        "visible_to_s": 47.936,
+        "keyframes": [
+          {
+            "t_s": 46.937,
+            "x_m": -35,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 47.936,
+            "x_m": -12,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 23
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.75
+      },
+      {
+        "id": "v8",
+        "label": "White car approaching in the upper-left tile near the end",
+        "category": "sedan",
+        "color_name": "white",
+        "color_hex": "#e5e9e8",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 4.7,
+        "width_m": 1.8,
+        "mass_kg": 1500,
+        "visible_from_s": 55.925,
+        "visible_to_s": 57.423,
+        "keyframes": [
+          {
+            "t_s": 55.925,
+            "x_m": -46,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 24
+          },
+          {
+            "t_s": 57.423,
+            "x_m": -10,
+            "y_m": -6,
+            "heading_deg": 0,
+            "speed_mps": 24
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.7
+      }
+    ],
+    "caveats": [
+      "No contact is visible in the supplied samples; a brief event between samples could be missed.",
+      "The mosaic contains substantially more vehicles than the selection listed. Distant and overlapping vehicles cannot be reliably identified and tracked individually from these sheets.",
+      "All object keyframes use the upper-left tile. The approximate origin is the median centre at the middle of that tile's visible stretch, with +x toward its camera.",
+      "The camera is uncalibrated. Positions and speeds are rough illustrative estimates based on apparent movement and typical lane and vehicle dimensions, not surveyed measurements.",
+      "The four camera tiles may cover different stretches; their spatial relationship has not been established.",
+      "Listed visibility bounds are sampled sightings, not confirmed entry and exit times.",
+      "Vehicle categories, dimensions, masses, lane count, road region and road surface are approximate. The speed limit and wind are not visible; zero wind and grade are placeholders.",
+      "Snow is visible beside the roadway; the pavement appears mostly clear, but its moisture and traction cannot be established from the images.",
+      "The final supplied sample is at 59.421 s, although the requested source duration is 60 s."
+    ]
+  },
+  "scene": {
+    "id": "codex-auth-smoke",
+    "title": "Divided highway traffic in winter conditions",
+    "location": "European motorway; exact location unknown",
+    "detail": "Codex reconstruction · 8 vehicles",
+    "duration": 60,
+    "impactTime": null,
+    "crashEnd": null,
+    "crashVehicles": [],
+    "startTime": 0,
+    "folder": "Codex reconstructions",
+    "created": "2026-11-15",
+    "kind": "proxy",
+    "vehicles": [
+      {
+        "id": "v1",
+        "label": "White car approaching in the upper-left tile",
+        "color": "#e9eded",
+        "type": "sedan",
+        "aliases": [
+          "car 1",
+          "the white sedan"
+        ],
+        "involvement": "background",
+        "massKg": 1500
+      },
+      {
+        "id": "v2",
+        "label": "Dark car approaching in the upper-left tile",
+        "color": "#333d43",
+        "type": "sedan",
+        "aliases": [
+          "car 2",
+          "the dark gray sedan"
+        ],
+        "involvement": "background",
+        "massKg": 1500
+      },
+      {
+        "id": "v3",
+        "label": "White van approaching in the upper-left tile",
+        "color": "#e7ebea",
+        "type": "van",
+        "aliases": [
+          "car 3",
+          "the white van"
+        ],
+        "involvement": "background",
+        "massKg": 2300
+      },
+      {
+        "id": "v4",
+        "label": "White box truck approaching in the upper-left tile",
+        "color": "#e7ece8",
+        "type": "truck",
+        "aliases": [
+          "car 4",
+          "the white truck"
+        ],
+        "involvement": "background",
+        "massKg": 12000
+      },
+      {
+        "id": "v5",
+        "label": "White tanker truck approaching in the upper-left tile",
+        "color": "#e1e5e2",
+        "type": "truck",
+        "aliases": [
+          "car 5",
+          "the white truck"
+        ],
+        "involvement": "background",
+        "massKg": 18000
+      },
+      {
+        "id": "v6",
+        "label": "Orange work truck approaching in the upper-left tile",
+        "color": "#a76d38",
+        "type": "truck",
+        "aliases": [
+          "car 6",
+          "the orange truck"
+        ],
+        "involvement": "background",
+        "massKg": 12000
+      },
+      {
+        "id": "v7",
+        "label": "Red car beside the orange truck in the upper-left tile",
+        "color": "#c72d37",
+        "type": "hatchback",
+        "aliases": [
+          "car 7",
+          "the red hatchback"
+        ],
+        "involvement": "background",
+        "massKg": 1400
+      },
+      {
+        "id": "v8",
+        "label": "White car approaching in the upper-left tile near the end",
+        "color": "#e5e9e8",
+        "type": "sedan",
+        "aliases": [
+          "car 8",
+          "the white sedan"
+        ],
+        "involvement": "background",
+        "massKg": 1500
+      }
+    ],
+    "environment": {
+      "sky": "clear",
+      "snow": 0.3,
+      "vegetation": "dormant",
+      "road": "dry"
+    },
+    "environmentSource": "Codex scene reading",
+    "basis": "interpolated from Codex estimates of sampled footage; positions, velocities and forces are uncertain",
+    "physics": {
+      "wind": [
+        0,
+        0,
+        0
+      ],
+      "gradePercent": 0,
+      "surface": "dry",
+      "mu": 0.75
+    },
+    "reportedForces": {}
+  },
+  "report": {
+    "seed": 42,
+    "crash": null,
+    "tiers": {
+      "crash": [],
+      "background": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6",
+        "v7",
+        "v8"
+      ]
+    },
+    "removed": [],
+    "notes": [
+      "Positions are interpolated between reported observations and held outside them. Occlusions and uncalibrated footage limit accuracy; contact and forces are not independently measured."
+    ],
+    "adjustments": {},
+    "caveats": [
+      "No contact is visible in the supplied samples; a brief event between samples could be missed.",
+      "The mosaic contains substantially more vehicles than the selection listed. Distant and overlapping vehicles cannot be reliably identified and tracked individually from these sheets.",
+      "All object keyframes use the upper-left tile. The approximate origin is the median centre at the middle of that tile's visible stretch, with +x toward its camera.",
+      "The camera is uncalibrated. Positions and speeds are rough illustrative estimates based on apparent movement and typical lane and vehicle dimensions, not surveyed measurements.",
+      "The four camera tiles may cover different stretches; their spatial relationship has not been established.",
+      "Listed visibility bounds are sampled sightings, not confirmed entry and exit times.",
+      "Vehicle categories, dimensions, masses, lane count, road region and road surface are approximate. The speed limit and wind are not visible; zero wind and grade are placeholders.",
+      "Snow is visible beside the roadway; the pavement appears mostly clear, but its moisture and traction cannot be established from the images.",
+      "The final supplied sample is at 59.421 s, although the requested source duration is 60 s."
+    ]
+  }
+}

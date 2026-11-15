@@ -161,3 +161,4 @@ export function registerAssistant({ ipcMain, getWindow }: Deps) {
 }
 
 export { registerKinematics } from "./kinematics";
+export { registerGemini } from "./gemini";

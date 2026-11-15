@@ -48,6 +48,16 @@ export type KinematicsFrame = {
   yaw_rate_dps: number;
   mass_kg: number;
   force_net: KinVec3;
+  /**
+   * The net force split by source (N, world frame): what the road applies through the tyres
+   * (braking, accelerating, steering), air drag, rolling resistance, the slope, and, during the
+   * crash period, the impact. They sum to force_net.
+   */
+  force_parts?: { tyre_road: KinVec3; drag: KinVec3; rolling: KinVec3; grade: KinVec3; contact: KinVec3 };
+  /** Gemini's own reading of the force from the footage, when it gave one near this time. */
+  force_reported?: { vector: KinVec3; cause: string; note: string } | null;
+  /** Precision tier: "crash" (precise) or "background" (approximate). */
+  involvement?: "crash" | "background";
   sigma: { position_m?: number; speed_mps?: number; accel_mps2?: number } | null;
 };
 
@@ -59,9 +69,26 @@ export type KinematicsIncident = {
   duration_s: number;
   origin_scene: KinVec3;
   crash: { start_s: number; end_s: number; vehicles: string[] } | null;
-  entities: { id: string; label: string; type: string; mass_kg: number; from_s: number; to_s: number }[];
+  entities: { id: string; label: string; type: string; mass_kg: number; from_s: number; to_s: number; involvement?: "crash" | "background" }[];
   basis: string;
+  /** Road and air used for the force breakdown. */
+  physics?: { wind: KinVec3; gradePercent: number; surface: string; mu: number; air_density: number };
 };
+
+/** A Gemini analysis of uploaded footage (electron/gemini.ts), already validated by gemini/spec.ts. */
+export type GeminiAnalysis = { analysisId: string; spec: import("@/gemini/spec").IncidentSpec; cached: boolean; models: string[] };
+
+/** A Gemini scene saved in MongoDB: rebuilt from its analysis and seed at startup. */
+export type GeminiSceneRecord = {
+  sceneId: string;
+  analysisId: string;
+  seed: number;
+  created: string;
+  title: string;
+  report?: unknown;
+};
+
+export type GeminiProgress = { stage: string; detail?: string };
 
 export type SceneCallMessage = { id: number; method: string; args: unknown[] };
 export type SceneResultMessage = { id: number; ok: true; result: unknown } | { id: number; ok: false; error: string };
@@ -90,6 +117,14 @@ declare global {
         incident: (incidentId: string) => Promise<KinematicsIncident & { synced_at: Date }>;
         sample: (incidentId: string, entityId: string, times: number[]) => Promise<(KinematicsFrame | null)[]>;
         positions: (incidentId: string, t: number) => Promise<{ entity_id: string; position: KinVec3 }[]>;
+      };
+      /** Footage → scene description via the Gemini API (key stays in the main process). */
+      gemini: {
+        status: () => Promise<{ configured: boolean; models: { fast: string; precise: string } }>;
+        analyze: (files: File[], opts?: { refresh?: boolean; durations?: (number | null)[] }) => Promise<GeminiAnalysis>;
+        saveScene: (record: GeminiSceneRecord) => Promise<void>;
+        listScenes: () => Promise<(GeminiSceneRecord & { spec: import("@/gemini/spec").IncidentSpec })[]>;
+        onProgress: (callback: (progress: GeminiProgress) => void) => () => void;
       };
       /** Resolves to the saved path, or null if the user cancelled the save dialog. */
       saveExport: (bytes: Uint8Array, fileName: string) => Promise<string | null>;

@@ -1,3 +1,4 @@
+import { computeCrashForces } from "../crash-forces";
 import type { SceneController } from "../controller";
 import { matchEntities } from "../entity-match";
 import { CAMERA_PRESETS } from "../types";
@@ -403,6 +404,17 @@ export class MockSceneController implements SceneController {
     const samples: KinematicsReading[] = [];
     for (let i = 0; from + i * stepS <= to + 1e-9 && i <= 60; i++) samples.push(this.reading(entityId, from + i * stepS, fields));
     return { entity_id: entityId, step_s: stepS, samples };
+  }
+
+  async crashForces() {
+    this.record("crashForces", []);
+    this.requireOpen();
+    return computeCrashForces({
+      crash: CRASH,
+      vehicles: MOCK_ENTITIES.map((e) => ({ id: e.id, label: e.label, mass_kg: TRACKS[e.id]!(0).mass })),
+      sample: async (id, times) => times.map((t) => ({ position: TRACKS[id]!(t).pos })),
+      speedSigma: 0.6,
+    });
   }
 
   async measureDistance(a: MeasureTarget, b: MeasureTarget, at?: TimeRef): Promise<Measurement> {

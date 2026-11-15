@@ -14,6 +14,7 @@
  * from the renderer's animation, so the assistant reports exactly what's stored.
  */
 import type { SceneController } from "@assistant/controller";
+import { computeCrashForces } from "@assistant/crash-forces";
 import { matchEntities } from "@assistant/entity-match";
 import {
   CAMERA_PRESETS,
@@ -37,7 +38,7 @@ import {
   type Vec3,
 } from "@assistant/types";
 import type { SceneInfo } from "@/data/scenes";
-import type { KinematicsFrame } from "@/electron.d";
+import type { KinematicsFrame, KinVec3 } from "@/electron.d";
 import { crashOrigin } from "@/kinematics/derive";
 import { incidentMeta, sampleKinematics } from "@/kinematics/store";
 import { startExport } from "@/lib/exportVideo";
@@ -152,6 +153,9 @@ function entities(scene: SceneInfo): Entity[] {
       color,
       type: vehicle.type,
       aliases: vehicle.aliases,
+      ...(vehicle.involvement ? { involvement: vehicle.involvement } : {}),
+      ...(vehicle.visibleFrom != null ? { visible_from_s: round(vehicle.visibleFrom, 2) } : {}),
+      ...(vehicle.visibleTo != null ? { visible_to_s: round(vehicle.visibleTo, 2) } : {}),
     };
   });
 }
@@ -210,8 +214,21 @@ function around(target: Vec3, distance: number, yawDeg: number, pitchDeg: number
 }
 
 function vehiclePoint(handle: SceneHandle, id: string): Vec3 {
-  const pose = handle.vehiclePose(id, store().time);
+  const state = store();
+  let t = state.time;
+  let pose = handle.vehiclePose(id, t);
   if (!pose) throw new Error(`Vehicle "${id}" isn't in the 3D scene.`);
+  if (pose.hidden) {
+    // Before it drives in or after it leaves there's nothing on screen to point the camera at
+    // (its held pose is off at the edge of view): jump to the nearest moment it's on the road.
+    const vehicle = state.scenes.find((s) => s.id === state.selectedId)?.vehicles.find((v) => v.id === id);
+    if (vehicle?.visibleFrom != null && vehicle.visibleTo != null) {
+      t = Math.min(Math.max(t, vehicle.visibleFrom), vehicle.visibleTo);
+      state.setTime(t);
+      pose = handle.vehiclePose(id, t) ?? pose;
+    }
+    if (pose.hidden) throw new Error(`The ${vehicle?.label ?? id} isn't in the scene at ${state.time.toFixed(1)} s.`);
+  }
   return add(pose.position, [0, 0.8, 0]);
 }
 
@@ -249,10 +266,20 @@ function reading(scene: SceneInfo, frame: KinematicsFrame, fields: KinematicsFie
   }
   if (want.has("yaw_rate")) out.yaw_rate = { value: round(frame.yaw_rate_dps, 1), unit: "deg/s" };
   if (want.has("forces")) {
+    const q = (v: KinVec3) => ({ vector: [Math.round(v[0]), Math.round(v[1]), Math.round(v[2])] as Vec3, magnitude: { value: Math.round(len(v)), unit: "N" } });
+    const parts = frame.force_parts;
     out.forces = {
       mass_kg: frame.mass_kg,
-      net: { vector: [Math.round(frame.force_net[0]), Math.round(frame.force_net[1]), Math.round(frame.force_net[2])], magnitude: { value: Math.round(len(frame.force_net)), unit: "N" } },
-      model: `net force = mass × acceleration, using a nominal ${frame.mass_kg} kg for a ${type}; air drag and friction not modeled separately`,
+      net: q(frame.force_net),
+      ...(parts
+        ? { parts: { tyre_road: q(parts.tyre_road), drag: q(parts.drag), rolling: q(parts.rolling), grade: q(parts.grade), contact: q(parts.contact) } }
+        : {}),
+      ...(frame.force_reported
+        ? { reported: { ...q(frame.force_reported.vector), cause: frame.force_reported.cause, note: frame.force_reported.note } }
+        : {}),
+      model: parts
+        ? `net force = mass × acceleration (${frame.mass_kg} kg, estimated ${type}); split into tyre/road, air drag (with wind), rolling resistance, slope and impact using standard coefficients`
+        : `net force = mass × acceleration, using a nominal ${frame.mass_kg} kg for a ${type}; air drag and friction not modeled separately`,
     };
   }
   return out;
@@ -412,7 +439,10 @@ export const appSceneController: SceneController = {
 
   async pov(entityId) {
     const { scene, handle, o } = await context();
-    if (entityId) requireEntity(scene, entityId);
+    if (entityId) {
+      requireEntity(scene, entityId);
+      vehiclePoint(handle, entityId); // seeks into the time it's on the road, if it isn't now
+    }
     store().setCameraMode({ pov: entityId, following: null });
     handle.render();
     return cameraState(handle, o);
@@ -470,6 +500,26 @@ export const appSceneController: SceneController = {
     const samples = frames.filter((frame) => frame !== null).map((frame) => reading(scene, frame, fields, meta.basis, vehicle.type));
     if (!samples.length) throw new Error(`The ${vehicle.label} isn't in the scene between ${round(from)} and ${round(to)} s.`);
     return { entity_id: entityId, step_s: stepS, samples };
+  },
+
+  async crashForces() {
+    const scene = openScene();
+    if (scene.impactTime == null || scene.crashVehicles.length === 0) throw new Error("This reconstruction has no crash.");
+    const meta = await incidentMeta(scene);
+    const crash = { start_s: scene.impactTime, end_s: scene.crashEnd ?? scene.impactTime, vehicles: scene.crashVehicles };
+    return computeCrashForces({
+      crash,
+      vehicles: scene.vehicles.map((vehicle) => ({
+        id: vehicle.id,
+        label: vehicle.label,
+        mass_kg: meta.entities.find((entity) => entity.id === vehicle.id)?.mass_kg ?? 1500,
+      })),
+      sample: async (entityId, times) =>
+        (await sampleKinematics(scene, entityId, times)).map((frame) =>
+          frame ? { position: frame.position, tyre: frame.force_parts?.tyre_road, reported: frame.force_reported ?? null } : null,
+        ),
+      basis: meta.basis,
+    });
   },
 
   async measureDistance(a: MeasureTarget, b: MeasureTarget, at?: TimeRef) {

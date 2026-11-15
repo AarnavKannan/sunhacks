@@ -174,7 +174,8 @@ export function Viewport() {
         {showVideo && scene?.sourceVideo && <SourceVideo key={scene.id} url={scene.sourceVideo.url} name={scene.sourceVideo.name} />}
         {scene &&
           scene.vehicles.length > 0 &&
-          scene.vehicles.map((vehicle) => (
+          // Busy scenes (Gemini reconstructions with dozens of cars): chips for the crash vehicles only, plus a count.
+          (scene.vehicles.length > 8 ? scene.vehicles.filter((v) => scene.crashVehicles.includes(v.id)) : scene.vehicles).map((vehicle) => (
             <span
               key={vehicle.id}
               className={`inline-flex items-center gap-2 rounded-full bg-[#071433]/70 px-2.5 py-1 text-xs text-white backdrop-blur-sm ${
@@ -185,6 +186,11 @@ export function Viewport() {
               {vehicle.label}
             </span>
           ))}
+        {scene && scene.vehicles.length > 8 && (
+          <span className="inline-flex items-center rounded-full bg-[#071433]/70 px-2.5 py-1 text-xs text-white/85 backdrop-blur-sm">
+            +{scene.vehicles.length - scene.crashVehicles.length} other vehicles
+          </span>
+        )}
       </div>
 
       {loading && (

@@ -21,7 +21,7 @@ import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 
-export type VehicleVisual = { id: string; color: string; label?: string };
+export type VehicleVisual = { id: string; color: string; label?: string; /** Body style hint: sedan, suv, hatchback... */ type?: string };
 
 /** A point in three.js scene coordinates (meters; +x east, +y up, -z north). */
 export type Point3 = [number, number, number];
@@ -52,7 +52,7 @@ export type SceneHandle = {
   homePose: () => CameraPose;
   bounds: () => ViewBounds;
   /** Where a vehicle's centre is at `time`, or null if the scene has no such vehicle. */
-  vehiclePose: (id: string, time: number) => { position: Point3; yaw: number } | null;
+  vehiclePose: (id: string, time: number) => { position: Point3; yaw: number; /** Not in the scene at this time. */ hidden?: boolean } | null;
   /** Keep a vehicle centred from outside (null stops). */
   setFollow: (id: string | null) => void;
   /** Ride along from a vehicle's approximate driver eye point (null leaves). */
@@ -245,6 +245,7 @@ export async function mountScene(
   let markerObjects = new Map<string, THREE.Group>();
   let follow: string | null = null;
   let pov: string | null = null;
+  let lastTime = 0;
   let frameCallback: ((canvas: HTMLCanvasElement) => void) | null = null;
   let tween: {
     fromTarget: THREE.Vector3;
@@ -511,6 +512,11 @@ export async function mountScene(
       };
       for (let t = 0; t <= duration + 1e-6; t += step) {
         const pose = mover.poseAt(t);
+        // Only where the vehicle is on the road; it's parked out of view before it enters / after it leaves.
+        if (pose.hidden) {
+          flush();
+          continue;
+        }
         const point = new THREE.Vector3(pose.x, 0.3, pose.z);
         if (run.length && run[run.length - 1].distanceTo(point) > 15) flush();
         run.push(point);
@@ -522,7 +528,7 @@ export async function mountScene(
 
   const applyVehicleVisibility = () => {
     for (const mover of movers) {
-      mover.rig.root.visible = !layers.hiddenVehicles.includes(mover.id) && pov !== mover.id;
+      mover.rig.root.visible = !mover.poseAt(lastTime).hidden && !layers.hiddenVehicles.includes(mover.id) && pov !== mover.id;
       const hitbox = mover.rig.root.getObjectByName("vehicle-hitbox");
       if (hitbox) hitbox.visible = layers.hitboxes;
     }
@@ -539,6 +545,8 @@ export async function mountScene(
       const mover = marker.entityId ? movers.find((item) => item.id === marker.entityId) : undefined;
       if (mover) object.position.set(mover.rig.root.position.x, 0, mover.rig.root.position.z);
       else object.position.set(...marker.point);
+      // A pin on a vehicle goes away with it while it's off the road.
+      object.visible = !mover || !mover.poseAt(lastTime).hidden;
     }
   };
 
@@ -574,7 +582,7 @@ export async function mountScene(
       if (!motion) continue;
       const kind = motion.kind ?? "car";
       const scale = motion.scale ?? 1;
-      const rig = makeVehicle(kind, vehicle.color, vehicle.id, vehicle.label);
+      const rig = makeVehicle(kind, vehicle.color, vehicle.id, `${vehicle.label ?? ""} ${vehicle.type ?? ""}`);
       rig.root.scale.setScalar(scale);
       proxy.add(rig.root);
       movers.push({ id: vehicle.id, rig, poseAt: motion.poseAt, color: vehicle.color, eyeHeight: EYE_HEIGHT[kind] * scale });
@@ -660,10 +668,12 @@ export async function mountScene(
   };
 
   const setTime = (time: number) => {
+    lastTime = time;
     for (const mover of movers) {
       const pose = mover.poseAt(time);
       mover.rig.root.position.set(pose.x, 0, pose.z);
       mover.rig.root.rotation.y = pose.yaw;
+      mover.rig.root.visible = !pose.hidden && !layers.hiddenVehicles.includes(mover.id) && pov !== mover.id;
 
       // Motion state from the trajectory itself, so any poseAt (scripted now, simulated
       // or tracked later) drives wheels, brake lights and suspension consistently.
@@ -747,7 +757,7 @@ export async function mountScene(
       const mover = movers.find((item) => item.id === id);
       if (!mover) return null;
       const pose = mover.poseAt(time);
-      return { position: [pose.x, 0, pose.z], yaw: pose.yaw };
+      return { position: [pose.x, 0, pose.z], yaw: pose.yaw, ...(pose.hidden ? { hidden: true } : {}) };
     },
     setFollow: (id) => {
       if (id && pov) leaveCameraModes();

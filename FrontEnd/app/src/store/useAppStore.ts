@@ -147,7 +147,19 @@ type Store = {
   setUploadAnalysis: (id: string, analysis: UploadItem["analysis"]) => void;
   removeUpload: (id: string) => void;
   addSplatScene: (file: { fileName: string; bytes: Uint8Array }) => void;
+  /** Adds a scene to the library, or replaces the one with the same id. */
+  upsertScene: (scene: SceneInfo) => void;
+  /** Progress of the current Gemini reconstruction (gemini/reconstruct.ts). */
+  geminiJob: GeminiJob;
+  setGeminiJob: (job: GeminiJob) => void;
 };
+
+export type GeminiJob =
+  | { state: "idle" }
+  | { state: "running"; stage: string; detail?: string }
+  | { state: "done"; sceneId: string; message: string }
+  | { state: "error"; error: string };
+
 
 const scenesWithDetectedCollisions = BUILTIN_SCENES.map((scene) => {
   const layout = getLayout(scene.id);
@@ -350,6 +362,16 @@ export const useAppStore = create<Store>((set, get) => ({
 
   removeUpload: (id) =>
     set((state) => ({ uploads: state.uploads.filter((item) => item.id !== id) })),
+
+  upsertScene: (scene) =>
+    set((state) => ({
+      scenes: state.scenes.some((item) => item.id === scene.id)
+        ? state.scenes.map((item) => (item.id === scene.id ? scene : item))
+        : [scene, ...state.scenes],
+    })),
+
+  geminiJob: { state: "idle" },
+  setGeminiJob: (geminiJob) => set({ geminiJob }),
 
   addSplatScene: (file) => {
     const id = `splat-${crypto.randomUUID()}`;

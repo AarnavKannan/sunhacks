@@ -1,0 +1,649 @@
+{
+ "camera": {
+  "model": "pinhole, no distortion, tile pixels (479x300 crop x=481 y=304 of demo.mp4)",
+  "cx": 239.5,
+  "cy": 150.0,
+  "f_px": 2029.3522165730858,
+  "h_m": 8.615816794180304,
+  "cam_Y_m": -2.081971730369573,
+  "yaw_deg": 1.9934177200035426,
+  "pitch_deg_down": 4.633892977566423,
+  "roll_deg": 0.17072755628483807,
+  "dash_phase_m": 54.71903163940497,
+  "R_world_to_cam": [
+   [
+    0.035025113856212806,
+    0.9993820192593669,
+    0.0029700135403760678
+   ],
+   [
+    -0.08063564982594512,
+    0.00578814198091005,
+    -0.9967268378997108
+   ],
+   [
+    0.9961280707702734,
+    -0.03467098200916025,
+    -0.08078854887924153
+   ]
+  ],
+  "usage": "cam.py: to_ground(u,v[,Z]) -> (X,Y) on plane z=Z; to_img(X,Y,Z=0) -> (u,v)"
+ },
+ "world_frame": "X along road away from camera; Y to camera's right; Z up; Y=0 = right-carriageway dashed line A (between right lanes 1 and 2); camera at (0, cam_Y, h)",
+ "scale_anchors": {
+  "longitudinal": "right-cwy lane-line dashes, 6 m dash + 12 m gap; the short-dash line R_C comes out on a 12.0 m period, consistent",
+  "lateral": "burned-in 3D box of the stopped van, width fixed 2.05 m (Ducato/Jumper body); without it lateral scale is unidentifiable (flat cost valley)",
+  "van_box_fit": {
+   "X": 80.56428663983509,
+   "Y": -10.368446537101798,
+   "yaw_deg": 0.5294348244098663,
+   "L": 5.053745496316625,
+   "W": 2.05,
+   "H": 2.656722983051933
+  },
+  "lateral_scale_sensitivity": "all lateral distances scale with the van width: W=1.95 -> right lane 2 = 3.49 m, W=2.05 -> 3.67, W=2.10 -> 3.76"
+ },
+ "lines_Y": {
+  "R_edge_left": -3.791,
+  "R_barrier": -4.803,
+  "R_A": 0.0,
+  "R_B": 3.669,
+  "R_C": 7.641,
+  "L_edge_inner": -9.031,
+  "L_1_2": -12.673,
+  "L_2_3": -16.144,
+  "L_3_4": -19.788,
+  "L_4_5": -23.563,
+  "L_5_6": -26.846,
+  "L_edge_outer": -29.871
+ },
+ "lines_Y_by_X_band": {
+  "R_edge_left": {
+   "60-100": -3.75,
+   "100-140": -3.8,
+   "140-180": -3.82,
+   "180-220": -3.92,
+   "220-260": -3.93,
+   "260-300": -3.89
+  },
+  "R_barrier": {
+   "60-100": -4.84,
+   "100-140": -4.82,
+   "140-180": -4.82,
+   "180-220": -4.63,
+   "220-260": -4.63,
+   "260-300": -4.62
+  },
+  "R_A": {
+   "60-100": 0.01,
+   "100-140": 0.0,
+   "140-180": -0.03,
+   "180-220": -0.07,
+   "220-260": -0.05,
+   "260-300": 0.01
+  },
+  "R_B": {
+   "60-100": 3.67,
+   "100-140": 3.66,
+   "140-180": 3.65,
+   "180-220": 3.63,
+   "220-260": 3.66,
+   "260-300": 3.72
+  },
+  "R_C": {
+   "100-140": 7.62,
+   "140-180": 7.58,
+   "180-220": 7.58,
+   "220-260": 7.67,
+   "260-300": 7.73
+  },
+  "L_edge_inner": {
+   "60-100": -9.0,
+   "100-140": -8.96,
+   "140-180": -9.04,
+   "180-220": -9.02,
+   "220-260": -8.95,
+   "260-300": -8.93
+  },
+  "L_1_2": {
+   "60-100": -12.66,
+   "100-140": -12.64,
+   "140-180": -12.63,
+   "180-220": -12.61,
+   "220-260": -12.56,
+   "260-300": -12.57
+  },
+  "L_2_3": {
+   "100-140": -16.11,
+   "140-180": -16.09,
+   "180-220": -16.08,
+   "260-300": -16.03
+  },
+  "L_3_4": {
+   "100-140": -19.77,
+   "140-180": -19.74,
+   "180-220": -19.7,
+   "220-260": -19.73
+  },
+  "L_4_5": {
+   "140-180": -23.53,
+   "180-220": -23.49,
+   "220-260": -23.45,
+   "260-300": -23.53
+  },
+  "L_5_6": {
+   "140-180": -26.82,
+   "180-220": -26.79,
+   "220-260": -26.72
+  },
+  "L_edge_outer": {
+   "180-220": -29.8,
+   "220-260": -29.82
+  }
+ },
+ "crash_carriageway": {
+  "traffic": "toward camera (decreasing X)",
+  "lanes_from_median": [
+   {
+    "lane": 1,
+    "Y_line_median_side": -9.031,
+    "Y_line_outer_side": -12.673,
+    "Y_centre": -10.852,
+    "width": 3.642,
+    "X_visible": [
+     57.0,
+     334.5
+    ]
+   },
+   {
+    "lane": 2,
+    "Y_line_median_side": -12.673,
+    "Y_line_outer_side": -16.144,
+    "Y_centre": -14.408,
+    "width": 3.471,
+    "X_visible": [
+     80.5,
+     334.0
+    ]
+   },
+   {
+    "lane": 3,
+    "Y_line_median_side": -16.144,
+    "Y_line_outer_side": -19.788,
+    "Y_centre": -17.966,
+    "width": 3.644,
+    "X_visible": [
+     103.5,
+     333.5
+    ]
+   },
+   {
+    "lane": 4,
+    "Y_line_median_side": -19.788,
+    "Y_line_outer_side": -23.563,
+    "Y_centre": -21.675,
+    "width": 3.775,
+    "X_visible": [
+     127.5,
+     333.0
+    ]
+   },
+   {
+    "lane": 5,
+    "Y_line_median_side": -23.563,
+    "Y_line_outer_side": -26.846,
+    "Y_centre": -25.205,
+    "width": 3.283,
+    "X_visible": [
+     150.5,
+     332.5
+    ]
+   },
+   {
+    "lane": 6,
+    "Y_line_median_side": -26.846,
+    "Y_line_outer_side": -29.871,
+    "Y_centre": -28.359,
+    "width": 3.025,
+    "X_visible": [
+     171.5,
+     332.0
+    ]
+   }
+  ],
+  "median_edge_line_Y": -9.031,
+  "outer_edge_line_Y": -29.871,
+  "note": "6 dash-separated lanes visible; lanes 5-6 only seen at X>165 m. Lane 1 partly occluded by the stopped van (X~78-83, Y~-11.4..-9.3)."
+ },
+ "right_carriageway": {
+  "traffic": "away from camera (increasing X)",
+  "lanes_from_median": [
+   {
+    "lane": 1,
+    "Y_line_median_side": -3.791,
+    "Y_line_outer_side": 0.0,
+    "Y_centre": -1.895,
+    "width": 3.791,
+    "X_visible": [
+     56.0,
+     336.0
+    ]
+   },
+   {
+    "lane": 2,
+    "Y_line_median_side": 0.0,
+    "Y_line_outer_side": 3.669,
+    "Y_centre": 1.834,
+    "width": 3.669,
+    "X_visible": [
+     56.0,
+     336.5
+    ]
+   },
+   {
+    "lane": 3,
+    "Y_line_median_side": 3.669,
+    "Y_line_outer_side": 7.641,
+    "Y_centre": 5.655,
+    "width": 3.972,
+    "X_visible": [
+     93.5,
+     337.0
+    ]
+   }
+  ],
+  "line_R_C_note": "R_C has short dashes on a 12 m period (auxiliary/exit-lane boundary); a further lane lies beyond it (faint line ~Y=+11.6)"
+ },
+ "median": {
+  "crash_side_edge_line_Y": -9.031,
+  "right_side_barrier_foot_Y": -4.803,
+  "right_edge_line_Y": -3.791,
+  "description": "snow-covered grass strip about Y=-8.8..-5.3 for X<~150, barrier foot at Y~-4.8; further away the strip narrows to a paved median with barrier"
+ },
+ "road_geometry": {
+  "heading": "both carriageways straight and parallel to X in the measured range (crash-cwy fitted slope 0.00029 rad = 0.017 deg)",
+  "curvature": "none detectable for X<300 m on crash lanes 1-4 (see lines_Y_by_X_band); only the outer guard-rail/verge at Y<-30 bends left beyond X~250 m",
+  "flat_ground": "single plane Z=0 fits all lines; roll 0.18 deg absorbs any crossfall"
+ },
+ "residuals": {
+  "dash_end_rms_px": 0.7727541167763329,
+  "van_corner_rms_px": 0.2279507968310289,
+  "line_median_abs_px": {
+   "R_edge_left": 0.79,
+   "R_barrier": 1.14,
+   "R_A": 0.4,
+   "R_B": 0.27,
+   "R_C": 0.49,
+   "L_edge_inner": 0.24,
+   "L_1_2": 0.14,
+   "L_2_3": 0.14,
+   "L_3_4": 0.16,
+   "L_4_5": 0.16,
+   "L_5_6": 0.13,
+   "L_edge_outer": 0.14
+  },
+  "line_X_seen": {
+   "R_edge_left": [
+    61.3,
+    317.2
+   ],
+   "R_barrier": [
+    61.2,
+    293.3
+   ],
+   "R_A": [
+    58.4,
+    312.5
+   ],
+   "R_B": [
+    74.6,
+    313.8
+   ],
+   "R_C": [
+    122.3,
+    326.2
+   ],
+   "L_edge_inner": [
+    60.5,
+    317.5
+   ],
+   "L_1_2": [
+    71.8,
+    290.9
+   ],
+   "L_2_3": [
+    105.3,
+    267.2
+   ],
+   "L_3_4": [
+    121.2,
+    230.7
+   ],
+   "L_4_5": [
+    144.8,
+    298.8
+   ],
+   "L_5_6": [
+    166.0,
+    258.7
+   ],
+   "L_edge_outer": [
+    183.4,
+    249.5
+   ]
+  }
+ },
+ "accuracy": {
+  "per_pixel": [
+   {
+    "X": 60,
+    "where": "crash_lane1",
+    "u": 16.1,
+    "v": 273.5,
+    "dXdY_per_px_u": [
+     0.002,
+     0.03
+    ],
+    "dXdY_per_px_v": [
+     -0.21,
+     0.03
+    ]
+   },
+   {
+    "X": 60,
+    "where": "right_lane1",
+    "u": 315.5,
+    "v": 275.9,
+    "dXdY_per_px_u": [
+     0.002,
+     0.03
+    ],
+    "dXdY_per_px_v": [
+     -0.208,
+     -0.0
+    ]
+   },
+   {
+    "X": 80,
+    "where": "crash_lane1",
+    "u": 88.9,
+    "v": 202.5,
+    "dXdY_per_px_u": [
+     0.002,
+     0.04
+    ],
+    "dXdY_per_px_v": [
+     -0.369,
+     0.04
+    ]
+   },
+   {
+    "X": 80,
+    "where": "right_lane1",
+    "u": 314.3,
+    "v": 204.0,
+    "dXdY_per_px_u": [
+     0.002,
+     0.04
+    ],
+    "dXdY_per_px_v": [
+     -0.368,
+     -0.001
+    ]
+   },
+   {
+    "X": 100,
+    "where": "crash_lane1",
+    "u": 132.8,
+    "v": 159.5,
+    "dXdY_per_px_u": [
+     0.003,
+     0.049
+    ],
+    "dXdY_per_px_v": [
+     -0.574,
+     0.05
+    ]
+   },
+   {
+    "X": 100,
+    "where": "crash_lane2",
+    "u": 61.4,
+    "v": 159.1,
+    "dXdY_per_px_u": [
+     0.003,
+     0.049
+    ],
+    "dXdY_per_px_v": [
+     -0.575,
+     0.071
+    ]
+   },
+   {
+    "X": 100,
+    "where": "right_lane1",
+    "u": 313.6,
+    "v": 160.6,
+    "dXdY_per_px_u": [
+     0.003,
+     0.049
+    ],
+    "dXdY_per_px_v": [
+     -0.572,
+     -0.001
+    ]
+   },
+   {
+    "X": 130,
+    "where": "crash_lane1",
+    "u": 173.6,
+    "v": 119.7,
+    "dXdY_per_px_u": [
+     0.005,
+     0.064
+    ],
+    "dXdY_per_px_v": [
+     -0.965,
+     0.065
+    ]
+   },
+   {
+    "X": 130,
+    "where": "crash_lane2",
+    "u": 118.5,
+    "v": 119.4,
+    "dXdY_per_px_u": [
+     0.005,
+     0.064
+    ],
+    "dXdY_per_px_v": [
+     -0.966,
+     0.091
+    ]
+   },
+   {
+    "X": 130,
+    "where": "right_lane1",
+    "u": 313.0,
+    "v": 120.5,
+    "dXdY_per_px_u": [
+     0.005,
+     0.064
+    ],
+    "dXdY_per_px_v": [
+     -0.963,
+     -0.001
+    ]
+   },
+   {
+    "X": 160,
+    "where": "crash_lane1",
+    "u": 199.2,
+    "v": 94.8,
+    "dXdY_per_px_u": [
+     0.007,
+     0.079
+    ],
+    "dXdY_per_px_v": [
+     -1.456,
+     0.08
+    ]
+   },
+   {
+    "X": 160,
+    "where": "crash_lane2",
+    "u": 154.3,
+    "v": 94.6,
+    "dXdY_per_px_u": [
+     0.007,
+     0.079
+    ],
+    "dXdY_per_px_v": [
+     -1.457,
+     0.112
+    ]
+   },
+   {
+    "X": 160,
+    "where": "right_lane1",
+    "u": 312.6,
+    "v": 95.3,
+    "dXdY_per_px_u": [
+     0.007,
+     0.079
+    ],
+    "dXdY_per_px_v": [
+     -1.453,
+     -0.001
+    ]
+   },
+   {
+    "X": 200,
+    "where": "crash_lane1",
+    "u": 221.4,
+    "v": 73.1,
+    "dXdY_per_px_u": [
+     0.01,
+     0.098
+    ],
+    "dXdY_per_px_v": [
+     -2.265,
+     0.1
+    ]
+   },
+   {
+    "X": 200,
+    "where": "crash_lane2",
+    "u": 185.4,
+    "v": 72.9,
+    "dXdY_per_px_u": [
+     0.01,
+     0.098
+    ],
+    "dXdY_per_px_v": [
+     -2.266,
+     0.14
+    ]
+   },
+   {
+    "X": 200,
+    "where": "right_lane1",
+    "u": 312.2,
+    "v": 73.5,
+    "dXdY_per_px_u": [
+     0.01,
+     0.098
+    ],
+    "dXdY_per_px_v": [
+     -2.261,
+     -0.002
+    ]
+   },
+   {
+    "X": 250,
+    "where": "crash_lane1",
+    "u": 239.2,
+    "v": 55.7,
+    "dXdY_per_px_u": [
+     0.015,
+     0.123
+    ],
+    "dXdY_per_px_v": [
+     -3.523,
+     0.124
+    ]
+   },
+   {
+    "X": 250,
+    "where": "crash_lane2",
+    "u": 210.4,
+    "v": 55.6,
+    "dXdY_per_px_u": [
+     0.015,
+     0.123
+    ],
+    "dXdY_per_px_v": [
+     -3.525,
+     0.174
+    ]
+   },
+   {
+    "X": 250,
+    "where": "right_lane1",
+    "u": 312.0,
+    "v": 56.0,
+    "dXdY_per_px_u": [
+     0.015,
+     0.123
+    ],
+    "dXdY_per_px_v": [
+     -3.519,
+     -0.002
+    ]
+   },
+   {
+    "X": 300,
+    "where": "crash_lane1",
+    "u": 251.1,
+    "v": 44.1,
+    "dXdY_per_px_u": [
+     0.02,
+     0.147
+    ],
+    "dXdY_per_px_v": [
+     -5.053,
+     0.148
+    ]
+   },
+   {
+    "X": 300,
+    "where": "crash_lane2",
+    "u": 227.1,
+    "v": 44.0,
+    "dXdY_per_px_u": [
+     0.02,
+     0.147
+    ],
+    "dXdY_per_px_v": [
+     -5.055,
+     0.208
+    ]
+   },
+   {
+    "X": 300,
+    "where": "right_lane1",
+    "u": 311.8,
+    "v": 44.3,
+    "dXdY_per_px_u": [
+     0.02,
+     0.148
+    ],
+    "dXdY_per_px_v": [
+     -5.048,
+     -0.002
+    ]
+   }
+  ],
+  "summary": "X=60: 1px(u) -> 0.030 m lateral, 1px(v) -> 0.21 m along-road; X=100: 1px(u) -> 0.049 m lateral, 1px(v) -> 0.57 m along-road; X=160: 1px(u) -> 0.079 m lateral, 1px(v) -> 1.46 m along-road; X=250: 1px(u) -> 0.123 m lateral, 1px(v) -> 3.52 m along-road. Systematic: lateral scale +-2.5% (van width +-0.05 m); longitudinal +-1% (dash standard); line Ys +-0.05 m relative to each other."
+ }
+}

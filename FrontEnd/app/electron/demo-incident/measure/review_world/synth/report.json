@@ -1,0 +1,69 @@
+{
+ "median_reproj_px": 1.1096050976487577,
+ "per_track_reproj_px": {
+  "c1": 1.7912309995113702,
+  "t1": 0.9615349319523272,
+  "c2": 0.8175152873548597,
+  "v1": 1.4355983674990505
+ },
+ "tracks": [
+  {
+   "id": "c1",
+   "cls": "car",
+   "cw": "crash",
+   "crash": false,
+   "frames": "100-282",
+   "speed": "1.5-11.9-12.5",
+   "y": "-9.5..-9.2",
+   "L": 4.6,
+   "events": [],
+   "reproj": 1.79,
+   "sigma_med": 0.2,
+   "flags": []
+  },
+  {
+   "id": "t1",
+   "cls": "truck",
+   "cw": "right",
+   "crash": false,
+   "frames": "0-250",
+   "speed": "23.7-24.0-25.0",
+   "y": "1.8..2.0",
+   "L": 14.0,
+   "events": [],
+   "reproj": 0.96,
+   "sigma_med": 0.99,
+   "flags": []
+  },
+  {
+   "id": "c2",
+   "cls": "car",
+   "cw": "right",
+   "crash": false,
+   "frames": "50-220",
+   "speed": "29.8-30.0-30.6",
+   "y": "-1.9..1.9",
+   "L": 4.63,
+   "events": [],
+   "reproj": 0.82,
+   "sigma_med": 0.68,
+   "flags": []
+  },
+  {
+   "id": "v1",
+   "cls": "van",
+   "cw": "crash",
+   "crash": true,
+   "frames": "200-320",
+   "speed": "2.5-9.8-10.1",
+   "y": "-5.6..-5.5",
+   "L": 5.4,
+   "events": [
+    279
+   ],
+   "reproj": 1.44,
+   "sigma_med": 0.18,
+   "flags": []
+  }
+ ]
+}

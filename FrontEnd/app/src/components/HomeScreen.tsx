@@ -1,4 +1,6 @@
 import { SceneArt } from "@/components/SceneArt";
+import { formatDuration, useGeminiEta } from "@/gemini/eta";
+import { reconstructWithGemini } from "@/gemini/reconstruct";
 import { ingestFiles } from "@/lib/ingest";
 import { formatBytes, formatClock } from "@/lib/time";
 import { describeEnvironment } from "@/scene/environment";
@@ -16,6 +18,9 @@ export function HomeScreen({ dragOver }: { dragOver: boolean }) {
   const setHomeFolder = useAppStore((state) => state.setHomeFolder);
   const openScene = useAppStore((state) => state.openScene);
   const removeUpload = useAppStore((state) => state.removeUpload);
+  const geminiJob = useAppStore((state) => state.geminiJob);
+  const geminiRunning = geminiJob.state === "running";
+  const eta = useGeminiEta();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isStaging, setIsStaging] = useState(false);
   const [stageMessage, setStageMessage] = useState("");
@@ -120,6 +125,17 @@ export function HomeScreen({ dragOver }: { dragOver: boolean }) {
             <section className="mb-6 max-w-[760px] rounded-2xl border border-slate-200 p-4">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <h2 className="text-xs font-medium tracking-wide text-slate-500 uppercase">Upload queue</h2>
+                <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  disabled={geminiRunning || !window.reconstruct?.gemini}
+                  title="Codex reads frames from the queued videos (up to 4 views of one incident) and the app rebuilds the scene from its reading."
+                  onClick={() => void reconstructWithGemini(uploads)}
+                  className="flex items-center gap-1 rounded-md bg-[#1a73e8] px-2 py-1 text-xs font-medium text-white disabled:opacity-50"
+                >
+                  <Zap size={12} />
+                  {geminiRunning ? "Reconstructing…" : "Reconstruct with Codex"}
+                </button>
                 <button
                   type="button"
                   disabled={isStaging}
@@ -128,7 +144,37 @@ export function HomeScreen({ dragOver }: { dragOver: boolean }) {
                 >
                   {isStaging ? "Staging…" : "Stage footage"}
                 </button>
+                </div>
               </div>
+              {geminiJob.state !== "idle" && (
+                <p
+                  className={`mb-2 text-xs ${geminiJob.state === "error" ? "text-red-600" : "text-slate-600"}`}
+                  role="status"
+                  aria-live="polite"
+                >
+                  {geminiJob.state === "running" && `${geminiJob.stage}${geminiJob.detail ? ` · ${geminiJob.detail}` : ""}`}
+                  {geminiJob.state === "running" && eta && (
+                    <span className="mt-1.5 block">
+                      <span
+                        className="block h-1.5 overflow-hidden rounded-full bg-slate-200"
+                        role="progressbar"
+                        aria-label="Reconstruction progress"
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuenow={Math.round(eta.fraction * 100)}
+                      >
+                        <span className="block h-full rounded-full bg-[#1a73e8] transition-[width] duration-1000 ease-linear" style={{ width: `${eta.fraction * 100}%` }} />
+                      </span>
+                      <span className="mt-1 flex justify-between text-[11px] text-slate-500">
+                        <span>{formatDuration(eta.elapsedS)} elapsed</span>
+                        <span>Time remaining is unknown</span>
+                      </span>
+                    </span>
+                  )}
+                  {geminiJob.state === "done" && geminiJob.message}
+                  {geminiJob.state === "error" && `Codex reconstruction failed: ${geminiJob.error}`}
+                </p>
+              )}
               {stageMessage && (
                 <p className="mb-2 text-xs text-slate-600" role="status">
                   {stageMessage}

@@ -65,7 +65,7 @@ export function KinematicsPanel() {
   const selectedVehicle =
     vehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? vehicles[0] ?? null;
   const motion = selectedVehicle ? layout?.vehicles.find((vehicle) => vehicle.id === selectedVehicle.id) : undefined;
-  const startSpeed = scene && motion ? getStartingSpeed(motion.poseAt, scene.startTime) : null;
+  const startSpeed = scene && motion ? getStartingSpeed(motion.poseAt, scene.startTime, selectedVehicle?.visibleFrom, selectedVehicle?.visibleTo) : null;
 
   const v0 = startSpeed;
   const t = parseNumber(time);
@@ -168,10 +168,26 @@ export function KinematicsPanel() {
   );
 }
 
-function getStartingSpeed(poseAt: (time: number) => { x: number; z: number }, startTime: number) {
+function getStartingSpeed(
+  poseAt: (time: number) => { x: number; z: number; hidden?: boolean },
+  startTime: number,
+  visibleFrom?: number,
+  visibleTo?: number,
+) {
   const sampleStep = 0.01;
-  const start = poseAt(startTime);
-  const next = poseAt(startTime + sampleStep);
+  // A vehicle that hasn't driven in yet (or already left) is parked off the road: measure from the
+  // moment it is on screen instead of reading its held pose as "stopped".
+  let from = startTime;
+  if (poseAt(from).hidden) {
+    if (visibleFrom != null && visibleFrom > from) from = visibleFrom;
+    else if (visibleTo != null && visibleTo < from) from = visibleTo - sampleStep;
+    else return null;
+  }
+  const start = poseAt(from);
+  let to = from + sampleStep;
+  // Right at its exit: difference backwards.
+  if (poseAt(to).hidden) to = from - sampleStep;
+  const next = poseAt(to);
   return Math.hypot(next.x - start.x, next.z - start.z) / sampleStep;
 }
 

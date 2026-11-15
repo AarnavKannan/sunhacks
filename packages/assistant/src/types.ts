@@ -23,6 +23,11 @@ export interface Entity {
   /** Seconds during which the object is inside the scene; objects can enter and leave. */
   visible_from_s?: number;
   visible_to_s?: number;
+  /**
+   * Precision tier. "crash": involved in the crash, reconstructed precisely. "background":
+   * other traffic, approximate; its exact path can differ slightly between rebuilds of the scene.
+   */
+  involvement?: "crash" | "background";
 }
 
 export interface SceneEvent {
@@ -139,6 +144,14 @@ export interface KinematicsReading {
     mass_kg: number;
     /** Net force = m·a, world frame. */
     net: { vector: Vec3; magnitude: Quantity };
+    /**
+     * Net force split by source (they sum to net): tyre_road = what the road applies through the
+     * tyres (braking, accelerating, steering); drag = air (including wind); rolling = rolling
+     * resistance; grade = the slope; contact = the impact itself (only during the crash period).
+     */
+    parts?: Record<"tyre_road" | "drag" | "rolling" | "grade" | "contact", { vector: Vec3; magnitude: Quantity }>;
+    /** What Gemini read off the footage near this moment (its own estimate, for comparison). */
+    reported?: { vector: Vec3; magnitude: Quantity; cause: string; note: string };
     /** Which effects the model includes, e.g. "net only; drag and friction not modeled". */
     model: string;
   };
@@ -148,6 +161,42 @@ export interface KinematicsReading {
    * animation, not measured from footage". Tell the user when it isn't measured.
    */
   basis?: string;
+}
+
+/** Speed in the three units people ask for. */
+export interface SpeedQuantity {
+  mps: Quantity;
+  mph: Quantity;
+  kmh: Quantity;
+}
+
+/** The crash as forces and momentum, per vehicle involved (crash_forces tool). */
+export interface CrashForces {
+  crash: CrashPeriod;
+  /** Speed at which the first two vehicles closed on each other at first contact. */
+  closing_speed: SpeedQuantity | null;
+  vehicles: {
+    entity_id: string;
+    label: string;
+    mass_kg: number;
+    /** Just before first contact. */
+    before: { t_s: number; speed: SpeedQuantity; heading_compass: string };
+    /** Just after the impulse. */
+    after: { t_s: number; speed: SpeedQuantity; heading_compass: string };
+    /** Change in velocity across the impact. */
+    delta_v: { vector: Vec3; magnitude: SpeedQuantity };
+    /** Impulse = mass × delta-v (N·s), and the direction it pushed (compass). */
+    impulse: { vector: Vec3; magnitude: Quantity; direction_compass: string };
+    /** Average impact force if the contact lasted pulse_s (footage can't resolve the pulse; ~0.1 s is typical for car crashes). */
+    average_force: { magnitude: Quantity; pulse_s: number; g: number };
+    /** From first contact until it stopped (or the crash ended): distance, time, mean tyre/road force. */
+    slide: { distance: { m: number; ft: number }; duration_s: number; mean_tyre_force: Quantity };
+    /** Gemini's own force readings during the crash period, for comparison. */
+    reported_by_gemini: { t_s: number; cause: string; magnitude: Quantity; note: string }[];
+  }[];
+  basis?: string;
+  /** What the numbers can and can't support. */
+  caveats: string[];
 }
 
 export interface KinematicsSeries {

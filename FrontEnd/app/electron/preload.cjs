@@ -42,6 +42,15 @@ contextBridge.exposeInMainWorld("reconstruct", {
     positions: (incidentId, t) => ipcRenderer.invoke("kinematics:positions", incidentId, t),
   },
 
+  /** Gemini scene reading (electron/gemini.ts). The API key never reaches the renderer. */
+  gemini: {
+    status: () => ipcRenderer.invoke("gemini:status"),
+    analyze: (files, opts) => ipcRenderer.invoke("gemini:analyze", files.map((file) => webUtils.getPathForFile(file)), opts ?? {}),
+    saveScene: (record) => ipcRenderer.invoke("gemini:save-scene", record),
+    listScenes: () => ipcRenderer.invoke("gemini:list-scenes"),
+    onProgress: (callback) => listen("gemini:progress", callback),
+  },
+
   /** Saves an exported video; returns the saved path. */
   saveExport: (bytes, fileName) => ipcRenderer.invoke("export:save", bytes, fileName),
 

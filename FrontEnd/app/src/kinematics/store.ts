@@ -33,6 +33,11 @@ export function ensureKinematics(scene: SceneInfo): Promise<boolean> {
   return job;
 }
 
+/** Drops the remembered sync for a scene (after it was rebuilt), so the next read stores the new frames. */
+export function forgetKinematics(sceneId: string) {
+  syncs.delete(sceneId);
+}
+
 /** Called once at startup in the desktop app: loads every built-in scene into the database. */
 export async function syncBuiltinScenes() {
   if (!window.reconstruct?.kinematics) return;

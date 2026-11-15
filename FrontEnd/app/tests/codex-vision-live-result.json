@@ -1,0 +1,362 @@
+{
+  "usage": {
+    "model": "gpt-6.1-terra",
+    "auth": "chatgpt",
+    "usage": {
+      "input_tokens": 16564,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2283,
+      "reasoning_output_tokens": 442
+    }
+  },
+  "spec": {
+    "prompt_version": "codex-scene-v6",
+    "title": "Highway camera mosaic, 20–23.5 seconds",
+    "location_guess": "Unidentified divided highway",
+    "summary": "Four highway camera tiles show traffic moving on a dry divided road with snow beside it. No physical contact is established in the sampled frames.",
+    "duration_s": 60,
+    "views": [
+      {
+        "video_index": 1,
+        "description": "Upper-left tile of each mosaic: highway traffic approaching the camera.",
+        "camera_kind": "fixed roadside camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "toward_camera"
+      },
+      {
+        "video_index": 1,
+        "description": "Upper-right tile of each mosaic: approaching traffic, including a white tanker and a white van.",
+        "camera_kind": "fixed roadside camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "toward_camera"
+      },
+      {
+        "video_index": 1,
+        "description": "Lower-left tile of each mosaic: both carriageways viewed along the highway.",
+        "camera_kind": "fixed roadside camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "not_visible"
+      },
+      {
+        "video_index": 1,
+        "description": "Lower-right tile of each mosaic: traffic on both carriageways.",
+        "camera_kind": "fixed roadside camera",
+        "moving": false,
+        "time_offset_s": 0,
+        "plus_x_traffic": "not_visible"
+      }
+    ],
+    "environment_preset": "clear_winter",
+    "road": {
+      "kind": "divided_highway",
+      "region": "EU",
+      "road_class": "motorway",
+      "lanes_each_way": 3,
+      "cross_lanes_each_way": 1,
+      "surface": "dry",
+      "grade_percent": 0,
+      "speed_limit_mps": null
+    },
+    "wind": {
+      "toward_deg": 0,
+      "speed_mps": 0
+    },
+    "crash": null,
+    "objects": [
+      {
+        "id": "truck-1",
+        "label": "White tanker truck",
+        "category": "truck",
+        "color_name": "white",
+        "color_hex": "#E5E8E7",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 10,
+        "width_m": 2.5,
+        "mass_kg": 18000,
+        "visible_from_s": 20,
+        "visible_to_s": 23,
+        "keyframes": [
+          {
+            "t_s": 20,
+            "x_m": -45,
+            "y_m": -9,
+            "heading_deg": 0,
+            "speed_mps": 20
+          },
+          {
+            "t_s": 21,
+            "x_m": -25,
+            "y_m": -9,
+            "heading_deg": 0,
+            "speed_mps": 20
+          },
+          {
+            "t_s": 22,
+            "x_m": -5,
+            "y_m": -9,
+            "heading_deg": 0,
+            "speed_mps": 20
+          },
+          {
+            "t_s": 23,
+            "x_m": 15,
+            "y_m": -9,
+            "heading_deg": 0,
+            "speed_mps": 20
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.84
+      },
+      {
+        "id": "van-1",
+        "label": "White van behind the tanker",
+        "category": "van",
+        "color_name": "white",
+        "color_hex": "#E9E9DD",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 5.2,
+        "width_m": 2,
+        "mass_kg": 2300,
+        "visible_from_s": 20,
+        "visible_to_s": 23.5,
+        "keyframes": [
+          {
+            "t_s": 20,
+            "x_m": -100,
+            "y_m": -5.5,
+            "heading_deg": 0,
+            "speed_mps": 21
+          },
+          {
+            "t_s": 21.5,
+            "x_m": -68.5,
+            "y_m": -5.5,
+            "heading_deg": 0,
+            "speed_mps": 21
+          },
+          {
+            "t_s": 23.5,
+            "x_m": -26.5,
+            "y_m": -5.5,
+            "heading_deg": 0,
+            "speed_mps": 21
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.75
+      },
+      {
+        "id": "car-1",
+        "label": "Dark car in the middle lane",
+        "category": "sedan",
+        "color_name": "dark blue",
+        "color_hex": "#293D4C",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 4.7,
+        "width_m": 1.8,
+        "mass_kg": 1500,
+        "visible_from_s": 20,
+        "visible_to_s": 21.5,
+        "keyframes": [
+          {
+            "t_s": 20,
+            "x_m": -20,
+            "y_m": -5.5,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 21,
+            "x_m": 3,
+            "y_m": -5.5,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 21.5,
+            "x_m": 14.5,
+            "y_m": -5.5,
+            "heading_deg": 0,
+            "speed_mps": 23
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.62
+      },
+      {
+        "id": "car-2",
+        "label": "Dark car in the lane nearer the median",
+        "category": "sedan",
+        "color_name": "dark gray",
+        "color_hex": "#424C50",
+        "make": null,
+        "model": null,
+        "involvement": "background",
+        "length_m": 4.7,
+        "width_m": 1.8,
+        "mass_kg": 1500,
+        "visible_from_s": 20,
+        "visible_to_s": 21.5,
+        "keyframes": [
+          {
+            "t_s": 20,
+            "x_m": -32,
+            "y_m": -2,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 21,
+            "x_m": -9,
+            "y_m": -2,
+            "heading_deg": 0,
+            "speed_mps": 23
+          },
+          {
+            "t_s": 21.5,
+            "x_m": 2.5,
+            "y_m": -2,
+            "heading_deg": 0,
+            "speed_mps": 23
+          }
+        ],
+        "forces": [],
+        "rest": null,
+        "confidence": 0.6
+      }
+    ],
+    "caveats": [
+      "Only frames from 20 to 23.5 seconds were supplied; the 60-second duration is supplied metadata.",
+      "The 0.5-second sampling interval can miss brief contact or other events. No contact is visible in the supplied frames.",
+      "Positions and speeds are rough illustrative estimates based on typical lane and vehicle dimensions, not calibrated measurements. The origin is estimated near the middle of the visible stretch in the upper-right tile.",
+      "The four listed vehicles are prominent tracks in the upper-right tile. Many other vehicles are visible, but their identities and positions cannot be reliably reconciled across the small camera tiles from these samples.",
+      "Lane count, road region, vehicle types, dimensions and masses are approximate. The geographic location is unknown.",
+      "Wind and road grade are not measurable from the images; the reported zero values are placeholders."
+    ]
+  },
+  "scene": {
+    "id": "codex-auth-smoke",
+    "title": "Highway camera mosaic, 20–23.5 seconds",
+    "location": "Unidentified divided highway",
+    "detail": "Codex reconstruction · 4 vehicles",
+    "duration": 60,
+    "impactTime": null,
+    "crashEnd": null,
+    "crashVehicles": [],
+    "startTime": 0,
+    "folder": "Codex reconstructions",
+    "created": "2026-11-15",
+    "kind": "proxy",
+    "vehicles": [
+      {
+        "id": "truck-1",
+        "label": "White tanker truck",
+        "color": "#E5E8E7",
+        "type": "truck",
+        "aliases": [
+          "car 1",
+          "the white truck"
+        ],
+        "involvement": "background",
+        "massKg": 18000
+      },
+      {
+        "id": "van-1",
+        "label": "White van behind the tanker",
+        "color": "#E9E9DD",
+        "type": "van",
+        "aliases": [
+          "car 2",
+          "the white van"
+        ],
+        "involvement": "background",
+        "massKg": 2300
+      },
+      {
+        "id": "car-1",
+        "label": "Dark car in the middle lane",
+        "color": "#293D4C",
+        "type": "sedan",
+        "aliases": [
+          "car 3",
+          "the dark blue sedan"
+        ],
+        "involvement": "background",
+        "massKg": 1500
+      },
+      {
+        "id": "car-2",
+        "label": "Dark car in the lane nearer the median",
+        "color": "#424C50",
+        "type": "sedan",
+        "aliases": [
+          "car 4",
+          "the dark gray sedan"
+        ],
+        "involvement": "background",
+        "massKg": 1500
+      }
+    ],
+    "environment": {
+      "sky": "clear",
+      "snow": 0.3,
+      "vegetation": "dormant",
+      "road": "dry"
+    },
+    "environmentSource": "Codex scene reading",
+    "basis": "estimated by Gemini from the footage and played through the app's physics engine; crash vehicles are reconstructed precisely, other traffic is approximate",
+    "physics": {
+      "wind": [
+        0,
+        0,
+        0
+      ],
+      "gradePercent": 0,
+      "surface": "dry",
+      "mu": 0.75
+    },
+    "reportedForces": {}
+  },
+  "report": {
+    "seed": 42,
+    "crash": null,
+    "tiers": {
+      "crash": [],
+      "background": [
+        "truck-1",
+        "van-1",
+        "car-1",
+        "car-2"
+      ]
+    },
+    "removed": [],
+    "notes": [],
+    "adjustments": {
+      "truck-1": [
+        "snapped to the nearest lane (1.4 m from Gemini's estimate)"
+      ]
+    },
+    "caveats": [
+      "Only frames from 20 to 23.5 seconds were supplied; the 60-second duration is supplied metadata.",
+      "The 0.5-second sampling interval can miss brief contact or other events. No contact is visible in the supplied frames.",
+      "Positions and speeds are rough illustrative estimates based on typical lane and vehicle dimensions, not calibrated measurements. The origin is estimated near the middle of the visible stretch in the upper-right tile.",
+      "The four listed vehicles are prominent tracks in the upper-right tile. Many other vehicles are visible, but their identities and positions cannot be reliably reconciled across the small camera tiles from these samples.",
+      "Lane count, road region, vehicle types, dimensions and masses are approximate. The geographic location is unknown.",
+      "Wind and road grade are not measurable from the images; the reported zero values are placeholders."
+    ]
+  }
+}

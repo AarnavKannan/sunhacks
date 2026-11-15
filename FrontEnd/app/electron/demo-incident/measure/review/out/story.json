@@ -1,0 +1,62 @@
+{
+ "spec_version": "hand-verified-a9-v1",
+ "t_impact": 22.3,
+ "checks": [
+  {
+   "check": "van still until impact",
+   "pass": true,
+   "detail": "max drift 0.00 m before t=22.3s; first pose x=15.00 y=-2.92"
+  },
+  {
+   "check": "no queue behind van pre-impact",
+   "pass": true,
+   "detail": "0 slow vehicles in van lane behind it: []"
+  },
+  {
+   "check": "yellow swerve",
+   "pass": true,
+   "detail": "lane y=-6.68, leaves lane (|dy|>0.4) at t=21.0"
+  },
+  {
+   "check": "contact frame (spec vs video)",
+   "pass": false,
+   "detail": "first geometric contact t=22.32 = frame 279.0; spec contact t=22.3 = frame 278.8; video contact f285-290"
+  },
+  {
+   "check": "van starts moving at video frame",
+   "pass": false,
+   "detail": "spec van first moves at t=22.4 = frame 280.0; video f291"
+  },
+  {
+   "check": "yellow spins after impact",
+   "pass": true,
+   "detail": "max yaw change after impact 31 deg, final heading -13"
+  },
+  {
+   "check": "van shoved",
+   "pass": true,
+   "detail": "van displaced 4.08 m (to x=19.08, y=-2.75, h=-8.3)"
+  },
+  {
+   "check": "lane-2 traffic brakes after impact",
+   "pass": true,
+   "detail": "4/5 lane-2 vehicles upstream drop below 60% speed: [('bg-032', 12.2, 0.0), ('bg-035', 11.6, 0.6), ('bg-037', 11.0, 2.4), ('bg-039', 10.6, 4.9), ('bg-042', 10.2, 7.2)]"
+  },
+  {
+   "check": "far carriageway unaffected",
+   "pass": true,
+   "detail": "0 far-side vehicles slow >25% after impact: []"
+  },
+  {
+   "check": "no overlaps",
+   "pass": true,
+   "detail": "0 overlapping pairs; worst: "
+  },
+  {
+   "check": "no pop-in/out inside the tile",
+   "pass": false,
+   "detail": "7 (id, event, t, u, v, box_h px): [('bg-021', 'appears', 0.36, 173, 44, 33), ('bg-029', 'appears', 8.52, 173, 44, 33), ('bg-031', 'appears', 11.56, 173, 44, 35), ('bg-033', 'vanishes', 26.56, 353, 45, 35), ('bg-038', 'appears', 18.32, 173, 49, 22), ('bg-048', 'appears', 25.44, 173, 44, 35), ('bg-053', 'appears', 31.4, 173, 44, 35)]"
+  }
+ ],
+ "overlaps": {}
+}

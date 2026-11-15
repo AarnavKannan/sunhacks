@@ -1,0 +1,308 @@
+{
+  "passed": true,
+  "spec": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\electron\\demo-incident\\incident-spec.json",
+  "vehicles": 78,
+  "impactTime": 22.3,
+  "crashEnd": 24,
+  "crashVehicles": [
+    "yellow-car",
+    "white-van"
+  ],
+  "startTime": 18.3,
+  "crashPoint": [
+    12.514,
+    0,
+    2.4135
+  ],
+  "removed": [],
+  "notes": [
+    "Positions are interpolated between reported observations and held outside them. Occlusions and uncalibrated footage limit accuracy; contact and forces are not independently measured."
+  ],
+  "kinematics": {
+    "frames": 46593,
+    "fullFrames": 140244,
+    "maxSpeed_mps": 30.7958
+  },
+  "laneSpeeds": {
+    "with z~3.6": {
+      "vehicles": 12,
+      "meanSpeedBefore_mps": 11.99,
+      "meanSpeedAfter_mps": 4.47
+    },
+    "with z~7.3": {
+      "vehicles": 15,
+      "meanSpeedBefore_mps": 9.71,
+      "meanSpeedAfter_mps": 7.48
+    },
+    "against z~-12.8": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 22.76,
+      "meanSpeedAfter_mps": 22.67
+    },
+    "against z~-9.1": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 24.37,
+      "meanSpeedAfter_mps": 25.49
+    },
+    "against z~-5.5": {
+      "vehicles": 4,
+      "meanSpeedBefore_mps": 29.74,
+      "meanSpeedAfter_mps": 29.06
+    },
+    "with z~0.0": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": null,
+      "meanSpeedAfter_mps": 4.42
+    }
+  },
+  "crashMotion": {
+    "yellow-car": {
+      "visibleFrom": 10.733333,
+      "visibleTo": 59.9,
+      "maxSpeedBeforeImpact_mps": 13.33,
+      "speedAtImpact_mps": 13.07,
+      "speedAt24_mps": 0
+    },
+    "white-van": {
+      "visibleFrom": 0,
+      "visibleTo": 59.9,
+      "maxSpeedBeforeImpact_mps": 0,
+      "speedAtImpact_mps": 0,
+      "speedAt24_mps": 0.04
+    }
+  },
+  "times": [
+    {
+      "t": 0,
+      "visible": 21,
+      "hidden": 57,
+      "finite": true,
+      "crash": {
+        "yellow-car": {
+          "x": -140,
+          "z": 6.67,
+          "yawDeg": 90,
+          "hidden": true
+        },
+        "white-van": {
+          "x": 15,
+          "z": 2.92,
+          "yawDeg": 90,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "t": 15,
+      "visible": 24,
+      "hidden": 54,
+      "finite": true,
+      "crash": {
+        "yellow-car": {
+          "x": -84.36,
+          "z": 6.67,
+          "yawDeg": 90,
+          "hidden": false
+        },
+        "white-van": {
+          "x": 15,
+          "z": 2.92,
+          "yawDeg": 90,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "t": 21.5,
+      "visible": 24,
+      "hidden": 54,
+      "finite": true,
+      "crash": {
+        "yellow-car": {
+          "x": -0.01,
+          "z": 5.02,
+          "yawDeg": 107.8,
+          "hidden": false
+        },
+        "white-van": {
+          "x": 15,
+          "z": 2.92,
+          "yawDeg": 90,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "t": 22.4,
+      "visible": 24,
+      "hidden": 54,
+      "finite": true,
+      "crash": {
+        "yellow-car": {
+          "x": 10.81,
+          "z": 1.69,
+          "yawDeg": 105.4,
+          "hidden": false
+        },
+        "white-van": {
+          "x": 15.24,
+          "z": 2.92,
+          "yawDeg": 89.5,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "t": 24,
+      "visible": 27,
+      "hidden": 51,
+      "finite": true,
+      "crash": {
+        "yellow-car": {
+          "x": 12.55,
+          "z": 1.55,
+          "yawDeg": 77.1,
+          "hidden": false
+        },
+        "white-van": {
+          "x": 19.08,
+          "z": 2.75,
+          "yawDeg": 81.7,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "t": 30,
+      "visible": 27,
+      "hidden": 51,
+      "finite": true,
+      "crash": {
+        "yellow-car": {
+          "x": 12.55,
+          "z": 1.55,
+          "yawDeg": 77.1,
+          "hidden": false
+        },
+        "white-van": {
+          "x": 19.08,
+          "z": 2.75,
+          "yawDeg": 81.7,
+          "hidden": false
+        }
+      }
+    }
+  ],
+  "finite": true,
+  "shots": [
+    {
+      "t": 15,
+      "wide": true,
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-overview-15.png",
+      "camera": {
+        "position": [
+          -6.818490107204859,
+          90,
+          48
+        ],
+        "target": [
+          12.514,
+          0,
+          2.4135
+        ],
+        "clamped": true
+      }
+    },
+    {
+      "t": 15,
+      "wide": false,
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-15.png",
+      "camera": {
+        "position": [
+          -29.486,
+          20,
+          28.413499999999996
+        ],
+        "target": [
+          8.514,
+          0,
+          2.4135
+        ],
+        "clamped": false
+      }
+    },
+    {
+      "t": 21.5,
+      "wide": false,
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-21_5.png",
+      "camera": {
+        "position": [
+          -29.486,
+          20,
+          28.413499999999996
+        ],
+        "target": [
+          8.514,
+          0,
+          2.4135
+        ],
+        "clamped": false
+      }
+    },
+    {
+      "t": 22.4,
+      "wide": false,
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-22_4.png",
+      "camera": {
+        "position": [
+          -29.486,
+          20,
+          28.413499999999996
+        ],
+        "target": [
+          8.514,
+          0,
+          2.4135
+        ],
+        "clamped": false
+      }
+    },
+    {
+      "t": 24,
+      "wide": false,
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-24.png",
+      "camera": {
+        "position": [
+          -29.486,
+          20,
+          28.413499999999996
+        ],
+        "target": [
+          8.514,
+          0,
+          2.4135
+        ],
+        "clamped": false
+      }
+    },
+    {
+      "t": 30,
+      "wide": false,
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-30.png",
+      "camera": {
+        "position": [
+          -29.486,
+          20,
+          28.413499999999996
+        ],
+        "target": [
+          8.514,
+          0,
+          2.4135
+        ],
+        "clamped": false
+      }
+    }
+  ],
+  "consoleErrors": []
+}

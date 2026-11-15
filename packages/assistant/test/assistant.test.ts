@@ -2,6 +2,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { matchEntities } from "../src/entity-match";
+import { buildSystemPrompt } from "../src/prompt/system-prompt";
 import { matchFastPath } from "../src/fastpath";
 import { startMcpServer, type RunningMcpServer } from "../src/mcp/server";
 import { MOCK_ENTITIES, MockSceneController } from "../src/mock/mock-scene";
@@ -120,6 +121,30 @@ describe("tool registry", () => {
   it("rejects offset_s without an event", async () => {
     const r = await callTool(new MockSceneController(), "kinematics_query", { entity_id: "v1", offset_s: -3 });
     expect(r.ok).toBe(false);
+  });
+
+  it("reports crash forces: speeds either side of contact, delta-v, impulse, closing speed", async () => {
+    const r = await callTool(new MockSceneController(), "crash_forces", {});
+    expect(r.ok).toBe(true);
+    const out = (r as { result: any }).result;
+    const toyota = out.vehicles.find((v: any) => v.entity_id === "v1");
+    // Toyota: 17 m/s braking at 4 m/s² from 2.6 s reaches the crash at 11.4 m/s, heading east.
+    expect(toyota.before.speed.mps.value).toBeCloseTo(11.4, 0);
+    expect(toyota.before.heading_compass).toBe("east");
+    // The crash slows it, so the change in velocity points back west.
+    expect(toyota.delta_v.magnitude.mps.value).toBeGreaterThan(0);
+    expect(toyota.impulse.direction_compass).toBe("west");
+    expect(toyota.average_force.pulse_s).toBe(0.1);
+    expect(out.closing_speed.mps.value).toBeCloseTo(Math.hypot(11.4, 11), 0);
+    expect(out.caveats.length).toBeGreaterThan(0);
+  });
+
+  it("system prompt covers Gemini reconstructions, precision tiers and forces over time", () => {
+    const prompt = buildSystemPrompt();
+    expect(prompt).toContain("crash_forces");
+    expect(prompt).toContain("background");
+    expect(prompt).toMatch(/Forces over time/);
+    expect(prompt).not.toMatch(/doesn't separate air drag or friction/);
   });
 
   it("samples a series across the crash period", async () => {

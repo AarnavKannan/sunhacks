@@ -1,6 +1,7 @@
 import type {
   CameraPreset,
   CameraState,
+  CrashForces,
   EntityMatch,
   ExportJob,
   KinematicsField,
@@ -75,6 +76,8 @@ export interface SceneController {
   queryKinematics(entityId: string, at: TimeRef | undefined, fields: KinematicsField[]): Promise<KinematicsReading>;
   querySeries(entityId: string, fromS: number, toS: number, stepS: number, fields: KinematicsField[]): Promise<KinematicsSeries>;
   measureDistance(a: MeasureTarget, b: MeasureTarget, at?: TimeRef): Promise<Measurement>;
+  /** Momentum change, impulse and impact force for each vehicle in the crash. Throws when there's no crash. */
+  crashForces(): Promise<CrashForces>;
 
   // Annotations and UI
   addMarker(label: string, target: { point: Vec3 } | { entity_id: string }): Promise<Marker>;

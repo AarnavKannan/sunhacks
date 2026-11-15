@@ -79,8 +79,8 @@ ipcMain.handle("footage:stage", async (_event, filePaths) => {
 
 let mainWindow = null;
 
-// API-key fallbacks for the assistant (GEMINI_API_KEY, ANTHROPIC_API_KEY) live in the
-// gitignored packages/assistant/.env during development.
+// GEMINI_API_KEY (scene reading from footage, and an assistant fallback) and ANTHROPIC_API_KEY
+// live in the gitignored packages/assistant/.env during development.
 if (isDev) {
   try {
     process.loadEnvFile(path.join(__dirname, "../../../packages/assistant/.env"));
@@ -95,6 +95,13 @@ try {
   const bundle = require("./assistant.bundle.cjs");
   assistant = bundle.registerAssistant({ ipcMain, getWindow: () => mainWindow });
   kinematics = bundle.registerKinematics({ ipcMain, app });
+  // Gemini reads the footage; its analyses and scenes live in the same MongoDB as the kinematics.
+  bundle.registerGemini({
+    ipcMain,
+    getWindow: () => mainWindow,
+    db: kinematics.db,
+    cacheDir: path.join(app.getPath("userData"), "gemini-tiles"),
+  });
 } catch (error) {
   console.error("Assistant failed to load. Run `npm run build:assistant`.", error);
   const unavailable = async () => {
@@ -104,6 +111,10 @@ try {
   ipcMain.handle("assistant:start", unavailable);
   ipcMain.handle("assistant:send", unavailable);
   ipcMain.handle("assistant:interrupt", async () => {});
+  ipcMain.handle("gemini:status", async () => ({ configured: false, models: { fast: "", precise: "" } }));
+  ipcMain.handle("gemini:analyze", unavailable);
+  ipcMain.handle("gemini:save-scene", unavailable);
+  ipcMain.handle("gemini:list-scenes", async () => []);
 }
 
 ipcMain.handle("export:save", async (_event, bytes, fileName) => {

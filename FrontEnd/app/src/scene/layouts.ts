@@ -21,7 +21,7 @@ import { parkingLot } from "@/scene/roads/parking";
 import { roundabout } from "@/scene/roads/roundabout";
 import type { P } from "@/scene/roads/geometry";
 
-export type Pose = { x: number; z: number; yaw: number };
+export type Pose = { x: number; z: number; yaw: number; /** Off the road at this time (not yet arrived, or already gone). */ hidden?: boolean };
 
 export type VehicleMotion = {
   id: string;
@@ -358,7 +358,7 @@ const laneChange = (from: number, to: number, start: number, length: number) => 
   from + (to - from) * smoothstep((time - start) / length);
 
 /** Both carriageways of a divided road along x, with the forward (eastbound) one at +z. */
-function motorway(p: Painter, spec: RoadSpec) {
+export function motorway(p: Painter, spec: RoadSpec) {
   const section = crossSection(spec);
   const layout = markingLayout(spec);
   const m = spec.markings;
@@ -424,4 +424,9 @@ const layouts = new Map<string, Layout>([
 
 export function getLayout(id: string) {
   return layouts.get(id);
+}
+
+/** Adds a layout built at runtime (Gemini reconstructions, see gemini/engine.ts). Replaces one with the same id. */
+export function registerLayout(layout: Layout) {
+  layouts.set(layout.id, layout);
 }

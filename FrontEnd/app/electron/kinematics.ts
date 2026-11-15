@@ -12,9 +12,12 @@
  *     <userData>/mongo, so demos need no setup and the data survives restarts.
  *
  * Collections (database MONGODB_DB, default "reconstruct"):
- *   incidents  { _id, title, hash, fps, duration_s, origin_scene, crash, entities[], basis, synced_at }
+ *   incidents  { _id, title, hash, fps, duration_s, origin_scene, crash, entities[], basis, physics, synced_at }
  *   frames     { incident_id, entity_id, t, frame, position, velocity, speed, accel, accel_long,
- *                heading_deg, yaw_rate_dps, mass_kg, force_net, sigma }
+ *                heading_deg, yaw_rate_dps, mass_kg, force_net, force_parts, force_reported,
+ *                involvement, sigma }
+ *   analyses   Gemini's reading of uploaded footage (electron/gemini.ts)
+ *   scenes     Gemini scenes in the library: analysis id + seed, rebuilt by the engine at startup
  * The tracking pipeline's real output (tracks.json) is meant to be loaded through the same
  * sync call, with `sigma` filled in and basis "tracked from the footage".
  */
@@ -43,6 +46,11 @@ export type FrameDoc = {
   mass_kg: number;
   /** Net force = mass × acceleration, world frame (N). */
   force_net: Vec3;
+  /** force_net split into tyre/road, air drag, rolling resistance, slope and impact (sums to force_net). */
+  force_parts?: { tyre_road: Vec3; drag: Vec3; rolling: Vec3; grade: Vec3; contact: Vec3 };
+  /** Gemini's own force reading near this time. */
+  force_reported?: { vector: Vec3; cause: string; note: string } | null;
+  involvement?: "crash" | "background";
   sigma: { position_m?: number; speed_mps?: number; accel_mps2?: number } | null;
 };
 
@@ -54,8 +62,9 @@ export type IncidentDoc = {
   duration_s: number;
   origin_scene: Vec3;
   crash: { start_s: number; end_s: number; vehicles: string[] } | null;
-  entities: { id: string; label: string; type: string; mass_kg: number; from_s: number; to_s: number }[];
+  entities: { id: string; label: string; type: string; mass_kg: number; from_s: number; to_s: number; involvement?: "crash" | "background" }[];
   basis: string;
+  physics?: { wind: Vec3; gradePercent: number; surface: string; mu: number; air_density: number };
   synced_at: Date;
 };
 
@@ -87,6 +96,18 @@ function blend(a: FrameDoc, b: FrameDoc, t: number): FrameDoc {
     heading_deg: lerpAngle(a.heading_deg, b.heading_deg, k),
     yaw_rate_dps: lerp(a.yaw_rate_dps, b.yaw_rate_dps, k),
     force_net: lerp3(a.force_net, b.force_net, k),
+    ...(a.force_parts && b.force_parts
+      ? {
+          force_parts: {
+            tyre_road: lerp3(a.force_parts.tyre_road, b.force_parts.tyre_road, k),
+            drag: lerp3(a.force_parts.drag, b.force_parts.drag, k),
+            rolling: lerp3(a.force_parts.rolling, b.force_parts.rolling, k),
+            grade: lerp3(a.force_parts.grade, b.force_parts.grade, k),
+            contact: lerp3(a.force_parts.contact, b.force_parts.contact, k),
+          },
+        }
+      : {}),
+    force_reported: k < 0.5 ? a.force_reported : b.force_reported,
   };
 }
 
@@ -195,6 +216,8 @@ export function registerKinematics({ ipcMain, app }: { ipcMain: IpcMain; app: Ap
   });
 
   return {
+    /** The database, for the Gemini module's analyses and scenes collections. */
+    db: () => ready,
     dispose: async () => {
       try {
         // Flush to disk before the embedded server stops, so nothing is lost on Windows.
