@@ -1,0 +1,55 @@
+=====================================================================
+Loaded: mamba 2.9.0
+
+Usage example:
+$ mamba create -n myenv -c conda-forge python=3 <package_name>
+$ source activate myenv
+
+Only run "pip install" after activating an environment.
+Running pip without activating an environment is known to cause issues.
+
+To list available environments:
+$ mamba info --envs
+
+More info: docs.rc.asu.edu/python
+
+
+=====================================================================
+     
+name, memory.total [MiB]
+NVIDIA A100-SXM4-80GB, 81920 MiB
+VGGT points: 0 -> init_type=random
+/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/core/fromnumeric.py:3504: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/core/_methods.py:121: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/lib/function_base.py:520: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis, **keepdims_kw)
+/scratch/rkazi1/sunhacks/src/gsplat/examples/datasets/normalize.py:74: RuntimeWarning: Degrees of freedom <= 0 for slice
+  covariance_matrix = np.cov(translated_point_cloud, rowvar=False)
+/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/lib/function_base.py:2748: RuntimeWarning: divide by zero encountered in divide
+  c *= np.true_divide(1, fact)
+/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/lib/function_base.py:2748: RuntimeWarning: invalid value encountered in multiply
+  c *= np.true_divide(1, fact)
+Warning: image_path not found for reconstruction
+[Parser] 5 images, taken by 5 cameras.
+Traceback (most recent call last):
+  File "/scratch/rkazi1/sunhacks/src/gsplat/examples/simple_trainer.py", line 1261, in <module>
+    cli(main, cfg, verbose=True)
+  File "/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/gsplat/distributed.py", line 360, in cli
+    return _distributed_worker(0, 1, fn=fn, args=args)
+  File "/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/gsplat/distributed.py", line 295, in _distributed_worker
+    fn(local_rank, world_rank, world_size, args)
+  File "/scratch/rkazi1/sunhacks/src/gsplat/examples/simple_trainer.py", line 1167, in main
+    runner = Runner(local_rank, world_rank, world_size, cfg)
+  File "/scratch/rkazi1/sunhacks/src/gsplat/examples/simple_trainer.py", line 334, in __init__
+    self.parser = Parser(
+  File "/scratch/rkazi1/sunhacks/src/gsplat/examples/datasets/colmap.py", line 223, in __init__
+    T2 = align_principal_axes(points)
+  File "/scratch/rkazi1/sunhacks/src/gsplat/examples/datasets/normalize.py", line 77, in align_principal_axes
+    eigenvalues, eigenvectors = np.linalg.eigh(covariance_matrix)
+  File "/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/linalg/linalg.py", line 1487, in eigh
+    w, vt = gufunc(a, signature=signature, extobj=extobj)
+  File "/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/numpy/linalg/linalg.py", line 118, in _raise_linalgerror_eigenvalues_nonconvergence
+    raise LinAlgError("Eigenvalues did not converge")
+numpy.linalg.LinAlgError: Eigenvalues did not converge

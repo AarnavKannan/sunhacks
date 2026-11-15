@@ -1,0 +1,90 @@
+### queue
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+### jobs today
+JobID                   JobName      State    Elapsed ExitCode 
+------------ ------------------ ---------- ---------- -------- 
+1518552             recon-setup     FAILED   00:25:19      1:0 
+1521234             recon-setup  COMPLETED   00:04:36      0:0 
+1521235            recon-ingest  COMPLETED   00:00:44      0:0 
+1521236             recon-poses  COMPLETED   00:01:44      0:0 
+1521237        recon-background     FAILED   00:00:22      1:0 
+1522346             recon-poses  COMPLETED   00:02:25      0:0 
+1522348        recon-background     FAILED   00:01:40      1:0 
+1523298             recon-setup     FAILED   00:01:24    255:0 
+1523629             recon-setup     FAILED   00:21:59      1:0 
+### latest setup: /scratch/rkazi1/sunhacks/logs/recon-setup-1523629.out
+=== [1/5] vggt env ===
+vggt env OK, torch 2.3.1+cu121 pycolmap 3.10.0
+=== [2/5] VGGT-1B weights (~5 GB) ===
+=== [3/5] gs env ===
+=== [4/5] Ubuntu 22.04 container (Sol's glibc is too old for gsplat's prebuilt module) ===
+Using Sol's image: /packages/apps/simg/ubuntu-22.04.sif
+Traceback (most recent call last):
+ModuleNotFoundError: No module named 'cv2'
+### latest ingest: /scratch/rkazi1/sunhacks/logs/recon-ingest-1521235.out
+cam1: 749 frames, plate from 150 frames
+cam2: 749 frames, plate from 150 frames
+cam3: 749 frames, plate from 150 frames
+cam4: 749 frames, plate from 150 frames
+### latest poses: /scratch/rkazi1/sunhacks/logs/recon-poses-1522346.out
+>>> conf_thres_value=5 -> 0 points
+>>> conf_thres_value=3 -> 0 points
+>>> conf_thres_value=2 -> 0 points
+>>> conf_thres_value=1.5 -> 0 points
+>>> conf_thres_value=1.2 -> 100000 points
+wrote 4 cameras, 100000 points -> /scratch/rkazi1/sunhacks/package/incident-r05_s03/cameras.json
+  cam1: center=[-0.0, 0.0, 0.0] f=661.7
+  cam2: center=[-0.152, -0.111, 0.741] f=737.3
+  cam3: center=[-0.362, -0.514, 2.012] f=623.1
+  cam4: center=[-0.28, -0.419, 1.617] f=731.5
+### latest background: /scratch/rkazi1/sunhacks/logs/recon-background-1522348.out
+VGGT points: 100000 (conf threshold 1.2) -> init_type=sfm
+Traceback (most recent call last):
+ImportError: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/gsplat/csrc.so)
+Traceback (most recent call last):
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v', '-j', '10']' returned non-zero exit status 11.
+Traceback (most recent call last):
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'gsplat_cuda': [1/30] /scratch/rkazi1/sunhacks/envs/gs/bin/nvcc --generate-dependencies-with-compile --dependency-output NullCUDA.cuda.o.d -ccbin /scratch/rkazi1/sunhacks/envs/gs/bin/x86_64-conda-linux-gnu-cc -DTORCH_EXTENSION_NAME=gsplat_cuda -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -I/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/gsplat/cuda/include -I/scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/gsplat/cuda/csrc/third_party/glm -isystem /scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/torch/include -isystem /scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -isystem /scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/torch/include/TH -isystem /scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/torch/include/THC -isystem /scratch/rkazi1/sunhacks/envs/gs/include -isystem /scratch/rkazi1/sunhacks/envs/gs/include/python3.10 -D_GLIBCXX_USE_CXX11_ABI=0 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_80,code=compute_80 -gencode=arch=compute_80,code=sm_80 --compiler-options '-fPIC' -O3 -use_fast_math -std=c++17 -c /scratch/rkazi1/sunhacks/envs/gs/lib/python3.10/site-packages/gsplat/cuda/csrc/NullCUDA.cu -o NullCUDA.cuda.o 
+### package
+/scratch/rkazi1/sunhacks/package:
+total 2
+drwxr-x---  3 rkazi1 grp_hwei27  1 Nov 14 17:56 ./
+drwxr-xr-x 12 rkazi1 grp_hwei27 10 Nov 14 19:30 ../
+drwxr-x---  3 rkazi1 grp_hwei27  2 Nov 14 18:38 incident-r05_s03/
+
+/scratch/rkazi1/sunhacks/package/incident-r05_s03:
+total 6
+drwxr-x--- 3 rkazi1 grp_hwei27    2 Nov 14 18:38 ./
+drwxr-x--- 3 rkazi1 grp_hwei27    1 Nov 14 17:56 ../
+-rw-r----- 1 rkazi1 grp_hwei27 3628 Nov 14 18:45 cameras.json
+drwxr-x--- 2 rkazi1 grp_hwei27    1 Nov 14 18:38 debug/
+
+/scratch/rkazi1/sunhacks/package/incident-r05_s03/debug:
+total 1564
+drwxr-x--- 2 rkazi1 grp_hwei27       1 Nov 14 18:38 ./
+drwxr-x--- 3 rkazi1 grp_hwei27       2 Nov 14 18:38 ../
+-rw-r----- 1 rkazi1 grp_hwei27 1600243 Nov 14 18:45 vggt_points.ply
+### scene
+/scratch/rkazi1/sunhacks/work/r05_s03/scene/images:
+total 814
+drwxr-x--- 2 rkazi1 grp_hwei27      5 Nov 14 18:35 ./
+drwxr-x--- 4 rkazi1 grp_hwei27      2 Nov 14 18:45 ../
+-rw-r----- 1 rkazi1 grp_hwei27 168109 Nov 14 18:35 0_holdout.png
+-rw-r----- 1 rkazi1 grp_hwei27 168109 Nov 14 18:34 cam1.png
+-rw-r----- 1 rkazi1 grp_hwei27 172210 Nov 14 18:35 cam2.png
+-rw-r----- 1 rkazi1 grp_hwei27 152892 Nov 14 18:35 cam3.png
+-rw-r----- 1 rkazi1 grp_hwei27 169333 Nov 14 18:35 cam4.png
+
+/scratch/rkazi1/sunhacks/work/r05_s03/scene/sparse:
+total 9672
+drwxr-x--- 2 rkazi1 grp_hwei27       5 Nov 14 18:45 ./
+drwxr-x--- 4 rkazi1 grp_hwei27       2 Nov 14 18:45 ../
+-rw-r----- 1 rkazi1 grp_hwei27     288 Nov 14 18:45 cameras.bin
+-rw-r----- 1 rkazi1 grp_hwei27       4 Nov 14 18:45 conf_thres_used.txt
+-rw-r----- 1 rkazi1 grp_hwei27 2400418 Nov 14 18:45 images.bin
+-rw-r----- 1 rkazi1 grp_hwei27 5900008 Nov 14 18:45 points3D.bin
+-rw-r----- 1 rkazi1 grp_hwei27 1600243 Nov 14 18:45 points.ply
+### threshold used
+1.2

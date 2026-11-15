@@ -1,0 +1,40 @@
+=====================================================================
+Loaded: mamba 2.9.0
+
+Usage example:
+$ mamba create -n myenv -c conda-forge python=3 <package_name>
+$ source activate myenv
+
+Only run "pip install" after activating an environment.
+Running pip without activating an environment is known to cause issues.
+
+To list available environments:
+$ mamba info --envs
+
+More info: docs.rc.asu.edu/python
+
+
+=====================================================================
+     
+{
+  "source": "r05_s03.mp4",
+  "sha256": "a02fe07d46091bbde14d9c58a16d94680f18d15ad48b3f316d25e03c3938e54a",
+  "width": 960,
+  "height": 610,
+  "fps": 12.5,
+  "frames": 749,
+  "duration_s": 59.92
+}
+cam1: 749 frames, plate from 150 frames
+cam2: 749 frames, plate from 150 frames
+cam3: 749 frames, plate from 150 frames
+cam4: 749 frames, plate from 150 frames
+ingest done -> /scratch/rkazi1/sunhacks/work/r05_s03
+total 814
+drwxr-x--- 2 rkazi1 grp_hwei27      3 Nov 14 18:35 .
+drwxr-x--- 3 rkazi1 grp_hwei27      1 Nov 14 18:34 ..
+-rw-r----- 1 rkazi1 grp_hwei27 168109 Nov 14 18:35 0_holdout.png
+-rw-r----- 1 rkazi1 grp_hwei27 168109 Nov 14 18:34 cam1.png
+-rw-r----- 1 rkazi1 grp_hwei27 172210 Nov 14 18:35 cam2.png
+-rw-r----- 1 rkazi1 grp_hwei27 152892 Nov 14 18:35 cam3.png
+-rw-r----- 1 rkazi1 grp_hwei27 169333 Nov 14 18:35 cam4.png
