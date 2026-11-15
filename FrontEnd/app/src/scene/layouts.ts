@@ -7,6 +7,7 @@ import {
   VERGE_WIDTH,
   type RoadSpec,
 } from "@/road/spec";
+import impactTrajectories from "@/data/impactTrajectories.json";
 import type { VehicleKind } from "@/scene/cars";
 import type { Painter } from "@/scene/draw";
 import type { Site } from "@/scene/environment";
@@ -24,12 +25,18 @@ export type VehicleMotion = {
   poseAt: (time: number) => Pose;
 };
 
+type CollisionTrajectory = {
+  yaw_rad: number;
+  samples: number[][];
+};
+
 export type Layout = {
   id: string;
   site: Site;
   camera: { position: [number, number, number]; target: [number, number, number] };
   build: (painter: Painter) => void;
   vehicles: VehicleMotion[];
+  skidMarks?: { impactTime: number; vehicleIds: string[] };
 };
 
 function smoothstep(value: number) {
@@ -43,12 +50,43 @@ const settle = (after: number, tau: number) => 1 - Math.exp(-Math.max(0, after) 
 /** Heading from a velocity in the plan; yaw 0 faces +z, π/2 faces +x. */
 const yawOf = (dx: number, dz: number) => Math.atan2(dx, dz);
 
+function withCollisionTrajectory(
+  impactTime: number,
+  trajectory: CollisionTrajectory,
+  authoredPoseAt: (time: number) => Pose,
+) {
+  return (time: number): Pose => {
+    if (time < impactTime) return authoredPoseAt(time);
+
+    const elapsed = time - impactTime;
+    const samples = trajectory.samples;
+    let low = 0;
+    let high = samples.length - 1;
+    while (low < high) {
+      const middle = Math.ceil((low + high) / 2);
+      if (samples[middle][0] <= elapsed) low = middle;
+      else high = middle - 1;
+    }
+
+    const start = samples[low];
+    const end = samples[Math.min(low + 1, samples.length - 1)];
+    const interval = end[0] - start[0];
+    const fraction = interval > 0 ? Math.min(1, Math.max(0, (elapsed - start[0]) / interval)) : 0;
+    return {
+      x: start[1] + (end[1] - start[1]) * fraction,
+      z: start[2] + (end[2] - start[2]) * fraction,
+      yaw: trajectory.yaw_rad,
+    };
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Roundabout: German urban single-lane roundabout (FGSV Merkblatt 2006) joining four
 // collector streets, with a car park on either side of the east arm.
 
 const ROUND_CENTER: P = [-6, 2];
 const ROUND_STANDARD = ROUNDABOUTS.DE;
+const ROUNDABOUT_TRAJECTORY = impactTrajectories.scenes.roundabout;
 const COLLECTOR = resolveRoadSpec({ region: "DE", roadClass: "collector" });
 const COLLECTOR_HALF = crossSection(COLLECTOR).pavedHalfWidthForward;
 const ROUND_INNER = ROUND_STANDARD.outerRadius - ROUND_STANDARD.circulatoryWidth;
@@ -143,8 +181,15 @@ const roundaboutLayout: Layout = {
     p.finish();
   },
   vehicles: [
-    { id: "white", scale: 1.08, poseAt: whitePose },
-    { id: "red", poseAt: redPose },
+    {
+      id: "white",
+      scale: 1.08,
+      poseAt: withCollisionTrajectory(ROUNDABOUT_TRAJECTORY.impact_time_s, ROUNDABOUT_TRAJECTORY.vehicles.white, whitePose),
+    },
+    {
+      id: "red",
+      poseAt: withCollisionTrajectory(ROUNDABOUT_TRAJECTORY.impact_time_s, ROUNDABOUT_TRAJECTORY.vehicles.red, redPose),
+    },
     {
       id: "orange",
       scale: 0.94,
@@ -165,6 +210,7 @@ const roundaboutLayout: Layout = {
       },
     },
   ],
+  skidMarks: { impactTime: ROUNDABOUT_TRAJECTORY.impact_time_s, vehicleIds: ["white", "red"] },
 };
 
 // ---------------------------------------------------------------------------
@@ -174,6 +220,7 @@ const roundaboutLayout: Layout = {
 const APACHE = resolveRoadSpec({ region: "US", roadClass: "arterial" });
 const APACHE_CROSS = resolveRoadSpec({ region: "US", roadClass: "collector" });
 const APACHE_LANES = crossSection(APACHE);
+const APACHE_TRAJECTORY = impactTrajectories.scenes.apache;
 
 const apache: Layout = {
   id: "apache",
@@ -187,7 +234,7 @@ const apache: Layout = {
     {
       // Eastbound (+x, right side is +z) in the inner lane, drifting over the centre line.
       id: "silver",
-      poseAt: (time) => {
+      poseAt: withCollisionTrajectory(APACHE_TRAJECTORY.impact_time_s, APACHE_TRAJECTORY.vehicles.silver, (time) => {
         const impact = 8;
         const lane = APACHE_LANES.forwardLaneCenters[0];
         const drift = 1.05 * smoothstep((time - 5.5) / 2.5);
@@ -198,13 +245,13 @@ const apache: Layout = {
         }
         const slide = settle(time - impact, 0.8);
         return { x: 2.6 * slide, z: lane - 1.05 + 1.6 * slide, yaw: Math.PI / 2 - 0.45 * slide };
-      },
+      }),
     },
     {
       // Westbound (-x) in its inner lane; swerves too late.
       id: "blue",
       scale: 1.08,
-      poseAt: (time) => {
+      poseAt: withCollisionTrajectory(APACHE_TRAJECTORY.impact_time_s, APACHE_TRAJECTORY.vehicles.blue, (time) => {
         const impact = 8;
         const lane = APACHE_LANES.backwardLaneCenters[0];
         const swerve = -0.35 * smoothstep((time - 7) / 1);
@@ -213,9 +260,10 @@ const apache: Layout = {
         }
         const slide = settle(time - impact, 0.8);
         return { x: -2.2 * slide, z: lane - 0.35 - 1.3 * slide, yaw: -Math.PI / 2 - 0.35 * slide };
-      },
+      }),
     },
   ],
+  skidMarks: { impactTime: APACHE_TRAJECTORY.impact_time_s, vehicleIds: ["silver", "blue"] },
 };
 
 // ---------------------------------------------------------------------------
