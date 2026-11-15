@@ -56,7 +56,7 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
   });
 
   return (
-    <aside className={`absolute inset-y-0 left-0 z-30 flex w-[400px] flex-col bg-white shadow-[4px_0_24px_rgba(0,0,0,0.18)] transition-transform duration-200 ${panelOpen ? "translate-x-0" : "-translate-x-[340px]"}`}>
+    <aside className={`absolute inset-y-0 left-0 z-30 flex w-[400px] flex-col bg-white shadow-[4px_0_24px_rgba(0,0,0,0.18)] transition-transform duration-200 ease-in-out ${panelOpen ? "translate-x-0" : "-translate-x-[340px]"}`}>
       <div className={`flex items-center gap-3 px-4 pt-4 ${panelOpen ? "" : "justify-end"}`}>
         {panelOpen && (
           <>

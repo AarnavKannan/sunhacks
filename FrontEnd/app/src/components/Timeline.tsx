@@ -26,7 +26,7 @@ export function Timeline() {
   };
 
   return (
-    <div className={`absolute right-4 bottom-4 z-20 ${panelOpen ? "left-[416px]" : "left-[76px]"}`}>
+    <div className={`absolute right-4 bottom-4 z-20 transition-[left] duration-200 ease-in-out ${panelOpen ? "left-[416px]" : "left-[76px]"}`}>
       <div className="rounded-2xl border border-white/10 bg-[#071433]/80 px-4 py-3 text-white shadow-lg backdrop-blur-md">
         <div className="mb-1 flex items-center gap-3">
           <button

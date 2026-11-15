@@ -88,7 +88,7 @@ export function Viewport() {
     <div className="absolute inset-0">
       <div ref={containerRef} className="h-full w-full" />
 
-      <div className={`pointer-events-none absolute top-4 z-10 text-sm text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.55)] ${panelOpen ? "left-[416px]" : "left-[76px]"}`}>
+      <div className={`pointer-events-none absolute top-4 z-10 text-sm text-white/90 transition-[left] duration-200 ease-in-out [text-shadow:0_1px_3px_rgba(0,0,0,0.55)] ${panelOpen ? "left-[416px]" : "left-[76px]"}`}>
         <div className="text-base font-medium text-white">{scene?.title}</div>
         <div>{scene?.kind === "splat" ? "Gaussian splat" : "Drag to orbit · scroll to zoom · right-drag to pan"}</div>
       </div>
@@ -113,7 +113,7 @@ export function Viewport() {
         </div>
       )}
       {error && (
-        <div className={`absolute top-20 right-4 z-10 rounded-xl bg-red-600/90 px-3 py-2 text-sm text-white ${panelOpen ? "left-[416px]" : "left-[76px]"}`}>
+        <div className={`absolute top-20 right-4 z-10 rounded-xl bg-red-600/90 px-3 py-2 text-sm text-white transition-[left] duration-200 ease-in-out ${panelOpen ? "left-[416px]" : "left-[76px]"}`}>
           {error}
         </div>
       )}
