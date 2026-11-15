@@ -1,12 +1,21 @@
+import { connectSceneBridge } from "@/assistant/bridge";
+import { useChatStore } from "@/assistant/chatStore";
+import { AssistantPanel } from "@/components/AssistantPanel";
+import { HomeScreen } from "@/components/HomeScreen";
 import { SidePanel } from "@/components/SidePanel";
 import { Timeline } from "@/components/Timeline";
 import { Viewport } from "@/components/Viewport";
+import { syncBuiltinScenes } from "@/kinematics/store";
 import { ingestFiles } from "@/lib/ingest";
 import { useAppStore } from "@/store/useAppStore";
 import { useEffect, useState } from "react";
 
+const cleanIpcError = (error: unknown) =>
+  error instanceof Error ? error.message.replace(/^Error invoking remote method '[^']+': (Error: )?/, "") : String(error);
+
 export default function App() {
   const [dragOver, setDragOver] = useState(false);
+  const view = useAppStore((state) => state.view);
 
   useEffect(() => {
     let depth = 0;
@@ -52,8 +61,11 @@ export default function App() {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
+      // Typing, picking from a list, or pressing a focused button keeps its own keys.
+      if (target && (["INPUT", "TEXTAREA", "SELECT", "BUTTON"].includes(target.tagName) || target.isContentEditable)) return;
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
       const store = useAppStore.getState();
+      if (store.view !== "viewer") return;
       if (event.key === " ") {
         event.preventDefault();
         store.togglePlay();
@@ -67,11 +79,58 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Keep both side panels inside a window that gets narrower.
+  useEffect(() => {
+    const onResize = () => {
+      const state = useAppStore.getState();
+      state.setLeftWidth(state.leftWidth);
+      state.setRightWidth(state.rightWidth);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Assistant: answer tool calls from the main process, and warm up the default model.
+  useEffect(() => {
+    const disconnect = connectSceneBridge();
+    // Store each preview scene's per-frame motion in MongoDB (skipped when it's unchanged).
+    void syncBuiltinScenes();
+    const api = window.reconstruct?.assistant;
+    if (api) {
+      const chat = useChatStore.getState();
+      chat.setStatus("starting");
+      void api
+        .providers()
+        .then((providers) => useChatStore.getState().setProviders(providers))
+        .catch(() => {});
+      void api
+        .start({})
+        .then((choice) => {
+          useChatStore.getState().setChoice(choice);
+          useChatStore.getState().setStatus("ready");
+        })
+        .catch(async (error) => {
+          useChatStore.getState().setStatus("error", cleanIpcError(error));
+          const choice = await api.choice().catch(() => null);
+          if (choice) useChatStore.getState().setChoice(choice);
+        });
+    }
+    return disconnect;
+  }, []);
+
   return (
-    <div className="relative h-full w-full overflow-hidden">
-      <Viewport />
-      <SidePanel dragOver={dragOver} />
-      <Timeline />
+    <div className="flex h-full w-full overflow-hidden bg-black">
+      <div className="relative h-full min-w-0 flex-1 overflow-hidden">
+        <Viewport />
+        {view === "viewer" && (
+          <>
+            <SidePanel />
+            <Timeline />
+          </>
+        )}
+        {view === "home" && <HomeScreen dragOver={dragOver} />}
+      </div>
+      <AssistantPanel />
     </div>
   );
 }

@@ -174,6 +174,15 @@ const roundaboutLayout: Layout = {
 const APACHE = resolveRoadSpec({ region: "US", roadClass: "arterial" });
 const APACHE_CROSS = resolveRoadSpec({ region: "US", roadClass: "collector" });
 const APACHE_LANES = crossSection(APACHE);
+/** The blue SUV's late swerve to its right (-z) before impact (m). */
+const APACHE_SWERVE = 0.35;
+/**
+ * Centre-to-centre lateral gap when the two cars sideswipe: half the sedan (1.82 m) plus half
+ * the scaled SUV (1.92 m x 1.08), less ~10 cm so the bodies visibly touch.
+ */
+const APACHE_CONTACT_GAP = 1.85;
+/** Where the silver sedan's centre has to be at impact to reach the blue SUV. */
+const APACHE_CONTACT_Z = APACHE_LANES.backwardLaneCenters[0] - APACHE_SWERVE + APACHE_CONTACT_GAP;
 
 const apache: Layout = {
   id: "apache",
@@ -190,14 +199,17 @@ const apache: Layout = {
       poseAt: (time) => {
         const impact = 8;
         const lane = APACHE_LANES.forwardLaneCenters[0];
-        const drift = 1.05 * smoothstep((time - 5.5) / 2.5);
+        // Derived from the lane geometry, so the cars still meet if the road spec changes.
+        const driftAt = (t: number) => (lane - APACHE_CONTACT_Z) * smoothstep((t - 5.5) / 2.5);
         if (time < impact) {
           const x = -28 + (28 * time) / impact;
-          const z = lane - drift;
-          return { x, z, yaw: Math.PI / 2 - (time > 5.5 && time < impact ? 0.06 : 0) };
+          const z = lane - driftAt(time);
+          // Point the nose along the drift (+x is yaw π/2).
+          const dz = -(driftAt(time + 0.05) - driftAt(time - 0.05)) / 0.1;
+          return { x, z, yaw: Math.atan2(28 / impact, dz) };
         }
         const slide = settle(time - impact, 0.8);
-        return { x: 2.6 * slide, z: lane - 1.05 + 1.6 * slide, yaw: Math.PI / 2 - 0.45 * slide };
+        return { x: 2.6 * slide, z: APACHE_CONTACT_Z + 1.6 * slide, yaw: Math.PI / 2 - 0.45 * slide };
       },
     },
     {
@@ -207,12 +219,12 @@ const apache: Layout = {
       poseAt: (time) => {
         const impact = 8;
         const lane = APACHE_LANES.backwardLaneCenters[0];
-        const swerve = -0.35 * smoothstep((time - 7) / 1);
+        const swerve = -APACHE_SWERVE * smoothstep((time - 7) / 1);
         if (time < impact) {
           return { x: 28 - (28 * time) / impact, z: lane + swerve, yaw: -Math.PI / 2 };
         }
         const slide = settle(time - impact, 0.8);
-        return { x: -2.2 * slide, z: lane - 0.35 - 1.3 * slide, yaw: -Math.PI / 2 - 0.35 * slide };
+        return { x: -2.2 * slide, z: lane - APACHE_SWERVE - 1.3 * slide, yaw: -Math.PI / 2 - 0.35 * slide };
       },
     },
   ],

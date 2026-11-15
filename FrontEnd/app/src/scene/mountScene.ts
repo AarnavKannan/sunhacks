@@ -1,4 +1,4 @@
-import { driveVehicle, makeVehicle, type VehicleRig } from "@/scene/cars";
+import { driveVehicle, makeVehicle, type VehicleKind, type VehicleRig } from "@/scene/cars";
 import { Painter } from "@/scene/draw";
 import {
   applyWorldUVs,
@@ -23,18 +23,64 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 
 export type VehicleVisual = { id: string; color: string; label?: string };
 
+/** A point in three.js scene coordinates (meters; +x east, +y up, -z north). */
+export type Point3 = [number, number, number];
+
+export type ViewBounds = { min: Point3; max: Point3 };
+
+export type CameraPose = { position: Point3; target: Point3 };
+
+export type SceneMarker = { id: string; label: string; point: Point3; entityId?: string };
+
+/** Overlays the user (or the assistant) can switch on and off. */
+export type SceneLayers = { trails: boolean; bounds: boolean; hiddenVehicles: string[] };
+
 export type SceneHandle = {
-  showProxy: (layoutId: string, vehicles: VehicleVisual[], environment: SceneEnvironment) => void;
+  showProxy: (layoutId: string, vehicles: VehicleVisual[], environment: SceneEnvironment, duration: number) => void;
   showSplat: (bytes: Uint8Array, fileName: string, environment: SceneEnvironment) => Promise<void>;
   setTime: (time: number) => void;
   setCameraAdjustments: (adjustments: CameraAdjustments) => void;
   resetCamera: () => void;
+  /** Where the camera is and what it looks at, after any move in progress finishes. */
+  getCamera: () => CameraPose;
+  /**
+   * Places the camera, clamped to the scene bounds. Animates unless `instant`.
+   * Returns where it ended up and whether the bounds stopped it.
+   */
+  setCamera: (pose: CameraPose, options?: { instant?: boolean }) => CameraPose & { clamped: boolean };
+  /** Default overview of the scene, as a pose (doesn't move the camera). */
+  homePose: () => CameraPose;
+  bounds: () => ViewBounds;
+  /** Where a vehicle's centre is at `time`, or null if the scene has no such vehicle. */
+  vehiclePose: (id: string, time: number) => { position: Point3; yaw: number } | null;
+  /** Keep a vehicle centred from outside (null stops). */
+  setFollow: (id: string | null) => void;
+  /** Ride along from a vehicle's approximate driver eye point (null leaves). */
+  setPov: (id: string | null) => void;
+  setLayers: (layers: SceneLayers) => void;
+  setMarkers: (markers: SceneMarker[]) => void;
+  /** Called after every rendered frame, while the frame is still in the canvas (used by export). */
+  onFrame: (callback: ((canvas: HTMLCanvasElement) => void) | null) => void;
   resize: () => void;
   render: () => void;
   dispose: () => void;
 };
 
-type Mover = { rig: VehicleRig; poseAt: (time: number) => Pose };
+type Mover = { id: string; rig: VehicleRig; poseAt: (time: number) => Pose; color: string; eyeHeight: number };
+
+/** Approximate driver eye height by vehicle class (m, before the layout's scale). */
+const EYE_HEIGHT: Record<VehicleKind, number> = { car: 1.2, van: 1.7, truck: 2.4 };
+
+/** How far outside the site the camera may go (m), and how high. */
+const BOUNDS_MARGIN = 20;
+const BOUNDS_HEIGHT = 90;
+const BOUNDS_FLOOR = 0.3;
+/** Camera moves the assistant or the panel asks for glide over this long (s). */
+const TWEEN_SECONDS = 0.6;
+/** Driver eye point: forward of the vehicle centre (m); the height comes from EYE_HEIGHT. */
+const POV_EYE_FORWARD = 0.2;
+/** How far ahead of the eye the POV camera looks (m). */
+const POV_LOOK_AHEAD = 12;
 
 /** Step for finite differences on trajectories (s). */
 const DT = 0.05;
@@ -49,6 +95,58 @@ type SplatMeshLike = THREE.Object3D & {
 };
 
 const LOADING_BACKGROUND = 0x9aa4b2;
+
+const toPoint = (v: THREE.Vector3): Point3 => [v.x, v.y, v.z];
+const toVector = (p: Point3) => new THREE.Vector3(p[0], p[1], p[2]);
+const easeInOut = (k: number) => (k < 0.5 ? 4 * k * k * k : 1 - (-2 * k + 2) ** 3 / 2);
+
+/** A text label that keeps the same size on screen at any distance. */
+function makeLabel(text: string) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d")!;
+  const font = "600 30px system-ui, -apple-system, Segoe UI, sans-serif";
+  ctx.font = font;
+  const width = Math.min(640, Math.ceil(ctx.measureText(text).width) + 36);
+  canvas.width = width;
+  canvas.height = 52;
+  ctx.font = font;
+  ctx.fillStyle = "rgba(7, 20, 51, 0.88)";
+  ctx.beginPath();
+  ctx.roundRect(0, 0, width, 52, 14);
+  ctx.fill();
+  ctx.fillStyle = "#ffffff";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, 18, 27);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const material = new THREE.SpriteMaterial({ map: texture, sizeAttenuation: false, depthTest: false, fog: false });
+  const sprite = new THREE.Sprite(material);
+  const scale = 0.045;
+  sprite.scale.set((scale * width) / 52, scale, 1);
+  sprite.center.set(0.5, 0);
+  sprite.renderOrder = 20;
+  return sprite;
+}
+
+function makePin(marker: SceneMarker) {
+  const group = new THREE.Group();
+  group.name = `marker:${marker.id}`;
+  const color = new THREE.Color("#ff8a00");
+  const stem = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.05, 0.05, 2.6, 8),
+    new THREE.MeshBasicMaterial({ color, fog: false }),
+  );
+  stem.position.y = 1.3;
+  const head = new THREE.Mesh(
+    new THREE.SphereGeometry(0.38, 20, 14),
+    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 1.6 }),
+  );
+  head.position.y = 2.8;
+  const label = makeLabel(marker.label);
+  label.position.y = 3.3;
+  group.add(stem, head, label);
+  return group;
+}
 
 export async function mountScene(
   container: HTMLElement,
@@ -88,7 +186,7 @@ export async function mountScene(
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.maxPolarAngle = Math.PI / 2.05;
-  controls.minDistance = 6;
+  controls.minDistance = 1.5;
   controls.maxDistance = 220;
   controls.zoomToCursor = true;
   controls.target.set(-2, 0, 2);
@@ -117,6 +215,12 @@ export async function mountScene(
   const proxy = new THREE.Group();
   scene.add(proxy);
 
+  // Overlays: never part of the reconstruction, only drawn on top of it.
+  const trailsGroup = new THREE.Group();
+  const markersGroup = new THREE.Group();
+  const boundsGroup = new THREE.Group();
+  scene.add(trailsGroup, markersGroup, boundsGroup);
+
   composer.addPass(new RenderPass(scene, camera));
   const ambientOcclusion = new GTAOPass(scene, camera, 1, 1);
   ambientOcclusion.updateGtaoMaterial({ radius: 0.9, distanceExponent: 1.5, thickness: 1.5, scale: 1.1, samples: 16 });
@@ -134,11 +238,29 @@ export async function mountScene(
   let currentLayout: Layout | null = null;
   let splatMesh: SplatMeshLike | null = null;
   let movers: Mover[] = [];
+  let duration = 0;
+  let viewBounds: ViewBounds = { min: [-150, BOUNDS_FLOOR, -150], max: [150, BOUNDS_HEIGHT, 150] };
+  let layers: SceneLayers = { trails: false, bounds: true, hiddenVehicles: [] };
+  let markers: SceneMarker[] = [];
+  let markerObjects = new Map<string, THREE.Group>();
+  let follow: string | null = null;
+  let pov: string | null = null;
+  let frameCallback: ((canvas: HTMLCanvasElement) => void) | null = null;
+  let tween: {
+    fromTarget: THREE.Vector3;
+    toTarget: THREE.Vector3;
+    from: THREE.Spherical;
+    to: THREE.Spherical;
+    start: number;
+  } | null = null;
   const home = {
     position: new THREE.Vector3(34, 30, 36),
     target: new THREE.Vector3(-2, 0, 2),
   };
 
+  // Panel readout of the camera; throttled because follow and POV move the camera every frame.
+  let lastCameraReport = 0;
+  let cameraReportPending = false;
   const readCameraAdjustments = (): CameraAdjustments => {
     const baseOffset = home.position.clone().sub(home.target);
     const base = new THREE.Spherical().setFromVector3(baseOffset);
@@ -153,6 +275,83 @@ export async function mountScene(
       tilt: round(THREE.MathUtils.radToDeg(current.phi - base.phi)),
       rotate: round(THREE.MathUtils.radToDeg(wrapAngle(current.theta - base.theta))),
     };
+  };
+  const reportCamera = (force = false) => {
+    const now = performance.now();
+    if (!force && now - lastCameraReport < 100) {
+      cameraReportPending = true;
+      return;
+    }
+    lastCameraReport = now;
+    cameraReportPending = false;
+    onCameraChange(readCameraAdjustments());
+  };
+  controls.addEventListener("change", () => reportCamera());
+
+  /** Clamps a point into the scene box in place; true if it had to move. */
+  const clampToBounds = (point: THREE.Vector3, floor = viewBounds.min[1]) => {
+    const before = point.clone();
+    point.set(
+      THREE.MathUtils.clamp(point.x, viewBounds.min[0], viewBounds.max[0]),
+      THREE.MathUtils.clamp(point.y, floor, viewBounds.max[1]),
+      THREE.MathUtils.clamp(point.z, viewBounds.min[2], viewBounds.max[2]),
+    );
+    return before.distanceToSquared(point) > 1e-8;
+  };
+
+  /**
+   * Applies the same limits the orbit controls enforce (distance, not below the horizon)
+   * and the scene box, so the pose we report is the pose the camera really takes.
+   */
+  const constrain = (position: THREE.Vector3, target: THREE.Vector3) => {
+    // The look-at point may sit on the ground; only the camera has to stay above the floor.
+    let limited = clampToBounds(target, Math.min(0, viewBounds.min[1]));
+    const offset = position.clone().sub(target);
+    if (offset.lengthSq() < 1e-6) offset.set(0, 1, 0);
+    const spherical = new THREE.Spherical().setFromVector3(offset);
+    const phi = THREE.MathUtils.clamp(spherical.phi, 1e-4, controls.maxPolarAngle);
+    const radius = THREE.MathUtils.clamp(spherical.radius, controls.minDistance, controls.maxDistance);
+    if (Math.abs(phi - spherical.phi) > 1e-3 || Math.abs(radius - spherical.radius) > 1e-3) limited = true;
+    spherical.phi = phi;
+    spherical.radius = radius;
+    const next = target.clone().add(new THREE.Vector3().setFromSpherical(spherical));
+    if (clampToBounds(next)) limited = true;
+    return { position: next, target, limited };
+  };
+
+  const stopMotion = () => {
+    tween = null;
+  };
+
+  const placeNow = (position: THREE.Vector3, target: THREE.Vector3) => {
+    stopMotion();
+    camera.position.copy(position);
+    controls.target.copy(target);
+    controls.saveState();
+    controls.reset();
+    reportCamera(true);
+  };
+
+  const glideTo = (position: THREE.Vector3, target: THREE.Vector3) => {
+    const from = new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));
+    const to = new THREE.Spherical().setFromVector3(position.clone().sub(target));
+    // Turn the short way round.
+    to.theta = from.theta + wrapAngle(to.theta - from.theta);
+    tween = { fromTarget: controls.target.clone(), toTarget: target.clone(), from, to, start: performance.now() };
+  };
+
+  const stepTween = (now: number) => {
+    if (!tween) return;
+    const k = Math.min(1, (now - tween.start) / (TWEEN_SECONDS * 1000));
+    const e = easeInOut(k);
+    controls.target.lerpVectors(tween.fromTarget, tween.toTarget, e);
+    const spherical = new THREE.Spherical(
+      THREE.MathUtils.lerp(tween.from.radius, tween.to.radius, e),
+      THREE.MathUtils.lerp(tween.from.phi, tween.to.phi, e),
+      THREE.MathUtils.lerp(tween.from.theta, tween.to.theta, e),
+    );
+    camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));
+    if (k >= 1) tween = null;
   };
 
   const setCameraAdjustments = (adjustments: CameraAdjustments) => {
@@ -170,14 +369,11 @@ export async function mountScene(
       controls.maxPolarAngle,
     );
     const theta = base.theta + THREE.MathUtils.degToRad(adjustments.rotate);
-    camera.position.copy(target).add(new THREE.Vector3().setFromSpherical(new THREE.Spherical(radius, phi, theta)));
-    controls.target.copy(target);
-    controls.saveState();
-    controls.reset();
-    onCameraChange(readCameraAdjustments());
+    const position = target.clone().add(new THREE.Vector3().setFromSpherical(new THREE.Spherical(radius, phi, theta)));
+    const placed = constrain(position, target);
+    leaveCameraModes();
+    placeNow(placed.position, placed.target);
   };
-
-  controls.addEventListener("change", () => onCameraChange(readCameraAdjustments()));
 
   const placeSun = () => {
     const center = currentLayout ? new THREE.Vector3(0, 0, 0) : controls.target.clone();
@@ -240,11 +436,8 @@ export async function mountScene(
   };
 
   const applyHome = () => {
-    camera.position.copy(home.position);
-    controls.target.copy(home.target);
-    controls.saveState();
-    controls.reset();
-    onCameraChange(readCameraAdjustments());
+    leaveCameraModes();
+    placeNow(home.position.clone(), home.target.clone());
   };
 
   const disposeObject = (object: THREE.Object3D) => {
@@ -253,7 +446,7 @@ export async function mountScene(
       mesh.geometry?.dispose();
       const material = mesh.material;
       const disposeMaterial = (item: THREE.Material) => {
-        // Canvas textures (signs) are per-scene; shared texture files stay cached.
+        // Canvas textures (signs, labels) are per-scene; shared texture files stay cached.
         const map = (item as THREE.MeshStandardMaterial).map;
         if (map instanceof THREE.CanvasTexture) map.dispose();
         item.dispose();
@@ -263,12 +456,17 @@ export async function mountScene(
     });
   };
 
-  const clearProxy = () => {
-    movers = [];
-    for (const child of [...proxy.children]) {
-      proxy.remove(child);
+  const clearGroup = (group: THREE.Group) => {
+    for (const child of [...group.children]) {
+      group.remove(child);
       disposeObject(child);
     }
+  };
+
+  const clearProxy = () => {
+    movers = [];
+    clearGroup(proxy);
+    clearGroup(trailsGroup);
   };
 
   const clearSplat = () => {
@@ -276,6 +474,86 @@ export async function mountScene(
     scene.remove(splatMesh);
     splatMesh.dispose?.();
     splatMesh = null;
+  };
+
+  const setBounds = (next: ViewBounds) => {
+    viewBounds = next;
+    clearGroup(boundsGroup);
+    const size = toVector(next.max).sub(toVector(next.min));
+    const center = toVector(next.min).add(size.clone().multiplyScalar(0.5));
+    const box = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(size.x, size.y, size.z)),
+      new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7, fog: false }),
+    );
+    box.position.copy(center);
+    boundsGroup.add(box);
+    boundsGroup.visible = layers.bounds;
+  };
+
+  /** Each vehicle's path over the whole clip, split where a looped road jumps back. */
+  const buildTrails = () => {
+    clearGroup(trailsGroup);
+    if (duration <= 0) return;
+    const step = 0.1;
+    for (const mover of movers) {
+      let run: THREE.Vector3[] = [];
+      const flush = () => {
+        if (run.length > 1) {
+          const line = new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints(run),
+            new THREE.LineBasicMaterial({ color: mover.color, fog: false, depthTest: false, transparent: true, opacity: 0.95 }),
+          );
+          line.name = `trail:${mover.id}`;
+          line.renderOrder = 10;
+          trailsGroup.add(line);
+        }
+        run = [];
+      };
+      for (let t = 0; t <= duration + 1e-6; t += step) {
+        const pose = mover.poseAt(t);
+        const point = new THREE.Vector3(pose.x, 0.3, pose.z);
+        if (run.length && run[run.length - 1].distanceTo(point) > 15) flush();
+        run.push(point);
+      }
+      flush();
+    }
+    trailsGroup.visible = layers.trails;
+  };
+
+  const applyVehicleVisibility = () => {
+    for (const mover of movers) mover.rig.root.visible = !layers.hiddenVehicles.includes(mover.id) && pov !== mover.id;
+    for (const line of trailsGroup.children) {
+      const id = line.name.slice("trail:".length);
+      line.visible = !layers.hiddenVehicles.includes(id);
+    }
+  };
+
+  const placeMarkers = () => {
+    for (const marker of markers) {
+      const object = markerObjects.get(marker.id);
+      if (!object) continue;
+      const mover = marker.entityId ? movers.find((item) => item.id === marker.entityId) : undefined;
+      if (mover) object.position.set(mover.rig.root.position.x, 0, mover.rig.root.position.z);
+      else object.position.set(...marker.point);
+    }
+  };
+
+  const setMarkers = (next: SceneMarker[]) => {
+    const keep = new Set(next.map((item) => item.id));
+    for (const [id, object] of markerObjects) {
+      if (keep.has(id)) continue;
+      markersGroup.remove(object);
+      disposeObject(object);
+      markerObjects.delete(id);
+    }
+    for (const marker of next) {
+      if (markerObjects.has(marker.id)) continue;
+      const object = makePin(marker);
+      markersGroup.add(object);
+      markerObjects.set(marker.id, object);
+    }
+    markers = next;
+    placeMarkers();
   };
 
   const buildProxy = (layout: Layout, vehicles: VehicleVisual[]) => {
@@ -290,22 +568,40 @@ export async function mountScene(
     for (const vehicle of vehicles) {
       const motion = layout.vehicles.find((item) => item.id === vehicle.id);
       if (!motion) continue;
-      const rig = makeVehicle(motion.kind ?? "car", vehicle.color, vehicle.id, vehicle.label);
-      rig.root.scale.setScalar(motion.scale ?? 1);
+      const kind = motion.kind ?? "car";
+      const scale = motion.scale ?? 1;
+      const rig = makeVehicle(kind, vehicle.color, vehicle.id, vehicle.label);
+      rig.root.scale.setScalar(scale);
       proxy.add(rig.root);
-      movers.push({ rig, poseAt: motion.poseAt });
+      movers.push({ id: vehicle.id, rig, poseAt: motion.poseAt, color: vehicle.color, eyeHeight: EYE_HEIGHT[kind] * scale });
     }
+    buildTrails();
+    applyVehicleVisibility();
     placeSun();
   };
 
-  const showProxy = (layoutId: string, vehicles: VehicleVisual[], next: SceneEnvironment) => {
+  const leaveCameraModes = () => {
+    follow = null;
+    if (pov) {
+      pov = null;
+      controls.enabled = true;
+      applyVehicleVisibility();
+    }
+  };
+
+  const showProxy = (layoutId: string, vehicles: VehicleVisual[], next: SceneEnvironment, clipDuration: number) => {
     const layout = getLayout(layoutId);
     if (!layout) return;
     useEnvironment(next);
     clearSplat();
     ambientOcclusion.enabled = true;
     currentLayout = layout;
+    duration = clipDuration;
+    leaveCameraModes();
     buildProxy(layout, vehicles);
+    const halfW = layout.site.width / 2 + BOUNDS_MARGIN;
+    const halfD = layout.site.depth / 2 + BOUNDS_MARGIN;
+    setBounds({ min: [-halfW, BOUNDS_FLOOR, -halfD], max: [halfW, BOUNDS_HEIGHT, halfD] });
     home.position.set(...layout.camera.position);
     home.target.set(...layout.camera.target);
     applyHome();
@@ -317,6 +613,11 @@ export async function mountScene(
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     const radius = Math.max(size.x, size.y, size.z, 1);
+    const reach = radius * 1.5 + BOUNDS_MARGIN;
+    setBounds({
+      min: [center.x - reach, Math.min(box.min.y, center.y - radius * 0.5), center.z - reach],
+      max: [center.x + reach, center.y + reach, center.z + reach],
+    });
     home.target.copy(center);
     home.position.copy(center).add(new THREE.Vector3(radius * 0.9, radius * 0.72, radius * 0.95));
     applyHome();
@@ -330,7 +631,9 @@ export async function mountScene(
     useEnvironment(next);
     clearSplat();
     clearProxy();
+    leaveCameraModes();
     currentLayout = null;
+    duration = 0;
     proxy.visible = false;
     // Ambient occlusion is computed from mesh depth/normals; splats don't provide them.
     ambientOcclusion.enabled = false;
@@ -367,6 +670,41 @@ export async function mountScene(
       const yawRate = wrapAngle(mover.poseAt(time + DT).yaw - mover.poseAt(time - DT).yaw) / (2 * DT);
       driveVehicle(mover.rig, { speed, accel, yawRate: Math.abs(speed) > 0.2 ? yawRate : 0, lamps: pack.lamps });
     }
+    placeMarkers();
+  };
+
+  const followPoint = (mover: Mover) => mover.rig.root.position.clone().add(new THREE.Vector3(0, 0.8, 0));
+
+  /** Keeps the followed vehicle at the orbit centre, carrying the camera along with it. */
+  const updateFollow = () => {
+    const mover = follow ? movers.find((item) => item.id === follow) : undefined;
+    if (!mover) return;
+    const point = followPoint(mover);
+    const delta = point.clone().sub(tween ? tween.toTarget : controls.target);
+    if (delta.lengthSq() < 1e-10) return;
+    if (tween) {
+      tween.toTarget.add(delta);
+      tween.fromTarget.add(delta);
+    } else {
+      camera.position.add(delta);
+      controls.target.copy(point);
+    }
+  };
+
+  const updatePov = () => {
+    const mover = pov ? movers.find((item) => item.id === pov) : undefined;
+    if (!mover) return;
+    const yaw = mover.rig.root.rotation.y;
+    const forward = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw));
+    const eye = mover.rig.root.position
+      .clone()
+      .addScaledVector(forward, POV_EYE_FORWARD * mover.rig.root.scale.x)
+      .add(new THREE.Vector3(0, mover.eyeHeight, 0));
+    const ahead = eye.clone().addScaledVector(forward, POV_LOOK_AHEAD);
+    ahead.y = eye.y - 0.4;
+    camera.position.copy(eye);
+    controls.target.copy(ahead);
+    camera.lookAt(ahead);
   };
 
   const observer = new ResizeObserver(resize);
@@ -380,12 +718,73 @@ export async function mountScene(
     showSplat,
     setTime,
     setCameraAdjustments,
-    resetCamera: applyHome,
+    resetCamera: () => {
+      leaveCameraModes();
+      const placed = constrain(home.position.clone(), home.target.clone());
+      glideTo(placed.position, placed.target);
+    },
+    getCamera: () => {
+      if (tween) {
+        const position = tween.toTarget.clone().add(new THREE.Vector3().setFromSpherical(tween.to));
+        return { position: toPoint(position), target: toPoint(tween.toTarget) };
+      }
+      return { position: toPoint(camera.position), target: toPoint(controls.target) };
+    },
+    setCamera: (pose, options = {}) => {
+      if (pov) leaveCameraModes();
+      const placed = constrain(toVector(pose.position), toVector(pose.target));
+      if (options.instant) placeNow(placed.position, placed.target);
+      else glideTo(placed.position, placed.target);
+      return { position: toPoint(placed.position), target: toPoint(placed.target), clamped: placed.limited };
+    },
+    homePose: () => ({ position: toPoint(home.position), target: toPoint(home.target) }),
+    bounds: () => ({ min: [...viewBounds.min], max: [...viewBounds.max] }),
+    vehiclePose: (id, time) => {
+      const mover = movers.find((item) => item.id === id);
+      if (!mover) return null;
+      const pose = mover.poseAt(time);
+      return { position: [pose.x, 0, pose.z], yaw: pose.yaw };
+    },
+    setFollow: (id) => {
+      if (id && pov) leaveCameraModes();
+      follow = id;
+    },
+    setPov: (id) => {
+      if (!id) {
+        leaveCameraModes();
+        return;
+      }
+      follow = null;
+      stopMotion();
+      pov = id;
+      controls.enabled = false;
+      applyVehicleVisibility();
+    },
+    setLayers: (next) => {
+      layers = { ...next, hiddenVehicles: [...next.hiddenVehicles] };
+      trailsGroup.visible = layers.trails;
+      boundsGroup.visible = layers.bounds;
+      applyVehicleVisibility();
+    },
+    setMarkers,
+    onFrame: (callback) => {
+      frameCallback = callback;
+    },
     resize,
     render: () => {
       if (disposed) return;
-      controls.update();
+      const now = performance.now();
+      if (pov) {
+        updatePov();
+      } else {
+        if (follow) updateFollow();
+        stepTween(now);
+        controls.update();
+        clampToBounds(camera.position);
+      }
+      if (cameraReportPending && now - lastCameraReport >= 100) reportCamera();
       composer.render();
+      frameCallback?.(renderer.domElement);
     },
     dispose: () => {
       disposed = true;
@@ -394,6 +793,8 @@ export async function mountScene(
       controls.dispose();
       clearProxy();
       clearSplat();
+      clearGroup(markersGroup);
+      clearGroup(boundsGroup);
       composer.dispose();
       renderer.dispose();
       renderer.domElement.remove();

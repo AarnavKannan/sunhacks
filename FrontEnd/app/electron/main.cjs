@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, dialog, ipcMain } = require("electron");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
@@ -77,6 +77,55 @@ ipcMain.handle("footage:stage", async (_event, filePaths) => {
   }
 });
 
+let mainWindow = null;
+
+// API-key fallbacks for the assistant (GEMINI_API_KEY, ANTHROPIC_API_KEY) live in the
+// gitignored packages/assistant/.env during development.
+if (isDev) {
+  try {
+    process.loadEnvFile(path.join(__dirname, "../../../packages/assistant/.env"));
+  } catch {
+    // No .env: the CLI logins are the main providers anyway.
+  }
+}
+
+let assistant = null;
+let kinematics = null;
+try {
+  const bundle = require("./assistant.bundle.cjs");
+  assistant = bundle.registerAssistant({ ipcMain, getWindow: () => mainWindow });
+  kinematics = bundle.registerKinematics({ ipcMain, app });
+} catch (error) {
+  console.error("Assistant failed to load. Run `npm run build:assistant`.", error);
+  const unavailable = async () => {
+    throw new Error("The assistant isn't built. Run `npm run build:assistant` and restart the app.");
+  };
+  ipcMain.handle("assistant:providers", async () => []);
+  ipcMain.handle("assistant:start", unavailable);
+  ipcMain.handle("assistant:send", unavailable);
+  ipcMain.handle("assistant:interrupt", async () => {});
+}
+
+ipcMain.handle("export:save", async (_event, bytes, fileName) => {
+  if (!(bytes instanceof Uint8Array) || typeof fileName !== "string") throw new Error("Nothing to save.");
+  const safeName = path.basename(fileName).replace(/[<>:"/\|?*\x00-\x1f]/g, "_") || "reconstruction.mp4";
+  const options = {
+    title: "Save exported video",
+    defaultPath: path.join(app.getPath("videos"), safeName),
+    filters: [{ name: "Video", extensions: [path.extname(safeName).slice(1) || "mp4"] }],
+  };
+  const result = mainWindow ? await dialog.showSaveDialog(mainWindow, options) : await dialog.showSaveDialog(options);
+  if (result.canceled || !result.filePath) return null;
+  await fs.promises.writeFile(result.filePath, bytes);
+  return result.filePath;
+});
+
+try {
+  require("./voice.cjs").register({ ipcMain, app, getWindow: () => mainWindow });
+} catch (error) {
+  console.error("Voice transcription failed to register", error);
+}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1440,
@@ -94,7 +143,16 @@ function createWindow() {
     },
   });
 
+  mainWindow = win;
+  win.on("closed", () => {
+    if (mainWindow === win) mainWindow = null;
+  });
+
   if (isDev) {
+    // Surface renderer warnings and errors in the terminal that runs `npm start`.
+    win.webContents.on("console-message", (event) => {
+      if (event.level === "warning" || event.level === "error") console.log(`[renderer ${event.level}] ${event.message}`);
+    });
     win.loadURL("http://127.0.0.1:5173");
   } else {
     win.loadFile(path.join(__dirname, "../dist/index.html"));
@@ -102,6 +160,16 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
+
+let quitting = false;
+app.on("before-quit", (event) => {
+  if (quitting) return;
+  // Close the CLIs and flush the kinematics database to disk before exiting.
+  quitting = true;
+  event.preventDefault();
+  const timeout = new Promise((resolve) => setTimeout(resolve, 5000));
+  void Promise.race([Promise.allSettled([assistant?.dispose(), kinematics?.dispose()]), timeout]).finally(() => app.quit());
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
