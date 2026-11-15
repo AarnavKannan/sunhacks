@@ -75,12 +75,20 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .workflow-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .workflow-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .workflow-step {
     min-height: 230px;
+  }
+
+  .hero-mini {
+    display: none;
   }
 
   .workflow-terminal {
@@ -399,6 +407,7 @@
     min-height: 112px;
   }
 
+  .workflow-rail,
   .workflow-grid {
     grid-template-columns: 1fr;
   }

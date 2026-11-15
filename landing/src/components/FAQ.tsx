@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Motion";
 import { Plus } from "lucide-react";
 
 const faqs = [
@@ -37,15 +38,15 @@ export function FAQ() {
   return (
     <section className="section-pad faq-section" id="faq">
       <div className="container-x faq-grid">
-        <div className="faq-intro" data-reveal>
+        <Reveal className="faq-intro">
           <div className="section-kicker">
-            <span className="section-index">07</span>
+            <span className="section-index">04</span>
             <span>QUESTIONS</span>
             <span className="section-rule" />
           </div>
-          <h2>
+          <h2 className="neon-title">
             The fine print,
-            <span className="serif"> in plain language.</span>
+            <span className="neon-accent"> in plain language.</span>
           </h2>
           <p>
             Reconstruction is a tool for understanding, not a verdict. Here’s what the app does,
@@ -54,9 +55,9 @@ export function FAQ() {
           <a href="https://github.com/AarnavKannan/sunhacks#readme" target="_blank" rel="noreferrer">
             Read the project docs <span>↗</span>
           </a>
-        </div>
+        </Reveal>
 
-        <div className="faq-list" data-reveal>
+        <Reveal className="faq-list" delay={0.08}>
           {faqs.map((faq, index) => (
             <details className="faq-item" key={faq.question} open={index === 0}>
               <summary>
@@ -69,7 +70,7 @@ export function FAQ() {
               </div>
             </details>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

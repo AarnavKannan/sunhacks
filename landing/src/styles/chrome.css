@@ -9,7 +9,8 @@
 }
 
 .wordmark-slash {
-  color: var(--lime);
+  color: var(--neon);
+  text-shadow: 0 0 12px rgba(209, 76, 255, 0.55);
 }
 
 .wordmark-compact {

@@ -5,8 +5,6 @@ const columns = [
   {
     title: "Product",
     links: [
-      { label: "Overview", href: "#product" },
-      { label: "Evidence player", href: "#evidence" },
       { label: "Workflow", href: "#workflow" },
       { label: "Scene assistant", href: "#assistant" },
       { label: "Download", href: "#download" },
@@ -18,7 +16,6 @@ const columns = [
       { label: "GitHub", href: "https://github.com/AarnavKannan/sunhacks" },
       { label: "Releases", href: "https://github.com/AarnavKannan/sunhacks/releases" },
       { label: "Credits", href: "https://github.com/AarnavKannan/sunhacks/blob/main/CREDITS.md" },
-      { label: "OpenSplat", href: "https://github.com/WebODM/OpenSplat" },
     ],
   },
   {
@@ -54,9 +51,14 @@ export function Footer() {
               <div className="footer-column" key={column.title}>
                 <span>{column.title}</span>
                 {column.links.map((link) => (
-                  <a key={link.label} href={link.href} target={link.href.startsWith("#") ? undefined : "_blank"} rel={link.href.startsWith("#") ? undefined : "noreferrer"}>
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.href.startsWith("#") || link.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={link.href.startsWith("#") || link.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                  >
                     {link.label}
-                    {!link.href.startsWith("#") && <ArrowUpRight size={11} />}
+                    {!link.href.startsWith("#") && !link.href.startsWith("mailto:") && <ArrowUpRight size={11} />}
                   </a>
                 ))}
               </div>
@@ -71,9 +73,12 @@ export function Footer() {
           <span className="footer-disclaimer">
             Reconstruction estimates only. Not a substitute for a certified forensic investigation.
           </span>
-          <a href="https://github.com/AarnavKannan/sunhacks" target="_blank" rel="noreferrer">
-            <Github size={13} /> Source
-          </a>
+          <div className="footer-bottom-right">
+            <img className="footer-mini" src="/mini.png" alt="" aria-hidden="true" width={36} height={36} />
+            <a href="https://github.com/AarnavKannan/sunhacks" target="_blank" rel="noreferrer">
+              <Github size={13} /> Source
+            </a>
+          </div>
         </div>
       </div>
     </footer>

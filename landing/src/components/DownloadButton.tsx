@@ -1,25 +1,16 @@
-import { ArrowUpRight, Apple, Download, Monitor, Terminal } from "lucide-react";
-import { platformLabel, useDownloadTarget, type Platform } from "@/lib/download";
-
-const platformIcon: Record<Platform, typeof Apple> = {
-  mac: Apple,
-  win: Monitor,
-  linux: Terminal,
-  other: Download,
-};
+import { ArrowUpRight, Download } from "lucide-react";
+import { useDownloadTarget } from "@/lib/download";
 
 export function DownloadButton({
   className = "",
   compact = false,
-  label,
+  label = "Download CRASHVZN",
 }: {
   className?: string;
   compact?: boolean;
   label?: string;
 }) {
   const target = useDownloadTarget();
-  const Icon = platformIcon[target.platform];
-  const text = label ?? (target.platform === "other" ? "Download CRASHVZN" : `Download for ${platformLabel[target.platform]}`);
 
   return (
     <a
@@ -27,10 +18,10 @@ export function DownloadButton({
       target="_blank"
       rel="noreferrer"
       className={`btn btn-primary ${compact ? "btn-compact" : ""} ${className}`}
-      aria-label={`${text} (opens download)`}
+      aria-label={`${label} (opens GitHub release)`}
     >
-      <Icon size={compact ? 15 : 17} strokeWidth={2} />
-      <span>{text}</span>
+      <Download size={compact ? 15 : 17} strokeWidth={2} />
+      <span>{label}</span>
       <ArrowUpRight size={compact ? 14 : 16} className="btn-trailing-icon" />
     </a>
   );
@@ -40,7 +31,7 @@ export function DownloadMeta() {
   const target = useDownloadTarget();
   return (
     <span className="download-meta">
-      v{target.version} · {target.direct ? "installer" : "source preview"} · free during beta
+      v{target.version} · {target.direct ? "latest release" : "GitHub releases"} · free during beta
     </span>
   );
 }

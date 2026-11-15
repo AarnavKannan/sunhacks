@@ -1,3 +1,5 @@
+import { motion, Reveal, useReducedMotion } from "@/components/Motion";
+import { AnimatePresence } from "motion/react";
 import { ArrowUpRight, Command, Mic, Sparkles, Volume2 } from "lucide-react";
 import { useState } from "react";
 
@@ -51,20 +53,21 @@ const prompts: Prompt[] = [
 
 export function AssistantSection() {
   const [active, setActive] = useState(prompts[0]);
+  const reduce = useReducedMotion();
 
   return (
     <section className="section-pad assistant-section" id="assistant">
       <div className="container-x">
-        <div className="assistant-panel" data-reveal>
+        <Reveal className="assistant-panel">
           <div className="assistant-copy">
             <div className="section-kicker">
-              <span className="section-index">05</span>
-              <span>THE SCENE ASSISTANT</span>
+              <span className="section-index">02</span>
+              <span>SCENE ASSISTANT</span>
               <span className="section-rule" />
             </div>
-            <h2>
+            <h2 className="neon-title">
               The fastest way into a 3D scene
-              <span className="serif"> is to ask.</span>
+              <span className="neon-accent"> is to ask.</span>
             </h2>
             <p>
               A local MCP server gives your LLM read-only eyes on the reconstruction. It can move
@@ -99,35 +102,44 @@ export function AssistantSection() {
             </div>
 
             <div className="assistant-demo-thread">
-              <div className="demo-user-bubble" key={`user-${active.id}`}>
-                {active.prompt}
-              </div>
-
-              <div className="demo-assistant-row" key={`answer-${active.id}`}>
-                <span className="demo-avatar"><Sparkles size={13} /></span>
-                <div className="demo-answer">
-                  <p>{active.answer}</p>
-                  <div className="demo-tool">
-                    <span>tool call</span>
-                    <code>{active.tool}</code>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active.id}
+                  initial={reduce ? false : { opacity: 0, y: 12, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={reduce ? undefined : { opacity: 0, y: -8, filter: "blur(4px)" }}
+                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                >
+                  <div className="demo-user-bubble">{active.prompt}</div>
+                  <div className="demo-assistant-row">
+                    <span className="demo-avatar"><Sparkles size={13} /></span>
+                    <div className="demo-answer">
+                      <p>{active.answer}</p>
+                      <div className="demo-tool">
+                        <span>tool call</span>
+                        <code>{active.tool}</code>
+                      </div>
+                      <span className="demo-meta">{active.meta}</span>
+                    </div>
                   </div>
-                  <span className="demo-meta">{active.meta}</span>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             <div className="assistant-prompts">
               <span>TRY A PROMPT</span>
               <div>
                 {prompts.map((prompt) => (
-                  <button
+                  <motion.button
                     type="button"
                     key={prompt.id}
                     className={prompt.id === active.id ? "is-active" : ""}
                     onClick={() => setActive(prompt)}
+                    whileHover={reduce ? undefined : { scale: 1.04 }}
+                    whileTap={reduce ? undefined : { scale: 0.97 }}
                   >
                     {prompt.short}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -141,7 +153,7 @@ export function AssistantSection() {
               </span>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

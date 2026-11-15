@@ -1,4 +1,6 @@
 import { DownloadButton, DownloadMeta } from "@/components/DownloadButton";
+import { InstallCommands } from "@/components/InstallCommands";
+import { Reveal } from "@/components/Motion";
 import { ArrowUpRight, Check, Github, HardDrive, LockKeyhole, Monitor, Terminal } from "lucide-react";
 import { useDownloadTarget } from "@/lib/download";
 
@@ -20,20 +22,20 @@ export function DownloadSection() {
       </div>
 
       <div className="container-x">
-        <div className="download-card" data-reveal>
+        <Reveal className="download-card">
           <div className="download-copy">
             <div className="section-kicker">
-              <span className="section-index">06</span>
+              <span className="section-index">03</span>
               <span>GET THE APP</span>
               <span className="section-rule" />
             </div>
-            <h2>
+            <h2 className="neon-title">
               Bring the scene
-              <span className="serif"> into focus.</span>
+              <span className="neon-accent"> into focus.</span>
             </h2>
             <p>
-              CRASHVZN is a desktop reconstruction workspace. Download the app, open a scene
-              package, and start with the moment that matters.
+              One download for every desktop. When a GitHub release ships an installer, this button
+              picks it up automatically.
             </p>
 
             <div className="download-actions">
@@ -54,8 +56,12 @@ export function DownloadSection() {
               <DownloadMeta />
               <span className="download-note-dot" />
               <span>
-                {target.direct ? "Direct installer available" : "No installer attached yet — build from source or watch Releases"}
+                {target.direct ? "Release asset available" : "No installer attached yet — use the CLI below or watch Releases"}
               </span>
+            </div>
+
+            <div className="download-install">
+              <InstallCommands />
             </div>
 
             <div className="download-checks">
@@ -104,13 +110,7 @@ export function DownloadSection() {
               <code>.AppImage</code> to the latest release and this page picks it up automatically.
             </p>
           </aside>
-        </div>
-
-        <div className="download-foot" data-reveal>
-          <span>BUILT AT SUNHACKS 2026</span>
-          <span className="download-foot-rule" />
-          <span>Open source underneath · your evidence stays on your machine</span>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

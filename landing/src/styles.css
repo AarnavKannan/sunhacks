@@ -5,10 +5,6 @@
 @import "./styles/base.css";
 @import "./styles/chrome.css";
 @import "./styles/hero.css";
-@import "./styles/app-preview.css";
-@import "./styles/story.css";
-@import "./styles/bento.css";
-@import "./styles/evidence.css";
 @import "./styles/workflow.css";
 @import "./styles/assistant.css";
 @import "./styles/download.css";
@@ -16,13 +12,14 @@
 @import "./styles/responsive.css";
 
 @theme {
-  --color-ink: #07080a;
-  --color-surface: #0b0d10;
-  --color-card: #0f1216;
-  --color-fg: #f4f3ef;
-  --color-muted: #8d939c;
-  --color-lime: #d8ff4f;
-  --color-ember: #ff6a3d;
+  --color-ink: #05030a;
+  --color-surface: #0a0612;
+  --color-card: #10081a;
+  --color-fg: #f7f4ff;
+  --color-muted: #9a90b0;
+  --color-neon: #d14cff;
+  --color-cyan: #2ee8ff;
+  --color-warn: #ffe34d;
   --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
   --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;

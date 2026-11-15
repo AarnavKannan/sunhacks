@@ -5,10 +5,9 @@ import { Github, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const links = [
-  { label: "Product", href: "#product" },
-  { label: "Evidence", href: "#evidence" },
   { label: "Workflow", href: "#workflow" },
   { label: "Assistant", href: "#assistant" },
+  { label: "Download", href: "#download" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -57,7 +56,7 @@ export function Nav() {
               <Github size={16} />
               <span>GitHub</span>
             </a>
-            <DownloadButton compact />
+            <DownloadButton compact label="Download" />
             <button
               type="button"
               className="nav-menu-button"

@@ -22,8 +22,8 @@
   font-size: clamp(36px, 4.4vw, 58px);
 }
 
-.faq-intro h2 .serif {
-  color: var(--lime);
+.faq-intro h2 .neon-accent {
+  color: var(--neon);
 }
 
 .faq-intro > p {
@@ -45,8 +45,8 @@
 }
 
 .faq-intro > a:hover {
-  border-color: var(--lime);
-  color: var(--lime);
+  border-color: var(--cyan);
+  color: var(--cyan);
 }
 
 .faq-list {
@@ -228,7 +228,7 @@
   letter-spacing: -0.075em;
   line-height: 0.72;
   white-space: nowrap;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.018));
+  background: linear-gradient(180deg, rgba(209, 76, 255, 0.28), rgba(46, 232, 255, 0.04));
   -webkit-background-clip: text;
   background-clip: text;
   user-select: none;
@@ -241,7 +241,7 @@
   gap: 18px;
   padding: 24px 0 27px;
   border-top: 1px solid var(--line);
-  color: #7c8794;
+  color: #8a7fa0;
   font-family: var(--font-mono);
   font-size: 7.5px;
   letter-spacing: 0.02em;
@@ -252,14 +252,27 @@
   text-align: center;
 }
 
+.footer-bottom-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-mini {
+  width: 34px;
+  height: auto;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 10px rgba(209, 76, 255, 0.25));
+}
+
 .footer-bottom a {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #77828d;
+  color: #8a7fa0;
   transition: color 0.2s ease;
 }
 
 .footer-bottom a:hover {
-  color: var(--lime);
+  color: var(--cyan);
 }
