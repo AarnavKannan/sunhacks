@@ -22,7 +22,7 @@ Four people, split along the hand-offs. Reconstruction is the riskiest and slowe
 
 - Detects and tracks vehicles (YOLO11 + BoT-SORT), outlines them across frames (SAM 2), and labels them ("red Toyota").
 - Converts measurements to real-world meters, smooths the paths (Kalman + RTS), and calculates speed, acceleration and the impact moment.
-- Owns the scene-package format (§6). Makes the **fake package on day one** so persons 3 and 4 can start building immediately.
+- Owns the scene-package format (§6). The package is measured from `demo.mp4`, so persons 3 and 4 can build against it.
 - Later owns the AWS GPU end-to-end run.
 
 **Delivers:** `tracks.json`, `entities.json`, `events.json`, `manifest.json`, `incident.yaml`
@@ -61,7 +61,7 @@ Four people, split along the hand-offs. Reconstruction is the riskiest and slowe
 
 | Agreement | Between | Agree on it by |
 |---|---|---|
-| Scene package format (§6) + fake package committed | 2 → 3, 4 | First 2 hours |
+| Scene package format (§6) + measured package from `demo.mp4` committed | 2 → 3, 4 | First 2 hours |
 | Named state functions in the app (`focusEntity`, `seek`, `orbit`, …) | 3 ↔ 4 | First 3 hours |
 | Splat file format and coordinates (`.spz`, Y-up, meters, origin) | 1 ↔ 2 ↔ 3 | First 3 hours |
 | First real scene package from Sol | 1 + 2 → 3 | About halfway |
@@ -73,7 +73,7 @@ Four people, split along the hand-offs. Reconstruction is the riskiest and slowe
 | Phase | Focus |
 |---|---|
 | **0–10%** | All four agree on the formats above. Persons 1 and 2 submit Sol jobs **immediately**, since the queue is your bottleneck. Person 4 gets Claude to call `camera.orbit` end to end. |
-| **10–50%** | Each person works their own track against the fake package. |
+| **10–50%** | Each person works their own track against the measured `incident-demo` package. |
 | **50–75%** | Load the real package into the app. Person 2 checks that the speeds make sense. Person 1 retrains or switches to a fallback if quality is poor. Person 3 polishes the tools. |
 | **75–90%** | Run the full pipeline on AWS once and test the notification. Rehearse the 7-step demo script (§2) repeatedly. |
 | **90–100%** | Freeze the code, record a backup demo video, and practice the pitch. |
