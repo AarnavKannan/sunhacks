@@ -13,6 +13,3 @@ venv/
 
 # Step cache. The generated scene package is kept.
 pipeline/.cache/
-
-# Assets
-*.png
