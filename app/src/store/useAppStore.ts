@@ -1,5 +1,7 @@
 import { BUILTIN_SCENES, type SceneInfo } from "@/data/scenes";
 import { putSplatFile } from "@/lib/splatFiles";
+import type { FootageAnalysis } from "@/lib/analyzeFootage";
+import { DEFAULT_ENVIRONMENT } from "@/scene/environment";
 import { create } from "zustand";
 
 export type UploadItem = {
@@ -7,6 +9,8 @@ export type UploadItem = {
   name: string;
   size: number;
   status: "queued";
+  /** Environment read from the footage; scenes reconstructed from it inherit it. */
+  analysis: { state: "analyzing" } | { state: "done"; result: FootageAnalysis } | { state: "failed"; error: string };
 };
 
 type Store = {
@@ -30,7 +34,8 @@ type Store = {
   setSearch: (search: string) => void;
   jumpToImpact: () => void;
   resetCamera: () => void;
-  addUploads: (files: { name: string; size: number }[]) => void;
+  addUploads: (files: { id: string; name: string; size: number }[]) => void;
+  setUploadAnalysis: (id: string, analysis: UploadItem["analysis"]) => void;
   removeUpload: (id: string) => void;
   addSplatScene: (file: { fileName: string; bytes: Uint8Array }) => void;
 };
@@ -54,7 +59,6 @@ export const useAppStore = create<Store>((set, get) => ({
   panelOpen: true,
   search: "",
   cameraResetToken: 0,
-
   selectScene: (id) => {
     const scene = get().scenes.find((item) => item.id === id);
     if (!scene) return;
@@ -96,13 +100,19 @@ export const useAppStore = create<Store>((set, get) => ({
     set((state) => ({
       uploads: [
         ...files.map((file) => ({
-          id: crypto.randomUUID(),
+          id: file.id,
           name: file.name,
           size: file.size,
           status: "queued" as const,
+          analysis: { state: "analyzing" as const },
         })),
         ...state.uploads,
       ],
+    })),
+
+  setUploadAnalysis: (id, analysis) =>
+    set((state) => ({
+      uploads: state.uploads.map((item) => (item.id === id ? { ...item, analysis } : item)),
     })),
 
   removeUpload: (id) =>
@@ -110,6 +120,10 @@ export const useAppStore = create<Store>((set, get) => ({
 
   addSplatScene: (file) => {
     const id = `splat-${crypto.randomUUID()}`;
+    // A splat carries no footage of its own; use the most recently analysed upload, if any.
+    const analysed = get().uploads.find((item) => item.analysis.state === "done");
+    const environment =
+      analysed?.analysis.state === "done" ? analysed.analysis.result.environment : DEFAULT_ENVIRONMENT;
     putSplatFile(id, file);
     const scene: SceneInfo = {
       id,
@@ -121,6 +135,8 @@ export const useAppStore = create<Store>((set, get) => ({
       startTime: 0,
       kind: "splat",
       vehicles: [],
+      environment,
+      environmentSource: analysed?.name,
     };
     set((state) => ({ scenes: [scene, ...state.scenes] }));
     get().selectScene(id);

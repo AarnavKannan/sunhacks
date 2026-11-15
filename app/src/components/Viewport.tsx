@@ -33,7 +33,7 @@ export function Viewport() {
         }
         setLoading(true);
         try {
-          await handle.showSplat(file.bytes, file.fileName);
+          await handle.showSplat(file.bytes, file.fileName, current.environment);
           handle.setTime(useAppStore.getState().time);
         } catch (err) {
           setError(err instanceof Error ? err.message : "Could not load the splat.");
@@ -42,7 +42,7 @@ export function Viewport() {
         }
         return;
       }
-      handle.showProxy(current.id, current.vehicles);
+      handle.showProxy(current.id, current.vehicles, current.environment);
       handle.setTime(useAppStore.getState().time);
     };
 
@@ -101,7 +101,7 @@ export function Viewport() {
         </button>
       )}
 
-      <div className={`pointer-events-none absolute top-4 z-10 text-sm text-white/85 ${panelOpen ? "left-[416px]" : "left-4"}`}>
+      <div className={`pointer-events-none absolute top-4 z-10 text-sm text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.55)] ${panelOpen ? "left-[416px]" : "left-4"}`}>
         <div className="text-base font-medium text-white">{scene?.title}</div>
         <div>{scene?.kind === "splat" ? "Gaussian splat" : "Drag to orbit · scroll to zoom · right-drag to pan"}</div>
       </div>

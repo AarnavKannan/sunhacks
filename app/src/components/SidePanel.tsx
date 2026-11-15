@@ -1,8 +1,9 @@
 import { SceneArt } from "@/components/SceneArt";
 import { formatBytes, formatClock } from "@/lib/time";
 import { ingestFiles } from "@/lib/ingest";
+import { describeEnvironment } from "@/scene/environment";
 import { useAppStore } from "@/store/useAppStore";
-import { Clock, Film, LocateFixed, MapPin, PanelLeftClose, Play, Search, Upload, X, Zap } from "lucide-react";
+import { Clock, CloudSun, Film, LocateFixed, MapPin, PanelLeftClose, Play, Search, Upload, X, Zap } from "lucide-react";
 import { useRef, type ReactNode } from "react";
 
 export function SidePanel({ dragOver }: { dragOver: boolean }) {
@@ -110,6 +111,14 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
                     <div className="text-xs text-slate-500">
                       {formatBytes(upload.size)} · Queued for the pipeline
                     </div>
+                    <div className="mt-0.5 flex items-center gap-1 text-xs text-slate-500">
+                      <CloudSun size={12} className="shrink-0" />
+                      <span className="truncate">
+                        {upload.analysis.state === "analyzing" && "Reading environment from footage…"}
+                        {upload.analysis.state === "done" && describeEnvironment(upload.analysis.result.environment)}
+                        {upload.analysis.state === "failed" && `Environment unknown: ${upload.analysis.error}`}
+                      </span>
+                    </div>
                   </div>
                   <button
                     type="button"
@@ -181,6 +190,13 @@ export function SidePanel({ dragOver }: { dragOver: boolean }) {
                           disabled={impactTime == null}
                         />
                         <Action icon={<LocateFixed size={18} />} label="Fit view" onClick={resetCamera} />
+                      </div>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-slate-600">
+                        <CloudSun size={14} className="shrink-0 text-slate-500" />
+                        <span className="truncate">
+                          {describeEnvironment(scene.environment)}
+                          {scene.environmentSource ? ` · from ${scene.environmentSource}` : " · default (no footage)"}
+                        </span>
                       </div>
                       {scene.vehicles.length > 0 && (
                         <div className="mt-3 flex flex-wrap gap-1.5">
