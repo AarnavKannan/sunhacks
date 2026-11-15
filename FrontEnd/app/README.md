@@ -2,9 +2,13 @@
 
 ## Run
 
-From `FrontEnd/app`:
+Install both packages because the app imports the assistant source from `packages/assistant`.
+From the repository root:
 
 ```powershell
+cd packages/assistant
+npm install
+cd ..\..\FrontEnd\app
 npm install
 npm start
 ```

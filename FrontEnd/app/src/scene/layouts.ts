@@ -27,6 +27,7 @@ export type VehicleMotion = {
 
 type CollisionTrajectory = {
   yaw_rad: number;
+  yaw_change_rad?: number;
   samples: number[][];
 };
 
@@ -75,7 +76,7 @@ function withCollisionTrajectory(
     return {
       x: start[1] + (end[1] - start[1]) * fraction,
       z: start[2] + (end[2] - start[2]) * fraction,
-      yaw: trajectory.yaw_rad,
+      yaw: trajectory.yaw_rad + (trajectory.yaw_change_rad ?? 0) * settle(elapsed, 0.25),
     };
   };
 }
@@ -240,6 +241,7 @@ const apache: Layout = {
         const lane = APACHE_LANES.forwardLaneCenters[0];
         // Derived from the lane geometry, so the cars still meet if the road spec changes.
         const driftAt = (t: number) => (lane - APACHE_CONTACT_Z) * smoothstep((t - 5.5) / 2.5);
+        const drift = driftAt(time);
         if (time < impact) {
           const x = COLLISION_APPROACH_SPEED_MPS * (time - impact);
           const z = lane - drift;
@@ -258,7 +260,11 @@ const apache: Layout = {
         const lane = APACHE_LANES.backwardLaneCenters[0];
         const swerve = -APACHE_SWERVE * smoothstep((time - 7) / 1);
         if (time < impact) {
-          return { x: -COLLISION_APPROACH_SPEED_MPS * (time - impact), z: lane + swerve, yaw: -Math.PI / 2 };
+          return {
+            x: 0.6 - COLLISION_APPROACH_SPEED_MPS * (time - impact),
+            z: lane + swerve,
+            yaw: -Math.PI / 2,
+          };
         }
         const slide = settle(time - impact, 0.8);
         return { x: -2.2 * slide, z: lane - 0.35 - 1.3 * slide, yaw: -Math.PI / 2 - 0.35 * slide };

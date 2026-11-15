@@ -1,4 +1,3 @@
-import { KinematicsPanel } from "@/components/KinematicsPanel";
 import { connectSceneBridge } from "@/assistant/bridge";
 import { useChatStore } from "@/assistant/chatStore";
 import { AssistantPanel } from "@/components/AssistantPanel";

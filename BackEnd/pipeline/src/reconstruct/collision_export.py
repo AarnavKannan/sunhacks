@@ -17,8 +17,8 @@ GRAVITY_MPS2 = 9.81
 SAMPLE_RATE_HZ = 60.0
 
 # These are the authored layouts' impact-time states, sampled from the incoming
-# paths. The current proxy layouts do not provide measured contact geometry, so
-# the collision normal is estimated opposite the closing relative velocity.
+# paths. Where contact geometry is unavailable, the normal is estimated opposite
+# closing relative velocity; the Apache corner contact supplies an explicit normal.
 SCENARIOS: dict[str, dict[str, Any]] = {
     "roundabout": {
         "impact_time_s": 12.0,
@@ -44,17 +44,20 @@ SCENARIOS: dict[str, dict[str, Any]] = {
         "vehicles": {
             "silver": {
                 "mass_kg": 1600.0,
-                "position_m": (0.0, 0.6264),
+                "position_m": (0.0, -0.1764),
                 "velocity_mps": (20.0, 0.0),
-                "yaw_rad": math.pi / 2,
+                "yaw_rad": math.pi / 2 - 0.06,
+                "yaw_change_rad": 0.35,
             },
             "blue": {
                 "mass_kg": 2000.0,
-                "position_m": (0.0, -2.0264),
+                "position_m": (0.6, -2.0264),
                 "velocity_mps": (-20.0, 0.0),
                 "yaw_rad": -math.pi / 2,
+                "yaw_change_rad": 0.35,
             },
         },
+        "collision_normal_1_to_2": (0.9, -0.4358898943540673),
     },
 }
 
@@ -75,7 +78,9 @@ def _scene_trajectories(scenario: dict[str, Any]) -> dict[str, Any]:
     closing_speed = float(np.linalg.norm(relative_velocity))
     if closing_speed <= 1e-9:
         raise ValueError("collision participants must have non-zero relative velocity")
-    normal = -relative_velocity / closing_speed
+    normal = scenario.get("collision_normal_1_to_2")
+    if normal is None:
+        normal = -relative_velocity / closing_speed
 
     post_velocities = resolve_collision(
         first["mass_kg"],
@@ -100,6 +105,7 @@ def _scene_trajectories(scenario: dict[str, Any]) -> dict[str, Any]:
         )
         result["vehicles"][vehicle_id] = {
             "yaw_rad": vehicle["yaw_rad"],
+            "yaw_change_rad": vehicle.get("yaw_change_rad", 0.0),
             "samples": np.round(samples, 6).tolist(),
         }
     return result

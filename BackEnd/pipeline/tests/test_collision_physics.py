@@ -76,3 +76,32 @@ def test_collision_vehicles_approach_at_about_20_meters_per_second():
     for scene in SCENARIOS.values():
         for vehicle in scene["vehicles"].values():
             assert np.linalg.norm(vehicle["velocity_mps"]) == pytest.approx(20.0, abs=0.01)
+
+
+def test_apache_corner_collision_recoils_and_deflects_both_vehicles():
+    scenario = SCENARIOS["apache"]
+    silver, blue = scenario["vehicles"].values()
+    post_silver, post_blue = resolve_collision(
+        silver["mass_kg"],
+        blue["mass_kg"],
+        silver["velocity_mps"],
+        blue["velocity_mps"],
+        scenario["collision_normal_1_to_2"],
+        restitution=0.15,
+    )
+
+    assert post_silver[0] < 0
+    assert post_blue[0] > -5
+    assert post_silver[1] > 0
+    assert post_blue[1] < 0
+    assert silver["yaw_change_rad"] > 0
+    assert blue["yaw_change_rad"] > 0
+
+    trajectories = build_builtin_trajectories()["scenes"]["apache"]["vehicles"]
+    for vehicle_id, vehicle in scenario["vehicles"].items():
+        np.testing.assert_allclose(
+            np.asarray(trajectories[vehicle_id]["samples"])[0, 1:],
+            vehicle["position_m"],
+            atol=1e-6,
+        )
+        assert trajectories[vehicle_id]["yaw_change_rad"] == pytest.approx(0.35)
