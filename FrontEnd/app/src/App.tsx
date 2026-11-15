@@ -372,97 +372,91 @@ export default function App() {
         )}
 
         {!splatFile && (
-          <>
-            <button className="details-toggle" onClick={() => setShowDetails((value) => !value)}>
-              <ChevronDown size={14} className={showDetails ? "" : "rotate-chevron"} />
-              {showDetails ? "Hide scene details" : "Show scene details"}
-            </button>
-
-            <div className="entity-tags">
-              <span className="entity-pill"><i className="entity-dot red-dot" /> Vehicle 01</span>
-              <span className="entity-pill"><i className="entity-dot gold-dot" /> Vehicle 02</span>
-            </div>
-          </>
+          <button className="details-toggle" onClick={() => setShowDetails((value) => !value)}>
+            <ChevronDown size={14} className={showDetails ? "" : "rotate-chevron"} />
+            {showDetails ? "Hide scene details" : "Show scene details"}
+          </button>
         )}
 
-        <section className="timeline-panel" aria-label="Scene timeline">
-          {splatFile ? (
-            <div className="static-scene-notice">
-              <span className="timeline-icon"><Layers3 size={16} /></span>
-              <div>
-                <strong>Static reconstruction</strong>
-                <span>Timeline playback requires vehicle tracks and time-varying scene assets.</span>
-              </div>
+        <div className="timeline-stack">
+          {!splatFile && showDetails && (
+            <div className="quick-stats">
+              <span><i className="entity-dot red-dot" /> Toyota · <b>38 mph</b></span>
+              <span><i className="entity-dot gold-dot" /> Sedan · <b>22 mph</b></span>
             </div>
-          ) : (
-            <>
-              <div className="timeline-topline">
-                <div className="timeline-title">
-                  <span className="timeline-icon"><Clock3 size={16} /></span>
-                  <div><strong>Incident timeline</strong><span>Drag to explore the reconstruction</span></div>
-                </div>
-                <div className="timeline-options">
-                  <button className="speed-button" onClick={() => setCurrentTime(0)} title="Jump to start"><RotateCcw size={14} /></button>
-                  <button className="speed-button">1× <ChevronDown size={12} /></button>
-                  <button className="speed-button" title="Timeline settings"><Settings2 size={14} /></button>
-                </div>
-              </div>
-              <div className="time-readout">
-                <span className="current-time">{formatTime(currentTime)}</span>
-                <span className="time-relative">{currentTime < 6.4 ? `T−${(6.4 - currentTime).toFixed(2)}s` : `T+${(currentTime - 6.4).toFixed(2)}s`}</span>
-                <span className="time-total">{formatTime(duration)}</span>
-              </div>
-              <div className="slider-wrap">
-                <button
-                  className="play-button"
-                  aria-label={isPlaying ? "Pause timeline" : "Play timeline"}
-                  onClick={() => {
-                    if (currentTime >= duration) setCurrentTime(0);
-                    setIsPlaying(!isPlaying);
-                  }}
-                >
-                  {isPlaying ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}
-                </button>
-                <div className="range-area">
-                  <div className="range-markers">
-                    <span className="impact-marker" style={{ left: `${(6.4 / duration) * 100}%` }}>
-                      <i /><b>IMPACT</b>
-                    </span>
-                    <span className="braking-marker" style={{ left: `${(4.2 / duration) * 100}%` }} title="Braking starts" />
-                  </div>
-                  <input
-                    aria-label="Timeline position"
-                    className="timeline-range"
-                    type="range"
-                    min={0}
-                    max={duration}
-                    step={0.01}
-                    value={currentTime}
-                    style={{ "--range-progress": `${(currentTime / duration) * 100}%` } as CSSProperties}
-                    onPointerDown={() => setIsPlaying(false)}
-                    onChange={(event) => setCurrentTime(Number(event.currentTarget.value))}
-                  />
-                  <div className="timeline-ticks" aria-hidden="true">
-                    <span>00:00</span><span>00:03</span><span>00:06</span><span>00:09</span><span>00:12</span>
-                  </div>
-                </div>
-              </div>
-              <div className="timeline-footer">
-                <span><i className="legend-impact" /> Impact</span>
-                <span><i className="legend-brake" /> Braking begins</span>
-                <button onClick={() => setCurrentTime(6.4)}><Gauge size={13} /> View kinematics</button>
-              </div>
-            </>
           )}
-        </section>
 
-        {!splatFile && (
-          <div className={`quick-stats ${showDetails ? "" : "quick-stats-hidden"}`}>
-            <span><i className="entity-dot red-dot" /> Toyota · <b>38 mph</b></span>
-            <span><i className="entity-dot gold-dot" /> Sedan · <b>22 mph</b></span>
-            <span className="stats-time"><Clock3 size={13} /> T−2.60 s</span>
-          </div>
-        )}
+          <section className="timeline-panel" aria-label="Scene timeline">
+            {splatFile ? (
+              <div className="static-scene-notice">
+                <span className="timeline-icon"><Layers3 size={16} /></span>
+                <div>
+                  <strong>Static reconstruction</strong>
+                  <span>Timeline playback requires vehicle tracks and time-varying scene assets.</span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="timeline-topline">
+                  <div className="timeline-title">
+                    <span className="timeline-icon"><Clock3 size={16} /></span>
+                    <div><strong>Incident timeline</strong><span>Drag to explore the reconstruction</span></div>
+                  </div>
+                  <div className="timeline-options">
+                    <button className="speed-button" onClick={() => setCurrentTime(0)} title="Jump to start"><RotateCcw size={14} /></button>
+                    <button className="speed-button">1× <ChevronDown size={12} /></button>
+                    <button className="speed-button" title="Timeline settings"><Settings2 size={14} /></button>
+                  </div>
+                </div>
+                <div className="time-readout">
+                  <span className="current-time">{formatTime(currentTime)}</span>
+                  <span className="time-relative">{currentTime < 6.4 ? `T−${(6.4 - currentTime).toFixed(2)}s` : `T+${(currentTime - 6.4).toFixed(2)}s`}</span>
+                  <span className="time-total">{formatTime(duration)}</span>
+                </div>
+                <div className="slider-wrap">
+                  <button
+                    className="play-button"
+                    aria-label={isPlaying ? "Pause timeline" : "Play timeline"}
+                    onClick={() => {
+                      if (currentTime >= duration) setCurrentTime(0);
+                      setIsPlaying(!isPlaying);
+                    }}
+                  >
+                    {isPlaying ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}
+                  </button>
+                  <div className="range-area">
+                    <div className="range-markers">
+                      <span className="impact-marker" style={{ left: `${(6.4 / duration) * 100}%` }}>
+                        <i /><b>IMPACT</b>
+                      </span>
+                      <span className="braking-marker" style={{ left: `${(4.2 / duration) * 100}%` }} title="Braking starts" />
+                    </div>
+                    <input
+                      aria-label="Timeline position"
+                      className="timeline-range"
+                      type="range"
+                      min={0}
+                      max={duration}
+                      step={0.01}
+                      value={currentTime}
+                      style={{ "--range-progress": `${(currentTime / duration) * 100}%` } as CSSProperties}
+                      onPointerDown={() => setIsPlaying(false)}
+                      onChange={(event) => setCurrentTime(Number(event.currentTarget.value))}
+                    />
+                    <div className="timeline-ticks" aria-hidden="true">
+                      <span>00:00</span><span>00:03</span><span>00:06</span><span>00:09</span><span>00:12</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="timeline-footer">
+                  <span><i className="legend-impact" /> Impact</span>
+                  <span><i className="legend-brake" /> Braking begins</span>
+                  <button onClick={() => setCurrentTime(6.4)}><Gauge size={13} /> View kinematics</button>
+                </div>
+              </>
+            )}
+          </section>
+        </div>
 
         <div className="viewer-bottom-note">
           <span className="note-dot" />
