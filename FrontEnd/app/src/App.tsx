@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import SceneViewer from "./SceneViewer";
 import { useSceneStore, type SceneId } from "./store";
+import type { StagedIncident } from "./electron";
 
 const demoScenes: Array<{
   id: SceneId;
@@ -53,12 +54,16 @@ export default function App() {
   const setCurrentTime = useSceneStore((state) => state.setCurrentTime);
   const setIsPlaying = useSceneStore((state) => state.setIsPlaying);
   const [footage, setFootage] = useState<File[]>([]);
+  const [stagedIncident, setStagedIncident] = useState<StagedIncident | null>(null);
+  const [splatFile, setSplatFile] = useState<File | null>(null);
   const [uploadMessage, setUploadMessage] = useState("");
+  const [isStaging, setIsStaging] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [viewerError, setViewerError] = useState("");
   const [showDetails, setShowDetails] = useState(true);
   const [cameraPreset, setCameraPreset] = useState<"iso" | "top">("iso");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const splatInputRef = useRef<HTMLInputElement>(null);
   const scene = useMemo(() => demoScenes.find((item) => item.id === sceneId) ?? demoScenes[0], [sceneId]);
 
   const reportViewerError = useCallback((message: string) => {
@@ -80,13 +85,33 @@ export default function App() {
   }, [duration, isPlaying, setCurrentTime, setIsPlaying]);
 
   const addFiles = (files: FileList | File[]) => {
-    const selected = Array.from(files).filter((file) => file.type.startsWith("video/"));
+    const selected = Array.from(files).filter((file) => /\.(mp4|mov|m4v|mkv|avi|webm)$/i.test(file.name));
     if (!selected.length) {
       setUploadMessage("Choose a video file to add footage.");
       return;
     }
+    setStagedIncident(null);
     setFootage((current) => [...current, ...selected]);
-    setUploadMessage(`${selected.length} video${selected.length === 1 ? "" : "s"} staged locally.`);
+    setUploadMessage(`${selected.length} video${selected.length === 1 ? "" : "s"} selected.`);
+  };
+
+  const stageFootage = async () => {
+    if (!window.reconstruct?.stageVideos) {
+      setUploadMessage("Local staging is available in the Electron desktop app.");
+      return;
+    }
+
+    setIsStaging(true);
+    setUploadMessage("Copying videos and recording SHA-256 hashes…");
+    try {
+      const incident = await window.reconstruct.stageVideos(footage);
+      setStagedIncident(incident);
+      setUploadMessage(`${incident.videos.length} video${incident.videos.length === 1 ? "" : "s"} copied and hashed.`);
+    } catch (error) {
+      setUploadMessage(error instanceof Error ? `Could not stage footage: ${error.message}` : "Could not stage footage.");
+    } finally {
+      setIsStaging(false);
+    }
   };
 
   const seekToImpact = () => setCurrentTime(6.4);
@@ -157,7 +182,7 @@ export default function App() {
           </div>
           {footage.length > 0 && (
             <div className="staged-files">
-              <div className="staged-header"><span>STAGED FOOTAGE</span><span>{footage.length}</span></div>
+              <div className="staged-header"><span>SELECTED FOOTAGE</span><span>{footage.length}</span></div>
               {footage.map((file, index) => (
                 <div className="staged-file" key={`${file.name}-${index}`}>
                   <FileVideo2 size={15} />
@@ -165,7 +190,10 @@ export default function App() {
                   <button
                     className="file-remove"
                     aria-label={`Remove ${file.name}`}
-                    onClick={() => setFootage((files) => files.filter((_, fileIndex) => fileIndex !== index))}
+                    onClick={() => {
+                      setStagedIncident(null);
+                      setFootage((files) => files.filter((_, fileIndex) => fileIndex !== index));
+                    }}
                   >
                     <X size={14} />
                   </button>
@@ -173,14 +201,57 @@ export default function App() {
               ))}
               <button
                 className="prepare-button"
-                onClick={() => setUploadMessage("Footage is staged on this device. Connect the reconstruction pipeline to process it.")}
+                disabled={isStaging}
+                onClick={() => void stageFootage()}
               >
-                Prepare reconstruction <ArrowUpRight size={14} />
+                {isStaging ? "Staging footage…" : "Stage footage"} <ArrowUpRight size={14} />
               </button>
-              <p className="upload-note">Files stay local in this preview. Processing is not connected yet.</p>
+              <p className="upload-note">Copies and hashes the source videos on this device. Sol submission is not connected yet.</p>
+              {stagedIncident && (
+                <p className="upload-note">
+                  Incident {stagedIncident.incidentId.slice(0, 8)} · SHA-256 recorded for each source.
+                </p>
+              )}
             </div>
           )}
           {uploadMessage && <p className="upload-feedback" role="status">{uploadMessage}</p>}
+          <div className="splat-import">
+            <input
+              ref={splatInputRef}
+              type="file"
+              accept=".splat,.ply,.spz,application/octet-stream"
+              hidden
+              onChange={(event) => {
+                const file = event.currentTarget.files?.[0];
+                if (!file) return;
+                const extension = file.name.split(".").pop()?.toLowerCase();
+                if (!extension || !["splat", "ply", "spz"].includes(extension)) {
+                  setUploadMessage("Choose an OpenSplat .splat, .ply, or .spz output.");
+                } else {
+                  setSplatFile(file);
+                  setViewerError("");
+                  setUploadMessage(`Loaded scene output: ${file.name}`);
+                }
+                event.currentTarget.value = "";
+              }}
+            />
+            <button className="load-splat-button" onClick={() => splatInputRef.current?.click()}>
+              <Layers3 size={14} /> Load splat output
+            </button>
+            {splatFile && (
+              <div className="loaded-splat">
+                <span className="ready-dot" />
+                <span title={splatFile.name}>{splatFile.name}</span>
+                <button
+                  className="file-remove"
+                  aria-label={`Unload ${splatFile.name}`}
+                  onClick={() => setSplatFile(null)}
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            )}
+          </div>
         </section>
 
         <div className="saved-heading">
@@ -224,7 +295,7 @@ export default function App() {
       </aside>
 
       <section className="viewer-shell">
-        <SceneViewer onRendererError={reportViewerError} cameraPreset={cameraPreset} />
+        <SceneViewer onRendererError={reportViewerError} cameraPreset={cameraPreset} splatFile={splatFile} />
         <div className="viewer-vignette" />
 
         <header className="viewer-topbar">
@@ -232,7 +303,9 @@ export default function App() {
             <span className="crumb-muted">Scenes</span>
             <span className="crumb-divider">/</span>
             <strong>{scene.title}</strong>
-            <span className="demo-badge"><span /> DEMO SCENE</span>
+            <span className={`demo-badge ${splatFile ? "splat-loaded-badge" : ""}`}>
+              <span /> {splatFile ? "SPLAT LOADED" : "DEMO SCENE"}
+            </span>
           </div>
           <div className="topbar-actions">
             <button className="topbar-button"><ArrowDownToLine size={15} /> Export <ChevronDown size={13} /></button>

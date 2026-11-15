@@ -54,8 +54,16 @@ button { color: inherit; }
 .file-remove:hover { color: #c45050; background: #fff2f1; }
 .prepare-button { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; margin-top: 5px; padding: 8px; border: 0; border-radius: 7px; color: white; background: #253f67; font-size: 10px; font-weight: 660; cursor: pointer; }
 .prepare-button:hover { background: #315581; }
+.prepare-button:disabled { cursor: progress; opacity: .7; }
 .upload-note { margin: 7px 1px 0; color: #9aa5b2; font-size: 9px; line-height: 1.4; }
 .upload-feedback { margin: 7px 1px 0; color: #638277; font-size: 9px; line-height: 1.45; }
+.splat-import { margin-top: 9px; }
+.load-splat-button { display: flex; align-items: center; gap: 6px; width: 100%; padding: 8px 9px; border: 1px solid #e2e8f0; border-radius: 7px; color: #536985; background: #fff; font-size: 9px; font-weight: 650; cursor: pointer; }
+.load-splat-button:hover { border-color: #b6c6d9; background: #f7f9fc; }
+.loaded-splat { display: flex; align-items: center; gap: 7px; min-width: 0; margin-top: 6px; padding: 5px 7px; border: 1px solid #e8edf3; border-radius: 6px; color: #6b947f; }
+.loaded-splat > span:nth-child(2) { overflow: hidden; flex: 1; color: #53647a; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.splat-loaded-badge { border-color: #81b99b55; color: #b4dec4; }
+.splat-loaded-badge > span { background: #8fd4aa; }
 .saved-heading { margin-top: 23px; }
 .scene-count { display: grid; width: 20px; height: 18px; place-items: center; border-radius: 5px; color: #8492a5; background: #f0f3f7; font-size: 9px; font-weight: 700; }
 .saved-subtitle { display: block; margin-top: 5px; color: #a3adba; font-size: 9px; }

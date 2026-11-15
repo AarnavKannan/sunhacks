@@ -11,6 +11,8 @@
     "start": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\""
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
     "@sparkjsdev/spark": "^2.4.0",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
