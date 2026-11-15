@@ -1,0 +1,214 @@
+/* ---------- Workflow ---------- */
+
+.workflow-section {
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(216, 255, 79, 0.035), transparent 38%),
+    #07080a;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.workflow-step {
+  position: relative;
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  padding: 22px 20px;
+  background: #0a0c0f;
+  transition: background 0.3s ease;
+}
+
+.workflow-step:hover {
+  background: #0d1014;
+}
+
+.workflow-step-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workflow-number {
+  color: #4f5a64;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.workflow-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  color: #96a1ab;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.workflow-step h3 {
+  margin-top: 30px;
+  color: #edf1f4;
+  font-size: 17px;
+  font-weight: 540;
+  letter-spacing: -0.035em;
+}
+
+.workflow-step > p {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+
+.workflow-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  color: #59646f;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.workflow-arrow {
+  color: #3e4852;
+}
+
+/* Terminal */
+
+.workflow-terminal {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.45fr);
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #080a0d;
+}
+
+.terminal-bar {
+  display: flex;
+  grid-column: 1 / 3;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 15px;
+  border-bottom: 1px solid var(--line);
+  color: #66717c;
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.terminal-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2a3038;
+}
+
+.terminal-dots i:first-child {
+  background: #ff5f57;
+}
+
+.terminal-dots i:nth-child(2) {
+  background: #febc2e;
+}
+
+.terminal-dots i:nth-child(3) {
+  background: #28c840;
+}
+
+.terminal-chip {
+  margin-left: auto;
+  padding: 3px 6px;
+  border: 1px solid rgba(216, 255, 79, 0.17);
+  border-radius: 3px;
+  color: #8f9e68;
+  font-size: 6.5px;
+  letter-spacing: 0.08em;
+}
+
+.terminal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.terminal-line {
+  color: #bdc6ce;
+}
+
+.terminal-prompt {
+  margin-right: 8px;
+  color: var(--lime);
+}
+
+.terminal-muted {
+  color: #5b6672;
+}
+
+.terminal-ok {
+  color: #8ba178;
+}
+
+.terminal-caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--lime);
+  animation: terminal-blink 1.1s steps(1) infinite;
+}
+
+.terminal-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 18px 20px;
+  border-left: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.013);
+}
+
+.terminal-aside > span {
+  margin-bottom: 3px;
+  color: #515c67;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+}
+
+.terminal-aside strong {
+  color: #78838e;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 400;
+}
+
+@keyframes terminal-blink {
+  50% {
+    opacity: 0;
+  }
+}
