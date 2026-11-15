@@ -27,14 +27,14 @@ SCENARIOS: dict[str, dict[str, Any]] = {
             "white": {
                 "mass_kg": 1950.0,
                 "position_m": (4.2698672581, -1.1768422216),
-                "velocity_mps": (-0.8259442654, -2.6701762245),
+                "velocity_mps": (-5.9104041332, -19.1067297825),
                 "yaw_rad": -2.8415926536,
             },
             "red": {
                 "mass_kg": 1500.0,
                 "position_m": (7.1698672581, -0.9768422216),
-                "velocity_mps": (-0.4787738484, 0.0028941354),
-                "yaw_rad": -1.5668173256,
+                "velocity_mps": (-19.9582851265, -1.2910673135),
+                "yaw_rad": -1.6353589158,
             },
         },
     },
@@ -45,13 +45,13 @@ SCENARIOS: dict[str, dict[str, Any]] = {
             "silver": {
                 "mass_kg": 1600.0,
                 "position_m": (0.0, 0.6264),
-                "velocity_mps": (3.5, 0.0),
+                "velocity_mps": (20.0, 0.0),
                 "yaw_rad": math.pi / 2,
             },
             "blue": {
                 "mass_kg": 2000.0,
                 "position_m": (0.0, -2.0264),
-                "velocity_mps": (-3.5, 0.0),
+                "velocity_mps": (-20.0, 0.0),
                 "yaw_rad": -math.pi / 2,
             },
         },

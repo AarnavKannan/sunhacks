@@ -1,3 +1,4 @@
+import { KinematicsPanel } from "@/components/KinematicsPanel";
 import { SidePanel } from "@/components/SidePanel";
 import { Timeline } from "@/components/Timeline";
 import { Viewport } from "@/components/Viewport";
@@ -52,7 +53,7 @@ export default function App() {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
+      if (target && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)) return;
       const store = useAppStore.getState();
       if (event.key === " ") {
         event.preventDefault();
@@ -71,6 +72,7 @@ export default function App() {
     <div className="relative h-full w-full overflow-hidden">
       <Viewport />
       <SidePanel dragOver={dragOver} />
+      <KinematicsPanel />
       <Timeline />
     </div>
   );

@@ -87,6 +87,7 @@ function withCollisionTrajectory(
 const ROUND_CENTER: P = [-6, 2];
 const ROUND_STANDARD = ROUNDABOUTS.DE;
 const ROUNDABOUT_TRAJECTORY = impactTrajectories.scenes.roundabout;
+const COLLISION_APPROACH_SPEED_MPS = 20;
 const COLLECTOR = resolveRoadSpec({ region: "DE", roadClass: "collector" });
 const COLLECTOR_HALF = crossSection(COLLECTOR).pavedHalfWidthForward;
 const ROUND_INNER = ROUND_STANDARD.outerRadius - ROUND_STANDARD.circulatoryWidth;
@@ -113,7 +114,7 @@ const SOUTH_AISLE_T = -(COLLECTOR_HALF + LOT_PLAN.setback + PARKING.DE.stallDept
 function whiteAngle(time: number) {
   // Joined from the west arm, circulating anticlockwise in plan (right-hand traffic).
   const impact = 12;
-  const omega = 0.26;
+  const omega = COLLISION_APPROACH_SPEED_MPS / ROUND_LANE;
   const start = -0.3 + omega * impact;
   if (time <= impact) return start - omega * time;
   return start - omega * impact - omega * 0.7 * settle(time - impact, 0.7);
@@ -133,26 +134,17 @@ function redPose(time: number): Pose {
   const impact = 12;
   const hit = whitePose(impact);
   const p0 = armPoint(0, 36, ARM_INBOUND);
-  const p1 = armPoint(0, ROUND_STANDARD.outerRadius + 3, ENTRY_OFFSET);
   const p2: P = [hit.x + 2.9, hit.z + 0.2];
-  const bezier = (u: number): P => {
-    const a = (1 - u) * (1 - u);
-    const b = 2 * (1 - u) * u;
-    const c = u * u;
-    return [a * p0[0] + b * p1[0] + c * p2[0], a * p0[1] + b * p1[1] + c * p2[1]];
+  const dx = p2[0] - p0[0];
+  const dz = p2[1] - p0[1];
+  const duration = Math.hypot(dx, dz) / COLLISION_APPROACH_SPEED_MPS;
+  const approachStart = impact - duration;
+  const progress = Math.min(1, Math.max(0, (time - approachStart) / duration));
+  return {
+    x: p0[0] + dx * progress,
+    z: p0[1] + dz * progress,
+    yaw: yawOf(dx, dz),
   };
-  // Eases off a little but never stops: the driver misjudges the gap.
-  const u = Math.min(time, impact) / impact;
-  const eased = u * (1.25 - 0.25 * u);
-  const [x, z] = bezier(eased);
-  const [nx, nz] = bezier(Math.min(1, eased + 0.01));
-  const [px, pz] = bezier(Math.max(0, eased - 0.01));
-  let yaw = yawOf(nx - px, nz - pz);
-  if (time <= impact) return { x, z, yaw };
-  const slide = settle(time - impact, 0.5);
-  yaw += 0.35 * slide;
-  // Carried along with the white SUV as it is shoved round the circle.
-  return { x: x - 0.5 * slide, z: z - 1.4 * slide, yaw };
 }
 
 const roundaboutLayout: Layout = {
@@ -239,7 +231,7 @@ const apache: Layout = {
         const lane = APACHE_LANES.forwardLaneCenters[0];
         const drift = 1.05 * smoothstep((time - 5.5) / 2.5);
         if (time < impact) {
-          const x = -28 + (28 * time) / impact;
+          const x = COLLISION_APPROACH_SPEED_MPS * (time - impact);
           const z = lane - drift;
           return { x, z, yaw: Math.PI / 2 - (time > 5.5 && time < impact ? 0.06 : 0) };
         }
@@ -256,7 +248,7 @@ const apache: Layout = {
         const lane = APACHE_LANES.backwardLaneCenters[0];
         const swerve = -0.35 * smoothstep((time - 7) / 1);
         if (time < impact) {
-          return { x: 28 - (28 * time) / impact, z: lane + swerve, yaw: -Math.PI / 2 };
+          return { x: -COLLISION_APPROACH_SPEED_MPS * (time - impact), z: lane + swerve, yaw: -Math.PI / 2 };
         }
         const slide = settle(time - impact, 0.8);
         return { x: -2.2 * slide, z: lane - 0.35 - 1.3 * slide, yaw: -Math.PI / 2 - 0.35 * slide };

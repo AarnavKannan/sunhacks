@@ -32,7 +32,7 @@ export const BUILTIN_SCENES: SceneInfo[] = [
     detail: "Preview · 4 vehicles",
     duration: 25,
     impactTime: 12,
-    startTime: 4,
+    startTime: 10.86,
     kind: "proxy",
     // No source footage bundled for this preview yet; analysed uploads will replace this.
     environment: { sky: "clear", snow: 0, vegetation: "green", road: "dry" },
@@ -50,7 +50,7 @@ export const BUILTIN_SCENES: SceneInfo[] = [
     detail: "Preview · 2 vehicles",
     duration: 16,
     impactTime: 8,
-    startTime: 3,
+    startTime: 6.5,
     kind: "proxy",
     // No source footage bundled for this preview yet; analysed uploads will replace this.
     environment: { sky: "clear", snow: 0, vegetation: "arid", road: "dry" },

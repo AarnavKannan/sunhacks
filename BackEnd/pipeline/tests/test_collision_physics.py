@@ -70,3 +70,9 @@ def test_builtin_collision_trajectories_match_proxy_impact_states():
             np.testing.assert_allclose(samples[-1, 1:], samples[-2, 1:], atol=1e-6)
             assert np.all(np.diff(samples[:, 0]) > 0)
             assert np.all(np.isfinite(samples))
+
+
+def test_collision_vehicles_approach_at_about_20_meters_per_second():
+    for scene in SCENARIOS.values():
+        for vehicle in scene["vehicles"].values():
+            assert np.linalg.norm(vehicle["velocity_mps"]) == pytest.approx(20.0, abs=0.01)
