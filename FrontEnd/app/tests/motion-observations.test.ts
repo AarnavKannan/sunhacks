@@ -1,7 +1,7 @@
 ﻿import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { planMotion, trackAt } from "../src/gemini/motion";
-const data = JSON.parse(readFileSync("FrontEnd/app/tests/codex-vision-live-result.json", "utf8"));
+const data = JSON.parse(readFileSync(new URL("./codex-vision-live-result.json", import.meta.url), "utf8"));
 const original = data.spec.objects[0];
 const objects = Array.from({ length: 131 }, (_, i) => ({ ...original, id: `v${i}`, label: `v${i}`, keyframes: [
   { t_s: 0, x_m: i, y_m: 0, heading_deg: 0, speed_mps: 1 },

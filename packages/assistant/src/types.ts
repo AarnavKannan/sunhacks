@@ -28,6 +28,73 @@ export interface Entity {
    * other traffic, approximate; its exact path can differ slightly between rebuilds of the scene.
    */
   involvement?: "crash" | "background";
+  /** "vehicle" (default) or "static": a fixed object (e.g. the median divider) that never moves. */
+  kind?: "vehicle" | "static";
+}
+
+/** A fixed collision object, world frame. Immovable: zero velocity, acceleration and net force at every frame. */
+export interface StaticObjectInfo {
+  id: string;
+  label: string;
+  /** e.g. "median_divider". */
+  kind: string;
+  material: string;
+  /** Ground footprint polygon, world meters. */
+  footprint: Vec3[];
+  centroid: Vec3;
+  /** Unit vector along the long axis. */
+  axis: Vec3;
+  length_m: number;
+  width_m: number;
+  height_m: number;
+  friction: number;
+  restitution: number;
+  stiffness_n_per_m: number;
+  immovable: true;
+  source: "measured" | "inferred";
+  sigma_m: number;
+  note: string;
+}
+
+/** One contact between two objects. Normal and impulse act from `a` onto `b`. */
+export interface ContactInfo {
+  a: string;
+  b: string;
+  kind: "vehicle-vehicle" | "vehicle-static";
+  /** Source video frame index of first contact (t = frame / fps), or null. */
+  frame: number | null;
+  t_s: number;
+  point: Vec3;
+  /** Unit normal from a to b, world frame. */
+  normal: Vec3;
+  /** The reconstruction's plan-frame normal angle, degrees. */
+  normal_deg_plan: number;
+  /** Impulse magnitude along the normal (N·s) or null. */
+  impulse_ns: number | null;
+  /** Impulse on b from a (N·s, world frame) = impulse_ns × normal, or null. */
+  impulse: Vec3 | null;
+  /** Each moving participant's mass × delta-v across the contact, from the stored vectors (cross-check). */
+  derived: { entity_id: string; mass_kg: number; delta_v: Vec3; impulse: Vec3; along_normal_ns: number; window_s: number }[];
+  source: "measured" | "inferred";
+  sigma_s?: number;
+  note?: string;
+}
+
+export interface FrameGrid {
+  fps: number;
+  first_frame: number;
+  last_frame: number;
+  /** "video": frame is the source video frame index and t = frame / fps. "preview": synthetic grid. */
+  source: "video" | "preview";
+}
+
+/** Contacts, fixed objects and the frame grid (query_contacts tool). */
+export interface ContactsReport {
+  contacts: ContactInfo[];
+  static_objects: StaticObjectInfo[];
+  frame_grid: FrameGrid | null;
+  basis?: string;
+  caveats: string[];
 }
 
 export interface SceneEvent {
@@ -75,6 +142,9 @@ export interface TimelineState {
   /** Seconds relative to the crash start (negative = before), if there is a crash. */
   t_rel_crash_s: number | null;
   phase: CrashPhase | null;
+  /** Source video frame index at the playhead (Math.round(t_s * fps)); only when the grid is "video". */
+  frame?: number;
+  fps?: number;
 }
 
 export interface LibraryIncident {
@@ -106,6 +176,12 @@ export interface SceneSummary {
   source_videos: number;
   timeline: TimelineState;
   camera: CameraState;
+  /** Fixed objects (e.g. the median divider). They are also listed in entities with kind "static". */
+  static_objects?: StaticObjectInfo[];
+  contacts?: ContactInfo[];
+  frame_grid?: FrameGrid;
+  basis?: string;
+  caveats?: string[];
 }
 
 export interface EntityMatch {
@@ -124,21 +200,33 @@ export interface Quantity {
   sigma?: number;
 }
 
-/** A point in time: absolute seconds, or an offset from an event ("3 s before the crash"). */
-export type TimeRef = { t_s: number } | { event: string; offset_s?: number };
+/**
+ * A point in time: absolute seconds, an offset from an event ("3 s before the crash"), or a
+ * source video frame index (t = frame / fps from the incident's frame grid).
+ */
+export type TimeRef = { t_s: number } | { event: string; offset_s?: number } | { frame: number };
 
 export interface KinematicsReading {
   entity_id: string;
   t_s: number;
   t_rel_crash_s: number | null;
   phase: CrashPhase | null;
-  position?: { value: Vec3; unit: "m" };
+  /** Stored source frame index (nearest frame for times between frames); video grids only. */
+  frame?: number;
+  /** Sample provenance: "measured" | "interpolated" | "occluded-rest" | "out-of-view-extrapolated" | "edge-extrapolated" | "static". */
+  src?: string;
+  entity_kind?: "vehicle" | "static";
+  /** Ids of objects this entity is in contact with at this frame. */
+  contact_with?: string[];
+  position?: { value: Vec3; unit: "m"; sigma_m?: number };
   velocity?: { value: Vec3; unit: "m/s" };
   speed?: { mps: Quantity; mph: Quantity; kmh: Quantity };
   /** Signed along the direction of travel: negative = slowing down. */
-  acceleration?: Quantity & { g: number };
+  acceleration?: Quantity & { g: number; vector?: Vec3 };
   /** Compass bearing of travel, 0 = north, 90 = east. */
   heading?: Quantity & { compass: string };
+  /** Compass bearing of the vehicle body, distinct from its direction of travel while sliding. */
+  body_heading?: Quantity & { compass: string };
   yaw_rate?: Quantity;
   forces?: {
     mass_kg: number;

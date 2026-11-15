@@ -1,0 +1,50 @@
+{
+  "scope": "Real crash-pair/static conversion only; world tracks absent, not a full real incident build",
+  "X_REF": 95.06,
+  "Y_median": -4.803,
+  "static_objects": 3,
+  "contacts": [
+    {
+      "a": "yellow-car",
+      "b": "white-van",
+      "t_s": 23.28,
+      "x_m": 11.998,
+      "y_m": -4.507,
+      "normal_deg": 0.0,
+      "kind": "vehicle-vehicle",
+      "source": "inferred",
+      "note": "First supported rear/median-side-corner contact f291; physical touch is hidden by the van and bounded to f290-292. Van rocks at f292 then translates clearly at f293. Impulse is van mass times fitted post-impact longitudinal velocity over f296-300, including unresolved tyre forces; mass is assumed.",
+      "frame": 291,
+      "impulse_ns": 22495.93263672827,
+      "sigma_s": 0.08
+    },
+    {
+      "a": "yellow-car",
+      "b": "median-divider",
+      "t_s": 22.64,
+      "x_m": -3.331,
+      "y_m": -3.834,
+      "normal_deg": 90.0,
+      "kind": "vehicle-static",
+      "source": "inferred",
+      "note": "Footprint first crosses the measured soft-verge edge, supported by paint/wheel silhouette at the snow/asphalt boundary. Timing +/-2 frames; this is verge encroachment, not proof of a rigid hedge/barrier impact. Static impulse is unidentifiable and is intentionally omitted. Steering, sliding and soft-ground resistance cannot be separated from this view.",
+      "frame": 283,
+      "sigma_s": 0.16
+    }
+  ],
+  "forward_lines": [
+    4.228000000000001,
+    7.87,
+    11.340999999999998,
+    14.985,
+    18.759999999999998,
+    22.043,
+    25.067999999999998
+  ],
+  "backward_lines": [
+    1.012,
+    4.803,
+    8.472,
+    12.443999999999999
+  ]
+}

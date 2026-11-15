@@ -5,6 +5,8 @@ import { CAMERA_PRESETS } from "../types";
 import type {
   CameraPreset,
   CameraState,
+  ContactInfo,
+  ContactsReport,
   CrashPeriod,
   CrashPhase,
   Entity,
@@ -18,6 +20,7 @@ import type {
   SceneBounds,
   SceneEvent,
   SceneSummary,
+  StaticObjectInfo,
   SeekRequest,
   TimelineState,
   TimeRef,
@@ -35,6 +38,56 @@ import type {
 export const MOCK_ENTITIES: Entity[] = [
   { id: "v1", label: "red Toyota Camry", color: "red", type: "sedan", make: "Toyota", model: "Camry", aliases: ["car 1", "the toyota"], visible_from_s: 0, visible_to_s: 8 },
   { id: "v2", label: "white Honda CR-V", color: "white", type: "suv", make: "Honda", model: "CR-V", aliases: ["car 2", "the honda", "the suv"], visible_from_s: 0, visible_to_s: 8 },
+];
+
+export const MOCK_FPS = 12.5;
+const FRAME_GRID = { fps: MOCK_FPS, first_frame: 0, last_frame: 99, source: "video" as const };
+const sourceFrame = (t: number) => Math.max(FRAME_GRID.first_frame, Math.min(FRAME_GRID.last_frame, Math.round(t * MOCK_FPS)));
+
+/** Fixed bushy median divider south of the crash point, long axis east-west. */
+export const MOCK_STATIC: StaticObjectInfo[] = [
+  {
+    id: "median-divider",
+    label: "bushy median divider",
+    kind: "median_divider",
+    material: "vegetation on a concrete curb",
+    footprint: [[-10, 0, 3.2], [10, 0, 3.2], [10, 0, 4], [-10, 0, 4]],
+    centroid: [0, 0, 3.6],
+    axis: [1, 0, 0],
+    length_m: 20,
+    width_m: 0.8,
+    height_m: 1,
+    friction: 0.6,
+    restitution: 0.1,
+    stiffness_n_per_m: 500000,
+    immovable: true,
+    source: "measured",
+    sigma_m: 0.3,
+    note: "mock divider",
+  },
+];
+
+export const MOCK_STATIC_ENTITIES: Entity[] = MOCK_STATIC.map((o) => ({
+  id: o.id, label: o.label, type: o.kind, aliases: ["the divider", "the median"], visible_from_s: 0, visible_to_s: 8, kind: "static" as const,
+}));
+
+/** The Toyota's front hits the Honda's side (v1 to v2), then the Honda slides into the divider. */
+export const MOCK_CONTACTS: ContactInfo[] = [
+  {
+    a: "v1", b: "v2", kind: "vehicle-vehicle", frame: 50, t_s: 4, point: [0, 0, 0], normal: [1, 0, 0], normal_deg_plan: 0,
+    impulse_ns: 12000, impulse: [12000, 0, 0],
+    derived: [
+      { entity_id: "v1", mass_kg: 1500, delta_v: [-8, 0, 0], impulse: [-12000, 0, 0], along_normal_ns: 12000, window_s: 0.08 },
+      { entity_id: "v2", mass_kg: 1700, delta_v: [7, 0, 0], impulse: [11900, 0, 0], along_normal_ns: 11900, window_s: 0.08 },
+    ],
+    source: "measured", sigma_s: 0.04,
+  },
+  {
+    a: "v2", b: "median-divider", kind: "vehicle-static", frame: 56, t_s: 4.48, point: [0, 0, 3.2], normal: [0, 0, 1], normal_deg_plan: -90,
+    impulse_ns: 3000, impulse: [0, 0, 3000],
+    derived: [{ entity_id: "v2", mass_kg: 1700, delta_v: [0, 0, -1.7], impulse: [0, 0, -2890], along_normal_ns: 2890, window_s: 0.08 }],
+    source: "inferred", note: "mock contact with the divider",
+  },
 ];
 
 const CRASH: CrashPeriod = { start_s: 4.0, end_s: 4.6, vehicles: ["v1", "v2"] };
@@ -91,7 +144,10 @@ const honda = track(
   (t) => (t < CRASH.start_s ? 0 : t < CRASH.end_s ? hondaCrashDecel : 0),
 );
 
-const TRACKS: Record<string, (t: number) => TrackSample> = { v1: toyota, v2: honda };
+const staticTrack = (o: StaticObjectInfo) => (): TrackSample => ({ pos: o.centroid, vel: [0, 0, 0], speed: 0, acc: 0, heading: 0, mass: 0 });
+const TRACKS: Record<string, (t: number) => TrackSample> = { v1: toyota, v2: honda, ...Object.fromEntries(MOCK_STATIC.map((o) => [o.id, staticTrack(o)])) };
+const ALL_ENTITIES: Entity[] = [...MOCK_ENTITIES, ...MOCK_STATIC_ENTITIES];
+const isStatic = (id: string) => MOCK_STATIC.some((o) => o.id === id);
 
 const round = (n: number, d = 2) => Math.round(n * 10 ** d) / 10 ** d;
 const r3 = (v: Vec3, d = 2): Vec3 => [round(v[0], d), round(v[1], d), round(v[2], d)];
@@ -115,7 +171,7 @@ export interface MockOptions {
 
 export class MockSceneController implements SceneController {
   camera: CameraState = structuredClone(DEFAULT_CAMERA);
-  timeline: TimelineState = { t_s: 0, duration_s: DURATION, playing: false, speed: 1, t_rel_crash_s: -CRASH.start_s, phase: "before_crash" };
+  timeline: TimelineState = { t_s: 0, duration_s: DURATION, playing: false, speed: 1, t_rel_crash_s: -CRASH.start_s, phase: "before_crash", frame: 0, fps: MOCK_FPS };
   markers: Marker[] = [];
   toggles: Record<string, boolean> = { trails: false, frustums: false, source_video: false, bounds: true };
   openId: string | null;
@@ -136,8 +192,8 @@ export class MockSceneController implements SceneController {
 
   private entity(id: string): Entity {
     this.requireOpen();
-    const e = MOCK_ENTITIES.find((x) => x.id === id);
-    if (!e) throw new Error(`No vehicle with id "${id}". Known ids: ${MOCK_ENTITIES.map((x) => x.id).join(", ")}.`);
+    const e = ALL_ENTITIES.find((x) => x.id === id);
+    if (!e) throw new Error(`No vehicle with id "${id}". Known ids: ${ALL_ENTITIES.map((x) => x.id).join(", ")}.`);
     return e;
   }
 
@@ -150,14 +206,17 @@ export class MockSceneController implements SceneController {
 
   private resolveTime(at: TimeRef | undefined): number {
     if (!at) return this.timeline.t_s;
-    const t = "t_s" in at ? at.t_s : this.eventTime(at.event) + (at.offset_s ?? 0);
-    if (t < 0 || t > DURATION) throw new Error(`That's ${round(t, 2)} s, outside the footage (0 to ${DURATION} s).`);
+    if ("frame" in at && (!Number.isInteger(at.frame) || at.frame < FRAME_GRID.first_frame || at.frame > FRAME_GRID.last_frame)) {
+      throw new Error(`Frame ${at.frame} is outside the footage (frames ${FRAME_GRID.first_frame} to ${FRAME_GRID.last_frame}).`);
+    }
+    const t = "t_s" in at ? at.t_s : "frame" in at ? at.frame / FRAME_GRID.fps : this.eventTime(at.event) + (at.offset_s ?? 0);
+    if (!Number.isFinite(t) || t < 0 || t > DURATION) throw new Error(`That's ${round(t, 2)} s, outside the footage (0 to ${DURATION} s).`);
     return t;
   }
 
   private setTime(t: number): TimelineState {
     const c = Math.max(0, Math.min(DURATION, t));
-    this.timeline = { ...this.timeline, t_s: round(c, 3), t_rel_crash_s: round(c - CRASH.start_s, 3), phase: phaseAt(c) };
+    this.timeline = { ...this.timeline, t_s: round(c, 3), t_rel_crash_s: round(c - CRASH.start_s, 3), phase: phaseAt(c), frame: sourceFrame(c), fps: MOCK_FPS };
     return { ...this.timeline };
   }
 
@@ -204,13 +263,16 @@ export class MockSceneController implements SceneController {
       incident_id: this.openId!,
       title: LIBRARY[0]!.incidents[0]!.title,
       duration_s: DURATION,
-      entities: MOCK_ENTITIES,
+      entities: ALL_ENTITIES,
       events: MOCK_EVENTS,
       crash: CRASH,
       bounds: BOUNDS,
       source_videos: 2,
       timeline: { ...this.timeline },
       camera: structuredClone(this.camera),
+      static_objects: MOCK_STATIC,
+      contacts: MOCK_CONTACTS,
+      frame_grid: FRAME_GRID,
     };
   }
 
@@ -243,7 +305,7 @@ export class MockSceneController implements SceneController {
   async findEntities(query: string) {
     this.record("findEntities", [query]);
     this.requireOpen();
-    return matchEntities(MOCK_ENTITIES, query);
+    return matchEntities(ALL_ENTITIES, query);
   }
 
   async focus(entityId: string, distanceM = 12) {
@@ -314,7 +376,10 @@ export class MockSceneController implements SceneController {
 
   async follow(entityId: string | null) {
     this.record("follow", [entityId]);
-    if (entityId) this.entity(entityId);
+    if (entityId) {
+      this.entity(entityId);
+      if (isStatic(entityId)) throw new Error(`"${entityId}" is a fixed object; the camera can't follow it. Use camera_focus instead.`);
+    }
     this.camera = { ...this.camera, following: entityId, pov: null };
     return structuredClone(this.camera);
   }
@@ -326,6 +391,7 @@ export class MockSceneController implements SceneController {
       return structuredClone(this.camera);
     }
     this.entity(entityId);
+    if (isStatic(entityId)) throw new Error(`"${entityId}" is a fixed object; there's no point of view to ride in.`);
     const s = TRACKS[entityId]!(this.timeline.t_s);
     const fwd: Vec3 = [Math.sin(s.heading * RAD), 0, -Math.cos(s.heading * RAD)];
     const eye: Vec3 = [s.pos[0], 1.2, s.pos[2]];
@@ -365,8 +431,11 @@ export class MockSceneController implements SceneController {
     const s = TRACKS[entityId]!(t);
     const want = new Set<KinematicsField>(fields.length ? fields : ["speed", "acceleration", "heading"]);
     const sigma = 0.6; // m/s, mock uncertainty
-    const out: KinematicsReading = { entity_id: entityId, t_s: round(t, 3), t_rel_crash_s: round(t - CRASH.start_s, 3), phase: phaseAt(t), source: "reconstruction" };
-    if (want.has("position")) out.position = { value: r3(s.pos), unit: "m" };
+    const out: KinematicsReading = { entity_id: entityId, t_s: round(t, 3), t_rel_crash_s: round(t - CRASH.start_s, 3), phase: phaseAt(t), source: "reconstruction", frame: sourceFrame(t), entity_kind: isStatic(entityId) ? "static" : "vehicle", src: isStatic(entityId) ? "static" : Math.abs(t * MOCK_FPS - Math.round(t * MOCK_FPS)) < 1e-6 ? "measured" : "interpolated" };
+    const touching = MOCK_CONTACTS.filter((c) => (c.a === entityId || c.b === entityId) && Math.round(t * MOCK_FPS) >= (c.frame ?? Infinity));
+    if (touching.length) out.contact_with = touching.map((c) => (c.a === entityId ? c.b : c.a));
+    const stat = isStatic(entityId);
+    if (want.has("position")) out.position = { value: r3(s.pos), unit: "m", sigma_m: stat ? MOCK_STATIC.find((o) => o.id === entityId)!.sigma_m : 0.3 };
     if (want.has("velocity")) out.velocity = { value: r3(s.vel), unit: "m/s" };
     if (want.has("speed")) {
       out.speed = {
@@ -375,13 +444,22 @@ export class MockSceneController implements SceneController {
         kmh: { value: round(s.speed * 3.6, 1), unit: "km/h", sigma: round(sigma * 3.6, 1) },
       };
     }
-    if (want.has("acceleration")) out.acceleration = { value: round(s.acc), unit: "m/s²", sigma: 0.5, g: round(s.acc / 9.80665) };
-    if (want.has("heading")) out.heading = { value: s.heading, unit: "deg", compass: COMPASS[Math.round(s.heading / 45) % 8]! };
+    const dir = len(s.vel) > 0 ? norm(s.vel) : ([Math.sin(s.heading * RAD), 0, -Math.cos(s.heading * RAD)] as Vec3);
+    if (want.has("acceleration")) out.acceleration = { value: round(s.acc), unit: "m/s²", sigma: 0.5, g: round(s.acc / 9.80665), vector: r3(scale(dir, s.acc)) };
+    if (want.has("heading") && !stat) {
+      out.heading = { value: s.heading, unit: "deg", compass: COMPASS[Math.round(s.heading / 45) % 8]! };
+      out.body_heading = { ...out.heading };
+    }
     if (want.has("yaw_rate")) out.yaw_rate = { value: 0, unit: "deg/s" };
     if (want.has("forces")) {
-      const dir = len(s.vel) > 0 ? norm(s.vel) : ([Math.sin(s.heading * RAD), 0, -Math.cos(s.heading * RAD)] as Vec3);
       const f = s.mass * s.acc;
-      out.forces = {
+      if (stat) {
+        out.forces = {
+          mass_kg: 0,
+          net: { vector: [0, 0, 0], magnitude: { value: 0, unit: "N" } },
+          model: "fixed object: immovable, net force is zero; contact reactions are taken by the ground and structure",
+        };
+      } else out.forces = {
         mass_kg: s.mass,
         net: { vector: r3(scale(dir, f), 0), magnitude: { value: round(Math.abs(f), 0), unit: "N", sigma: round(s.mass * 0.5, 0) } },
         model: "net force = mass × acceleration; air drag and friction not modeled separately",
@@ -415,6 +493,17 @@ export class MockSceneController implements SceneController {
       sample: async (id, times) => times.map((t) => ({ position: TRACKS[id]!(t).pos })),
       speedSigma: 0.6,
     });
+  }
+
+  async queryContacts(): Promise<ContactsReport> {
+    this.record("queryContacts", []);
+    this.requireOpen();
+    return {
+      contacts: MOCK_CONTACTS,
+      static_objects: MOCK_STATIC,
+      frame_grid: FRAME_GRID,
+      caveats: ["Contact 2 (v2 → median-divider) is inferred, not seen in the footage."],
+    };
   }
 
   async measureDistance(a: MeasureTarget, b: MeasureTarget, at?: TimeRef): Promise<Measurement> {

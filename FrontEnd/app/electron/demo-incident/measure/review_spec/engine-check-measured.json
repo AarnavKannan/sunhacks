@@ -1,0 +1,24 @@
+{
+  "result": "MEASURED ENGINE CHECK PASS",
+  "fixture": "SYNTHETIC CHECK: A9 motorway: car strikes stopped van",
+  "vehicles": 132,
+  "keyframes": 52411,
+  "max_pose_error_m": 0,
+  "painted_lines": [
+    4.228,
+    7.87,
+    11.341,
+    14.985,
+    18.76,
+    22.043,
+    25.068,
+    -1.012,
+    -4.803,
+    -8.472,
+    -12.444
+  ],
+  "static_objects": 2,
+  "contacts": 2,
+  "kinematics_rows": 50019,
+  "elapsed_ms": 5152
+}

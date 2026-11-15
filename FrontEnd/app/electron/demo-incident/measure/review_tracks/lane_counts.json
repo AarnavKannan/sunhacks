@@ -1,0 +1,6800 @@
+{
+  "lane_convention": "1=median-adjacent, increasing outward to 6; 0=inside median line, 7=beyond straight outer line",
+  "note": "Visible means the reprojected 3-D cuboid intersects the source tile. Eye census is a source review, not a confidence claim for every subpixel horizon identity.",
+  "checks": [
+    {
+      "requested_t": 0,
+      "f": 0,
+      "source_t": 0.0,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 4,
+          "2": 9,
+          "3": 3,
+          "4": 4,
+          "5": 2,
+          "6": 1,
+          "7": 2
+        },
+        "total": 25,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 0
+          },
+          "1": {
+            "min": 4,
+            "max": 8
+          },
+          "2": {
+            "min": 8,
+            "max": 13
+          },
+          "3": {
+            "min": 2,
+            "max": 10
+          },
+          "4": {
+            "min": 0,
+            "max": 8
+          },
+          "5": {
+            "min": 1,
+            "max": 8
+          },
+          "6": {
+            "min": 1,
+            "max": 4
+          },
+          "7": {
+            "min": 0,
+            "max": 3
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 21,
+        "uncertain_silhouette_marks": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "Top-clipped trucks and small yellow/cyan boxes have uncertain separability/lane. No claim of identity before a box is distinguishable.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              102.5,
+              201.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "stopped white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              40.75,
+              168.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "near dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              44.5,
+              122.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              8.75,
+              107.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4,
+              5
+            ],
+            "description": "clipped truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              114.25,
+              117.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              183.5,
+              103.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "median-side car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              147.25,
+              95.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              115.5,
+              88.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              163.5,
+              83.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              185.5,
+              72.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              199.0,
+              65.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              210.75,
+              56.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "partly overlapping car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              227.5,
+              66.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              225.75,
+              46.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              251.25,
+              42.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              94.5,
+              54.25
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              165.75,
+              38.5
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              214.5,
+              26.25
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              232.25,
+              18.25
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              240.0,
+              23.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              257.5,
+              22.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "small car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              248.75,
+              11.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "small van behind van",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              238.0,
+              5.75
+            ],
+            "lane": 7,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 24,
+            "anchor_px": [
+              258.75,
+              6.0
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 25,
+            "anchor_px": [
+              254.0,
+              2.5
+            ],
+            "lane": 7,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": true,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 4,
+        "2": 10,
+        "3": 2,
+        "4": 4,
+        "5": 2,
+        "6": 2,
+        "7": 1
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 0,
+        "2": 1,
+        "3": -1,
+        "4": 0,
+        "5": 0,
+        "6": 1,
+        "7": -1
+      },
+      "delta_tracks_minus_eye_total": 0,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": 0,
+          "max": 0
+        },
+        "1": {
+          "min": -4,
+          "max": 0
+        },
+        "2": {
+          "min": -3,
+          "max": 2
+        },
+        "3": {
+          "min": -8,
+          "max": 0
+        },
+        "4": {
+          "min": -4,
+          "max": 4
+        },
+        "5": {
+          "min": -6,
+          "max": 1
+        },
+        "6": {
+          "min": -2,
+          "max": 1
+        },
+        "7": {
+          "min": -2,
+          "max": 1
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 4,
+        "2": 10,
+        "3": 2,
+        "4": 4,
+        "5": 2,
+        "6": 2,
+        "7": 1
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 0,
+        "2": 1,
+        "3": -1,
+        "4": 0,
+        "5": 0,
+        "6": 1,
+        "7": -1
+      },
+      "inferred_track_ids": [],
+      "total_tracks": 25,
+      "measured": 25,
+      "tracks": [
+        {
+          "id": "c001",
+          "lane": 2,
+          "src": "measured",
+          "x": 93.797,
+          "y": -14.541,
+          "sigma_m": 0.938
+        },
+        {
+          "id": "c002",
+          "lane": 3,
+          "src": "measured",
+          "x": 125.357,
+          "y": -18.42,
+          "sigma_m": 1.254
+        },
+        {
+          "id": "c003",
+          "lane": 2,
+          "src": "measured",
+          "x": 131.838,
+          "y": -14.768,
+          "sigma_m": 1.318
+        },
+        {
+          "id": "c004",
+          "lane": 4,
+          "src": "measured",
+          "x": 146.376,
+          "y": -23.304,
+          "sigma_m": 10.248
+        },
+        {
+          "id": "c005",
+          "lane": 1,
+          "src": "measured",
+          "x": 148.173,
+          "y": -11.363,
+          "sigma_m": 1.482
+        },
+        {
+          "id": "c006",
+          "lane": 2,
+          "src": "measured",
+          "x": 158.103,
+          "y": -14.776,
+          "sigma_m": 1.581
+        },
+        {
+          "id": "c007",
+          "lane": 3,
+          "src": "measured",
+          "x": 164.974,
+          "y": -17.895,
+          "sigma_m": 1.65
+        },
+        {
+          "id": "c008",
+          "lane": 2,
+          "src": "measured",
+          "x": 178.032,
+          "y": -14.864,
+          "sigma_m": 1.78
+        },
+        {
+          "id": "c009",
+          "lane": 2,
+          "src": "measured",
+          "x": 199.152,
+          "y": -14.395,
+          "sigma_m": 1.992
+        },
+        {
+          "id": "c010",
+          "lane": 1,
+          "src": "measured",
+          "x": 216.578,
+          "y": -10.853,
+          "sigma_m": 2.166
+        },
+        {
+          "id": "c011",
+          "lane": 2,
+          "src": "measured",
+          "x": 218.099,
+          "y": -14.154,
+          "sigma_m": 2.557
+        },
+        {
+          "id": "c012",
+          "lane": 2,
+          "src": "measured",
+          "x": 246.847,
+          "y": -14.15,
+          "sigma_m": 2.468
+        },
+        {
+          "id": "c013",
+          "lane": 6,
+          "src": "measured",
+          "x": 251.47,
+          "y": -28.686,
+          "sigma_m": 2.515
+        },
+        {
+          "id": "c014",
+          "lane": 2,
+          "src": "measured",
+          "x": 277.736,
+          "y": -13.826,
+          "sigma_m": 2.777
+        },
+        {
+          "id": "c015",
+          "lane": 1,
+          "src": "measured",
+          "x": 304.057,
+          "y": -11.008,
+          "sigma_m": 3.041
+        },
+        {
+          "id": "c016",
+          "lane": 5,
+          "src": "measured",
+          "x": 330.18,
+          "y": -25.596,
+          "sigma_m": 3.302
+        },
+        {
+          "id": "c017",
+          "lane": 4,
+          "src": "measured",
+          "x": 433.911,
+          "y": -21.934,
+          "sigma_m": 5.603
+        },
+        {
+          "id": "c018",
+          "lane": 2,
+          "src": "measured",
+          "x": 451.474,
+          "y": -15.79,
+          "sigma_m": 8.479
+        },
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 489.289,
+          "y": -14.377,
+          "sigma_m": 7.535
+        },
+        {
+          "id": "c020",
+          "lane": 4,
+          "src": "measured",
+          "x": 530.594,
+          "y": -22.895,
+          "sigma_m": 8.064
+        },
+        {
+          "id": "c021",
+          "lane": 4,
+          "src": "measured",
+          "x": 640.641,
+          "y": -21.697,
+          "sigma_m": 14.009
+        },
+        {
+          "id": "c022",
+          "lane": 7,
+          "src": "measured",
+          "x": 787.432,
+          "y": -30.188,
+          "sigma_m": 19.86
+        },
+        {
+          "id": "c023",
+          "lane": 5,
+          "src": "measured",
+          "x": 848.461,
+          "y": -23.655,
+          "sigma_m": 20.587
+        },
+        {
+          "id": "c024",
+          "lane": 6,
+          "src": "measured",
+          "x": 894.149,
+          "y": -27.272,
+          "sigma_m": 25.745
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 10,
+      "f": 125,
+      "source_t": 10.0,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 6,
+          "3": 6,
+          "4": 2,
+          "5": 1,
+          "6": 1,
+          "7": 1
+        },
+        "total": 23,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 3
+          },
+          "1": {
+            "min": 3,
+            "max": 8
+          },
+          "2": {
+            "min": 5,
+            "max": 12
+          },
+          "3": {
+            "min": 4,
+            "max": 8
+          },
+          "4": {
+            "min": 1,
+            "max": 6
+          },
+          "5": {
+            "min": 0,
+            "max": 3
+          },
+          "6": {
+            "min": 1,
+            "max": 3
+          },
+          "7": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 21,
+        "uncertain_silhouette_marks": [
+          22,
+          23
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "Unboxed horizon cars counted as silhouettes; identity unassigned. Two side-by-side distant trucks are distinct.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              102.0,
+              201.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "stopped white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              8.0,
+              200.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "clipped dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              95.0,
+              131.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              62.5,
+              118.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              175.0,
+              117.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "median-side car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              156.25,
+              87.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              154.5,
+              71.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              119.75,
+              83.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              103.25,
+              72.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              150.0,
+              38.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "left distant truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              170.25,
+              42.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4,
+              5
+            ],
+            "description": "right distant truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              203.0,
+              26.25
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              4,
+              5,
+              6
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              237.5,
+              6.5
+            ],
+            "lane": 7,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              202.5,
+              61.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              228.0,
+              31.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              242.5,
+              34.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              259.5,
+              36.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              265.0,
+              27.75
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              268.25,
+              21.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              251.5,
+              22.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              238.25,
+              26.0
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              277.0,
+              13.75
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "small unboxed horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              265.0,
+              9.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small unboxed horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 5,
+        "2": 7,
+        "3": 5,
+        "4": 3,
+        "5": 2,
+        "6": 2,
+        "7": 1
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": -1,
+        "2": 1,
+        "3": -1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_total": 2,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -3,
+          "max": 0
+        },
+        "1": {
+          "min": -3,
+          "max": 2
+        },
+        "2": {
+          "min": -5,
+          "max": 2
+        },
+        "3": {
+          "min": -3,
+          "max": 1
+        },
+        "4": {
+          "min": -3,
+          "max": 2
+        },
+        "5": {
+          "min": -1,
+          "max": 2
+        },
+        "6": {
+          "min": -1,
+          "max": 1
+        },
+        "7": {
+          "min": 0,
+          "max": 1
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 5,
+        "2": 5,
+        "3": 4,
+        "4": 3,
+        "5": 2,
+        "6": 1,
+        "7": 0
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": -1,
+        "2": -1,
+        "3": -2,
+        "4": 1,
+        "5": 1,
+        "6": 0,
+        "7": -1
+      },
+      "inferred_track_ids": [
+        "c038",
+        "c060",
+        "c066",
+        "c067",
+        "c068"
+      ],
+      "total_tracks": 25,
+      "measured": 20,
+      "tracks": [
+        {
+          "id": "c010",
+          "lane": 2,
+          "src": "measured",
+          "x": 79.994,
+          "y": -14.527,
+          "sigma_m": 0.8
+        },
+        {
+          "id": "c012",
+          "lane": 3,
+          "src": "measured",
+          "x": 128.515,
+          "y": -17.777,
+          "sigma_m": 1.285
+        },
+        {
+          "id": "c014",
+          "lane": 2,
+          "src": "measured",
+          "x": 168.583,
+          "y": -14.85,
+          "sigma_m": 1.686
+        },
+        {
+          "id": "c017",
+          "lane": 4,
+          "src": "measured",
+          "x": 196.181,
+          "y": -21.86,
+          "sigma_m": 1.962
+        },
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 227.7,
+          "y": -14.254,
+          "sigma_m": 2.277
+        },
+        {
+          "id": "c020",
+          "lane": 6,
+          "src": "measured",
+          "x": 318.352,
+          "y": -27.033,
+          "sigma_m": 4.038
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 555.694,
+          "y": -22.357,
+          "sigma_m": 9.176
+        },
+        {
+          "id": "c030",
+          "lane": 5,
+          "src": "measured",
+          "x": 425.866,
+          "y": -24.778,
+          "sigma_m": 5.187
+        },
+        {
+          "id": "c038",
+          "lane": 2,
+          "src": "interpolated",
+          "x": 114.7,
+          "y": -14.368,
+          "sigma_m": 1.517
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 346.167,
+          "y": -10.976,
+          "sigma_m": 3.462
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 362.9,
+          "y": -14.006,
+          "sigma_m": 3.767
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 389.201,
+          "y": -18.18,
+          "sigma_m": 4.333
+        },
+        {
+          "id": "c051",
+          "lane": 2,
+          "src": "measured",
+          "x": 447.628,
+          "y": -14.734,
+          "sigma_m": 5.731
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 297.723,
+          "y": -22.318,
+          "sigma_m": 2.977
+        },
+        {
+          "id": "c054",
+          "lane": 3,
+          "src": "measured",
+          "x": 196.53,
+          "y": -17.275,
+          "sigma_m": 1.965
+        },
+        {
+          "id": "c059",
+          "lane": 1,
+          "src": "measured",
+          "x": 467.304,
+          "y": -11.367,
+          "sigma_m": 6.246
+        },
+        {
+          "id": "c060",
+          "lane": 2,
+          "src": "interpolated",
+          "x": 450.677,
+          "y": -12.699,
+          "sigma_m": 21.508
+        },
+        {
+          "id": "c061",
+          "lane": 1,
+          "src": "measured",
+          "x": 130.708,
+          "y": -10.761,
+          "sigma_m": 1.307
+        },
+        {
+          "id": "c063",
+          "lane": 3,
+          "src": "measured",
+          "x": 176.318,
+          "y": -18.742,
+          "sigma_m": 1.763
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 399.741,
+          "y": -10.91,
+          "sigma_m": 4.57
+        },
+        {
+          "id": "c065",
+          "lane": 5,
+          "src": "measured",
+          "x": 362.236,
+          "y": -25.26,
+          "sigma_m": 3.849
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 429.881,
+          "y": -18.504,
+          "sigma_m": 19.31
+        },
+        {
+          "id": "c067",
+          "lane": 7,
+          "src": "interpolated",
+          "x": 277.392,
+          "y": -30.011,
+          "sigma_m": 8.13
+        },
+        {
+          "id": "c068",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 522.69,
+          "y": -29.314,
+          "sigma_m": 28.924
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 15,
+      "f": 188,
+      "source_t": 15.04,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 6,
+          "3": 5,
+          "4": 4,
+          "5": 0,
+          "6": 2,
+          "7": 0
+        },
+        "total": 23,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 2
+          },
+          "1": {
+            "min": 4,
+            "max": 10
+          },
+          "2": {
+            "min": 4,
+            "max": 11
+          },
+          "3": {
+            "min": 3,
+            "max": 10
+          },
+          "4": {
+            "min": 1,
+            "max": 6
+          },
+          "5": {
+            "min": 0,
+            "max": 4
+          },
+          "6": {
+            "min": 2,
+            "max": 4
+          },
+          "7": {
+            "min": 0,
+            "max": 2
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 21,
+        "uncertain_silhouette_marks": [
+          22,
+          23
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "Occlusion near the van and overlapping distant boxes. First two rows of horizon texture are not countable.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              102.0,
+              201.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "stopped white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              5.0,
+              152.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "clipped van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              58.75,
+              156.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              132.5,
+              108.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              185.5,
+              75.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              209.5,
+              81.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              229.5,
+              65.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              238.0,
+              56.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              208.75,
+              59.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              185.0,
+              52.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              174.25,
+              59.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              52.25,
+              67.5
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              109.25,
+              70.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "large truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              145.0,
+              41.0
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              215.0,
+              24.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              248.75,
+              10.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              268.25,
+              14.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              242.0,
+              23.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              253.75,
+              24.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              266.25,
+              27.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "yellow car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              281.5,
+              15.75
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              272.5,
+              7.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "small horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              260.0,
+              7.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "small horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 7,
+        "2": 6,
+        "3": 5,
+        "4": 5,
+        "5": 0,
+        "6": 2,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 1,
+        "5": 0,
+        "6": 0,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_total": 2,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -2,
+          "max": 0
+        },
+        "1": {
+          "min": -3,
+          "max": 3
+        },
+        "2": {
+          "min": -5,
+          "max": 2
+        },
+        "3": {
+          "min": -5,
+          "max": 2
+        },
+        "4": {
+          "min": -1,
+          "max": 4
+        },
+        "5": {
+          "min": -4,
+          "max": 0
+        },
+        "6": {
+          "min": -2,
+          "max": 0
+        },
+        "7": {
+          "min": -2,
+          "max": 0
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 6,
+        "3": 4,
+        "4": 4,
+        "5": 0,
+        "6": 2,
+        "7": 0
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": -1,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+      },
+      "inferred_track_ids": [
+        "c075",
+        "c078",
+        "c083"
+      ],
+      "total_tracks": 25,
+      "measured": 22,
+      "tracks": [
+        {
+          "id": "c014",
+          "lane": 2,
+          "src": "measured",
+          "x": 101.546,
+          "y": -14.636,
+          "sigma_m": 1.015
+        },
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 140.478,
+          "y": -14.432,
+          "sigma_m": 1.405
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 433.799,
+          "y": -22.238,
+          "sigma_m": 6.359
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "measured",
+          "x": 307.282,
+          "y": -27.162,
+          "sigma_m": 3.073
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 178.19,
+          "y": -10.894,
+          "sigma_m": 1.782
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 191.269,
+          "y": -13.916,
+          "sigma_m": 1.913
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 231.431,
+          "y": -17.603,
+          "sigma_m": 2.314
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 205.837,
+          "y": -21.932,
+          "sigma_m": 2.058
+        },
+        {
+          "id": "c059",
+          "lane": 1,
+          "src": "measured",
+          "x": 247.353,
+          "y": -10.995,
+          "sigma_m": 2.474
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 212.825,
+          "y": -10.601,
+          "sigma_m": 2.128
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 262.666,
+          "y": -18.503,
+          "sigma_m": 2.627
+        },
+        {
+          "id": "c068",
+          "lane": 6,
+          "src": "measured",
+          "x": 367.102,
+          "y": -29.637,
+          "sigma_m": 4.647
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 445.38,
+          "y": -14.599,
+          "sigma_m": 5.673
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 244.466,
+          "y": -14.572,
+          "sigma_m": 2.445
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 478.025,
+          "y": -18.127,
+          "sigma_m": 6.535
+        },
+        {
+          "id": "c075",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 644.902,
+          "y": -22.573,
+          "sigma_m": 43.416
+        },
+        {
+          "id": "c076",
+          "lane": 4,
+          "src": "measured",
+          "x": 743.468,
+          "y": -22.539,
+          "sigma_m": 15.808
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 593.102,
+          "y": -10.821,
+          "sigma_m": 10.06
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 714.847,
+          "y": -12.365,
+          "sigma_m": 53.426
+        },
+        {
+          "id": "c080",
+          "lane": 4,
+          "src": "measured",
+          "x": 535.567,
+          "y": -20.924,
+          "sigma_m": 8.203
+        },
+        {
+          "id": "c081",
+          "lane": 3,
+          "src": "measured",
+          "x": 804.897,
+          "y": -19.076,
+          "sigma_m": 18.528
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 642.515,
+          "y": -15.266,
+          "sigma_m": 11.806
+        },
+        {
+          "id": "c083",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 523.789,
+          "y": -19.582,
+          "sigma_m": 28.594
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 400.36724028291565,
+          "y": -10.924612139322344,
+          "sigma_m": 5.610287448211526
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 17,
+      "f": 212,
+      "source_t": 16.96,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 7,
+          "3": 4,
+          "4": 5,
+          "5": 1,
+          "6": 3,
+          "7": 0
+        },
+        "total": 26,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 1
+          },
+          "1": {
+            "min": 5,
+            "max": 8
+          },
+          "2": {
+            "min": 5,
+            "max": 10
+          },
+          "3": {
+            "min": 2,
+            "max": 9
+          },
+          "4": {
+            "min": 2,
+            "max": 7
+          },
+          "5": {
+            "min": 1,
+            "max": 4
+          },
+          "6": {
+            "min": 3,
+            "max": 3
+          },
+          "7": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 23,
+        "uncertain_silhouette_marks": [
+          24,
+          25,
+          26
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "The left-edge sliver is counted once. Yellow is visible well before impact. Cyan car overlaps the near large truck.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              102.0,
+              201.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "stopped white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              84.25,
+              143.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "partly occluded car beside van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              1.0,
+              233.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "clipped near car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              148.0,
+              99.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              185.75,
+              108.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              209.75,
+              88.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              217.25,
+              75.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              171.25,
+              79.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              139.0,
+              80.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              150.75,
+              69.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              3.25,
+              85.0
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "clipped outer truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              72.75,
+              88.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "large truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              62.5,
+              80.25
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "car beside truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              102.75,
+              53.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              123.25,
+              47.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              203.75,
+              30.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              218.75,
+              26.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              231.0,
+              25.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              244.5,
+              31.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              251.5,
+              43.75
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "yellow car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              259.25,
+              25.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              276.25,
+              21.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              263.75,
+              16.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 24,
+            "anchor_px": [
+              243.25,
+              13.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "partly clipped distant truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 25,
+            "anchor_px": [
+              253.5,
+              9.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "top green truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 26,
+            "anchor_px": [
+              263.25,
+              10.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small van behind van",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 7,
+        "2": 6,
+        "3": 6,
+        "4": 5,
+        "5": 1,
+        "6": 4,
+        "7": 2
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 1,
+        "2": -1,
+        "3": 2,
+        "4": 0,
+        "5": 0,
+        "6": 1,
+        "7": 2
+      },
+      "delta_tracks_minus_eye_total": 5,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -1,
+          "max": 0
+        },
+        "1": {
+          "min": -1,
+          "max": 2
+        },
+        "2": {
+          "min": -4,
+          "max": 1
+        },
+        "3": {
+          "min": -3,
+          "max": 4
+        },
+        "4": {
+          "min": -2,
+          "max": 3
+        },
+        "5": {
+          "min": -3,
+          "max": 0
+        },
+        "6": {
+          "min": 1,
+          "max": 1
+        },
+        "7": {
+          "min": 2,
+          "max": 2
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 7,
+        "2": 6,
+        "3": 5,
+        "4": 4,
+        "5": 1,
+        "6": 1,
+        "7": 1
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 1,
+        "2": -1,
+        "3": 1,
+        "4": -1,
+        "5": 0,
+        "6": -2,
+        "7": 1
+      },
+      "inferred_track_ids": [
+        "c030",
+        "c083",
+        "c084",
+        "c086",
+        "c092",
+        "c094"
+      ],
+      "total_tracks": 31,
+      "measured": 25,
+      "tracks": [
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 111.136,
+          "y": -14.493,
+          "sigma_m": 1.111
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 386.869,
+          "y": -22.574,
+          "sigma_m": 5.276
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 263.35,
+          "y": -28.414,
+          "sigma_m": 7.193
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 141.069,
+          "y": -10.925,
+          "sigma_m": 1.411
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 152.048,
+          "y": -14.153,
+          "sigma_m": 1.52
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 184.937,
+          "y": -17.643,
+          "sigma_m": 1.849
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 174.204,
+          "y": -21.87,
+          "sigma_m": 1.742
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 170.365,
+          "y": -10.518,
+          "sigma_m": 1.704
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 209.843,
+          "y": -18.387,
+          "sigma_m": 2.098
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 380.657,
+          "y": -14.434,
+          "sigma_m": 4.145
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 184.214,
+          "y": -14.722,
+          "sigma_m": 1.842
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 413.399,
+          "y": -18.227,
+          "sigma_m": 4.888
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 488.767,
+          "y": -10.689,
+          "sigma_m": 6.832
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 609.45,
+          "y": -11.247,
+          "sigma_m": 11.244
+        },
+        {
+          "id": "c080",
+          "lane": 4,
+          "src": "measured",
+          "x": 459.091,
+          "y": -23.523,
+          "sigma_m": 6.028
+        },
+        {
+          "id": "c081",
+          "lane": 3,
+          "src": "measured",
+          "x": 723.656,
+          "y": -18.505,
+          "sigma_m": 14.976
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 582.184,
+          "y": -15.416,
+          "sigma_m": 9.911
+        },
+        {
+          "id": "c083",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 487.807,
+          "y": -23.21,
+          "sigma_m": 24.97
+        },
+        {
+          "id": "c084",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 216.302,
+          "y": -27.688,
+          "sigma_m": 5.153
+        },
+        {
+          "id": "c086",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 182.877,
+          "y": -16.25,
+          "sigma_m": 3.92
+        },
+        {
+          "id": "c087",
+          "lane": 2,
+          "src": "measured",
+          "x": 472.697,
+          "y": -14.311,
+          "sigma_m": 6.918
+        },
+        {
+          "id": "c088",
+          "lane": 4,
+          "src": "measured",
+          "x": 504.884,
+          "y": -23.111,
+          "sigma_m": 7.29
+        },
+        {
+          "id": "c090",
+          "lane": 5,
+          "src": "measured",
+          "x": 188.86,
+          "y": -25.277,
+          "sigma_m": 1.889
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "measured",
+          "x": 193.962,
+          "y": -10.937,
+          "sigma_m": 1.94
+        },
+        {
+          "id": "c092",
+          "lane": 7,
+          "src": "interpolated",
+          "x": 242.198,
+          "y": -30.439,
+          "sigma_m": 6.234
+        },
+        {
+          "id": "c094",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 494.311,
+          "y": -27.968,
+          "sigma_m": 25.782
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 630.849,
+          "y": -18.167,
+          "sigma_m": 11.535
+        },
+        {
+          "id": "c096",
+          "lane": 7,
+          "src": "measured",
+          "x": 996.725,
+          "y": -31.026,
+          "sigma_m": 33.311
+        },
+        {
+          "id": "c097",
+          "lane": 6,
+          "src": "measured",
+          "x": 287.0,
+          "y": -28.27,
+          "sigma_m": 2.87
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 298.00965129261033,
+          "y": -10.801826115812228,
+          "sigma_m": 3.1083413292240123
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 17.04,
+      "f": 213,
+      "source_t": 17.04,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 6,
+          "3": 4,
+          "4": 5,
+          "5": 1,
+          "6": 3,
+          "7": 0
+        },
+        "total": 25,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 1
+          },
+          "1": {
+            "min": 5,
+            "max": 8
+          },
+          "2": {
+            "min": 4,
+            "max": 9
+          },
+          "3": {
+            "min": 2,
+            "max": 9
+          },
+          "4": {
+            "min": 2,
+            "max": 7
+          },
+          "5": {
+            "min": 1,
+            "max": 4
+          },
+          "6": {
+            "min": 3,
+            "max": 3
+          },
+          "7": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 22,
+        "uncertain_silhouette_marks": [
+          23,
+          24,
+          25
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "The near left-edge sliver visible at f212 has left the crop. Other counts use f213 source itself.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              102.0,
+              201.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "stopped white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              82.5,
+              145.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "partly occluded car beside van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              147.25,
+              100.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              184.5,
+              109.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              207.75,
+              88.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              216.75,
+              75.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              170.25,
+              79.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              138.0,
+              81.0
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              150.0,
+              69.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              2.5,
+              85.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "clipped outer truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              71.75,
+              90.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "large truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              61.5,
+              81.25
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "car beside truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              101.75,
+              54.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              122.75,
+              48.5
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              203.25,
+              31.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              218.25,
+              27.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              230.5,
+              25.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              243.75,
+              31.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              250.75,
+              44.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "yellow car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              259.0,
+              26.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              275.5,
+              21.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              263.25,
+              16.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              242.5,
+              13.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "partly clipped distant truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 24,
+            "anchor_px": [
+              253.0,
+              9.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "top green truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 25,
+            "anchor_px": [
+              263.0,
+              11.0
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small van behind van",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 7,
+        "2": 6,
+        "3": 6,
+        "4": 4,
+        "5": 2,
+        "6": 4,
+        "7": 2
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 1,
+        "2": 0,
+        "3": 2,
+        "4": -1,
+        "5": 1,
+        "6": 1,
+        "7": 2
+      },
+      "delta_tracks_minus_eye_total": 6,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -1,
+          "max": 0
+        },
+        "1": {
+          "min": -1,
+          "max": 2
+        },
+        "2": {
+          "min": -3,
+          "max": 2
+        },
+        "3": {
+          "min": -3,
+          "max": 4
+        },
+        "4": {
+          "min": -3,
+          "max": 2
+        },
+        "5": {
+          "min": -2,
+          "max": 1
+        },
+        "6": {
+          "min": 1,
+          "max": 1
+        },
+        "7": {
+          "min": 2,
+          "max": 2
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 7,
+        "2": 6,
+        "3": 5,
+        "4": 3,
+        "5": 2,
+        "6": 2,
+        "7": 2
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 1,
+        "2": 0,
+        "3": 1,
+        "4": -2,
+        "5": 1,
+        "6": -1,
+        "7": 2
+      },
+      "inferred_track_ids": [
+        "c083",
+        "c084",
+        "c086",
+        "c094"
+      ],
+      "total_tracks": 31,
+      "measured": 27,
+      "tracks": [
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 109.911,
+          "y": -14.492,
+          "sigma_m": 1.099
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 384.84,
+          "y": -22.575,
+          "sigma_m": 4.236
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "measured",
+          "x": 261.612,
+          "y": -28.42,
+          "sigma_m": 2.616
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 139.796,
+          "y": -10.92,
+          "sigma_m": 1.398
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 150.548,
+          "y": -14.174,
+          "sigma_m": 1.505
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 183.09,
+          "y": -17.649,
+          "sigma_m": 1.831
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 172.94,
+          "y": -21.87,
+          "sigma_m": 1.729
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 168.892,
+          "y": -10.523,
+          "sigma_m": 1.689
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 207.832,
+          "y": -18.382,
+          "sigma_m": 2.078
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 377.843,
+          "y": -14.432,
+          "sigma_m": 4.083
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 182.142,
+          "y": -14.729,
+          "sigma_m": 1.821
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 410.623,
+          "y": -18.221,
+          "sigma_m": 4.823
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 484.387,
+          "y": -10.685,
+          "sigma_m": 6.711
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 605.119,
+          "y": -11.202,
+          "sigma_m": 10.472
+        },
+        {
+          "id": "c080",
+          "lane": 5,
+          "src": "measured",
+          "x": 456.001,
+          "y": -23.631,
+          "sigma_m": 5.947
+        },
+        {
+          "id": "c081",
+          "lane": 3,
+          "src": "measured",
+          "x": 720.302,
+          "y": -18.492,
+          "sigma_m": 14.838
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 579.606,
+          "y": -15.418,
+          "sigma_m": 9.824
+        },
+        {
+          "id": "c083",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 486.247,
+          "y": -23.277,
+          "sigma_m": 24.813
+        },
+        {
+          "id": "c084",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 215.204,
+          "y": -27.74,
+          "sigma_m": 4.954
+        },
+        {
+          "id": "c086",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 181.013,
+          "y": -16.266,
+          "sigma_m": 3.7
+        },
+        {
+          "id": "c087",
+          "lane": 2,
+          "src": "measured",
+          "x": 470.167,
+          "y": -14.313,
+          "sigma_m": 6.844
+        },
+        {
+          "id": "c088",
+          "lane": 4,
+          "src": "measured",
+          "x": 501.494,
+          "y": -23.067,
+          "sigma_m": 7.193
+        },
+        {
+          "id": "c090",
+          "lane": 5,
+          "src": "measured",
+          "x": 186.896,
+          "y": -25.26,
+          "sigma_m": 1.869
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "measured",
+          "x": 192.401,
+          "y": -10.947,
+          "sigma_m": 1.924
+        },
+        {
+          "id": "c092",
+          "lane": 7,
+          "src": "measured",
+          "x": 241.048,
+          "y": -30.498,
+          "sigma_m": 2.41
+        },
+        {
+          "id": "c094",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 491.786,
+          "y": -27.993,
+          "sigma_m": 25.374
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 628.24,
+          "y": -18.169,
+          "sigma_m": 11.44
+        },
+        {
+          "id": "c096",
+          "lane": 7,
+          "src": "measured",
+          "x": 996.45,
+          "y": -31.081,
+          "sigma_m": 34.273
+        },
+        {
+          "id": "c097",
+          "lane": 6,
+          "src": "measured",
+          "x": 285.233,
+          "y": -28.305,
+          "sigma_m": 2.852
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 294.1554780045432,
+          "y": -10.825456206479494,
+          "sigma_m": 3.028460583402846
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 20,
+      "f": 250,
+      "source_t": 20.0,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 7,
+          "2": 6,
+          "3": 6,
+          "4": 4,
+          "5": 1,
+          "6": 2,
+          "7": 0
+        },
+        "total": 26,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 1
+          },
+          "1": {
+            "min": 6,
+            "max": 9
+          },
+          "2": {
+            "min": 4,
+            "max": 10
+          },
+          "3": {
+            "min": 3,
+            "max": 10
+          },
+          "4": {
+            "min": 2,
+            "max": 8
+          },
+          "5": {
+            "min": 0,
+            "max": 3
+          },
+          "6": {
+            "min": 2,
+            "max": 3
+          },
+          "7": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 22,
+        "uncertain_silhouette_marks": [
+          23,
+          24,
+          25,
+          26
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "Median-side car partly hidden behind stopped van. Horizon includes two unboxed small silhouettes.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              102.0,
+              201.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "stopped white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              40.75,
+              167.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light near car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              135.0,
+              151.75
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "partly occluded median car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              43.25,
+              129.0
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              79.5,
+              106.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              107.5,
+              122.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              176.75,
+              117.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              186.25,
+              100.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              207.25,
+              82.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "yellow car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              8.75,
+              121.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "clipped outer truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              42.5,
+              71.25
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              70.5,
+              61.25
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              174.75,
+              42.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "distant truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              203.0,
+              40.0
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              219.75,
+              46.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              239.5,
+              33.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              256.25,
+              37.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              270.75,
+              25.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              200.0,
+              26.25
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              4,
+              5,
+              6
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              210.25,
+              26.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              234.25,
+              22.25
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "unboxed distant truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              251.25,
+              19.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "distant green truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              254.0,
+              22.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 24,
+            "anchor_px": [
+              253.25,
+              15.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small van behind",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 25,
+            "anchor_px": [
+              260.0,
+              11.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 26,
+            "anchor_px": [
+              270.75,
+              11.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 8,
+        "2": 5,
+        "3": 6,
+        "4": 3,
+        "5": 3,
+        "6": 4,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 1,
+        "2": -1,
+        "3": 0,
+        "4": -1,
+        "5": 2,
+        "6": 2,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_total": 3,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -1,
+          "max": 0
+        },
+        "1": {
+          "min": -1,
+          "max": 2
+        },
+        "2": {
+          "min": -5,
+          "max": 1
+        },
+        "3": {
+          "min": -4,
+          "max": 3
+        },
+        "4": {
+          "min": -5,
+          "max": 1
+        },
+        "5": {
+          "min": 0,
+          "max": 3
+        },
+        "6": {
+          "min": 1,
+          "max": 2
+        },
+        "7": {
+          "min": 0,
+          "max": 0
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 5,
+        "3": 5,
+        "4": 2,
+        "5": 3,
+        "6": 2,
+        "7": 0
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": -1,
+        "2": -1,
+        "3": -1,
+        "4": -2,
+        "5": 2,
+        "6": 0,
+        "7": 0
+      },
+      "inferred_track_ids": [
+        "c050",
+        "c091",
+        "c094",
+        "c106",
+        "c107",
+        "c110"
+      ],
+      "total_tracks": 29,
+      "measured": 23,
+      "tracks": [
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 306.581,
+          "y": -22.452,
+          "sigma_m": 3.066
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "measured",
+          "x": 201.839,
+          "y": -28.515,
+          "sigma_m": 2.018
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 104.632,
+          "y": -11.051,
+          "sigma_m": 1.046
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 95.376,
+          "y": -14.73,
+          "sigma_m": 0.954
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 116.391,
+          "y": -17.357,
+          "sigma_m": 2.008
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 129.5,
+          "y": -22.072,
+          "sigma_m": 2.085
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 129.343,
+          "y": -10.582,
+          "sigma_m": 1.293
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 141.692,
+          "y": -18.223,
+          "sigma_m": 1.417
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 277.919,
+          "y": -14.411,
+          "sigma_m": 2.779
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 126.87,
+          "y": -14.795,
+          "sigma_m": 1.269
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 305.703,
+          "y": -17.883,
+          "sigma_m": 3.057
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 329.093,
+          "y": -11.014,
+          "sigma_m": 3.291
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 449.467,
+          "y": -10.894,
+          "sigma_m": 5.778
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 481.204,
+          "y": -15.089,
+          "sigma_m": 6.97
+        },
+        {
+          "id": "c083",
+          "lane": 5,
+          "src": "measured",
+          "x": 422.925,
+          "y": -24.752,
+          "sigma_m": 5.116
+        },
+        {
+          "id": "c086",
+          "lane": 3,
+          "src": "measured",
+          "x": 119.921,
+          "y": -17.857,
+          "sigma_m": 1.199
+        },
+        {
+          "id": "c087",
+          "lane": 2,
+          "src": "measured",
+          "x": 365.495,
+          "y": -14.523,
+          "sigma_m": 3.821
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 149.618,
+          "y": -11.269,
+          "sigma_m": 2.624
+        },
+        {
+          "id": "c094",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 390.565,
+          "y": -27.633,
+          "sigma_m": 15.966
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 532.923,
+          "y": -17.942,
+          "sigma_m": 9.207
+        },
+        {
+          "id": "c097",
+          "lane": 6,
+          "src": "measured",
+          "x": 224.903,
+          "y": -28.625,
+          "sigma_m": 2.249
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 435.624,
+          "y": -23.885,
+          "sigma_m": 5.428
+        },
+        {
+          "id": "c106",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 124.571,
+          "y": -21.6,
+          "sigma_m": 10.216
+        },
+        {
+          "id": "c107",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 1112.846,
+          "y": -27.554,
+          "sigma_m": 128.532
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 576.703,
+          "y": -17.438,
+          "sigma_m": 9.512
+        },
+        {
+          "id": "c109",
+          "lane": 5,
+          "src": "measured",
+          "x": 668.353,
+          "y": -25.195,
+          "sigma_m": 19.482
+        },
+        {
+          "id": "c110",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 373.323,
+          "y": -12.636,
+          "sigma_m": 15.201
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 174.35164910083358,
+          "y": -11.130830856572613,
+          "sigma_m": 1.063947414046307
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 24,
+      "f": 300,
+      "source_t": 24.0,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 2,
+          "3": 4,
+          "4": 1,
+          "5": 6,
+          "6": 0,
+          "7": 0
+        },
+        "total": 19,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 0
+          },
+          "1": {
+            "min": 6,
+            "max": 7
+          },
+          "2": {
+            "min": 2,
+            "max": 6
+          },
+          "3": {
+            "min": 1,
+            "max": 6
+          },
+          "4": {
+            "min": 0,
+            "max": 7
+          },
+          "5": {
+            "min": 2,
+            "max": 7
+          },
+          "6": {
+            "min": 0,
+            "max": 3
+          },
+          "7": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 16,
+        "uncertain_silhouette_marks": [
+          17,
+          18,
+          19
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 0,
+        "notes": "Yellow and white van count as two visible vehicles. Duplicate delivered footprint at the distant median car is not a second source car.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              74.75,
+              216.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "moving white van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              126.0,
+              186.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "yellow car overlapping van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              157.5,
+              140.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              170.0,
+              121.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              173.5,
+              80.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              133.0,
+              79.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              184.75,
+              61.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3
+            ],
+            "description": "red car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              215.75,
+              71.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              105.75,
+              67.0
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              163.25,
+              38.5
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              173.5,
+              36.75
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              248.5,
+              48.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              235.0,
+              35.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              235.25,
+              24.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              241.25,
+              20.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              216.5,
+              23.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "distant unboxed truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              233.5,
+              16.25
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              4,
+              5,
+              6
+            ],
+            "description": "green truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              241.75,
+              11.75
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              4,
+              5,
+              6
+            ],
+            "description": "top green truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              253.75,
+              6.0
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "top green truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 2,
+        "3": 4,
+        "4": 2,
+        "5": 4,
+        "6": 0,
+        "7": 1
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 1,
+        "5": -2,
+        "6": 0,
+        "7": 1
+      },
+      "delta_tracks_minus_eye_total": 0,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": 0,
+          "max": 0
+        },
+        "1": {
+          "min": -1,
+          "max": 0
+        },
+        "2": {
+          "min": -4,
+          "max": 0
+        },
+        "3": {
+          "min": -2,
+          "max": 3
+        },
+        "4": {
+          "min": -5,
+          "max": 2
+        },
+        "5": {
+          "min": -3,
+          "max": 2
+        },
+        "6": {
+          "min": -3,
+          "max": 0
+        },
+        "7": {
+          "min": 0,
+          "max": 1
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 2,
+        "3": 4,
+        "4": 2,
+        "5": 4,
+        "6": 0,
+        "7": 0
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 1,
+        "5": -2,
+        "6": 0,
+        "7": 0
+      },
+      "inferred_track_ids": [
+        "c114"
+      ],
+      "total_tracks": 19,
+      "measured": 18,
+      "tracks": [
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 212.499,
+          "y": -22.546,
+          "sigma_m": 2.125
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 111.588,
+          "y": -10.497,
+          "sigma_m": 1.116
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 184.205,
+          "y": -14.409,
+          "sigma_m": 1.842
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 184.358,
+          "y": -18.068,
+          "sigma_m": 1.844
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 196.013,
+          "y": -11.242,
+          "sigma_m": 1.96
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 277.838,
+          "y": -10.633,
+          "sigma_m": 2.778
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 349.122,
+          "y": -15.095,
+          "sigma_m": 3.926
+        },
+        {
+          "id": "c083",
+          "lane": 5,
+          "src": "measured",
+          "x": 325.134,
+          "y": -26.454,
+          "sigma_m": 3.251
+        },
+        {
+          "id": "c087",
+          "lane": 3,
+          "src": "measured",
+          "x": 225.996,
+          "y": -16.21,
+          "sigma_m": 2.26
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "measured",
+          "x": 127.291,
+          "y": -10.803,
+          "sigma_m": 1.273
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 419.226,
+          "y": -17.393,
+          "sigma_m": 6.278
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 344.339,
+          "y": -25.263,
+          "sigma_m": 3.443
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 462.422,
+          "y": -17.933,
+          "sigma_m": 6.116
+        },
+        {
+          "id": "c113",
+          "lane": 4,
+          "src": "measured",
+          "x": 732.8,
+          "y": -22.946,
+          "sigma_m": 17.592
+        },
+        {
+          "id": "c114",
+          "lane": 7,
+          "src": "interpolated",
+          "x": 763.956,
+          "y": -30.987,
+          "sigma_m": 60.654
+        },
+        {
+          "id": "c120",
+          "lane": 5,
+          "src": "measured",
+          "x": 918.218,
+          "y": -26.645,
+          "sigma_m": 33.045
+        },
+        {
+          "id": "c123",
+          "lane": 5,
+          "src": "measured",
+          "x": 723.204,
+          "y": -26.401,
+          "sigma_m": 17.65
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.0,
+          "y": -10.5,
+          "sigma_m": 1.2
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 75.24684481309986,
+          "y": -10.757361311996483,
+          "sigma_m": 0.65
+        }
+      ]
+    },
+    {
+      "requested_t": 28,
+      "f": 350,
+      "source_t": 28.0,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 4,
+          "3": 6,
+          "4": 3,
+          "5": 3,
+          "6": 1,
+          "7": 0
+        },
+        "total": 23,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 1
+          },
+          "1": {
+            "min": 4,
+            "max": 9
+          },
+          "2": {
+            "min": 2,
+            "max": 9
+          },
+          "3": {
+            "min": 4,
+            "max": 11
+          },
+          "4": {
+            "min": 1,
+            "max": 7
+          },
+          "5": {
+            "min": 0,
+            "max": 6
+          },
+          "6": {
+            "min": 1,
+            "max": 4
+          },
+          "7": {
+            "min": 0,
+            "max": 2
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 21,
+        "uncertain_silhouette_marks": [
+          22,
+          23
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 1,
+        "notes": "Yellow wreck has no independently separable visible silhouette; excluded from eye count but retained in world as occluded-rest. White van left clipped.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              23.5,
+              257.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "white van clipped at left",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              148.75,
+              148.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              168.25,
+              126.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              122.0,
+              113.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              94.5,
+              99.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "red car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              25.0,
+              129.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "left dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              15.0,
+              102.75
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              4,
+              5
+            ],
+            "description": "clipped truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              176.75,
+              95.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1,
+              2
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              221.5,
+              76.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              198.25,
+              60.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              196.75,
+              46.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              216.0,
+              43.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2,
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              207.25,
+              37.5
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              192.75,
+              36.75
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "unboxed truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              232.5,
+              29.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              233.0,
+              18.25
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              246.75,
+              13.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              265.25,
+              18.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "small car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              281.5,
+              14.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              86.0,
+              57.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              6
+            ],
+            "description": "outer light car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              117.25,
+              53.5
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5,
+              6
+            ],
+            "description": "outer dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              255.75,
+              7.0
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "small horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              270.25,
+              7.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "description": "small horizon car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 3,
+        "3": 6,
+        "4": 3,
+        "5": 3,
+        "6": 2,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": 0,
+        "2": -1,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 1,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_total": 0,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -1,
+          "max": 0
+        },
+        "1": {
+          "min": -3,
+          "max": 2
+        },
+        "2": {
+          "min": -6,
+          "max": 1
+        },
+        "3": {
+          "min": -5,
+          "max": 2
+        },
+        "4": {
+          "min": -4,
+          "max": 2
+        },
+        "5": {
+          "min": -3,
+          "max": 3
+        },
+        "6": {
+          "min": -2,
+          "max": 1
+        },
+        "7": {
+          "min": -2,
+          "max": 0
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 4,
+        "2": 3,
+        "3": 6,
+        "4": 2,
+        "5": 3,
+        "6": 2,
+        "7": 0
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": -2,
+        "2": -1,
+        "3": 0,
+        "4": -1,
+        "5": 0,
+        "6": 1,
+        "7": 0
+      },
+      "inferred_track_ids": [
+        "c123",
+        "c133",
+        "yellow-car"
+      ],
+      "total_tracks": 23,
+      "measured": 20,
+      "tracks": [
+        {
+          "id": "c026",
+          "lane": 5,
+          "src": "measured",
+          "x": 142.01,
+          "y": -23.595,
+          "sigma_m": 2.156
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 105.474,
+          "y": -10.395,
+          "sigma_m": 1.055
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 133.418,
+          "y": -14.493,
+          "sigma_m": 1.334
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 116.018,
+          "y": -18.283,
+          "sigma_m": 1.16
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 152.25,
+          "y": -12.004,
+          "sigma_m": 1.523
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 190.524,
+          "y": -10.491,
+          "sigma_m": 1.905
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 230.012,
+          "y": -14.951,
+          "sigma_m": 2.3
+        },
+        {
+          "id": "c083",
+          "lane": 6,
+          "src": "measured",
+          "x": 237.764,
+          "y": -28.368,
+          "sigma_m": 2.378
+        },
+        {
+          "id": "c087",
+          "lane": 3,
+          "src": "measured",
+          "x": 149.44,
+          "y": -18.127,
+          "sigma_m": 1.494
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 256.926,
+          "y": -26.682,
+          "sigma_m": 2.569
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 334.45,
+          "y": -17.659,
+          "sigma_m": 3.344
+        },
+        {
+          "id": "c113",
+          "lane": 4,
+          "src": "measured",
+          "x": 638.086,
+          "y": -22.325,
+          "sigma_m": 12.238
+        },
+        {
+          "id": "c123",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 526.241,
+          "y": -23.187,
+          "sigma_m": 28.86
+        },
+        {
+          "id": "c129",
+          "lane": 3,
+          "src": "measured",
+          "x": 281.504,
+          "y": -18.029,
+          "sigma_m": 2.815
+        },
+        {
+          "id": "c130",
+          "lane": 4,
+          "src": "measured",
+          "x": 410.432,
+          "y": -22.256,
+          "sigma_m": 5.671
+        },
+        {
+          "id": "c131",
+          "lane": 3,
+          "src": "measured",
+          "x": 410.876,
+          "y": -18.155,
+          "sigma_m": 4.829
+        },
+        {
+          "id": "c132",
+          "lane": 2,
+          "src": "measured",
+          "x": 551.098,
+          "y": -14.662,
+          "sigma_m": 8.686
+        },
+        {
+          "id": "c133",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 595.283,
+          "y": -10.954,
+          "sigma_m": 36.887
+        },
+        {
+          "id": "c134",
+          "lane": 3,
+          "src": "measured",
+          "x": 623.865,
+          "y": -17.215,
+          "sigma_m": 11.832
+        },
+        {
+          "id": "c142",
+          "lane": 5,
+          "src": "measured",
+          "x": 633.354,
+          "y": -24.997,
+          "sigma_m": 14.845
+        },
+        {
+          "id": "c143",
+          "lane": 6,
+          "src": "measured",
+          "x": 618.152,
+          "y": -26.892,
+          "sigma_m": 14.633
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "occluded-rest",
+          "x": 74.15,
+          "y": -12.65,
+          "sigma_m": 3.775
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 62.60445604749443,
+          "y": -11.617603505022167,
+          "sigma_m": 0.65
+        }
+      ]
+    },
+    {
+      "requested_t": 31.92,
+      "f": 399,
+      "source_t": 31.92,
+      "eye": {
+        "per_lane": {
+          "0": 0,
+          "1": 6,
+          "2": 5,
+          "3": 5,
+          "4": 5,
+          "5": 2,
+          "6": 1,
+          "7": 0
+        },
+        "total": 24,
+        "per_lane_assignment_bounds": {
+          "0": {
+            "min": 0,
+            "max": 2
+          },
+          "1": {
+            "min": 4,
+            "max": 8
+          },
+          "2": {
+            "min": 3,
+            "max": 8
+          },
+          "3": {
+            "min": 4,
+            "max": 10
+          },
+          "4": {
+            "min": 2,
+            "max": 6
+          },
+          "5": {
+            "min": 2,
+            "max": 6
+          },
+          "6": {
+            "min": 0,
+            "max": 1
+          },
+          "7": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        "count_excluding_uncertain_silhouettes": 20,
+        "uncertain_silhouette_marks": [
+          21,
+          22,
+          23,
+          24
+        ],
+        "count_interpretation": "Primary manual count of marked source silhouettes. Assignment bounds allow the same marks to change lanes; they are not statistical confidence intervals or a full-recall bound. Horizon separability can also change the total.",
+        "visible_only": true,
+        "hidden_retained_crash_vehicles": 1,
+        "notes": "Yellow wreck hidden; excluded from eye count. White van and leftmost car are clipped. Several horizon boxes overlap.",
+        "marks": [
+          {
+            "mark": 1,
+            "anchor_px": [
+              23.0,
+              255.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "white van clipped at left",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 2,
+            "anchor_px": [
+              146.0,
+              152.0
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 3,
+            "anchor_px": [
+              88.0,
+              137.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "white car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 4,
+            "anchor_px": [
+              130.5,
+              116.75
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 5,
+            "anchor_px": [
+              167.75,
+              124.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 6,
+            "anchor_px": [
+              198.75,
+              99.5
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              1
+            ],
+            "description": "dark car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 7,
+            "anchor_px": [
+              148.75,
+              88.0
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              2
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 8,
+            "anchor_px": [
+              135.0,
+              77.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 9,
+            "anchor_px": [
+              41.25,
+              85.25
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "outer car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 10,
+            "anchor_px": [
+              1.5,
+              138.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "clipped left car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": true,
+            "confidence": "clear"
+          },
+          {
+            "mark": 11,
+            "anchor_px": [
+              145.0,
+              58.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "unboxed truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 12,
+            "anchor_px": [
+              171.0,
+              59.75
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 13,
+            "anchor_px": [
+              165.75,
+              38.75
+            ],
+            "lane": 5,
+            "possible_lanes": [
+              5
+            ],
+            "description": "car beside truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 14,
+            "anchor_px": [
+              186.25,
+              42.0
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              4
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 15,
+            "anchor_px": [
+              198.25,
+              46.25
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              3
+            ],
+            "description": "small car",
+            "silhouette_separability_uncertain": false,
+            "horizon": false,
+            "clipped": false,
+            "confidence": "clear"
+          },
+          {
+            "mark": 16,
+            "anchor_px": [
+              212.5,
+              26.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "truck",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 17,
+            "anchor_px": [
+              228.25,
+              22.25
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 18,
+            "anchor_px": [
+              235.0,
+              27.0
+            ],
+            "lane": 3,
+            "possible_lanes": [
+              2,
+              3,
+              4
+            ],
+            "description": "small car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 19,
+            "anchor_px": [
+              249.0,
+              27.5
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 20,
+            "anchor_px": [
+              256.75,
+              24.25
+            ],
+            "lane": 2,
+            "possible_lanes": [
+              1,
+              2,
+              3
+            ],
+            "description": "car",
+            "silhouette_separability_uncertain": false,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 21,
+            "anchor_px": [
+              271.75,
+              22.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "small van",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 22,
+            "anchor_px": [
+              275.0,
+              23.25
+            ],
+            "lane": 1,
+            "possible_lanes": [
+              0,
+              1,
+              2
+            ],
+            "description": "overlapping small car",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 23,
+            "anchor_px": [
+              258.5,
+              10.5
+            ],
+            "lane": 4,
+            "possible_lanes": [
+              3,
+              4,
+              5
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          },
+          {
+            "mark": 24,
+            "anchor_px": [
+              238.0,
+              9.75
+            ],
+            "lane": 6,
+            "possible_lanes": [
+              5,
+              6,
+              7
+            ],
+            "description": "top-clipped truck",
+            "silhouette_separability_uncertain": true,
+            "horizon": true,
+            "clipped": false,
+            "confidence": "uncertain-lane"
+          }
+        ],
+        "residual": "Not a full-recall certificate: subpixel/fully occluded source traffic and exact horizon lane membership cannot be established from these images."
+      },
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 5,
+        "2": 4,
+        "3": 6,
+        "4": 5,
+        "5": 2,
+        "6": 0,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": -1,
+        "2": -1,
+        "3": 1,
+        "4": 0,
+        "5": 0,
+        "6": -1,
+        "7": 0
+      },
+      "delta_tracks_minus_eye_total": -2,
+      "delta_with_manual_lane_assignment_bounds": {
+        "0": {
+          "min": -2,
+          "max": 0
+        },
+        "1": {
+          "min": -3,
+          "max": 1
+        },
+        "2": {
+          "min": -4,
+          "max": 1
+        },
+        "3": {
+          "min": -4,
+          "max": 2
+        },
+        "4": {
+          "min": -1,
+          "max": 3
+        },
+        "5": {
+          "min": -4,
+          "max": 0
+        },
+        "6": {
+          "min": -1,
+          "max": 0
+        },
+        "7": {
+          "min": -1,
+          "max": 0
+        }
+      },
+      "measured_tracks_per_lane": {
+        "0": 0,
+        "1": 4,
+        "2": 4,
+        "3": 6,
+        "4": 5,
+        "5": 2,
+        "6": 0,
+        "7": 0
+      },
+      "delta_measured_tracks_minus_eye_per_lane": {
+        "0": 0,
+        "1": -2,
+        "2": -1,
+        "3": 1,
+        "4": 0,
+        "5": 0,
+        "6": -1,
+        "7": 0
+      },
+      "inferred_track_ids": [
+        "yellow-car"
+      ],
+      "total_tracks": 22,
+      "measured": 21,
+      "tracks": [
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 101.397,
+          "y": -10.391,
+          "sigma_m": 1.014
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 113.55,
+          "y": -14.518,
+          "sigma_m": 1.135
+        },
+        {
+          "id": "c077",
+          "lane": 2,
+          "src": "measured",
+          "x": 129.696,
+          "y": -13.602,
+          "sigma_m": 1.297
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 150.078,
+          "y": -10.664,
+          "sigma_m": 1.501
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 174.394,
+          "y": -25.433,
+          "sigma_m": 1.744
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 232.554,
+          "y": -18.158,
+          "sigma_m": 2.326
+        },
+        {
+          "id": "c113",
+          "lane": 4,
+          "src": "measured",
+          "x": 535.439,
+          "y": -22.37,
+          "sigma_m": 8.212
+        },
+        {
+          "id": "c123",
+          "lane": 4,
+          "src": "measured",
+          "x": 411.545,
+          "y": -22.541,
+          "sigma_m": 4.844
+        },
+        {
+          "id": "c129",
+          "lane": 3,
+          "src": "measured",
+          "x": 186.527,
+          "y": -18.391,
+          "sigma_m": 1.865
+        },
+        {
+          "id": "c130",
+          "lane": 4,
+          "src": "measured",
+          "x": 300.448,
+          "y": -21.663,
+          "sigma_m": 4.5
+        },
+        {
+          "id": "c131",
+          "lane": 3,
+          "src": "measured",
+          "x": 280.913,
+          "y": -17.831,
+          "sigma_m": 2.809
+        },
+        {
+          "id": "c132",
+          "lane": 2,
+          "src": "measured",
+          "x": 407.863,
+          "y": -14.576,
+          "sigma_m": 4.758
+        },
+        {
+          "id": "c134",
+          "lane": 3,
+          "src": "measured",
+          "x": 484.631,
+          "y": -17.753,
+          "sigma_m": 6.717
+        },
+        {
+          "id": "c147",
+          "lane": 4,
+          "src": "measured",
+          "x": 749.763,
+          "y": -22.333,
+          "sigma_m": 16.076
+        },
+        {
+          "id": "c154",
+          "lane": 3,
+          "src": "measured",
+          "x": 560.005,
+          "y": -19.508,
+          "sigma_m": 9.184
+        },
+        {
+          "id": "c155",
+          "lane": 5,
+          "src": "measured",
+          "x": 341.613,
+          "y": -26.124,
+          "sigma_m": 3.416
+        },
+        {
+          "id": "c157",
+          "lane": 3,
+          "src": "measured",
+          "x": 570.314,
+          "y": -16.812,
+          "sigma_m": 9.302
+        },
+        {
+          "id": "c158",
+          "lane": 1,
+          "src": "measured",
+          "x": 565.086,
+          "y": -10.567,
+          "sigma_m": 12.763
+        },
+        {
+          "id": "c161",
+          "lane": 2,
+          "src": "measured",
+          "x": 161.046,
+          "y": -14.765,
+          "sigma_m": 2.272
+        },
+        {
+          "id": "c166",
+          "lane": 4,
+          "src": "measured",
+          "x": 475.094,
+          "y": -22.537,
+          "sigma_m": 6.456
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "occluded-rest",
+          "x": 74.15,
+          "y": -12.65,
+          "sigma_m": 5.0
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 62.60445604749443,
+          "y": -11.647204422283487,
+          "sigma_m": 0.65
+        }
+      ]
+    }
+  ]
+}

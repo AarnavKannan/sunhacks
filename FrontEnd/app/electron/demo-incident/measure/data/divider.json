@@ -1,0 +1,342 @@
+{
+ "id": "median-divider",
+ "kind": "median_divider",
+ "label": "median verge (snow-covered grass)",
+ "footprint_W": [
+  [
+   55.5,
+   -8.637
+  ],
+  [
+   158.875,
+   -8.637
+  ],
+  [
+   158.875,
+   -5.025
+  ],
+  [
+   55.5,
+   -5.025
+  ]
+ ],
+ "face_Y_crash_side": -8.637,
+ "face_Y_far_side": -5.025,
+ "x_range": [
+  55.5,
+  158.875
+ ],
+ "height_m": 0.15,
+ "height_sigma_m": 0.15,
+ "material": "snow_covered_grass_verge",
+ "friction": 0.35,
+ "restitution": 0.05,
+ "stiffness_n_per_m": 300000.0,
+ "contact_params_source": "assumed (typical values for the material); not measured",
+ "immovable": true,
+ "velocity_mps": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "acceleration_mps2": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "source": "measured",
+ "sigma_m": 0.1,
+ "note": "At the crash site (X 56-159 m) the median is a vegetated verge: plowed snow on grass from the crash-side edge Y=-8.64 to Y=-6.94, bare grass to the far-side barrier (lit face foot Y=-4.72, right-carriageway side). No tall hedge/barrier is visible on the crash side. A low kerb or asphalt/verge lip is unresolved: the painted edge line (calibrated Y=-9.03) and ~0.26 m of asphalt are visible next to it, which bounds the verge height at its crash-side edge to <= 0.33 m; the height of the snow-covered vegetation itself is not resolvable from this single fixed view (height_m 0.15 is an estimate, height_sigma_m 0.15). Beyond X=159 m the verge ends and the median is paved, bordered on the crash side by a dark band (see related_objects: median-hedge-far). No tall 'bushy' hedge is visible next to the crash site itself: a vehicle leaving lane 1 to its left runs onto this soft verge first and reaches the barrier ~3.6 m further on.",
+ "snow_band_Y": [
+  -8.637,
+  -6.94
+ ],
+ "x_range_note": "visible extent of the verge: tile bottom edge at X=55.5 m (the median continues toward and past the camera, unseen), verge end at X=158.9 m (snow end 161.2, grass end 156.5). Anything drawn outside x_range is inferred.",
+ "related_objects": [
+  {
+   "id": "median-barrier",
+   "kind": "barrier",
+   "label": "median barrier (far side)",
+   "footprint_W": [
+    [
+     55.5,
+     -5.025
+    ],
+    [
+     320.0,
+     -5.025
+    ],
+    [
+     320.0,
+     -4.725
+    ],
+    [
+     55.5,
+     -4.725
+    ]
+   ],
+   "face_Y_crash_side": -5.025,
+   "face_Y_far_side": -4.725,
+   "x_range": [
+    55.5,
+    320.0
+   ],
+   "height_m": 0.536,
+   "height_sigma_m": 0.2,
+   "material": "concrete_barrier",
+   "friction": 0.5,
+   "restitution": 0.15,
+   "stiffness_n_per_m": 5000000.0,
+   "contact_params_source": "assumed (typical values for the material); not measured",
+   "immovable": true,
+   "velocity_mps": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "acceleration_mps2": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "source": "measured",
+   "sigma_m": 0.1,
+   "note": "Bright band Y -4.90..-4.72 on the road plane along the whole visible median (calibration line R_barrier Y=-4.80 is its centre). Read as the lit right-carriageway face of a barrier with its foot at Y=-4.72; the projected width gives height ~0.54 m (sigma 0.2). Thickness 0.3 m is assumed (the median-side face is hidden). Concrete vs steel is not resolvable at this resolution.",
+   "thickness_m": 0.3,
+   "thickness_source": "assumed"
+  },
+  {
+   "id": "median-hedge-far",
+   "kind": "other",
+   "label": "median hedge band (far section)",
+   "footprint_W": [
+    [
+     158.875,
+     -8.454
+    ],
+    [
+     320.0,
+     -8.454
+    ],
+    [
+     320.0,
+     -7.694
+    ],
+    [
+     158.875,
+     -7.694
+    ]
+   ],
+   "face_Y_crash_side": -8.454,
+   "face_Y_far_side": -7.694,
+   "x_range": [
+    158.875,
+    320.0
+   ],
+   "height_m": 0.5,
+   "height_sigma_m": 0.3,
+   "material": "hedge",
+   "friction": 0.4,
+   "restitution": 0.05,
+   "stiffness_n_per_m": 500000.0,
+   "contact_params_source": "assumed (typical values for the material); not measured",
+   "immovable": true,
+   "velocity_mps": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "acceleration_mps2": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "source": "inferred",
+   "sigma_m": 0.3,
+   "note": "Dark band Y -8.85..-7.69 (road-plane projection) on the crash side of the paved median beyond X=159 m; saturation 20 vs asphalt 4 and paved median 15: vegetation-like, probably a low hedge (could be a barrier in shade). Height assumed 0.5 m; its crash-side face is then at Y=-8.45. Far from the crash site (X~80 m).",
+   "projected_band_Y": [
+    -8.846,
+    -7.694
+   ]
+  }
+ ],
+ "paved_median_far": {
+  "x_range": [
+   158.875,
+   320.0
+  ],
+  "Y": [
+   -7.694,
+   -5.025
+  ],
+  "material": "paved (flat)",
+  "source": "measured",
+  "note": "flat light-grey strip between the hedge band and the barrier; not a collision object"
+ },
+ "measurements": {
+  "verge_bands": [
+   {
+    "X": [
+     58,
+     70
+    ],
+    "line": -8.980000000000013,
+    "verge_edge": -8.670761958956739,
+    "snow_grass": -6.775243045389712,
+    "barrier_band": [
+     -4.899573207572202,
+     -4.7286467669905266
+    ]
+   },
+   {
+    "X": [
+     70,
+     85
+    ],
+    "line": -8.990000000000013,
+    "verge_edge": -8.636817763447782,
+    "snow_grass": -6.601171349883143,
+    "barrier_band": [
+     -4.9001478236914675,
+     -4.724989176988705
+    ]
+   },
+   {
+    "X": [
+     85,
+     100
+    ],
+    "line": -8.980000000000013,
+    "verge_edge": -8.65260546684267,
+    "snow_grass": -6.82816350698477,
+    "barrier_band": [
+     -4.89858978703628,
+     -4.723819011449917
+    ]
+   },
+   {
+    "X": [
+     100,
+     115
+    ],
+    "line": -8.960000000000013,
+    "verge_edge": -8.554629021883033,
+    "snow_grass": -6.940378738045749,
+    "barrier_band": [
+     -4.9031041717530295,
+     -4.723175742626294
+    ]
+   },
+   {
+    "X": [
+     115,
+     130
+    ],
+    "line": -8.940000000000014,
+    "verge_edge": -8.575470482409022,
+    "snow_grass": -7.043845655918176,
+    "barrier_band": [
+     -4.888760657385092,
+     -4.723327346444234
+    ]
+   },
+   {
+    "X": [
+     130,
+     145
+    ],
+    "line": -8.970000000000013,
+    "verge_edge": -8.599748772755285,
+    "snow_grass": -6.958880649432596,
+    "barrier_band": [
+     -4.912345748543839,
+     -4.730653411150082
+    ]
+   },
+   {
+    "X": [
+     145,
+     158
+    ],
+    "line": -8.990000000000013,
+    "verge_edge": -8.695227465331573,
+    "snow_grass": -7.143113873601012,
+    "barrier_band": [
+     -4.908242426216702,
+     -4.738718422800406
+    ]
+   }
+  ],
+  "verge_end_X": {
+   "snow": 161.25,
+   "grass": 156.5
+  },
+  "far_bands": [
+   {
+    "X": [
+     170,
+     200
+    ],
+    "line": -9.060000000000011,
+    "crash_band": [
+     -8.917317651808276,
+     -7.784433647394219
+    ],
+    "far_band": [
+     -5.250113565921875,
+     -4.797432996034725
+    ],
+    "crash_band_sat": 23.29490089416504,
+    "asphalt_sat": 4.019059658050537,
+    "paved_sat": 12.679668426513672
+   },
+   {
+    "X": [
+     200,
+     240
+    ],
+    "line": -9.010000000000012,
+    "crash_band": [
+     -8.846420195996776,
+     -7.694435476660769
+    ],
+    "far_band": [
+     -5.242476617693994,
+     -4.782265892624958
+    ],
+    "crash_band_sat": 20.15221405029297,
+    "asphalt_sat": 4.384306907653809,
+    "paved_sat": 15.393881797790527
+   },
+   {
+    "X": [
+     240,
+     290
+    ],
+    "line": -8.940000000000014,
+    "crash_band": [
+     -8.758844833150524,
+     -7.636456073522609
+    ],
+    "far_band": [
+     -5.270161294341179,
+     -4.840422753691774
+    ],
+    "crash_band_sat": 17.948787689208984,
+    "asphalt_sat": 3.895993709564209,
+    "paved_sat": 17.652851104736328
+   }
+  ],
+  "edge_line_check": {
+   "profile_peak_Y": -8.98,
+   "calibration_Y": -9.031,
+   "note": "profile peak of the ~0.15 m wide paint; agrees with the calibrated line within 0.05 m"
+  },
+  "height_bound_at_verge_edge_m": 0.333,
+  "camera": {
+   "h_m": 8.615816794180304,
+   "cam_Y_m": -2.081971730369573
+  },
+  "method": "divider.py: road-plane resampling of data/br_bg.png with cam.py; half-level crossings of lateral grey/saturation profiles"
+ }
+}

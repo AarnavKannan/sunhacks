@@ -1,12 +1,14 @@
 """Per-frame pixel tracks -> metric world trajectories, kinematics and forces (frame W).
 
-Usage: python world_kinematics.py [--in data/tracks_px.json] [--out data/tracks_world.json] [--review review_world]
+Usage: python world_kinematics.py [--in data/tracks_px_clean.json] [--out data/tracks_world.json] [--review review_world]
+Clean-track input (clean_tracks.py: frames carry "world" = fitted cuboid centre [X, Y, yaw]) is processed by
+process_clean(); the legacy bbox path (process_track) is kept for old provisional files.
 Method: ground back-projection via cam.to_ground (bottom corners if present, else bbox bottom-edge
 contact point + class offset), per-track 2-D constant-acceleration Kalman/RTS smoother with full
 camera-derived measurement covariance, innovation-gated outliers, and adaptive event detection that
 injects velocity/acceleration jump noise (impact, hard braking) so sudden events are not smoothed away.
 """
-import argparse, json, math, os, sys
+import argparse, hashlib, json, math, os, sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +18,7 @@ import cam  # noqa: E402
 FPS = 12.5
 DT = 1.0 / FPS
 TILE_W, TILE_H = 479, 300
-IMPACT_F = 279          # 22.3 s
+IMPACT_F = 288          # provisional first contact (A4: frames 285-291); crash_pair.json is authoritative
 PIX_SIG = 1.5           # bbox edge noise (px)
 
 # class priors: length, width, height, length sigma, contact overhang (bbox bottom = nearest tyre contact)
@@ -143,7 +145,7 @@ def cv_blocks(dt):
     return F1, Q1
 
 
-def rts(f0, n, Z, Rs, valid, qx, qy, jumps, x0):
+def rts(f0, n, Z, Rs, valid, qx, qy, jumps, x0, initial_cov=None):
     """State [x,vx,ax,y,vy,ay]. jumps: dict k -> (sig_v, sig_a) extra process noise entering frame k."""
     F1, Q1 = cv_blocks(DT)
     F = np.zeros((6, 6)); F[:3, :3] = F1; F[3:, 3:] = F1
@@ -151,7 +153,8 @@ def rts(f0, n, Z, Rs, valid, qx, qy, jumps, x0):
     H = np.zeros((2, 6)); H[0, 0] = 1; H[1, 3] = 1
     xs_p = np.zeros((n, 6)); Ps_p = np.zeros((n, 6, 6)); xs = np.zeros((n, 6)); Ps = np.zeros((n, 6, 6))
     nis = np.full(n, np.nan); used = np.zeros(n, bool)
-    x = x0.copy(); P = np.diag([25.0, 100.0, 4.0, 1.0, 4.0, 1.0])
+    x = x0.copy()
+    P = np.diag([25.0, 100.0, 4.0, 1.0, 4.0, 1.0]) if initial_cov is None else initial_cov.copy()
     for k in range(n):
         if k > 0:
             Q = Qb.copy()
@@ -355,6 +358,160 @@ def process_track(tr, fps):
     return out, diag
 
 
+# ---------------------------------------------------------------- clean tracks (clean_tracks.py)
+CRASH_LINES = [cam.LINES[k] for k in ("L_edge_inner", "L_1_2", "L_2_3", "L_3_4", "L_4_5", "L_5_6", "L_edge_outer")]
+
+
+def lane_of(Y):
+    for i, yl in enumerate(CRASH_LINES):
+        if Y > yl:
+            return i
+    return 7
+
+
+def meas_sigma(X, fit=0.3):
+    """Ground-position noise of a fitted cuboid centre: ~1 px row error along the road, ~0.9 px across."""
+    k = 1.0 + 1.5 * max(0.0, fit or 0.0)
+    X = max(X, 40.0)
+    return max(0.2, k * X * X / (cam.f * cam.h)), max(0.08, 0.9 * k * X / cam.f)
+
+
+def process_clean(tr, fps, impact_f=IMPACT_F):
+    k = cls_key(tr.get("class"))
+    role = (tr.get("role") or "").lower()
+    crash = role in ("van", "yellow") or bool(tr.get("crash"))
+    frs = sorted(tr["frames"], key=lambda a: a["f"])
+    f0, f1 = int(frs[0]["f"]), int(frs[-1]["f"])
+    n = f1 - f0 + 1
+    Z = np.zeros((n, 2)); Rs = np.tile(np.eye(2) * 1e6, (n, 1, 1)); valid = np.zeros(n, bool)
+    srcs = ["interpolated"] * n
+    yaws = np.full(n, np.nan)
+    for fr in frs:
+        i = int(fr["f"]) - f0
+        X, Y, yaw = fr["world"]
+        if fr.get("src") == "measured":
+            sx, sy = meas_sigma(X, fr.get("fit_px"))
+            # partly out-of-tile boxes (leaving at the near edge) are less certain
+            bb = fr.get("bbox") or [1, 1, 1, 1]
+            if bb[0] <= 0.5 or bb[3] >= TILE_H - 1.5:
+                # A clipped edge does not measure the missing cuboid face. A
+                # twofold pixel-error multiplier still treated fitted range
+                # jumps as real hard braking/reversal on exit (e.g. c073).
+                # Include the missing body extent as measurement uncertainty;
+                # retain the raw fit and let the observed approach constrain it.
+                dims = tr.get('dims_m') or [PRIOR[k]['L'], PRIOR[k]['W'], PRIOR[k]['H']]
+                lost = max(0., -bb[0])/max(bb[2]-bb[0],1.)
+                lost += max(0., bb[3]-(TILE_H-1))/max(bb[3]-bb[1],1.)
+                sx = max(2*sx, dims[0]*(.5+2*lost))
+                sy = max(2*sy, dims[1]*(.2+lost))
+            slope=(Y-cam.cy0)/max(X,40.)
+            Z[i] = (X, Y); Rs[i] = np.array([[sx*sx,slope*sx*sx],[slope*sx*sx,sy*sy+(slope*sx)**2]])
+            valid[i] = True; srcs[i] = "measured"
+            yaws[i] = yaw
+        else:
+            Z[i] = (X, Y)
+    vi = np.where(valid)[0]
+    if len(vi) < 2:
+        return None
+    # A short horizon least-squares slope can be +/-120 m/s from <1 px of
+    # quantization. Previously that slope was installed with a tight prior,
+    # and its own measurements were consumed again by the filter. Start with
+    # an explicit weak traffic prior instead; all positions still enter once
+    # with camera-derived covariance. This is an assumption, never a speed cap.
+    first = vi[0]
+    x0 = np.array([Z[first, 0] + 18.0*first*DT, -18.0, 0, Z[first, 1], 0, 0])
+    initial_cov = np.diag([max(25., 4*Rs[first, 0, 0]), 18.0**2, 4.0,
+                           max(1., 4*Rs[first, 1, 1]), 4.0, 1.0])
+    initial_cov[0,3] = initial_cov[3,0] = 4*Rs[first,0,1]
+    qx, qy = {"car": (1.5, 0.25), "van": (1.2, 0.2), "truck": (0.6, 0.1)}.get(k, (1.5, 0.25))
+    jumps = {}
+    if crash and f0 < impact_f <= f1:
+        jumps[impact_f - f0] = (8.0, 30.0)
+    for _ in range(3):
+        xs, Ps, nis, used = rts(f0, n, Z, Rs, valid, qx, qy, jumps, x0, initial_cov)
+        new = detect_events(xs, Z, Rs, valid, used, list(jumps))
+        if not new:
+            break
+        for e in new:
+            jumps[e] = (4.0, 8.0)
+    vx, vy, ax_, ay_ = xs[:, 1], xs[:, 4], xs[:, 2], xs[:, 5]
+    sp = np.hypot(vx, vy)
+    # heading: velocity direction when moving; else fitted cuboid axis oriented toward -X (crash side)
+    hd = np.arctan2(vy, vx)
+    slow = sp < 2.0
+    if slow.any():
+        cy = np.where(np.isnan(yaws), 0.0, yaws)
+        cy = np.where(np.cos(cy) > 0, cy + np.pi, cy)   # crash-side traffic faces -X
+        cy = np.where(np.isnan(yaws), np.pi, cy)
+        hd = np.where(slow, cy, hd)
+    hd = np.unwrap(hd)
+    if n > 5:
+        from scipy.ndimage import uniform_filter1d
+        hd = uniform_filter1d(hd, 5, mode="nearest")
+    yaw = np.gradient(hd, DT) if n > 2 else np.zeros(n)
+    ux, uy = np.cos(hd), np.sin(hd)
+    along = ax_ * ux + ay_ * uy
+    lat = -ax_ * uy + ay_ * ux
+    sig_a_long = np.sqrt(np.maximum(Ps[:, 2, 2] * ux ** 2 + Ps[:, 5, 5] * uy ** 2, 1e-6))
+    dims = tr.get("dims_m") or [PRIOR[k]["L"], PRIOR[k]["W"], PRIOR[k]["H"]]
+    L = float(np.clip(dims[0], *LRANGE[k])); Wd = float(dims[1]); Hd = float(dims[2])
+    mass = mass_for(k, L)
+    samples = []
+    for i in range(n):
+        f = f0 + i
+        if crash and abs(f - impact_f) <= 2:
+            cause = "impact"
+        elif along[i] < -max(1.0, 2 * sig_a_long[i]):
+            cause = "braking"
+        elif along[i] > max(0.6, 2 * sig_a_long[i]):
+            cause = "accelerating"
+        elif abs(lat[i]) > 0.8 or abs(yaw[i]) > 0.0523:
+            cause = "steering"
+        else:
+            cause = "coasting"
+        sig = math.sqrt(max(Ps[i, 0, 0], 0) + max(Ps[i, 3, 3], 0))
+        src = srcs[i]
+        if src == "measured" and not used[i]:
+            src = "interpolated"
+        if src != "measured":
+            # Inference must remain more uncertain than a measured nearby pose,
+            # even when the RTS covariance is small between close observations.
+            gap_frames = int(np.min(np.abs(vi - i)))
+            sx, sy = meas_sigma(float(xs[i, 0]))
+            sig = max(sig, math.hypot(sx, sy) * 1.25 + 0.15 * gap_frames, 0.5)
+        else:
+            # Keep pixel/range uncertainty and the calibration scale floor;
+            # the conditional smoother covariance alone understates both.
+            sx, sy = meas_sigma(float(xs[i, 0]), frs[i].get("fit_px") if i < len(frs) else None)
+            sig = max(sig, 0.5 * math.hypot(sx, sy), abs(float(xs[i, 0])) * 0.01)
+        samples.append(dict(
+            f=f, t=round(f / fps, 4), x=round(float(xs[i, 0]), 3), y=round(float(xs[i, 3]), 3),
+            heading_deg=round(float(math.degrees(hd[i]) % 360.0), 2), speed_mps=round(float(sp[i]), 3),
+            vx=round(float(vx[i]), 3), vy=round(float(vy[i]), 3), ax=round(float(ax_[i]), 3), ay=round(float(ay_[i]), 3),
+            yaw_rate_dps=round(float(math.degrees(yaw[i])), 3),
+            fx_n=round(round(mass)*round(float(ax_[i]),3), 1), fy_n=round(round(mass)*round(float(ay_[i]),3), 1),
+            f_long_n=round(float(mass * along[i]), 1), f_lat_n=round(float(mass * lat[i]), 1),
+            cause=cause, sigma_m=round(sig, 3),
+            sigma_v_mps=round(math.sqrt(max(Ps[i,1,1]+Ps[i,4,4],0)),3),
+            src=src, lane=lane_of(float(xs[i, 3])),
+            lane_measured=(lane_of(float(Z[i, 1])) if srcs[i] == "measured" else None),
+        ))
+    out = dict(id=tr["id"], **{kk: tr.get(kk) for kk in ("class", "paint", "paint_hex", "role")})
+    out.update(crash=crash, carriageway="crash", length_m=round(L, 2), width_m=round(Wd, 2),
+               height_m=round(Hd, 2), mass_kg=round(mass, 0), f_first=f0, f_last=f1,
+               n_measured=int(valid.sum()), event_frames=[f0 + e for e in sorted(jumps)], heading_src="velocity",
+               samples=samples)
+    out['merged_track_ids'] = tr.get('merged_track_ids', [])
+    out['kinematics_caveats'] = []
+    if float(np.median(Z[vi,0])) > 600 or float(np.median([s['sigma_m'] for s in samples])) > 15:
+        out['kinematics_caveats'].append('Horizon range/association uncertain; speed partly prior-dependent and not accepted physical truth.')
+    if float(np.max(sp)) > 55:
+        out['kinematics_caveats'].append('High fitted speed requires source/identity verification; no speed clamp applied.')
+    if any(fr.get('bbox') and (fr['bbox'][0]<=.5 or fr['bbox'][3]>=TILE_H-1.5) for fr in frs):
+        out['kinematics_caveats'].append('Clipped source box: missing faces inflate position uncertainty; endpoint derivatives are not measured braking/contact evidence.')
+    return out, dict(Z=Z, valid=valid, used=used, xs=xs, f0=f0, k=k)
+
+
 def box_corners(s, L, W):
     th = math.radians(s["heading_deg"]); c, sn = math.cos(th), math.sin(th)
     pts = []
@@ -436,25 +593,44 @@ def render_review(world, px, outdir, frames):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--in", dest="inp", default=os.path.join(HERE, "data", "tracks_px.json"))
+    ap.add_argument("--in", dest="inp", default=os.path.join(HERE, "data", "tracks_px_clean.json"))
+    ap.add_argument("--impact-frame", type=int, default=IMPACT_F)
     ap.add_argument("--out", default=os.path.join(HERE, "data", "tracks_world.json"))
     ap.add_argument("--review", default=os.path.join(HERE, "review_world"))
     ap.add_argument("--frames", default="40,120,200,260,279,300,360")
     ap.add_argument("--no-render", action="store_true")
+    ap.add_argument("--crash-pair", default=os.path.join(HERE,"data","crash_pair.json"))
     a = ap.parse_args()
     px = json.load(open(a.inp))
     fps = float(px.get("fps", FPS))
     tracks = []
+    cp = json.load(open(a.crash_pair)) if os.path.exists(a.crash_pair) else None
+    if cp:
+        a.impact_frame=int(cp['contact']['frame'])
     for tr in px["tracks"]:
-        r = process_track(tr, fps)
+        if cp and tr.get('id') in cp['vehicles']:
+            id=tr['id']; t=cp['vehicles'][id]
+            tracks.append(dict(t,id=id,role='van' if id=='white-van' else 'yellow',carriageway='crash',
+                               f_first=t['samples'][0]['f'],f_last=t['samples'][-1]['f'],
+                               event_frames=[int(cp['contact']['frame'])],heading_src='authoritative crash-pair measurements'))
+            continue
+        clean = bool(tr.get("frames")) and "world" in tr["frames"][0]
+        r = process_clean(tr, fps, a.impact_frame) if clean else process_track(tr, fps)
         if r:
             tracks.append(r[0])
-    world = {"frame": "W", "fps": fps, "frames": px.get("frames", 400), "impact_frame": IMPACT_F,
-             "notes": "x,y metres in W (X away from camera, Y camera-right); heading 0=+X, 90=+Y; F=m*a in W; f_long/f_lat in vehicle frame; crash tracks overridden by crash_pair.json",
+    world = {"frame": "W", "fps": fps, "frames": px.get("frames", 400), "impact_frame": a.impact_frame,
+             "source": os.path.basename(a.inp),
+             "source_sha256": {"tracks_px_clean": hashlib.sha256(open(a.inp,'rb').read()).hexdigest(),
+                               "crash_pair": hashlib.sha256(open(a.crash_pair,'rb').read()).hexdigest() if cp else None,
+                               "calib_joint": hashlib.sha256(open(os.path.join(HERE,'data','calib_joint.json'),'rb').read()).hexdigest()},
+             "lanes": "lane per sample from the smoothed y and the measured crash-side painted lines (cam.LINES): 1 = next to the median ... 6 = outermost; 0 = median side of the inner edge line, 7 = beyond the outer edge line. lane_measured = from the raw fitted y of that frame.",
+             "src": "measured = cuboid fitted to the source wireframe and accepted by the smoother; interpolated = missed/occluded detection or gated outlier, with increased uncertainty",
+             "notes": "crash-side carriageway only (opposing traffic omitted); x,y metres in W (X away from camera, Y camera-right); heading 0=+X, 90=+Y; F=m*a in W; f_long/f_lat in vehicle frame; crash tracks overridden by crash_pair.json",
+             "kinematics_assumptions": "Background initial velocity prior vx=-18 +/-18 m/s (1 sigma), vy=0 +/-2 m/s; horizon slopes are not independent physical speed measurements. sigma_v_mps is conditional smoother uncertainty and excludes identity/calibration error. Raw fitted positions and simultaneous alternatives remain in tracks_px_clean.json. No manufactured vehicles or speed caps.",
              "tracks": tracks}
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     tmp = a.out + ".tmp"
-    json.dump(world, open(tmp, "w"))
+    json.dump(world, open(tmp, "w"), allow_nan=False)
     os.replace(tmp, a.out)
     med, per = reproj_errors(world, px)
     os.makedirs(a.review, exist_ok=True)
@@ -475,11 +651,11 @@ def main():
             flags.append(f"rejected_{nrej}")
         line = dict(id=t["id"], cls=t["class"], cw=t["carriageway"], crash=t["crash"], frames=f"{t['f_first']}-{t['f_last']}",
                     speed=f"{sp.min():.1f}-{np.median(sp):.1f}-{sp.max():.1f}", y=f"{ys.min():.1f}..{ys.max():.1f}",
-                    L=t["length_m"], events=t["event_frames"], reproj=round(per.get(t["id"], float('nan')), 2),
+                    L=t["length_m"], events=t["event_frames"], reproj=round(per[t['id']], 2) if t['id'] in per else None,
                     sigma_med=round(float(np.median([s['sigma_m'] for s in S])), 2), flags=flags)
         rep["tracks"].append(line)
         print(line)
-    json.dump(rep, open(os.path.join(a.review, "report.json"), "w"), indent=1)
+    json.dump(rep, open(os.path.join(a.review, "report.json"), "w"), indent=1, allow_nan=False)
     if not a.no_render:
         render_review(world, px, a.review, [int(x) for x in a.frames.split(",")])
 

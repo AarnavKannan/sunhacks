@@ -1,0 +1,302 @@
+[
+  {
+    "ids": [
+      "c009",
+      "c032"
+    ],
+    "span": [
+      27,
+      33
+    ],
+    "overlap_frames": 7,
+    "high_iou": 7,
+    "median_iou": 0.8179679035752976,
+    "both_measured": 1,
+    "median_measured_iou": 0.5446009389671366
+  },
+  {
+    "ids": [
+      "c010",
+      "c039"
+    ],
+    "span": [
+      43,
+      48
+    ],
+    "overlap_frames": 6,
+    "high_iou": 6,
+    "median_iou": 0.749556214459701,
+    "both_measured": 2,
+    "median_measured_iou": 0.6089237603904469
+  },
+  {
+    "ids": [
+      "c108",
+      "c151"
+    ],
+    "span": [
+      357,
+      362
+    ],
+    "overlap_frames": 6,
+    "high_iou": 6,
+    "median_iou": 0.719271597876737,
+    "both_measured": 1,
+    "median_measured_iou": 0.5904642058165545
+  },
+  {
+    "ids": [
+      "c064",
+      "c085"
+    ],
+    "span": [
+      191,
+      213
+    ],
+    "overlap_frames": 23,
+    "high_iou": 17,
+    "median_iou": 0.7047591434370213,
+    "both_measured": 1,
+    "median_measured_iou": 0.19912276450346564
+  },
+  {
+    "ids": [
+      "c059",
+      "c079"
+    ],
+    "span": [
+      175,
+      191
+    ],
+    "overlap_frames": 17,
+    "high_iou": 15,
+    "median_iou": 0.6869794322624521,
+    "both_measured": 4,
+    "median_measured_iou": 0.46349111712243324
+  },
+  {
+    "ids": [
+      "c149",
+      "c150"
+    ],
+    "span": [
+      355,
+      360
+    ],
+    "overlap_frames": 6,
+    "high_iou": 6,
+    "median_iou": 0.6568198981687946,
+    "both_measured": 1,
+    "median_measured_iou": 0.5135256988277727
+  },
+  {
+    "ids": [
+      "c119",
+      "c128"
+    ],
+    "span": [
+      297,
+      302
+    ],
+    "overlap_frames": 6,
+    "high_iou": 5,
+    "median_iou": 0.6331912628385334,
+    "both_measured": 2,
+    "median_measured_iou": 0.47724015055088986
+  },
+  {
+    "ids": [
+      "c077",
+      "c119"
+    ],
+    "span": [
+      264,
+      274
+    ],
+    "overlap_frames": 11,
+    "high_iou": 8,
+    "median_iou": 0.6271109271523182,
+    "both_measured": 1,
+    "median_measured_iou": 0.3879310344827592
+  },
+  {
+    "ids": [
+      "c137",
+      "c138"
+    ],
+    "span": [
+      319,
+      326
+    ],
+    "overlap_frames": 8,
+    "high_iou": 8,
+    "median_iou": 0.6173543486331158,
+    "both_measured": 0,
+    "median_measured_iou": null
+  },
+  {
+    "ids": [
+      "c147",
+      "c159"
+    ],
+    "span": [
+      373,
+      378
+    ],
+    "overlap_frames": 6,
+    "high_iou": 6,
+    "median_iou": 0.5824791996289311,
+    "both_measured": 2,
+    "median_measured_iou": 0.6662749706227971
+  },
+  {
+    "ids": [
+      "c087",
+      "c165"
+    ],
+    "span": [
+      387,
+      390
+    ],
+    "overlap_frames": 4,
+    "high_iou": 3,
+    "median_iou": 0.5668006161549213,
+    "both_measured": 0,
+    "median_measured_iou": null
+  },
+  {
+    "ids": [
+      "c013",
+      "c042"
+    ],
+    "span": [
+      45,
+      49
+    ],
+    "overlap_frames": 5,
+    "high_iou": 4,
+    "median_iou": 0.5327676714318726,
+    "both_measured": 0,
+    "median_measured_iou": null
+  },
+  {
+    "ids": [
+      "c082",
+      "c141"
+    ],
+    "span": [
+      336,
+      358
+    ],
+    "overlap_frames": 23,
+    "high_iou": 13,
+    "median_iou": 0.5200120373156795,
+    "both_measured": 3,
+    "median_measured_iou": 0.5064148485835237
+  },
+  {
+    "ids": [
+      "c073",
+      "c121"
+    ],
+    "span": [
+      267,
+      290
+    ],
+    "overlap_frames": 24,
+    "high_iou": 12,
+    "median_iou": 0.5050723868757143,
+    "both_measured": 8,
+    "median_measured_iou": 0.33360842574798844
+  },
+  {
+    "ids": [
+      "c026",
+      "c144"
+    ],
+    "span": [
+      343,
+      352
+    ],
+    "overlap_frames": 10,
+    "high_iou": 5,
+    "median_iou": 0.5007199093645984,
+    "both_measured": 2,
+    "median_measured_iou": 0.4052917181369276
+  },
+  {
+    "ids": [
+      "c039",
+      "c047"
+    ],
+    "span": [
+      54,
+      66
+    ],
+    "overlap_frames": 13,
+    "high_iou": 6,
+    "median_iou": 0.4948128401643896,
+    "both_measured": 3,
+    "median_measured_iou": 0.42297746974417694
+  },
+  {
+    "ids": [
+      "c112",
+      "c113"
+    ],
+    "span": [
+      251,
+      282
+    ],
+    "overlap_frames": 32,
+    "high_iou": 13,
+    "median_iou": 0.45761152616731915,
+    "both_measured": 3,
+    "median_measured_iou": 0.2861896838602309
+  },
+  {
+    "ids": [
+      "c077",
+      "c102"
+    ],
+    "span": [
+      221,
+      252
+    ],
+    "overlap_frames": 32,
+    "high_iou": 13,
+    "median_iou": 0.45061510891686873,
+    "both_measured": 5,
+    "median_measured_iou": 0.23396292105492328
+  },
+  {
+    "ids": [
+      "c090",
+      "c100"
+    ],
+    "span": [
+      218,
+      231
+    ],
+    "overlap_frames": 14,
+    "high_iou": 6,
+    "median_iou": 0.4475764999282303,
+    "both_measured": 3,
+    "median_measured_iou": 0.3330055751664192
+  },
+  {
+    "ids": [
+      "c039",
+      "c057"
+    ],
+    "span": [
+      71,
+      87
+    ],
+    "overlap_frames": 17,
+    "high_iou": 8,
+    "median_iou": 0.41767696519358655,
+    "both_measured": 1,
+    "median_measured_iou": 0.39961255561945686
+  }
+]

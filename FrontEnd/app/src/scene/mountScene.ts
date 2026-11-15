@@ -44,10 +44,11 @@ export type SceneHandle = {
   /** Where the camera is and what it looks at, after any move in progress finishes. */
   getCamera: () => CameraPose;
   /**
-   * Places the camera, clamped to the scene bounds. Animates unless `instant`.
+   * Places the camera, clamped to the scene bounds. Animates unless `instant`. `fovDeg` sets the
+   * vertical field of view (e.g. to match a source camera); home/reset restore the default.
    * Returns where it ended up and whether the bounds stopped it.
    */
-  setCamera: (pose: CameraPose, options?: { instant?: boolean }) => CameraPose & { clamped: boolean };
+  setCamera: (pose: CameraPose, options?: { instant?: boolean; fovDeg?: number; up?: Point3 }) => CameraPose & { clamped: boolean };
   /** Default overview of the scene, as a pose (doesn't move the camera). */
   homePose: () => CameraPose;
   bounds: () => ViewBounds;
@@ -69,7 +70,7 @@ export type SceneHandle = {
 type Mover = { id: string; rig: VehicleRig; poseAt: (time: number) => Pose; color: string; eyeHeight: number };
 
 /** Approximate driver eye height by vehicle class (m, before the layout's scale). */
-const EYE_HEIGHT: Record<VehicleKind, number> = { car: 1.2, van: 1.7, truck: 2.4 };
+const EYE_HEIGHT: Record<VehicleKind, number> = { car: 1.2, van: 1.7, truck: 2.4, motorcycle: 1.3 };
 
 /** How far outside the site the camera may go (m), and how high. */
 const BOUNDS_MARGIN = 20;
@@ -81,6 +82,9 @@ const TWEEN_SECONDS = 0.6;
 const POV_EYE_FORWARD = 0.2;
 /** How far ahead of the eye the POV camera looks (m). */
 const POV_LOOK_AHEAD = 12;
+
+/** Default vertical field of view (degrees). */
+const DEFAULT_FOV = 32;
 
 /** Step for finite differences on trajectories (s). */
 const DT = 0.05;
@@ -181,7 +185,13 @@ export async function mountScene(
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(LOADING_BACKGROUND);
 
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 3000);
+  const camera = new THREE.PerspectiveCamera(DEFAULT_FOV, 1, 0.1, 3000);
+  const setFov = (deg: number) => {
+    const fov = THREE.MathUtils.clamp(deg, 1, 120);
+    if (Math.abs(camera.fov - fov) < 1e-9) return;
+    camera.fov = fov;
+    camera.updateProjectionMatrix();
+  };
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
@@ -438,6 +448,7 @@ export async function mountScene(
 
   const applyHome = () => {
     leaveCameraModes();
+    setFov(DEFAULT_FOV);
     placeNow(home.position.clone(), home.target.clone());
   };
 
@@ -582,10 +593,11 @@ export async function mountScene(
       if (!motion) continue;
       const kind = motion.kind ?? "car";
       const scale = motion.scale ?? 1;
-      const rig = makeVehicle(kind, vehicle.color, vehicle.id, `${vehicle.label ?? ""} ${vehicle.type ?? ""}`);
-      rig.root.scale.setScalar(scale);
+      const rig = makeVehicle(kind, vehicle.color, vehicle.id, motion.modelLabel ?? `${vehicle.label ?? ""} ${vehicle.type ?? ""}`);
+      if (motion.scaleXYZ) rig.root.scale.set(...motion.scaleXYZ);
+      else rig.root.scale.setScalar(scale);
       proxy.add(rig.root);
-      movers.push({ id: vehicle.id, rig, poseAt: motion.poseAt, color: vehicle.color, eyeHeight: EYE_HEIGHT[kind] * scale });
+      movers.push({ id: vehicle.id, rig, poseAt: motion.poseAt, color: vehicle.color, eyeHeight: EYE_HEIGHT[kind] * (motion.scaleXYZ?.[1] ?? scale) });
     }
     buildTrails();
     applyVehicleVisibility();
@@ -608,6 +620,7 @@ export async function mountScene(
     clearSplat();
     ambientOcclusion.enabled = true;
     currentLayout = layout;
+    controls.maxDistance = Math.max(220, Math.hypot(layout.site.width, layout.site.depth));
     duration = clipDuration;
     leaveCameraModes();
     buildProxy(layout, vehicles);
@@ -733,7 +746,9 @@ export async function mountScene(
     setTime,
     setCameraAdjustments,
     resetCamera: () => {
+      camera.up.set(0, 1, 0);
       leaveCameraModes();
+      setFov(DEFAULT_FOV);
       const placed = constrain(home.position.clone(), home.target.clone());
       glideTo(placed.position, placed.target);
     },
@@ -745,8 +760,10 @@ export async function mountScene(
       return { position: toPoint(camera.position), target: toPoint(controls.target) };
     },
     setCamera: (pose, options = {}) => {
+      camera.up.set(...(options.up ?? [0, 1, 0] as Point3));
       if (pov) leaveCameraModes();
       const placed = constrain(toVector(pose.position), toVector(pose.target));
+      if (options.fovDeg !== undefined && Number.isFinite(options.fovDeg)) setFov(options.fovDeg);
       if (options.instant) placeNow(placed.position, placed.target);
       else glideTo(placed.position, placed.target);
       return { position: toPoint(placed.position), target: toPoint(placed.target), clamped: placed.limited };

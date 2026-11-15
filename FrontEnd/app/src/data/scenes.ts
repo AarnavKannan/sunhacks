@@ -29,7 +29,7 @@ export type SceneInfo = {
   duration: number;
   /** Start of the crash period (s): "before the crash" counts back from here. Null = no crash. */
   impactTime: number | null;
-  /** End of the crash period (s), when the vehicles involved have come to rest. */
+  /** End of the reconstructed crash sequence (s); exact hidden rest may remain uncertain. */
   crashEnd: number | null;
   /** Vehicles involved in the crash. */
   crashVehicles: string[];

@@ -1,0 +1,2122 @@
+{
+  "lane_convention": "1=median-adjacent, increasing outward to 6; 0=inside median line, 7=beyond straight outer line",
+  "note": "Visible means the reprojected 3-D cuboid intersects the source tile. Eye census is a source review, not a confidence claim for every subpixel horizon identity.",
+  "checks": [
+    {
+      "requested_t": 0,
+      "f": 0,
+      "source_t": 0.0,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 4,
+        "2": 10,
+        "3": 2,
+        "4": 5,
+        "5": 1,
+        "6": 2,
+        "7": 1
+      },
+      "total_tracks": 25,
+      "measured": 25,
+      "tracks": [
+        {
+          "id": "c001",
+          "lane": 2,
+          "src": "measured",
+          "x": 94.273,
+          "y": -14.58,
+          "sigma_m": 0.943
+        },
+        {
+          "id": "c002",
+          "lane": 3,
+          "src": "measured",
+          "x": 125.427,
+          "y": -18.43,
+          "sigma_m": 1.254
+        },
+        {
+          "id": "c003",
+          "lane": 2,
+          "src": "measured",
+          "x": 131.935,
+          "y": -14.776,
+          "sigma_m": 1.319
+        },
+        {
+          "id": "c004",
+          "lane": 4,
+          "src": "measured",
+          "x": 143.979,
+          "y": -23.189,
+          "sigma_m": 1.712
+        },
+        {
+          "id": "c005",
+          "lane": 1,
+          "src": "measured",
+          "x": 148.157,
+          "y": -11.362,
+          "sigma_m": 1.482
+        },
+        {
+          "id": "c006",
+          "lane": 2,
+          "src": "measured",
+          "x": 158.103,
+          "y": -14.776,
+          "sigma_m": 1.581
+        },
+        {
+          "id": "c007",
+          "lane": 3,
+          "src": "measured",
+          "x": 164.916,
+          "y": -17.889,
+          "sigma_m": 1.649
+        },
+        {
+          "id": "c008",
+          "lane": 2,
+          "src": "measured",
+          "x": 178.032,
+          "y": -14.865,
+          "sigma_m": 1.78
+        },
+        {
+          "id": "c009",
+          "lane": 2,
+          "src": "measured",
+          "x": 199.075,
+          "y": -14.391,
+          "sigma_m": 1.991
+        },
+        {
+          "id": "c010",
+          "lane": 1,
+          "src": "measured",
+          "x": 216.365,
+          "y": -10.843,
+          "sigma_m": 2.164
+        },
+        {
+          "id": "c011",
+          "lane": 2,
+          "src": "measured",
+          "x": 217.746,
+          "y": -14.134,
+          "sigma_m": 2.205
+        },
+        {
+          "id": "c012",
+          "lane": 2,
+          "src": "measured",
+          "x": 246.925,
+          "y": -14.154,
+          "sigma_m": 2.469
+        },
+        {
+          "id": "c013",
+          "lane": 6,
+          "src": "measured",
+          "x": 251.401,
+          "y": -28.677,
+          "sigma_m": 2.514
+        },
+        {
+          "id": "c014",
+          "lane": 2,
+          "src": "measured",
+          "x": 277.705,
+          "y": -13.825,
+          "sigma_m": 2.777
+        },
+        {
+          "id": "c015",
+          "lane": 1,
+          "src": "measured",
+          "x": 304.189,
+          "y": -11.011,
+          "sigma_m": 3.042
+        },
+        {
+          "id": "c016",
+          "lane": 5,
+          "src": "measured",
+          "x": 330.439,
+          "y": -25.615,
+          "sigma_m": 3.304
+        },
+        {
+          "id": "c017",
+          "lane": 4,
+          "src": "measured",
+          "x": 433.402,
+          "y": -21.907,
+          "sigma_m": 5.59
+        },
+        {
+          "id": "c018",
+          "lane": 2,
+          "src": "measured",
+          "x": 452.015,
+          "y": -15.811,
+          "sigma_m": 8.5
+        },
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 490.379,
+          "y": -14.406,
+          "sigma_m": 7.569
+        },
+        {
+          "id": "c020",
+          "lane": 4,
+          "src": "measured",
+          "x": 537.415,
+          "y": -23.159,
+          "sigma_m": 8.272
+        },
+        {
+          "id": "c021",
+          "lane": 4,
+          "src": "measured",
+          "x": 648.338,
+          "y": -21.962,
+          "sigma_m": 14.347
+        },
+        {
+          "id": "c022",
+          "lane": 7,
+          "src": "measured",
+          "x": 784.287,
+          "y": -30.119,
+          "sigma_m": 19.702
+        },
+        {
+          "id": "c023",
+          "lane": 4,
+          "src": "measured",
+          "x": 834.607,
+          "y": -23.561,
+          "sigma_m": 19.92
+        },
+        {
+          "id": "c024",
+          "lane": 6,
+          "src": "measured",
+          "x": 947.527,
+          "y": -28.881,
+          "sigma_m": 28.91
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 10,
+      "f": 125,
+      "source_t": 10.0,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 7,
+        "3": 5,
+        "4": 3,
+        "5": 2,
+        "6": 2,
+        "7": 1
+      },
+      "total_tracks": 26,
+      "measured": 20,
+      "tracks": [
+        {
+          "id": "c012",
+          "lane": 3,
+          "src": "measured",
+          "x": 128.484,
+          "y": -17.769,
+          "sigma_m": 1.285
+        },
+        {
+          "id": "c014",
+          "lane": 2,
+          "src": "measured",
+          "x": 168.586,
+          "y": -14.851,
+          "sigma_m": 1.686
+        },
+        {
+          "id": "c017",
+          "lane": 4,
+          "src": "measured",
+          "x": 196.097,
+          "y": -21.851,
+          "sigma_m": 1.961
+        },
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 227.702,
+          "y": -14.255,
+          "sigma_m": 2.277
+        },
+        {
+          "id": "c020",
+          "lane": 6,
+          "src": "measured",
+          "x": 318.441,
+          "y": -27.04,
+          "sigma_m": 4.041
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 555.906,
+          "y": -22.364,
+          "sigma_m": 9.183
+        },
+        {
+          "id": "c030",
+          "lane": 5,
+          "src": "measured",
+          "x": 425.892,
+          "y": -24.778,
+          "sigma_m": 5.188
+        },
+        {
+          "id": "c038",
+          "lane": 2,
+          "src": "interpolated",
+          "x": 114.719,
+          "y": -14.37,
+          "sigma_m": 1.518
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 346.094,
+          "y": -10.974,
+          "sigma_m": 3.461
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 362.798,
+          "y": -14.003,
+          "sigma_m": 3.765
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 389.244,
+          "y": -18.181,
+          "sigma_m": 4.334
+        },
+        {
+          "id": "c051",
+          "lane": 2,
+          "src": "measured",
+          "x": 450.532,
+          "y": -14.785,
+          "sigma_m": 5.805
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 297.684,
+          "y": -22.315,
+          "sigma_m": 2.977
+        },
+        {
+          "id": "c054",
+          "lane": 3,
+          "src": "measured",
+          "x": 196.534,
+          "y": -17.275,
+          "sigma_m": 1.965
+        },
+        {
+          "id": "c057",
+          "lane": 2,
+          "src": "measured",
+          "x": 80.623,
+          "y": -14.53,
+          "sigma_m": 0.806
+        },
+        {
+          "id": "c059",
+          "lane": 1,
+          "src": "measured",
+          "x": 468.125,
+          "y": -11.383,
+          "sigma_m": 6.268
+        },
+        {
+          "id": "c060",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 448.874,
+          "y": -12.656,
+          "sigma_m": 21.34
+        },
+        {
+          "id": "c061",
+          "lane": 1,
+          "src": "measured",
+          "x": 130.697,
+          "y": -10.76,
+          "sigma_m": 1.307
+        },
+        {
+          "id": "c063",
+          "lane": 3,
+          "src": "measured",
+          "x": 176.316,
+          "y": -18.742,
+          "sigma_m": 1.763
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 399.517,
+          "y": -10.905,
+          "sigma_m": 4.565
+        },
+        {
+          "id": "c065",
+          "lane": 5,
+          "src": "measured",
+          "x": 362.236,
+          "y": -25.26,
+          "sigma_m": 3.849
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 429.492,
+          "y": -18.49,
+          "sigma_m": 19.275
+        },
+        {
+          "id": "c067",
+          "lane": 7,
+          "src": "interpolated",
+          "x": 277.164,
+          "y": -29.988,
+          "sigma_m": 8.116
+        },
+        {
+          "id": "c068",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 521.327,
+          "y": -29.263,
+          "sigma_m": 28.777
+        },
+        {
+          "id": "c069",
+          "lane": 2,
+          "src": "interpolated",
+          "x": 408.071,
+          "y": -14.068,
+          "sigma_m": 17.565
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 15,
+      "f": 188,
+      "source_t": 15.04,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 8,
+        "2": 6,
+        "3": 5,
+        "4": 5,
+        "5": 0,
+        "6": 2,
+        "7": 0
+      },
+      "total_tracks": 26,
+      "measured": 22,
+      "tracks": [
+        {
+          "id": "c014",
+          "lane": 2,
+          "src": "measured",
+          "x": 101.592,
+          "y": -14.632,
+          "sigma_m": 1.016
+        },
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 140.508,
+          "y": -14.435,
+          "sigma_m": 1.405
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 433.707,
+          "y": -22.234,
+          "sigma_m": 6.356
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "measured",
+          "x": 307.567,
+          "y": -27.126,
+          "sigma_m": 3.076
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 178.189,
+          "y": -10.894,
+          "sigma_m": 1.782
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 191.265,
+          "y": -13.916,
+          "sigma_m": 1.913
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 231.495,
+          "y": -17.608,
+          "sigma_m": 2.315
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 205.825,
+          "y": -21.931,
+          "sigma_m": 2.058
+        },
+        {
+          "id": "c059",
+          "lane": 1,
+          "src": "measured",
+          "x": 242.474,
+          "y": -10.785,
+          "sigma_m": 2.425
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 212.679,
+          "y": -10.594,
+          "sigma_m": 2.127
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 262.676,
+          "y": -18.504,
+          "sigma_m": 2.627
+        },
+        {
+          "id": "c068",
+          "lane": 6,
+          "src": "measured",
+          "x": 367.174,
+          "y": -29.642,
+          "sigma_m": 4.649
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 445.675,
+          "y": -14.607,
+          "sigma_m": 5.681
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 244.431,
+          "y": -14.57,
+          "sigma_m": 2.444
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 477.892,
+          "y": -18.123,
+          "sigma_m": 6.532
+        },
+        {
+          "id": "c075",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 644.576,
+          "y": -22.563,
+          "sigma_m": 43.373
+        },
+        {
+          "id": "c076",
+          "lane": 4,
+          "src": "measured",
+          "x": 743.404,
+          "y": -22.537,
+          "sigma_m": 15.805
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 592.099,
+          "y": -10.806,
+          "sigma_m": 10.026
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 718.218,
+          "y": -12.413,
+          "sigma_m": 53.926
+        },
+        {
+          "id": "c079",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 255.039,
+          "y": -11.378,
+          "sigma_m": 6.896
+        },
+        {
+          "id": "c080",
+          "lane": 4,
+          "src": "measured",
+          "x": 538.089,
+          "y": -21.013,
+          "sigma_m": 8.281
+        },
+        {
+          "id": "c081",
+          "lane": 3,
+          "src": "measured",
+          "x": 811.155,
+          "y": -19.205,
+          "sigma_m": 18.817
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 640.794,
+          "y": -15.229,
+          "sigma_m": 11.743
+        },
+        {
+          "id": "c083",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 527.27,
+          "y": -19.739,
+          "sigma_m": 28.973
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 400.36724028291565,
+          "y": -10.924612139322344,
+          "sigma_m": 5.610287448211526
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 17,
+      "f": 212,
+      "source_t": 16.96,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 8,
+        "2": 6,
+        "3": 6,
+        "4": 5,
+        "5": 1,
+        "6": 4,
+        "7": 2
+      },
+      "total_tracks": 32,
+      "measured": 25,
+      "tracks": [
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 111.012,
+          "y": -14.476,
+          "sigma_m": 1.11
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 386.87,
+          "y": -22.575,
+          "sigma_m": 5.276
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 263.431,
+          "y": -28.428,
+          "sigma_m": 7.197
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 141.069,
+          "y": -10.925,
+          "sigma_m": 1.411
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 152.074,
+          "y": -14.155,
+          "sigma_m": 1.521
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 184.976,
+          "y": -17.647,
+          "sigma_m": 1.85
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 174.303,
+          "y": -21.881,
+          "sigma_m": 1.743
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 167.816,
+          "y": -10.413,
+          "sigma_m": 1.678
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 209.832,
+          "y": -18.387,
+          "sigma_m": 2.098
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 380.85,
+          "y": -14.44,
+          "sigma_m": 4.149
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 184.215,
+          "y": -14.722,
+          "sigma_m": 1.842
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 413.055,
+          "y": -18.213,
+          "sigma_m": 4.88
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 488.662,
+          "y": -10.689,
+          "sigma_m": 6.829
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 609.92,
+          "y": -11.255,
+          "sigma_m": 11.261
+        },
+        {
+          "id": "c080",
+          "lane": 4,
+          "src": "measured",
+          "x": 458.379,
+          "y": -23.491,
+          "sigma_m": 6.009
+        },
+        {
+          "id": "c081",
+          "lane": 3,
+          "src": "measured",
+          "x": 723.041,
+          "y": -18.491,
+          "sigma_m": 14.951
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 581.621,
+          "y": -15.404,
+          "sigma_m": 9.892
+        },
+        {
+          "id": "c083",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 488.844,
+          "y": -23.253,
+          "sigma_m": 25.075
+        },
+        {
+          "id": "c084",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 216.354,
+          "y": -27.694,
+          "sigma_m": 5.155
+        },
+        {
+          "id": "c085",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 171.942,
+          "y": -10.551,
+          "sigma_m": 3.218
+        },
+        {
+          "id": "c086",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 182.77,
+          "y": -16.241,
+          "sigma_m": 3.916
+        },
+        {
+          "id": "c087",
+          "lane": 2,
+          "src": "measured",
+          "x": 471.966,
+          "y": -14.291,
+          "sigma_m": 6.896
+        },
+        {
+          "id": "c088",
+          "lane": 4,
+          "src": "measured",
+          "x": 504.659,
+          "y": -23.101,
+          "sigma_m": 7.284
+        },
+        {
+          "id": "c090",
+          "lane": 5,
+          "src": "measured",
+          "x": 188.525,
+          "y": -25.232,
+          "sigma_m": 1.885
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "measured",
+          "x": 193.913,
+          "y": -10.934,
+          "sigma_m": 1.939
+        },
+        {
+          "id": "c092",
+          "lane": 7,
+          "src": "interpolated",
+          "x": 242.194,
+          "y": -30.437,
+          "sigma_m": 6.234
+        },
+        {
+          "id": "c094",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 499.068,
+          "y": -28.215,
+          "sigma_m": 26.272
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 627.914,
+          "y": -18.092,
+          "sigma_m": 11.428
+        },
+        {
+          "id": "c096",
+          "lane": 7,
+          "src": "measured",
+          "x": 993.0,
+          "y": -30.909,
+          "sigma_m": 33.063
+        },
+        {
+          "id": "c097",
+          "lane": 6,
+          "src": "measured",
+          "x": 287.012,
+          "y": -28.271,
+          "sigma_m": 2.87
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 298.00965129261033,
+          "y": -10.801826115812228,
+          "sigma_m": 3.1083413292240123
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 17.04,
+      "f": 213,
+      "source_t": 17.04,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 8,
+        "2": 6,
+        "3": 6,
+        "4": 4,
+        "5": 2,
+        "6": 5,
+        "7": 2
+      },
+      "total_tracks": 33,
+      "measured": 28,
+      "tracks": [
+        {
+          "id": "c019",
+          "lane": 2,
+          "src": "measured",
+          "x": 109.78,
+          "y": -14.472,
+          "sigma_m": 1.098
+        },
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 384.844,
+          "y": -22.575,
+          "sigma_m": 4.236
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "measured",
+          "x": 261.684,
+          "y": -28.432,
+          "sigma_m": 2.617
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 139.796,
+          "y": -10.92,
+          "sigma_m": 1.398
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 150.573,
+          "y": -14.176,
+          "sigma_m": 1.506
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "measured",
+          "x": 183.117,
+          "y": -17.652,
+          "sigma_m": 1.831
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 173.04,
+          "y": -21.881,
+          "sigma_m": 1.73
+        },
+        {
+          "id": "c064",
+          "lane": 1,
+          "src": "measured",
+          "x": 166.224,
+          "y": -10.407,
+          "sigma_m": 1.662
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 207.821,
+          "y": -18.381,
+          "sigma_m": 2.078
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 378.024,
+          "y": -14.438,
+          "sigma_m": 4.087
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 182.144,
+          "y": -14.729,
+          "sigma_m": 1.821
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 410.291,
+          "y": -18.208,
+          "sigma_m": 4.815
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 484.352,
+          "y": -10.686,
+          "sigma_m": 6.71
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 605.523,
+          "y": -11.208,
+          "sigma_m": 10.486
+        },
+        {
+          "id": "c080",
+          "lane": 5,
+          "src": "measured",
+          "x": 455.255,
+          "y": -23.597,
+          "sigma_m": 5.928
+        },
+        {
+          "id": "c081",
+          "lane": 3,
+          "src": "measured",
+          "x": 719.538,
+          "y": -18.475,
+          "sigma_m": 14.806
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 579.078,
+          "y": -15.406,
+          "sigma_m": 9.806
+        },
+        {
+          "id": "c083",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 487.214,
+          "y": -23.317,
+          "sigma_m": 24.91
+        },
+        {
+          "id": "c084",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 215.26,
+          "y": -27.747,
+          "sigma_m": 4.957
+        },
+        {
+          "id": "c085",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 170.316,
+          "y": -10.555,
+          "sigma_m": 3.16
+        },
+        {
+          "id": "c086",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 180.93,
+          "y": -16.258,
+          "sigma_m": 3.697
+        },
+        {
+          "id": "c087",
+          "lane": 2,
+          "src": "measured",
+          "x": 469.478,
+          "y": -14.294,
+          "sigma_m": 6.824
+        },
+        {
+          "id": "c088",
+          "lane": 4,
+          "src": "measured",
+          "x": 501.249,
+          "y": -23.056,
+          "sigma_m": 7.186
+        },
+        {
+          "id": "c090",
+          "lane": 5,
+          "src": "measured",
+          "x": 186.568,
+          "y": -25.214,
+          "sigma_m": 1.866
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "measured",
+          "x": 192.36,
+          "y": -10.945,
+          "sigma_m": 1.924
+        },
+        {
+          "id": "c092",
+          "lane": 7,
+          "src": "measured",
+          "x": 241.048,
+          "y": -30.496,
+          "sigma_m": 2.41
+        },
+        {
+          "id": "c094",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 496.294,
+          "y": -28.228,
+          "sigma_m": 25.836
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 625.44,
+          "y": -18.097,
+          "sigma_m": 11.338
+        },
+        {
+          "id": "c096",
+          "lane": 7,
+          "src": "measured",
+          "x": 994.83,
+          "y": -31.027,
+          "sigma_m": 34.161
+        },
+        {
+          "id": "c097",
+          "lane": 6,
+          "src": "measured",
+          "x": 285.245,
+          "y": -28.306,
+          "sigma_m": 2.852
+        },
+        {
+          "id": "c098",
+          "lane": 6,
+          "src": "measured",
+          "x": 1031.78,
+          "y": -29.712,
+          "sigma_m": 49.03
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 294.1554780045432,
+          "y": -10.825456206479494,
+          "sigma_m": 3.028460583402846
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 20,
+      "f": 250,
+      "source_t": 20.0,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 8,
+        "2": 6,
+        "3": 6,
+        "4": 3,
+        "5": 4,
+        "6": 4,
+        "7": 1
+      },
+      "total_tracks": 32,
+      "measured": 25,
+      "tracks": [
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 306.548,
+          "y": -22.45,
+          "sigma_m": 3.065
+        },
+        {
+          "id": "c030",
+          "lane": 6,
+          "src": "measured",
+          "x": 201.689,
+          "y": -28.506,
+          "sigma_m": 2.017
+        },
+        {
+          "id": "c045",
+          "lane": 1,
+          "src": "measured",
+          "x": 104.632,
+          "y": -11.051,
+          "sigma_m": 1.046
+        },
+        {
+          "id": "c049",
+          "lane": 2,
+          "src": "measured",
+          "x": 95.453,
+          "y": -14.749,
+          "sigma_m": 0.955
+        },
+        {
+          "id": "c050",
+          "lane": 3,
+          "src": "interpolated",
+          "x": 117.596,
+          "y": -17.619,
+          "sigma_m": 2.037
+        },
+        {
+          "id": "c053",
+          "lane": 4,
+          "src": "measured",
+          "x": 128.05,
+          "y": -21.974,
+          "sigma_m": 1.28
+        },
+        {
+          "id": "c066",
+          "lane": 3,
+          "src": "measured",
+          "x": 141.721,
+          "y": -18.226,
+          "sigma_m": 1.417
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 277.888,
+          "y": -14.409,
+          "sigma_m": 2.779
+        },
+        {
+          "id": "c073",
+          "lane": 2,
+          "src": "measured",
+          "x": 126.769,
+          "y": -14.796,
+          "sigma_m": 1.268
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 305.736,
+          "y": -17.885,
+          "sigma_m": 3.057
+        },
+        {
+          "id": "c077",
+          "lane": 1,
+          "src": "measured",
+          "x": 330.595,
+          "y": -11.055,
+          "sigma_m": 3.306
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 449.25,
+          "y": -10.89,
+          "sigma_m": 5.772
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 481.283,
+          "y": -15.091,
+          "sigma_m": 6.973
+        },
+        {
+          "id": "c083",
+          "lane": 5,
+          "src": "measured",
+          "x": 422.808,
+          "y": -24.746,
+          "sigma_m": 5.113
+        },
+        {
+          "id": "c085",
+          "lane": 1,
+          "src": "measured",
+          "x": 129.302,
+          "y": -10.579,
+          "sigma_m": 1.293
+        },
+        {
+          "id": "c086",
+          "lane": 3,
+          "src": "measured",
+          "x": 119.951,
+          "y": -17.849,
+          "sigma_m": 1.2
+        },
+        {
+          "id": "c087",
+          "lane": 2,
+          "src": "measured",
+          "x": 365.541,
+          "y": -14.525,
+          "sigma_m": 3.822
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 149.622,
+          "y": -11.269,
+          "sigma_m": 2.624
+        },
+        {
+          "id": "c094",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 389.944,
+          "y": -27.592,
+          "sigma_m": 15.916
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 533.163,
+          "y": -17.949,
+          "sigma_m": 9.215
+        },
+        {
+          "id": "c097",
+          "lane": 6,
+          "src": "measured",
+          "x": 224.881,
+          "y": -28.623,
+          "sigma_m": 2.249
+        },
+        {
+          "id": "c098",
+          "lane": 5,
+          "src": "measured",
+          "x": 765.554,
+          "y": -26.196,
+          "sigma_m": 22.82
+        },
+        {
+          "id": "c102",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 351.022,
+          "y": -11.774,
+          "sigma_m": 13.076
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 435.529,
+          "y": -23.88,
+          "sigma_m": 5.425
+        },
+        {
+          "id": "c106",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 126.293,
+          "y": -21.781,
+          "sigma_m": 1.957
+        },
+        {
+          "id": "c107",
+          "lane": 6,
+          "src": "interpolated",
+          "x": 1119.005,
+          "y": -27.695,
+          "sigma_m": 129.957
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 580.958,
+          "y": -17.553,
+          "sigma_m": 9.653
+        },
+        {
+          "id": "c109",
+          "lane": 5,
+          "src": "measured",
+          "x": 670.159,
+          "y": -25.262,
+          "sigma_m": 19.587
+        },
+        {
+          "id": "c110",
+          "lane": 2,
+          "src": "interpolated",
+          "x": 375.717,
+          "y": -12.691,
+          "sigma_m": 15.387
+        },
+        {
+          "id": "c111",
+          "lane": 7,
+          "src": "measured",
+          "x": 870.292,
+          "y": -30.678,
+          "sigma_m": 21.66
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 174.35164910083358,
+          "y": -11.130830856572613,
+          "sigma_m": 1.063947414046307
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.56428664,
+          "y": -10.36844654,
+          "sigma_m": 0.25
+        }
+      ]
+    },
+    {
+      "requested_t": 24,
+      "f": 300,
+      "source_t": 24.0,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 8,
+        "2": 2,
+        "3": 4,
+        "4": 2,
+        "5": 3,
+        "6": 1,
+        "7": 1
+      },
+      "total_tracks": 21,
+      "measured": 18,
+      "tracks": [
+        {
+          "id": "c026",
+          "lane": 4,
+          "src": "measured",
+          "x": 212.618,
+          "y": -22.559,
+          "sigma_m": 2.126
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 184.206,
+          "y": -14.409,
+          "sigma_m": 1.842
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 184.35,
+          "y": -18.067,
+          "sigma_m": 1.843
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 277.858,
+          "y": -10.634,
+          "sigma_m": 2.779
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 349.124,
+          "y": -15.094,
+          "sigma_m": 3.926
+        },
+        {
+          "id": "c083",
+          "lane": 5,
+          "src": "measured",
+          "x": 325.146,
+          "y": -26.455,
+          "sigma_m": 3.251
+        },
+        {
+          "id": "c085",
+          "lane": 1,
+          "src": "measured",
+          "x": 111.586,
+          "y": -10.497,
+          "sigma_m": 1.116
+        },
+        {
+          "id": "c087",
+          "lane": 3,
+          "src": "measured",
+          "x": 225.998,
+          "y": -16.21,
+          "sigma_m": 2.26
+        },
+        {
+          "id": "c091",
+          "lane": 1,
+          "src": "measured",
+          "x": 127.291,
+          "y": -10.803,
+          "sigma_m": 1.273
+        },
+        {
+          "id": "c095",
+          "lane": 3,
+          "src": "measured",
+          "x": 419.095,
+          "y": -17.388,
+          "sigma_m": 6.274
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 344.366,
+          "y": -25.265,
+          "sigma_m": 3.444
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 462.094,
+          "y": -17.922,
+          "sigma_m": 6.107
+        },
+        {
+          "id": "c113",
+          "lane": 4,
+          "src": "measured",
+          "x": 741.14,
+          "y": -23.182,
+          "sigma_m": 17.994
+        },
+        {
+          "id": "c114",
+          "lane": 7,
+          "src": "interpolated",
+          "x": 765.51,
+          "y": -31.048,
+          "sigma_m": 60.9
+        },
+        {
+          "id": "c119",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 196.168,
+          "y": -11.25,
+          "sigma_m": 4.142
+        },
+        {
+          "id": "c120",
+          "lane": 6,
+          "src": "measured",
+          "x": 938.049,
+          "y": -27.188,
+          "sigma_m": 34.487
+        },
+        {
+          "id": "c123",
+          "lane": 5,
+          "src": "measured",
+          "x": 714.871,
+          "y": -26.019,
+          "sigma_m": 17.246
+        },
+        {
+          "id": "c127",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 83.191,
+          "y": -11.017,
+          "sigma_m": 1.024
+        },
+        {
+          "id": "c128",
+          "lane": 1,
+          "src": "measured",
+          "x": 199.678,
+          "y": -11.314,
+          "sigma_m": 1.997
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "measured",
+          "x": 80.0,
+          "y": -10.5,
+          "sigma_m": 1.2
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 75.24684481309986,
+          "y": -10.757361311996483,
+          "sigma_m": 0.65
+        }
+      ]
+    },
+    {
+      "requested_t": 28,
+      "f": 350,
+      "source_t": 28.0,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 6,
+        "2": 4,
+        "3": 6,
+        "4": 3,
+        "5": 5,
+        "6": 1,
+        "7": 0
+      },
+      "total_tracks": 25,
+      "measured": 20,
+      "tracks": [
+        {
+          "id": "c026",
+          "lane": 5,
+          "src": "measured",
+          "x": 140.045,
+          "y": -23.57,
+          "sigma_m": 1.4
+        },
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 133.418,
+          "y": -14.493,
+          "sigma_m": 1.334
+        },
+        {
+          "id": "c074",
+          "lane": 3,
+          "src": "measured",
+          "x": 115.995,
+          "y": -18.288,
+          "sigma_m": 1.16
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 190.523,
+          "y": -10.491,
+          "sigma_m": 1.905
+        },
+        {
+          "id": "c082",
+          "lane": 2,
+          "src": "measured",
+          "x": 229.773,
+          "y": -14.913,
+          "sigma_m": 2.298
+        },
+        {
+          "id": "c083",
+          "lane": 6,
+          "src": "measured",
+          "x": 237.776,
+          "y": -28.37,
+          "sigma_m": 2.378
+        },
+        {
+          "id": "c085",
+          "lane": 1,
+          "src": "measured",
+          "x": 105.474,
+          "y": -10.395,
+          "sigma_m": 1.055
+        },
+        {
+          "id": "c087",
+          "lane": 3,
+          "src": "measured",
+          "x": 149.423,
+          "y": -18.124,
+          "sigma_m": 1.494
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 256.924,
+          "y": -26.682,
+          "sigma_m": 2.569
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 334.69,
+          "y": -17.68,
+          "sigma_m": 3.347
+        },
+        {
+          "id": "c113",
+          "lane": 4,
+          "src": "measured",
+          "x": 635.68,
+          "y": -22.251,
+          "sigma_m": 12.146
+        },
+        {
+          "id": "c119",
+          "lane": 1,
+          "src": "measured",
+          "x": 152.266,
+          "y": -12.005,
+          "sigma_m": 1.523
+        },
+        {
+          "id": "c123",
+          "lane": 4,
+          "src": "interpolated",
+          "x": 524.515,
+          "y": -23.08,
+          "sigma_m": 28.673
+        },
+        {
+          "id": "c129",
+          "lane": 3,
+          "src": "measured",
+          "x": 281.468,
+          "y": -18.027,
+          "sigma_m": 2.815
+        },
+        {
+          "id": "c130",
+          "lane": 4,
+          "src": "measured",
+          "x": 410.42,
+          "y": -22.256,
+          "sigma_m": 5.671
+        },
+        {
+          "id": "c131",
+          "lane": 3,
+          "src": "measured",
+          "x": 410.974,
+          "y": -18.159,
+          "sigma_m": 4.831
+        },
+        {
+          "id": "c132",
+          "lane": 2,
+          "src": "measured",
+          "x": 550.185,
+          "y": -14.641,
+          "sigma_m": 8.657
+        },
+        {
+          "id": "c133",
+          "lane": 1,
+          "src": "interpolated",
+          "x": 594.106,
+          "y": -10.937,
+          "sigma_m": 36.742
+        },
+        {
+          "id": "c134",
+          "lane": 3,
+          "src": "measured",
+          "x": 623.581,
+          "y": -17.208,
+          "sigma_m": 11.821
+        },
+        {
+          "id": "c141",
+          "lane": 2,
+          "src": "interpolated",
+          "x": 245.871,
+          "y": -16.085,
+          "sigma_m": 6.42
+        },
+        {
+          "id": "c142",
+          "lane": 5,
+          "src": "measured",
+          "x": 627.307,
+          "y": -24.782,
+          "sigma_m": 14.563
+        },
+        {
+          "id": "c143",
+          "lane": 5,
+          "src": "measured",
+          "x": 615.345,
+          "y": -26.78,
+          "sigma_m": 14.5
+        },
+        {
+          "id": "c144",
+          "lane": 5,
+          "src": "interpolated",
+          "x": 146.496,
+          "y": -24.58,
+          "sigma_m": 2.678
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "occluded-rest",
+          "x": 74.15,
+          "y": -12.65,
+          "sigma_m": 3.775
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 62.60445604749443,
+          "y": -11.617603505022167,
+          "sigma_m": 0.65
+        }
+      ]
+    },
+    {
+      "requested_t": 31.92,
+      "f": 399,
+      "source_t": 31.92,
+      "eye": {},
+      "tracks_per_lane": {
+        "0": 0,
+        "1": 5,
+        "2": 4,
+        "3": 6,
+        "4": 5,
+        "5": 2,
+        "6": 0,
+        "7": 0
+      },
+      "total_tracks": 22,
+      "measured": 21,
+      "tracks": [
+        {
+          "id": "c071",
+          "lane": 2,
+          "src": "measured",
+          "x": 113.55,
+          "y": -14.518,
+          "sigma_m": 1.135
+        },
+        {
+          "id": "c078",
+          "lane": 1,
+          "src": "measured",
+          "x": 150.077,
+          "y": -10.664,
+          "sigma_m": 1.501
+        },
+        {
+          "id": "c085",
+          "lane": 1,
+          "src": "measured",
+          "x": 101.397,
+          "y": -10.391,
+          "sigma_m": 1.014
+        },
+        {
+          "id": "c103",
+          "lane": 5,
+          "src": "measured",
+          "x": 174.392,
+          "y": -25.432,
+          "sigma_m": 1.744
+        },
+        {
+          "id": "c108",
+          "lane": 3,
+          "src": "measured",
+          "x": 232.476,
+          "y": -18.155,
+          "sigma_m": 2.325
+        },
+        {
+          "id": "c113",
+          "lane": 4,
+          "src": "measured",
+          "x": 538.137,
+          "y": -22.471,
+          "sigma_m": 8.295
+        },
+        {
+          "id": "c119",
+          "lane": 2,
+          "src": "measured",
+          "x": 129.698,
+          "y": -13.602,
+          "sigma_m": 1.297
+        },
+        {
+          "id": "c123",
+          "lane": 4,
+          "src": "measured",
+          "x": 414.458,
+          "y": -22.685,
+          "sigma_m": 4.913
+        },
+        {
+          "id": "c129",
+          "lane": 3,
+          "src": "measured",
+          "x": 186.52,
+          "y": -18.39,
+          "sigma_m": 1.865
+        },
+        {
+          "id": "c130",
+          "lane": 4,
+          "src": "measured",
+          "x": 300.688,
+          "y": -21.678,
+          "sigma_m": 4.507
+        },
+        {
+          "id": "c131",
+          "lane": 3,
+          "src": "measured",
+          "x": 280.871,
+          "y": -17.829,
+          "sigma_m": 2.809
+        },
+        {
+          "id": "c132",
+          "lane": 2,
+          "src": "measured",
+          "x": 408.864,
+          "y": -14.607,
+          "sigma_m": 4.781
+        },
+        {
+          "id": "c134",
+          "lane": 3,
+          "src": "measured",
+          "x": 484.714,
+          "y": -17.756,
+          "sigma_m": 6.72
+        },
+        {
+          "id": "c154",
+          "lane": 3,
+          "src": "measured",
+          "x": 559.804,
+          "y": -19.501,
+          "sigma_m": 9.178
+        },
+        {
+          "id": "c155",
+          "lane": 5,
+          "src": "measured",
+          "x": 341.44,
+          "y": -26.111,
+          "sigma_m": 3.414
+        },
+        {
+          "id": "c157",
+          "lane": 3,
+          "src": "measured",
+          "x": 573.065,
+          "y": -16.88,
+          "sigma_m": 9.392
+        },
+        {
+          "id": "c158",
+          "lane": 1,
+          "src": "measured",
+          "x": 557.804,
+          "y": -10.458,
+          "sigma_m": 12.436
+        },
+        {
+          "id": "c159",
+          "lane": 4,
+          "src": "measured",
+          "x": 763.504,
+          "y": -22.732,
+          "sigma_m": 16.671
+        },
+        {
+          "id": "c161",
+          "lane": 2,
+          "src": "measured",
+          "x": 161.167,
+          "y": -14.775,
+          "sigma_m": 2.266
+        },
+        {
+          "id": "c166",
+          "lane": 4,
+          "src": "measured",
+          "x": 480.704,
+          "y": -22.772,
+          "sigma_m": 6.609
+        },
+        {
+          "id": "yellow-car",
+          "lane": 1,
+          "src": "occluded-rest",
+          "x": 74.15,
+          "y": -12.65,
+          "sigma_m": 5.0
+        },
+        {
+          "id": "white-van",
+          "lane": 1,
+          "src": "measured",
+          "x": 62.60445604749443,
+          "y": -11.647204422283487,
+          "sigma_m": 0.65
+        }
+      ]
+    }
+  ]
+}

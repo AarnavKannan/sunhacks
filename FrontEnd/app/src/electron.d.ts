@@ -59,6 +59,74 @@ export type KinematicsFrame = {
   /** Precision tier: "crash" (precise) or "background" (approximate). */
   involvement?: "crash" | "background";
   sigma: { position_m?: number; speed_mps?: number; accel_mps2?: number } | null;
+  /** Compass bearing the body faces (from the played-back pose); heading_deg is the direction of travel. */
+  body_heading_deg?: number;
+  /** "vehicle" (default when absent) or "static": a fixed object, zero velocity/acceleration/net force. */
+  entity_kind?: "vehicle" | "static";
+  /**
+   * Provenance of this sample's position (measured reconstructions): the spec keyframe's `src`
+   * when a keyframe falls on this frame, "interpolated" between keyframes, "static" for fixed
+   * objects, absent for preview/model scenes.
+   */
+  src?: KinSampleSource;
+  /** Ids of the objects this entity is in contact with at this frame (from the spec's contacts). */
+  contact_with?: string[];
+};
+
+/** gemini/spec.ts SampleSource plus "static" (fixed scene object). */
+export type KinSampleSource = "measured" | "interpolated" | "occluded-rest" | "out-of-view-extrapolated" | "edge-extrapolated" | "static";
+
+/** A fixed collision object (e.g. the median divider), world frame. Immovable: never has velocity. */
+export type KinStaticObject = {
+  id: string;
+  label: string;
+  /** spec StaticObject.kind, e.g. "median_divider". */
+  kind: string;
+  material: string;
+  /** Ground footprint polygon, world frame (y = 0), same order as the spec's plan footprint. */
+  footprint: KinVec3[];
+  /** Footprint centroid, world frame (y = 0); this is the "position" stored in its frames. */
+  centroid: KinVec3;
+  /** Unit vector along the footprint's long axis, world frame. */
+  axis: KinVec3;
+  length_m: number;
+  width_m: number;
+  height_m: number;
+  friction: number;
+  restitution: number;
+  stiffness_n_per_m: number;
+  immovable: true;
+  source: "measured" | "inferred";
+  sigma_m: number;
+  note: string;
+};
+
+/** One contact between two objects, world frame. Normal and impulse act from `a` onto `b`. */
+export type KinContact = {
+  a: string;
+  b: string;
+  kind: "vehicle-vehicle" | "vehicle-static";
+  /** Source video frame index of first contact (t = frame / fps); null when the spec gave none. */
+  frame: number | null;
+  t: number;
+  point: KinVec3;
+  /** Unit contact normal from a to b, world frame. */
+  normal: KinVec3;
+  /** The spec's plan-frame normal (degrees, x along the road, y to its left), for reference. */
+  normal_deg_plan: number;
+  /** Impulse magnitude along the normal (N·s), as given by the spec; null if not given. */
+  impulse_ns: number | null;
+  /** Impulse vector on b from a (N·s, world frame) = impulse_ns × normal; null if not given. */
+  impulse: KinVec3 | null;
+  /**
+   * What the stored vectors imply: each moving participant's mass × change in velocity across the
+   * contact (velocity just before vs just after, `window_s` apart), world frame. Compare with
+   * `impulse` (on b) / -`impulse` (on a). Static objects never move, so they have no entry.
+   */
+  derived: { entity_id: string; mass_kg: number; delta_v: KinVec3; impulse: KinVec3; along_normal_ns: number; window_s: number }[];
+  source: "measured" | "inferred";
+  sigma_s?: number;
+  note?: string;
 };
 
 export type KinematicsIncident = {
@@ -69,14 +137,46 @@ export type KinematicsIncident = {
   duration_s: number;
   origin_scene: KinVec3;
   crash: { start_s: number; end_s: number; vehicles: string[] } | null;
-  entities: { id: string; label: string; type: string; mass_kg: number; from_s: number; to_s: number; involvement?: "crash" | "background" }[];
+  entities: {
+    id: string;
+    label: string;
+    type: string;
+    mass_kg: number;
+    from_s: number;
+    to_s: number;
+    involvement?: "crash" | "background";
+    /** "static" for fixed objects (see static_objects); absent = vehicle. */
+    kind?: "vehicle" | "static";
+  }[];
   basis: string;
+  caveats?: string[];
   /** Road and air used for the force breakdown. */
   physics?: { wind: KinVec3; gradePercent: number; surface: string; mu: number; air_density: number };
+  /**
+   * What these frames were derived from: derivation version + source version, e.g.
+   * "kin-v3|measured-a9-v2#1a2b3c4d5e6f". Part of `hash`, so a new source re-stores the frames.
+   */
+  version?: string;
+  /**
+   * Frame grid the samples sit on. "video": sample `frame` is the source video frame index and
+   * t = frame / fps exactly (frames first_frame..last_frame). "preview": a synthetic 30 fps grid.
+   */
+  frame_grid?: { fps: number; first_frame: number; last_frame: number; source: "video" | "preview" };
+  /** Fixed collision objects (zero motion), stored as entities of kind "static" too. */
+  static_objects?: KinStaticObject[];
+  /** Every contact (vehicle-vehicle and vehicle-static) with normals and impulses. */
+  contacts?: KinContact[];
 };
 
 /** A Gemini analysis of uploaded footage (electron/gemini.ts), already validated by gemini/spec.ts. */
-export type GeminiAnalysis = { analysisId: string; spec: import("@/gemini/spec").IncidentSpec; cached: boolean; models: string[] };
+export type GeminiAnalysis = {
+  analysisId: string;
+  spec: import("@/gemini/spec").IncidentSpec;
+  cached: boolean;
+  models: string[];
+  /** Set when the upload matched known footage and loaded its stored reconstruction instead of a model run. */
+  known?: { label: string; version: string };
+};
 
 /** A Gemini scene saved in MongoDB: rebuilt from its analysis and seed at startup. */
 export type GeminiSceneRecord = {

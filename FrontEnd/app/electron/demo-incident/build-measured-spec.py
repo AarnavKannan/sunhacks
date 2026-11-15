@@ -1,11 +1,14 @@
 """
-Builds incident-spec.json (the app's verified reconstruction of demo.mp4 / demo_32s.mp4, 0-32 s)
+Builds incident-spec.json (the app's measured reconstruction of demo.mp4 / demo_32s.mp4, 0-32 s)
 from the frame-by-frame measurements in measure/data/:
 
   br_camera.json    road geometry in the world frame W (lane centres, median)
   tracks_world.json every vehicle, one sample per video frame, in W
-  crash_pair.json   the white van and the yellow car, per frame, plus the contact (overrides the
+  crash_pair.json   the white van and the yellow car, per frame, plus contacts (overrides the
                     crash-flagged tracks in tracks_world.json)
+  divider.json      measured fixed median verge, barrier and uncertain far hedge
+
+Writes <output>.build.json with the actual transform, source SHA-256s and stable track-ID map.
 
 World frame W (measure/README.md): X along the road AWAY from the camera, Y to the camera's RIGHT,
 heading 0 = +X, 90 = +Y. The crash carriageway is at negative Y with traffic moving -X.
@@ -14,13 +17,13 @@ App plan frame (src/gemini/spec.ts): x along the road with the crash carriageway
 +x; y to the LEFT when facing +x; heading 0 = +x, 90 = +y. A vehicle driving toward the camera
 (-X) faces +x, and its left is the camera's right (+Y), so
 
-    plan_x = -(X - X_ref)        plan_y = Y - Y_median (+ a per-carriageway lane-fit shift)
+    plan_x = -(X - X_ref)        plan_y = Y - Y_median
     plan direction (cos h, sin h) = (-cos hW, sin hW)  =>  h = 180 - hW
     forces/velocities: (fx, fy)_plan = (-fx, fy)_W
 
 Usage (from anywhere):  python build-measured-spec.py [--data DIR] [--out FILE] [--check]
 """
-import argparse, json, math, os, shutil, sys
+import argparse, hashlib, json, math, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FPS = 12.5
@@ -75,7 +78,7 @@ def road_geometry(cam):
 
     Plan y = 0 is the median barrier (or, without one, midway between the inner edge lines). Offsets
     are distances from it, inner edge line first, outer edge last."""
-    lines = cam.get("lines") or {}
+    lines = cam.get("lines_Y") or cam.get("lines") or {}
     if isinstance(lines, list):  # [{"name", "Y"}]
         lines = {l.get("name", str(i)): l.get("Y") for i, l in enumerate(lines)}
     lines = {k: (fnum(v.get("Y")) if isinstance(v, dict) else fnum(v)) for k, v in lines.items()}
@@ -93,233 +96,335 @@ def road_geometry(cam):
 # ---------------------------------------------------------------------------
 
 
+# Matches measuredDividedRoad in engine.ts: 200 m maximum site half-width + 650 m extension.
+ROAD_ENDS_PLAN = (-850.0, 850.0)
+SAMPLE_SOURCES = {"measured", "interpolated", "occluded-rest", "out-of-view-extrapolated", "edge-extrapolated"}
+
+
+def plan_point(point, x_ref, y_med):
+    if isinstance(point, dict):
+        point = [point.get("x", point.get("X")), point.get("y", point.get("Y"))]
+    return [round(x_ref - float(point[0]), 3), round(float(point[1]) - y_med, 3)]
+
+
+def polygon_area(poly):
+    return sum(a[0] * b[1] - b[0] * a[1] for a, b in zip(poly, poly[1:] + poly[:1])) / 2
+
+
+def static_objects(divider, x_ref, y_med):
+    result = []
+    for raw in ([divider] + divider.get("related_objects", [])) if divider else []:
+        poly = [plan_point(p, x_ref, y_med) for p in raw["footprint_W"]]
+        if poly[0] == poly[-1]:
+            poly.pop()
+        # Reflecting X reverses winding. Restore the schema's CCW plan-frame convention.
+        if polygon_area(poly) < 0:
+            poly.reverse()
+        if len(poly) < 3 or polygon_area(poly) <= 0:
+            raise ValueError(f"invalid static footprint: {raw['id']}")
+        result.append({"id": raw["id"], "kind": raw.get("kind", "other"), "label": raw.get("label", raw["id"]),
+                       "footprint_m": poly, "height_m": float(raw["height_m"]), "material": raw["material"],
+                       "friction": float(raw["friction"]), "restitution": float(raw["restitution"]),
+                       "stiffness_n_per_m": float(raw["stiffness_n_per_m"]), "immovable": True,
+                       "source": raw.get("source", "inferred"), "sigma_m": float(raw.get("sigma_m", 0.3)),
+                       "note": raw.get("note", "") + " " + raw.get("contact_params_source", "Contact parameters assumed.")})
+    return result
+
+
+def convert_contact(raw, x_ref, y_med, vehicle_ids, static_ids):
+    frame = fnum(raw.get("frame", raw.get("f")))
+    time = frame / FPS if frame is not None else fnum(raw.get("t_s", raw.get("t")))
+    if time is None or not 0 <= time <= LAST_FRAME / FPS:
+        raise ValueError(f"invalid contact time: {raw}")
+    a, b = raw.get("a", "yellow-car"), raw.get("b", "white-van")
+    if a not in vehicle_ids or b not in vehicle_ids | static_ids or a == b:
+        raise ValueError(f"unknown contact participants: {a}, {b}")
+    point = raw.get("W", raw.get("point_W", raw.get("point")))
+    if point is None:
+        raise ValueError("Contact needs a measured/inferred W point; no fallback contact is fabricated")
+    px, py = plan_point(point, x_ref, y_med)
+    normal = raw.get("normal_W")
+    if normal is not None:
+        if isinstance(normal, dict):
+            normal = [normal.get("x", normal.get("X")), normal.get("y", normal.get("Y"))]
+        nx, ny = -float(normal[0]), float(normal[1])
+        if not math.isfinite(nx + ny) or math.hypot(nx, ny) < 1e-9:
+            raise ValueError("Contact normal_W must be a finite nonzero vector from a to b")
+        deg = wrap(math.degrees(math.atan2(ny, nx)))
+    elif fnum(raw.get("normal_deg")) is not None:
+        deg = to_plan_heading(float(raw["normal_deg"]))
+    else:
+        raise ValueError("Contact needs normal_W or legacy world normal_deg")
+    result = {"a": a, "b": b, "t_s": round(time, 4), "x_m": px, "y_m": py, "normal_deg": round(deg, 5),
+              "kind": "vehicle-static" if b in static_ids else "vehicle-vehicle",
+              "source": "measured" if raw.get("source") == "measured" else "inferred",
+              "note": str(raw.get("note", "Contact inferred from footage and fitted geometry; not instrumented."))}
+    if frame is not None:
+        if frame != int(frame):
+            raise ValueError("Contact frame must be an integer source-video frame")
+        result["frame"] = int(frame)
+    for key in ("impulse_ns", "sigma_s"):
+        value = fnum(raw.get(key))
+        if value is not None:
+            result[key] = max(0.0, value)
+    return result
+
+
+def edge_keyframes(kfs, samples):
+    """Extend background endpoints at constant along-lane velocity, never changing observed samples.
+
+    Stop at a drawn road end or the clip boundary. Lateral velocity is deliberately discarded;
+    endpoint Y stays fixed even if the observed vehicle was changing lanes at that endpoint.
+    """
+    before, after = [], []
+    for first, target in ((True, before), (False, after)):
+        k, sample = (kfs[0], samples[0]) if first else (kfs[-1], samples[-1])
+        vx = fnum(sample.get("vx"))
+        if vx is None:
+            a, b = (kfs[0], kfs[1]) if first else (kfs[-2], kfs[-1])
+            v_plan = (b["x_m"] - a["x_m"]) / (b["t_s"] - a["t_s"])
+        else:
+            v_plan = -vx
+        if abs(v_plan) < 0.3:
+            continue
+        # Generate on the source frame grid; also retain the exact road-edge crossing.
+        edge = ROAD_ENDS_PLAN[0 if (v_plan > 0) == first else 1]
+        t_edge = k["t_s"] + (edge - k["x_m"]) / v_plan
+        lo, hi = (max(0.0, t_edge), k["t_s"]) if first else (k["t_s"], min(LAST_FRAME / FPS, t_edge))
+        if hi <= lo + 1e-6:
+            continue
+        times = {round(f / FPS, 6) for f in range(math.ceil(lo * FPS), math.floor(hi * FPS) + 1)}
+        times.add(round(lo if first else hi, 6))
+        # Keep the exact outer crossing and drop a nearby frame-grid extrapolation if needed.
+        ordered = sorted(times, reverse=not first)
+        spaced = []
+        for t in ordered:
+            if not spaced or abs(t - spaced[-1]) >= 0.02:
+                spaced.append(t)
+        for t in sorted(spaced):
+            if (first and t >= k["t_s"] - 1e-6) or (not first and t <= k["t_s"] + 1e-6):
+                continue
+            dt = t - k["t_s"]
+            target.append({"t_s": t, "x_m": round(k["x_m"] + v_plan * dt, 3), "y_m": k["y_m"],
+                           "heading_deg": 0.0 if v_plan > 0 else -180.0, "speed_mps": round(abs(v_plan), 3),
+                           "src": "edge-extrapolated", "sigma_m": round(k.get("sigma_m", 0.5) + abs(dt) * 0.5, 3)})
+    # Do not emit an almost-coincident edge/frame pair that replay would deduplicate.
+    if before and kfs[0]["t_s"] - before[-1]["t_s"] < 0.02:
+        before.pop()
+    if after and after[0]["t_s"] - kfs[-1]["t_s"] < 0.02:
+        after.pop(0)
+    return before + kfs + after
+
+
+def source_info(path, data=None):
+    if data is None:
+        with open(path, "rb") as fh:
+            data = fh.read()
+    return {"path": os.path.abspath(path), "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
+
+
 def main():
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--data", default=os.path.join(HERE, "measure", "data"))
     ap.add_argument("--out", default=os.path.join(HERE, "incident-spec.json"))
-    ap.add_argument("--check", action="store_true", help="only run the frame-mapping unit check")
+    ap.add_argument("--check", action="store_true", help="only run coordinate and static geometry checks")
+    ap.add_argument("--omit-opposing", action="store_true", help="omit background traffic above the median in W")
+    ap.add_argument("--extend-background-edges", action="store_true", help="diagnostic only: extend background endpoints to road ends; can create unsupported in-camera traffic")
     args = ap.parse_args()
-
     check_mapping()
     if args.check:
         return
-
-    cam = json.load(open(os.path.join(args.data, "br_camera.json")))
-    tw = json.load(open(os.path.join(args.data, "tracks_world.json")))
-    cp_path = os.path.join(args.data, "crash_pair.json")
-    cp = json.load(open(cp_path)) if os.path.exists(cp_path) else None
-
-    y_med, lines_fwd, lines_bwd, raw_lines = road_geometry(cam)
-    centres_fwd = [-(a + b) / 2 for a, b in zip(lines_fwd, lines_fwd[1:])]   # plan y of each drawn lane centre
+    paths = {k: os.path.join(args.data, k + ".json") for k in ("br_camera", "tracks_world", "crash_pair", "divider")}
+    # Hash the bytes actually parsed, even when another worker replaces a source during a build.
+    loaded_sources = {}
+    def load_source(key, default=None):
+        path = paths[key]
+        if default is not None and not os.path.exists(path):
+            return default
+        with open(path, "rb") as fh:
+            data = fh.read()
+        loaded_sources[key] = source_info(path, data)
+        return json.loads(data)
+    cam = load_source("br_camera")
+    tw = load_source("tracks_world")
+    cp = load_source("crash_pair", {})
+    div = load_source("divider", {})
+    synthetic = bool(tw.get("synthetic") or cp.get("synthetic"))
+    extend_edges = synthetic or args.extend_background_edges
+    y_med, lines_fwd, lines_bwd, _ = road_geometry(cam)
+    centres_fwd = [-(a + b) / 2 for a, b in zip(lines_fwd, lines_fwd[1:])]
     centres_bwd = [(a + b) / 2 for a, b in zip(lines_bwd, lines_bwd[1:])]
-    shift_fwd = shift_bwd = 0.0
-
-    # Crash vehicles: A4's file wins; A3's crash-flagged tracks are dropped.
-    crash_src = {}
-    contact = None
-    if cp:
-        crash_src = dict(cp.get("vehicles", {}))
-        contact = cp.get("contact")
-    a3_crash = [t for t in tw["tracks"] if t.get("crash")]
-    if not crash_src:  # fallback: take A3's crash-flagged tracks
-        for t in a3_crash:
-            cat = category_of(t.get("class"), fnum(t.get("length_m")))
-            crash_src["white-van" if cat == "van" else "yellow-car"] = t
-    background = [t for t in tw["tracks"] if not t.get("crash")]
-
-    t_contact = fnum(contact.get("t")) if contact else None
-    if t_contact is None and contact and contact.get("frame") is not None:
-        t_contact = int(contact["frame"]) / FPS
-    if contact and contact.get("frame") is not None:
-        t_contact = int(contact["frame"]) / FPS
-    # X_ref: puts the contact at plan x = +12 (crash carriageway traffic runs +x toward it).
-    if contact and contact.get("point"):
-        x_contact_w = float(contact["point"][0])
+    crash_src = dict(cp.get("vehicles", {}))
+    if not crash_src:
+        for track in tw["tracks"]:
+            if track.get("crash"):
+                cat = category_of(track.get("class"), fnum(track.get("length_m")))
+                crash_src["white-van" if cat == "van" else "yellow-car"] = track
+    contacts_raw = cp.get("contacts")
+    if contacts_raw is None:
+        contacts_raw = [cp["contact"]] if cp.get("contact") else []
+    primary = next((c for c in contacts_raw if c.get("b", "white-van") in crash_src), None)
+    anchor = primary or next(iter(contacts_raw), None)
+    anchor_point = anchor.get("W", anchor.get("point_W", anchor.get("point"))) if anchor else None
+    if anchor_point is not None:
+        x_contact_w = float(anchor_point.get("x", anchor_point.get("X"))) if isinstance(anchor_point, dict) else float(anchor_point[0])
     else:
-        van = crash_src.get("white-van") or next(iter(crash_src.values()))
-        x_contact_w = sorted(float(s["x"]) for s in van["samples"])[len(van["samples"]) // 2]
-    X_REF = round(x_contact_w + 12.0, 2)
+        van = crash_src.get("white-van") or next(iter(crash_src.values()), None)
+        xs = sorted(float(s["x"]) for s in (van or {}).get("samples", []) if fnum(s.get("x")) is not None)
+        x_contact_w = xs[len(xs) // 2] if xs else 80.0
+    x_ref = round(x_contact_w + 12.0, 2)
+    fixed = static_objects(div, x_ref, y_med)
+    objects, dropped, mapping = [], [], {}
+    used = {o["id"] for o in fixed} | set(crash_src)
 
-    def plan_xy(X, Y, side_shift):
-        return -(X - X_REF), (Y - y_med) + side_shift
-
-    dropped = []
-    objects = []
-    lateral_err = []
-
-    def make_object(oid, t, involvement):
-        samples = sorted((s for s in t.get("samples", []) if s.get("f") is not None), key=lambda s: s["f"])
-        samples = [s for s in samples if 0 <= int(s["f"]) <= LAST_FRAME and fnum(s.get("x")) is not None and fnum(s.get("y")) is not None]
-        # one sample per frame
-        seen, uniq = set(), []
-        for s in samples:
-            if int(s["f"]) not in seen:
-                seen.add(int(s["f"]))
-                uniq.append(s)
-        samples = uniq
+    def make_object(oid, track, involvement):
+        samples = sorted((s for s in track.get("samples", []) if fnum(s.get("f")) is not None), key=lambda s: s["f"])
+        uniq = {}
+        for sample in samples:
+            f = int(sample["f"])
+            if 0 <= f <= LAST_FRAME and fnum(sample.get("x")) is not None and fnum(sample.get("y")) is not None:
+                uniq.setdefault(f, sample)
+        samples = list(uniq.values())
         if len(samples) < 2:
-            dropped.append((t.get("id", oid), f"{len(samples)} usable sample(s) in 0-32 s"))
+            dropped.append({"id": str(track.get("id", oid)), "reason": "fewer than two usable samples"})
             return None
-        length = fnum(t.get("length_m"))
-        cat = category_of(t.get("class"), length)
+        cat = category_of(track.get("class"), fnum(track.get("length_m")))
         dl, dw, dm = CATEGORY_DEFAULTS[cat]
-        # Same bounds sanitizeSpec enforces, so the file survives it unchanged.
-        # (rounded first, then clamped with the same float bounds JS computes)
-        length = min(dl * 1.4, max(dl * 0.6, round(length or dl, 3)))
-        width = min(dw * 1.4, max(dw * 0.6, round(fnum(t.get("width_m")) or dw, 3)))
-        mass = min(dm * 2, max(dm * 0.5, round(fnum(t.get("mass_kg")) or dm, 1)))
-        # Which carriageway: by where it mostly is relative to the median.
-        ys = sorted(float(s["y"]) for s in samples)
-        on_crash_side = ys[len(ys) // 2] < y_med or involvement == "crash"
-        side_shift = shift_fwd if on_crash_side else shift_bwd
-        drawn = centres_fwd if on_crash_side else centres_bwd
-        kfs = []
+        length = min(dl * 1.4, max(dl * 0.6, round(fnum(track.get("length_m")) or dl, 3)))
+        width = min(dw * 1.4, max(dw * 0.6, round(fnum(track.get("width_m")) or dw, 3)))
+        mass = min(dm * 2, max(dm * 0.5, round(fnum(track.get("mass_kg")) or dm, 1)))
+        kfs, forces = [], []
         for s in samples:
-            f = int(s["f"])
-            x, y = plan_xy(float(s["x"]), float(s["y"]), side_shift)
-            spd = fnum(s.get("speed_mps"))
-            if spd is None:
-                spd = math.hypot(fnum(s.get("vx"), 0.0), fnum(s.get("vy"), 0.0))
-            hw = fnum(s.get("heading_deg"))
-            if hw is None:
-                hw = math.degrees(math.atan2(fnum(s.get("vy"), 0.0), fnum(s.get("vx"), 0.0)))
-            kfs.append({"t_s": round(f / FPS, 4), "x_m": round(x, 3), "y_m": round(y, 3),
-                        "heading_deg": round(to_plan_heading(hw), 2), "speed_mps": round(min(70.0, max(0.0, spd)), 3)})
-            if involvement == "background" and drawn:
-                lateral_err.append(min(abs(y - d) for d in drawn))
-        paint = (t.get("paint") or "grey").strip().lower()
-        hexv = t.get("paint_hex") or "#8a8f98"
-        if not (isinstance(hexv, str) and len(hexv) == 7 and hexv.startswith("#")):
+            x, y = plan_point([s["x"], s["y"]], x_ref, y_med)
+            speed = fnum(s.get("speed_mps"), math.hypot(fnum(s.get("vx"), 0.0), fnum(s.get("vy"), 0.0)))
+            hw = fnum(s.get("heading_deg"), math.degrees(math.atan2(fnum(s.get("vy"), 0.0), fnum(s.get("vx"), 0.0))))
+            k = {"t_s": round(int(s["f"]) / FPS, 4), "x_m": x, "y_m": y,
+                 "heading_deg": round(to_plan_heading(hw), 3), "speed_mps": round(min(70.0, max(0.0, speed)), 3),
+                 "src": s.get("src") if s.get("src") in SAMPLE_SOURCES else "measured"}
+            if fnum(s.get("sigma_m")) is not None:
+                k["sigma_m"] = max(0.0, float(s["sigma_m"]))
+            kfs.append(k)
+            if involvement == "crash":
+                cause = s.get("cause", "other")
+                forces.append({"t_s": k["t_s"], "fx_n": round(max(-2e6, min(2e6, -fnum(s.get("fx_n"), 0.0))), 1),
+                               "fy_n": round(max(-2e6, min(2e6, fnum(s.get("fy_n"), 0.0))), 1),
+                               "cause": cause if cause in FORCE_CAUSES else "other", "note": f"Derived from track ({k['src']}); not instrumented."})
+        if involvement == "background" and extend_edges:
+            kfs = edge_keyframes(kfs, samples)
+        last = kfs[-1]
+        rest = {key: last[key] for key in ("x_m", "y_m", "heading_deg")} if involvement == "crash" and last["speed_mps"] < 0.3 and last["src"] != "out-of-view-extrapolated" else None
+        paint = str(track.get("paint") or "grey").strip().lower()
+        hexv = track.get("paint_hex") or "#8a8f98"
+        if not isinstance(hexv, str) or not re.fullmatch(r"#[0-9a-fA-F]{6}", hexv):
             hexv = "#8a8f98"
-        word = {"other": "vehicle"}.get(cat, cat)
-        forces, rest = [], None
-        if involvement == "crash":
-            for s in samples:
-                fx, fy = fnum(s.get("fx_n"), 0.0), fnum(s.get("fy_n"), 0.0)
-                cause = str(s.get("cause") or "other")
-                forces.append({"t_s": round(int(s["f"]) / FPS, 4), "fx_n": round(max(-2e6, min(2e6, -fx)), 1),
-                               "fy_n": round(max(-2e6, min(2e6, fy)), 1), "cause": cause if cause in FORCE_CAUSES else "other",
-                               "note": f"measured ({s.get('src', 'video')})" + ("" if cause in FORCE_CAUSES else f"; {cause}")})
-            last = kfs[-1]
-            rest = {"x_m": last["x_m"], "y_m": last["y_m"], "heading_deg": last["heading_deg"]}
-        return {
-            "id": oid, "label": f"{paint} {word}", "category": cat, "color_name": paint, "color_hex": hexv.lower(),
-            "make": None, "model": None, "involvement": involvement,
-            "length_m": length, "width_m": width, "mass_kg": mass,
-            "visible_from_s": kfs[0]["t_s"], "visible_to_s": kfs[-1]["t_s"],
-            "keyframes": kfs, "forces": forces, "rest": rest,
-            "confidence": 0.9 if involvement == "crash" else 0.75,
-        }
+        return {"id": oid, "label": f"{paint} {cat}", "category": cat, "color_name": paint, "color_hex": hexv.lower(),
+                "make": None, "model": None, "involvement": involvement, "length_m": length, "width_m": width, "mass_kg": mass,
+                **({"height_m": min(6.0, max(0.3, fnum(track.get("height_m"))))} if fnum(track.get("height_m")) else {}),
+                "visible_from_s": kfs[0]["t_s"], "visible_to_s": kfs[-1]["t_s"], "keyframes": kfs,
+                "forces": forces, "rest": rest, "confidence": fnum(track.get("confidence"), 0.9 if involvement == "crash" else 0.75)}
 
-    for oid in ("white-van", "yellow-car"):
-        if oid in crash_src:
-            o = make_object(oid, crash_src[oid], "crash")
-            if o:
-                o["label"] = {"white-van": "white van (stopped in lane 1)", "yellow-car": "yellow car"}.get(oid, o["label"])
-                objects.append(o)
+    for oid, track in crash_src.items():
+        obj = make_object(oid, track, "crash")
+        if obj:
+            objects.append(obj)
+            mapping[str(track.get("id", oid))] = oid
     n_bg = 0
-    for t in sorted(background, key=lambda t: min((s["f"] for s in t.get("samples", [])), default=9999)):
-        o = make_object(f"veh-{n_bg + 1:03d}", t, "background")
-        if o:
-            o["source_track"] = t.get("id")
-            objects.append(o)
+    for i, track in enumerate(tw["tracks"]):
+        if track.get("crash"):
+            # Crash-pair measurements supersede these, but keep their identity mapping auditable.
+            cat = category_of(track.get("class"), fnum(track.get("length_m")))
+            mapping[str(track.get("id", i))] = "white-van" if cat == "van" else "yellow-car"
+            continue
+        ys = [float(s["y"]) for s in track.get("samples", []) if fnum(s.get("y")) is not None]
+        if args.omit_opposing and ys and sorted(ys)[len(ys) // 2] > y_med:
+            continue
+        original = str(track.get("id", f"veh-{i + 1:03d}"))
+        oid = original
+        suffix = 2
+        while oid in used:
+            oid = f"{original}-{suffix}"
+            suffix += 1
+        obj = make_object(oid, track, "background")
+        if obj:
+            used.add(oid)
+            objects.append(obj)
+            mapping[original] = oid
             n_bg += 1
-    for o in objects:  # source_track is not part of SpecObject; keep it out of the file
-        o.pop("source_track", None)
-
     by_id = {o["id"]: o for o in objects}
+    contacts = sorted((convert_contact(c, x_ref, y_med, set(by_id), {o["id"] for o in fixed}) for c in contacts_raw), key=lambda c: c["t_s"])
     crash = None
-    if "white-van" in by_id and "yellow-car" in by_id and t_contact is not None:
-        def rest_time(o):
-            k = o["keyframes"]
-            t_rest = k[-1]["t_s"]
-            for i in range(len(k) - 1, -1, -1):
-                if k[i]["t_s"] < t_contact or k[i]["speed_mps"] >= 0.3:
-                    break
-                t_rest = k[i]["t_s"]
-            return t_rest
-        end = max(t_contact + 0.08, rest_time(by_id["white-van"]), rest_time(by_id["yellow-car"]))
-        px, py = plan_xy(*map(float, contact["point"]), shift_fwd) if contact.get("point") else (12.0, centres_fwd[0])
-        nw = fnum(contact.get("normal_deg"))
-        crash = {
-            "start_s": round(t_contact, 4), "end_s": round(min(DURATION, end), 4),
-            "kind": "rear-end sideswipe into stationary van",
-            "description": (f"The yellow car leaves lane 2 and its front strikes the rear median-side corner of the white van stopped in lane 1 "
-                            f"at {t_contact:.2f} s (frame {int(round(t_contact * FPS))}); measured impulse {fnum(contact.get('impulse_ns'), 0) / 1000:.1f} kN·s, "
-                            f"peak force {fnum(contact.get('peak_force_n'), 0) / 1000:.0f} kN over {fnum(contact.get('duration_s'), 0):.2f} s. "
-                            f"Both vehicles are at rest by {end:.2f} s."),
-            "participants": ["yellow-car", "white-van"],
-            "contacts": [{"a": "yellow-car", "b": "white-van", "t_s": round(t_contact, 4), "x_m": round(px, 3), "y_m": round(py, 3),
-                          "normal_deg": round(to_plan_heading(nw), 2) if nw is not None else float("nan")}],
-        }
-        if not math.isfinite(crash["contacts"][0]["normal_deg"]):
-            crash["contacts"][0]["normal_deg"] = 0.0
-
-    old_path = args.out
-    if os.path.exists(old_path):
-        old = json.load(open(old_path))
-        backup = os.path.join(os.path.dirname(old_path), "incident-spec.hand.json")
-        if not str(old.get("prompt_version", "")).startswith("hand-verified-measured") and not os.path.exists(backup):
-            shutil.copyfile(old_path, backup)
-            print("backed up the hand-authored spec to", backup)
-
-    lat = sorted(lateral_err)
-    lat_med = lat[len(lat) // 2] if lat else float("nan")
-    lat_p90 = lat[int(len(lat) * 0.9)] if lat else float("nan")
+    if contacts:
+        participants = list(dict.fromkeys(oid for c in contacts for oid in (c["a"], c["b"]) if oid in by_id))
+        end = fnum(cp.get("end_s"), max(by_id[oid]["keyframes"][-1]["t_s"] for oid in participants))
+        # Soft-verge encroachment may precede the main vehicle impact. Preserve its own contact
+        # time, while the viewer's main impact marker follows the first vehicle-vehicle contact.
+        primary_contact = next((c for c in contacts if c["kind"] == "vehicle-vehicle"), contacts[0])
+        crash = {"start_s": primary_contact["t_s"], "end_s": round(min(DURATION, max(contacts[-1]["t_s"], end)), 4),
+                 "kind": cp.get("kind", "car strikes stopped van near median verge"),
+                 "description": "Frame-timed contacts from crash_pair.json. Inferred geometry and impulses are labeled individually. Moving or out-of-view vehicles are not assumed to be at rest.",
+                 "participants": participants, "contacts": contacts}
+    tracking_caveats = [str(tw["kinematics_assumptions"])] if tw.get("kinematics_assumptions") else []
+    caveat_ids = {}
+    for track in tw["tracks"]:
+        oid = mapping.get(str(track.get("id")))
+        if oid not in by_id:
+            continue
+        for note in track.get("kinematics_caveats", []):
+            caveat_ids.setdefault(str(note), []).append(oid)
+    tracking_caveats += [f"{note} Affected track IDs: {', '.join(ids)}." for note, ids in caveat_ids.items()]
+    review_path = os.path.join(args.data, "..", "review_tracks", "REVIEW-COMPLETE.md")
+    if not synthetic and os.path.isfile(review_path):
+        with open(review_path, "rb") as fh:
+            review_bytes = fh.read()
+        loaded_sources["tracking_review"] = source_info(review_path, review_bytes)
+        review_text = review_bytes.decode("utf-8")
+        heading = "## Residual issues to carry into production caveats"
+        if heading in review_text:
+            residuals = review_text.split(heading, 1)[1].split("\n## ", 1)[0]
+            tracking_caveats += ["Tracking audit: " + re.sub(r"^\d+\.\s*", "", line).replace("**", "").replace("`", "")
+                                 for line in residuals.splitlines() if re.match(r"^\d+\.\s+", line)]
     spec = {
-        "prompt_version": "hand-verified-measured-v1",
-        "title": "A9 motorway: car strikes stopped van",
+        "prompt_version": "measured-a9-v2", "title": ("SYNTHETIC CHECK: " if synthetic else "") + "A9 motorway: car strikes stopped van",
         "location_guess": "A9 motorway near Munich, Germany (TUM Traffic gantry cameras)",
-        "summary": ("Measured frame by frame (12.5 fps) from the bottom-right gantry camera, first 32 s. A white panel van stands stopped "
-                    "in lane 1 (next to the median) of the carriageway toward the camera while traffic steers around it. "
-                    + (f"At {t_contact:.2f} s a yellow car swerving out of lane 2 strikes the van's rear median-side corner and both come to rest by {crash['end_s']:.2f} s. " if crash else "")
-                    + f"{n_bg} other vehicles are reconstructed from their measured tracks."),
+        "summary": "First 32 seconds at 12.5 fps. Calibrated crash-side trajectories, asymmetric measured lane lines and fixed median geometry. " + f"{n_bg} background tracks; " + ("diagnostic endpoint extrapolations are labeled." if extend_edges else "background visibility follows audited source spans."),
         "duration_s": DURATION,
-        "views": [
-            {"video_index": 1, "description": "Mosaic tile bottom-right: calibrated gantry camera looking along the road; the crash carriageway (toward the camera) is on the left of the picture, crash site in lane 1 by the median",
-             "camera_kind": "fixed gantry traffic camera", "moving": False, "time_offset_s": 0, "plus_x_traffic": "toward_camera"},
-            {"video_index": 1, "description": "Mosaic tile bottom-left: neighbouring gantry camera on the same A9 section (not measured)",
-             "camera_kind": "fixed gantry traffic camera", "moving": False, "time_offset_s": 0, "plus_x_traffic": "not_visible"},
-            {"video_index": 1, "description": "Mosaic tile top-left: neighbouring gantry camera on the same A9 section (not measured)",
-             "camera_kind": "fixed gantry traffic camera", "moving": False, "time_offset_s": 0, "plus_x_traffic": "not_visible"},
-            {"video_index": 1, "description": "Mosaic tile top-right: neighbouring gantry camera on the same A9 section (not measured)",
-             "camera_kind": "fixed gantry traffic camera", "moving": False, "time_offset_s": 0, "plus_x_traffic": "not_visible"},
-        ],
+        "views": [{"video_index": 1, "description": "Bottom-right crash camera; calibrated 479x300 tile, crop x=481 y=304; 12.5 fps.",
+                   "camera_kind": "fixed gantry traffic camera", "moving": False, "time_offset_s": 0, "plus_x_traffic": "toward_camera"}],
         "environment_preset": "snowy",
-        "road": {"kind": "divided_highway", "region": "DE", "road_class": "motorway", "lanes_each_way": max(1, min(5, len(centres_fwd))),
+        "road": {"kind": "divided_highway", "region": "DE", "road_class": "motorway", "lanes_each_way": len(centres_fwd),
                  "cross_lanes_each_way": 1, "surface": "dry", "grade_percent": 0, "speed_limit_mps": None,
                  "lane_lines_forward_m": [round(v, 3) for v in lines_fwd], "lane_lines_backward_m": [round(v, 3) for v in lines_bwd]},
-        "wind": {"toward_deg": 0, "speed_mps": 0},
-        "crash": crash,
-        "objects": objects,
-        "caveats": [
-            "Positions, headings and speeds are measured per video frame (12.5 fps) from the bottom-right camera, calibrated on the lane dashes (3.75 m lanes assumed); vehicles are shown only while that camera sees them.",
-            f"The road is drawn from the measured painted lines: {len(centres_fwd)} lanes toward the camera ({', '.join(f'{b - a:.2f}' for a, b in zip(lines_fwd, lines_fwd[1:]))} m wide) and {len(centres_bwd)} away ({', '.join(f'{b - a:.2f}' for a, b in zip(lines_bwd, lines_bwd[1:]))} m); lateral positions are not shifted.",
-            "Forces on the crash pair are derived from the measured motion (m·a) and the momentum exchange at contact, not from instruments.",
-            "Vehicle sizes are clamped to the viewer's class ranges (long trucks are drawn shorter).",
-            "Pedestrians (the van's driver) and debris are not reconstructed.",
-        ],
-    }
+        "wind": {"toward_deg": 0, "speed_mps": 0}, "crash": crash, "objects": objects, "static_objects": fixed,
+        "caveats": (["SYNTHETIC integration fixture: trajectories and contacts do not describe the source footage."] if synthetic else []) + [
+            "Frame measurements use a calibrated pinhole camera; dash spacing and assumed van width set scale. Uncertainty is retained per sample.",
+            f"Measured road has {len(centres_fwd)} crash-side strips and {len(centres_bwd)} opposing strips; no symmetric lane fit or lateral shift.",
+            ("Diagnostic background endpoint extension uses constant along-road velocity and fixed lateral position to the road/clip bounds. It can create unsupported visible traffic and does not establish observed presence." if extend_edges else
+             "Background visibility follows the supplied audited measured/interpolated spans. Run-in/run-out identity outside those spans is unknown; a track can first appear inside the image where its first reliable fit occurs."),
+            "Manual lane census retains residual differences: inferred/occluded tracks can remain without a visible source body, and horizon/edge identities are uncertain. Complete one-to-one visible-traffic coverage has not been established.",
+            "The crash-side median near the crash is a low snow-covered verge, separate from its far-side barrier and the uncertain far-section hedge band. Heights and contact parameters are estimates; see static-object notes.",
+            "Contact times/points, normals and impulses retain their inferred/measured labels; forces derived from fitted motion are not instrumented.",
+            "Vehicle dimensions are clamped to viewer class ranges; pedestrians and debris are omitted."]
+            + [str(note) for note in cp.get("evidence_notes", []) if note] + tracking_caveats}
+    out_dir = os.path.dirname(os.path.abspath(args.out))
+    os.makedirs(out_dir, exist_ok=True)
     with open(args.out, "w", encoding="utf-8") as fh:
-        json.dump(spec, fh, separators=(",", ":"))
+        json.dump(spec, fh, separators=(",", ":"), allow_nan=False)
         fh.write("\n")
-
-    cats = {}
-    for o in objects:
-        cats[o["category"]] = cats.get(o["category"], 0) + 1
-    print(f"wrote {args.out} ({os.path.getsize(args.out) / 1e6:.1f} MB)")
-    print(f"vehicles: {len(objects)} ({len(objects) - n_bg} crash, {n_bg} background); by class {cats}; keyframes {sum(len(o['keyframes']) for o in objects)}")
-    print(f"A3 tracks: {len(tw['tracks'])} ({len(a3_crash)} crash-flagged, replaced by crash_pair)" if cp else f"A3 tracks: {len(tw['tracks'])} (no crash_pair.json: crash pair taken from A3)")
-    print(f"dropped: {len(dropped)}" + "".join(f"\n  {i}: {why}" for i, why in dropped))
-    print(f"X_ref {X_REF:.2f} m (contact X {x_contact_w:.2f} -> plan x {-(x_contact_w - X_REF):.2f}); Y_median {y_med:.3f}")
-    print(f"road lines (m from plan y=0 at W Y={y_med:.3f}): forward {[round(v, 3) for v in lines_fwd]} backward {[round(v, 3) for v in lines_bwd]}")
-    print(f"drawn lane centres plan y: fwd {[round(v, 2) for v in centres_fwd]} bwd {[round(v, 2) for v in centres_bwd]} (lines drawn exactly where measured)")
-    print(f"background lateral distance to nearest drawn lane centre: median {lat_med:.2f} m, p90 {lat_p90:.2f} m")
-    if crash:
-        print(f"crash: start {crash['start_s']} s, end {crash['end_s']} s, contact plan ({crash['contacts'][0]['x_m']}, {crash['contacts'][0]['y_m']}), normal {crash['contacts'][0]['normal_deg']} deg")
-        for oid in ("yellow-car", "white-van"):
-            k = by_id[oid]["keyframes"]
-            print(f"  {oid}: {len(k)} kf {k[0]['t_s']}-{k[-1]['t_s']} s, rest {by_id[oid]['rest']}")
+    metadata = {"version": "measured-a9-v2", "synthetic": synthetic, "fps": FPS, "duration_s": DURATION,
+                "X_REF": x_ref, "Y_median": y_med, "road_ends_plan_m": list(ROAD_ENDS_PLAN),
+                "frame_transform": {"x_m": "X_REF - X_W", "y_m": "Y_W - Y_median", "normal_plan": "(-nx_W, ny_W)", "three": "(x_plan, height, -y_plan)"},
+                "sources": loaded_sources,
+                "builder": source_info(__file__), "output": source_info(args.out), "source_track_to_spec_id": mapping,
+                "dropped": dropped, "omit_opposing": args.omit_opposing, "background_edge_extrapolation": extend_edges}
+    video_path = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", "demo_32s.mp4"))
+    if os.path.exists(video_path):
+        metadata["source_video"] = source_info(video_path)
+    with open(args.out + ".build.json", "w", encoding="utf-8") as fh:
+        json.dump(metadata, fh, indent=2, allow_nan=False)
+        fh.write("\n")
+    print(f"wrote {args.out} + .build.json: {len(objects)} vehicles ({n_bg} background), {len(fixed)} static objects, {len(contacts)} contacts")
+    print(f"X_REF={x_ref:.3f}; Y_median={y_med:.3f}; forward lines={spec['road']['lane_lines_forward_m']}; backward lines={spec['road']['lane_lines_backward_m']}")
+    print(f"keyframes={sum(len(o['keyframes']) for o in objects)}; edge-extrapolated={sum(k['src'] == 'edge-extrapolated' for o in objects for k in o['keyframes'])}; dropped={len(dropped)}")
 
 
 def check_mapping():
@@ -343,7 +448,25 @@ def check_mapping():
     assert to_plan_heading(180.0 - 10.0) > 0
     # Other carriageway: moving +X (hW = 0) at Y above the median -> plan heading 180, plan y > 0.
     assert abs(abs(to_plan_heading(0.0)) - 180.0) < 1e-9 and (y_med + 2.9) - y_med > 0
-    print("frame mapping check: PASS (crash-carriageway traffic -> plan heading 0, plan y < 0)")
+    fixture = {"id": "synthetic-wall", "footprint_W": [[0, -8], [10, -8], [10, -7], [0, -7]],
+               "height_m": 0.5, "material": "concrete", "friction": 0.5, "restitution": 0.1,
+               "stiffness_n_per_m": 1e6, "source": "inferred"}
+    fixed = static_objects(fixture, 20, -5)[0]
+    assert polygon_area(fixed["footprint_m"]) > 0 and fixed["immovable"]
+    for nw in ([1, 0], [-1, 0], [0, 1], [0, -1], [3, 4]):
+        c = convert_contact({"a": "car", "b": "synthetic-wall", "frame": 290, "W": [5, -8], "normal_W": nw},
+                            20, -5, {"car"}, {"synthetic-wall"})
+        h = math.radians(c["normal_deg"])
+        length = math.hypot(*nw)
+        assert abs(math.cos(h) + nw[0] / length) < 1e-6
+        assert abs(math.sin(h) - nw[1] / length) < 1e-6
+        assert c["kind"] == "vehicle-static" and c["frame"] / FPS == c["t_s"]
+        assert "impulse_ns" not in c
+        with_null = convert_contact({"a": "car", "b": "synthetic-wall", "frame": 290,
+                                    "W": [5, -8], "normal_W": nw, "impulse_ns": None},
+                                   20, -5, {"car"}, {"synthetic-wall"})
+        assert "impulse_ns" not in with_null
+    print("frame mapping/static winding/contact normal checks: PASS")
 
 
 if __name__ == "__main__":

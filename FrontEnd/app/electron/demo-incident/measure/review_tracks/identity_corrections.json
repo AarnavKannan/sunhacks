@@ -1,0 +1,278 @@
+{
+  "version": 1,
+  "detection_sha256": "5d5c682774ee751e7cd5d0a3eeea401a921414ac52ed6a73d28d1bd58a2ec106",
+  "expected_track_sha256": {
+    "c009": "0a3f3f4051c0b4ebdbb264f3088523089985523802db8967fed732b169941e73",
+    "c010": "872a6378898a516b744ff35a17e4c8c29e98965ccbc4dd00a66a2d39c93b741f",
+    "c013": "2178ace5990352dd2fddf41963b214240b56fa98b7d9673253d25aacc7b6add3",
+    "c026": "98424d3f6645a7d7eb6ae79256b5492151b4ae0afd2ec6037326c12fd785399c",
+    "c032": "4877d1b32b4d3e49d234869977994631ae1009418e67d3e21ff6152a184189cf",
+    "c039": "a1b38f9945714e39c31814e15bba0f1272252467beca2c8aa0c5f143213910ec",
+    "c042": "10b2dadacccfdbd941e5080c4614632c862c4372d4efaf6ee4ca223308336b2b",
+    "c047": "b2a4f78fb877497c9a73a228c86bd99b7877733124af8520ea98dc8be8c5d4d6",
+    "c057": "ff12dd183bb5ae02d5bef872ff7ab52ae83fa1a236fca5a0244257db7f018c63",
+    "c059": "d4f26aa895f6c098b593d0c08761996efe2dad9c45a3231da07ea467d00c3d0f",
+    "c064": "b9ef9c2b1976306e844084ad6c347f656abf9d74d32ef63c5d80c8b6f43f46d4",
+    "c073": "ac30fd1bd96e4055eecd0139ddda2079d0fc3db09bca07f1cde4e8937401216d",
+    "c077": "2f0fd15d0438981ba36968910f2a3cda8b7cdab7b9f910ca56d6efc76204bf12",
+    "c079": "6647ce44fbfd8b092487ba1c253ceb9d6245c21ec43c0731fa980243ec1a6beb",
+    "c082": "e259edc01d6096f41ce15c4a13007b73d7a39c444ebbac9ca7aa22e3cb5e148b",
+    "c085": "268f3523cdfa74a3e624db5b6d3f63e389c043ee7bb0cb3712a990b42d860927",
+    "c087": "50789a97caef07680c90183f64c3b56652af49e43b5cd34a1064d05ad482cadb",
+    "c090": "b3f94ce70a818bfb60002c5351728857c1aee47984fb6c272e9c59fcfa8261cf",
+    "c100": "15cfe7bc7a9aa2e3ea02c9091baf41553604d586c0eae9850a8d67b720fb0aa0",
+    "c102": "4be990ed6433be38b31bc28a77d7863a92d72c3a45d8a28a1338b5df34065b28",
+    "c108": "2d69010a095e79a54a2802af94f5efb2632a2d9576c6541a02c6ac01b292208b",
+    "c112": "3af66726e0b0d9a4ea023e06a02ab96c645a548f625b656b30ae185360a36244",
+    "c113": "0624a96f526439f3a8f580b49fcb69f6dea7edd7b231ac87f022caeb67a97f83",
+    "c119": "5aaf9b720f296ac503700eeb97a97fc7705399c4f01a3a5e6ecb2ce99934e892",
+    "c121": "2f431632891f2dfa175ff0139fde07dabc87139057ddac3bef8ea3a762a44cc6",
+    "c127": "f77dc71e8f65d2be73f01a27bdeb7160cb97252d615f7866551f8cfc7b686134",
+    "c128": "346573174c384e20f8c9e56633f3422bc4bca93ed5d613f0fffc64f38c9e38d9",
+    "c137": "8f5932407f428fa5dc3360d9823e279db113018c2429b5c5e5d627bafad9461e",
+    "c138": "2b7a1578a17d1c46ecea0796818cb2f71ebcf60487ca647aa01b0b13763f1c96",
+    "c141": "94d38424bfd2e21c56dd903f75ebcb34dad09196eba46ac3abdc53278c50355a",
+    "c144": "b88deaf1ea0d93a107cf228436f9b94a49a73848b50c1f33121c8a39a78c8835",
+    "c147": "7c7c8aeac290647214f30c3a56c638354b541de630bb4b6093328db696b252e3",
+    "c149": "7584c51f2d77fa32cef4489799c5ee7baa30f11f5988536b3f71fef32df7662b",
+    "c150": "50a5d5a35d9104389db73d2947b893dc39d362e71130bde39d780309990b1530",
+    "c151": "4c775be29d26a1e739326ebc55b37f1f8220e5ff8094b4c3731ca4a53be6ccc1",
+    "c159": "370d62751b88916a8cdc40334544cdc5cd14e9cf0023f1bfecd33c8cd24544e4",
+    "c165": "42f2c029115c2da338966f3dc568081baf8fb2f1c85320c6579424124e69babb",
+    "c098": "43413ce5f169223300e8a77eb0672ad2e900a5406b065c2697a231d233ec826f",
+    "c111": "1cc91f21014d24011c8f6b6f79f55f6d626f72d6eddd3ad75d0ae60331a1d238",
+    "c163": "3c95899080a59e6aa989883b2818e02245efd68188111cafc3422a698385d6a9",
+    "c029": "664fee2be82e3cb4332685da055cfe11cc185cae785324526bbb42a2939b9d9a",
+    "c051": "dc274f6112c0094329c10ba77fb65c4230d1b4446fcad92a4c3a87914ab7dac0",
+    "c069": "9493d682fa158f675d0fd4ae09888b2327729165f87413a53a5ca25e9922ee7b"
+  },
+  "merges": [
+    {
+      "keep": "c009",
+      "merge": [
+        "c032"
+      ],
+      "evidence": [
+        "inspect_c009_c032.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c010",
+      "merge": [
+        "c039",
+        "c047",
+        "c057"
+      ],
+      "evidence": [
+        "inspect_c010_c039.png",
+        "inspect_c039_c047.png",
+        "inspect_c039_c057.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic.",
+      "priority": [
+        "c010",
+        "c057",
+        "c039",
+        "c047"
+      ]
+    },
+    {
+      "keep": "c013",
+      "merge": [
+        "c042"
+      ],
+      "evidence": [
+        "inspect_c013_c042.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c059",
+      "merge": [
+        "c079"
+      ],
+      "evidence": [
+        "inspect_c059_c079.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c064",
+      "merge": [
+        "c085"
+      ],
+      "evidence": [
+        "inspect_c064_c085.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c077",
+      "merge": [
+        "c102",
+        "c119",
+        "c128"
+      ],
+      "evidence": [
+        "inspect_c077_c102.png",
+        "inspect_c077_c119.png",
+        "inspect_c119_c128.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic.",
+      "priority": [
+        "c077",
+        "c119",
+        "c128",
+        "c102"
+      ]
+    },
+    {
+      "keep": "c108",
+      "merge": [
+        "c151"
+      ],
+      "evidence": [
+        "inspect_c108_c151.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c149",
+      "merge": [
+        "c150"
+      ],
+      "evidence": [
+        "inspect_c149_c150.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c147",
+      "merge": [
+        "c159"
+      ],
+      "evidence": [
+        "inspect_c147_c159.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c087",
+      "merge": [
+        "c165"
+      ],
+      "evidence": [
+        "inspect_c087_c165.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c082",
+      "merge": [
+        "c141"
+      ],
+      "evidence": [
+        "inspect_c082_c141.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c073",
+      "merge": [
+        "c121"
+      ],
+      "evidence": [
+        "inspect_c073_c121.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c026",
+      "merge": [
+        "c144"
+      ],
+      "evidence": [
+        "inspect_c026_c144.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c090",
+      "merge": [
+        "c100"
+      ],
+      "evidence": [
+        "inspect_c090_c100.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c113",
+      "merge": [
+        "c112"
+      ],
+      "evidence": [
+        "inspect_c112_c113.png"
+      ],
+      "reason": "Same source silhouette through coexisting fragment interval; independently inspected source contact sheets. Simultaneous fits retained as alternatives, not extra traffic."
+    },
+    {
+      "keep": "c051",
+      "merge": [
+        "c069"
+      ],
+      "measurement_frame_max": {
+        "c069": 135
+      },
+      "evidence": [
+        "inspect_c051_c069.png",
+        "inspect_c069.png"
+      ],
+      "reason": "c069 observations through f135 fit the same red source car as c051. Later c069 fits cross an occlusion onto uncertain other silhouettes; retain them as unassigned evidence without a reversing vehicle.",
+      "partial_exclusion_reason": "c069 after f135 has no established continuous identity: long occlusion then different silhouettes/range reversal. Raw fits remain unassigned; no new traffic or extrapolated linkage."
+    }
+  ],
+  "reservations": [
+    {
+      "id": "c127",
+      "physical_id": "white-van",
+      "evidence": "inspect_yellow-car_c127.png",
+      "reason": "Fits cover the authoritative crash white van front/body after impact; not an additional background vehicle. W2 measurements remain authoritative."
+    },
+    {
+      "id": "c137",
+      "physical_id": "white-van",
+      "evidence": "inspect_white-van_c137_c138.png",
+      "reason": "Fits cover the authoritative crash white van front/body after impact; not an additional background vehicle. W2 measurements remain authoritative."
+    },
+    {
+      "id": "c138",
+      "physical_id": "white-van",
+      "evidence": "inspect_white-van_c137_c138.png",
+      "reason": "Fits cover the authoritative crash white van front/body after impact; not an additional background vehicle. W2 measurements remain authoritative."
+    }
+  ],
+  "suppressed_parts": [
+    {
+      "id": "c098",
+      "evidence": "inspect_c098.png",
+      "reason": "Tiny car fit follows a green truck wireframe edge/top, without an independent car silhouette. Preserve fitted observations as excluded source parts, not manufactured traffic."
+    },
+    {
+      "id": "c111",
+      "evidence": "inspect_c111.png",
+      "reason": "Tiny car fit follows a green truck wireframe edge/top, without an independent car silhouette. Preserve fitted observations as excluded source parts, not manufactured traffic."
+    },
+    {
+      "id": "c163",
+      "evidence": "inspect_c163_c164.png",
+      "reason": "Tiny car fit follows a green truck wireframe edge/top, without an independent car silhouette. Preserve fitted observations as excluded source parts, not manufactured traffic."
+    },
+    {
+      "id": "c029",
+      "evidence": "inspect_c029.png",
+      "reason": "The car box follows the upper face/edge of a green truck source cuboid at f8\u201333, without a separate car body. Reverse range was not traffic motion."
+    }
+  ]
+}

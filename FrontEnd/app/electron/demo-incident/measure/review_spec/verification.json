@@ -1,0 +1,48 @@
+{
+  "scope": "Historical W3 geometry/synthetic checkpoint before final motorcycle retention and real production assembly; not final acceptance",
+  "typescript": "npx tsc -b PASS",
+  "engine_check": "PASS; 132 objects, zero keyframe error, sanitizer preserves dimensions/counts",
+  "measured_engine_check": {
+    "result": "MEASURED ENGINE CHECK PASS",
+    "fixture": "SYNTHETIC CHECK: A9 motorway: car strikes stopped van",
+    "vehicles": 132,
+    "keyframes": 52411,
+    "max_pose_error_m": 0,
+    "painted_lines": [
+      4.228,
+      7.87,
+      11.341,
+      14.985,
+      18.76,
+      22.043,
+      25.068,
+      -1.012,
+      -4.803,
+      -8.472,
+      -12.444
+    ],
+    "static_objects": 2,
+    "contacts": 2,
+    "kinematics_rows": 50019,
+    "elapsed_ms": 5152
+  },
+  "browser": {
+    "tool": "agent-browser",
+    "page": "browser-geometry.html",
+    "ready": true,
+    "errors": [],
+    "static_colliders": 3,
+    "meshes": 10,
+    "triangles": 11032,
+    "screenshots": [
+      "browser-geometry-overview.png",
+      "browser-geometry-near.png"
+    ],
+    "electron_launched": false
+  },
+  "real_contact_conversion": "real-contact-conversion-check.json",
+  "real_preview": "Historical missing-data state at W3; frozen real data is now assembled in production",
+  "production_incident_spec": "Final measured production SHA-256 38515829d0c5234dc23322d9fb4f33c5013ac9039b4d358d5ea99d7d7442f6f1; see final verification",
+  "additional_shared_contract_fields": [],
+  "superseded_by": "FrontEnd/app/tests/final-verification.json and tests/final-playback/playback-render-status.json"
+}

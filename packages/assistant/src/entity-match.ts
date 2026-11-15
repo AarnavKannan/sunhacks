@@ -2,6 +2,9 @@ import type { Entity, EntityMatch } from "./types";
 
 const STOP_WORDS = new Set(["the", "a", "an", "car", "vehicle", "one", "on", "in", "at", "that", "this"]);
 
+/** Words people use for fixed roadside objects; every static entity answers to them. */
+const STATIC_WORDS = "median divider barrier hedge bush bushes shrub shrubs planter island wall fixed static object".split(" ");
+
 function tokens(text: string): string[] {
   return text
     .toLowerCase()
@@ -25,7 +28,7 @@ export function matchEntities(entities: Entity[], query: string): EntityMatch[] 
       continue;
     }
     const haystack = new Set(
-      tokens([e.label, e.color, e.type, e.make, e.model, ...(e.aliases ?? [])].filter(Boolean).join(" ")),
+      tokens([e.label, e.color, e.type, e.make, e.model, ...(e.aliases ?? []), ...(e.kind === "static" ? STATIC_WORDS : [])].filter(Boolean).join(" ")),
     );
     if (q.length === 0) continue;
     const hits = q.filter((t) => haystack.has(t)).length;

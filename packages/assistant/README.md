@@ -42,7 +42,7 @@ npm test
 
 | File | What it is |
 |---|---|
-| `src/tools/registry.ts` | The 25 tools (requirements §7 plus `/ux-features.md`): library and Back, exact camera moves (degrees and meters), POV, crash-relative timeline seeks, per-frame kinematics and series, overlays including the source video. One definition serves MCP and the API adapters. Names use `_` not `.` (API name rules). |
+| `src/tools/registry.ts` | The 26 tools (requirements §7 plus `/ux-features.md`): library and Back, exact camera moves (degrees and meters), POV, crash-relative timeline seeks, per-frame kinematics and series, `query_contacts` (vehicle-vehicle and vehicle-static contacts, fixed objects like the median divider, frame grid; times may be given as a source video `frame`, t = frame / fps), overlays including the source video. One definition serves MCP and the API adapters. Names use `_` not `.` (API name rules). |
 | `src/mcp/server.ts` | Streamable HTTP MCP server on `127.0.0.1`, random port, per-session bearer token, stateless. |
 | `src/prompt/system-prompt.ts` | The system prompt: plain language, numbers only from tools, units + uncertainty, crash as a period (before = before `crash_start`), camera conventions and scene bounds, POV caveat, no fault/liability opinions, read-only data. |
 | `src/fastpath.ts` | Instant handling for "pause", "zoom in", "orbit 90 left", "jump to impact", etc. Anything naming a vehicle or asking a question goes to the LLM. |

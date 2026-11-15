@@ -213,7 +213,22 @@
   ],
   "median_edge_line_Y": -9.031,
   "outer_edge_line_Y": -29.871,
-  "note": "6 dash-separated lanes visible; lanes 5-6 only seen at X>165 m. Lane 1 partly occluded by the stopped van (X~78-83, Y~-11.4..-9.3)."
+  "note": "6 dash-separated lanes visible; lanes 5-6 only seen at X>165 m. Lane 1 partly occluded by the stopped van (X~78-83, Y~-11.4..-9.3).",
+  "cross_section_check": {
+   "painted_lines_Y": [
+    -9.031,
+    -12.673,
+    -16.144,
+    -19.788,
+    -23.563,
+    -26.846,
+    -29.871
+   ],
+   "strip_count": 6,
+   "method": "calib_joint fit, inspected divider_overlay_bg/f0/f296/f360.png",
+   "line_median_abs_residual_max_px": 0.24,
+   "note": "Six lane-width strips, including possible auxiliary lanes; outer strips enter the camera farther away."
+  }
  },
  "right_carriageway": {
   "traffic": "away from camera (increasing X)",
@@ -256,9 +271,21 @@
  },
  "median": {
   "crash_side_edge_line_Y": -9.031,
-  "right_side_barrier_foot_Y": -4.803,
+  "right_side_barrier_foot_Y": -4.725,
   "right_edge_line_Y": -3.791,
-  "description": "snow-covered grass strip about Y=-8.8..-5.3 for X<~150, barrier foot at Y~-4.8; further away the strip narrows to a paved median with barrier"
+  "description": "Low snow-covered grass verge near the crash, separate narrow far-side barrier; paved median beyond X~159 m. Far crash-side dark band may be a low hedge or shaded barrier; do not model the near verge as tall bushes.",
+  "right_side_barrier_reference_Y": -4.803,
+  "crash_side_verge_face_Y": -8.637,
+  "far_side_verge_face_Y": -5.025,
+  "verge_x_range": [
+   55.5,
+   158.875
+  ],
+  "verge_height_m": 0.15,
+  "verge_height_sigma_m": 0.15,
+  "barrier_height_m": 0.536,
+  "barrier_height_sigma_m": 0.2,
+  "divider_geometry_file": "divider.json"
  },
  "road_geometry": {
   "heading": "both carriageways straight and parallel to X in the measured range (crash-cwy fitted slope 0.00029 rad = 0.017 deg)",

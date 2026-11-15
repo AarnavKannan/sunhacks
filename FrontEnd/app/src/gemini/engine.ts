@@ -20,16 +20,19 @@ import type { SceneEnvironment } from "@/scene/environment";
 import { motorway, registerLayout, type Layout, type Pose } from "@/scene/layouts";
 import { fourWayIntersection } from "@/scene/roads/intersection";
 import { roundabout } from "@/scene/roads/roundabout";
+import { drawStaticObjects } from "@/scene/roads/staticObjects";
 
 export const GEMINI_FOLDER = "Codex reconstructions";
 export const VERIFIED_FOLDER = "Verified reconstructions";
+export const MEASURED_FOLDER = "Measured reconstructions";
 export const VERIFIED_BASIS =
   "hand-verified from the footage frame by frame; speeds and positions approximate (uncalibrated cameras)";
 export const GEMINI_BASIS =
   "interpolated from Codex estimates of sampled footage; positions, velocities and forces are uncertain";
 
-/** Categories the viewer can draw. Pedestrians, bikes and motorcycles are recorded but not drawn yet. */
-const RENDERABLE = new Set(["sedan", "hatchback", "suv", "pickup", "van", "truck", "bus", "other"]);
+/** Categories with vehicle meshes. Pedestrians and bicycles still require their own renderer. */
+const RENDERABLE = new Set(["sedan", "hatchback", "suv", "pickup", "van", "truck", "bus", "motorcycle", "other"]);
+const MEASURED_ROAD_HALF_LENGTH = 850;
 
 export type EngineReport = {
   seed: number;
@@ -44,20 +47,20 @@ export type EngineReport = {
 export type GeminiScene = { scene: SceneInfo; layout: Layout; report: EngineReport };
 
 const kindOf = (object: SpecObject): VehicleKind =>
-  object.category === "van" ? "van" : object.category === "truck" || object.category === "bus" ? "truck" : "car";
+  object.category === "motorcycle" ? "motorcycle" : object.category === "van" ? "van" : object.category === "truck" || object.category === "bus" ? "truck" : "car";
 
 const styleWord = (object: SpecObject) =>
   object.category === "suv" || object.category === "pickup" ? "suv" : object.category === "hatchback" ? "hatchback" : "sedan";
 
 /** Real size of the model the viewer will draw, so contacts are computed on the visible bodies. */
-const modelSizes = new Map<string, { length: number; width: number }>();
+const modelSizes = new Map<string, { length: number; width: number; height: number }>();
 function modelSize(kind: VehicleKind, style: string) {
   const key = `${kind}/${style}`;
   let size = modelSizes.get(key);
   if (!size) {
     const rig = makeVehicle(kind, "#888888", "measure", style);
     const box = new THREE.Box3().setFromObject(rig.root);
-    size = { length: box.max.z - box.min.z, width: box.max.x - box.min.x };
+    size = { length: box.max.z - box.min.z, width: box.max.x - box.min.x, height: box.max.y - box.min.y };
     rig.root.traverse((node) => {
       if (node instanceof THREE.Mesh) node.geometry.dispose();
     });
@@ -99,10 +102,11 @@ function straightRoad(p: Painter, spec: RoadSpec) {
  * are distances from the median barrier (inner edge, lane lines, outer edge), so lane count and
  * every lane width can differ per lane and per side. Scene offsets: + is the +x carriageway.
  */
-function measuredDividedRoad(p: Painter, main: RoadSpec, forward: number[], backward: number[]) {
+function measuredDividedRoad(p: Painter, main: RoadSpec, forward: number[], backward: number[], hasMeasuredDivider: boolean) {
   const m = main.markings;
-  const west = -p.reach([0, 0], [-1, 0]);
-  const east = p.reach([0, 0], [1, 0]);
+  // Kept in sync with build-measured-spec.py's background endpoint extrapolation.
+  const west = -MEASURED_ROAD_HALF_LENGTH;
+  const east = MEASURED_ROAD_HALF_LENGTH;
   const a: [number, number] = [west, 0];
   const e: [number, number] = [east, 0];
   const right = forward[forward.length - 1] + main.outerShoulder;
@@ -119,14 +123,14 @@ function measuredDividedRoad(p: Painter, main: RoadSpec, forward: number[], back
       else p.styled(line(sign * t), m.laneLine, "white", phase(m.laneLine));
     });
   }
-  p.barrier(a, e);
+  if (!hasMeasuredDivider) p.barrier(a, e);
   p.guardrail([east, right + 0.5], [west, right + 0.5]);
   p.guardrail([west, -left - 0.5], [east, -left - 0.5]);
 }
 
 /** Measured lines, if valid: at least 2 values, increasing, lanes 2-6 m wide. */
 function measuredLines(lines: number[] | undefined) {
-  if (!Array.isArray(lines) || lines.length < 2 || lines.length > 9 || lines[0] < 0) return null;
+  if (!Array.isArray(lines) || lines.length < 2 || lines.length > 9 || !lines.every(Number.isFinite) || lines[0] < 0) return null;
   for (let i = 1; i < lines.length; i++) if (!(lines[i] - lines[i - 1] > 2 && lines[i] - lines[i - 1] < 6)) return null;
   return lines;
 }
@@ -157,15 +161,18 @@ function roadFor(spec: IncidentSpec) {
     lanes = { forward: centres(fLines).map((o) => -o), backward: centres(bLines) };
   }
   const build = (p: Painter) => {
-    if (fLines && bLines) measuredDividedRoad(p, main, fLines, bLines);
+    if (fLines && bLines) measuredDividedRoad(p, main, fLines, bLines, !!spec.static_objects?.length);
     else if (r.kind === "divided_highway") motorway(p, main);
     else if (r.kind === "intersection") fourWayIntersection(p, main, cross);
     else if (r.kind === "roundabout") {
       roundabout(p, [0, 0], ROUNDABOUTS[r.region], [0, Math.PI / 2, Math.PI, -Math.PI / 2].map((angle) => ({ angle, spec: cross })));
     } else straightRoad(p, main);
+    drawStaticObjects(p, spec.static_objects ?? []);
     p.finish();
   };
-  return { main, lanes, build };
+  const extent = fLines && bLines ? { halfWidth: MEASURED_ROAD_HALF_LENGTH,
+    halfDepth: Math.max(fLines.at(-1)!, bLines.at(-1)!) + main.outerShoulder + VERGE_WIDTH + 1 } : null;
+  return { main, lanes, build, extent };
 }
 
 /** Converts Gemini's plan-frame force samples to the scene frame (x, z), for the database. */
@@ -181,11 +188,18 @@ export function buildGeminiScene(input: {
   const { id, seed } = input;
   // Work on a copy: sizes are aligned to the drawn models below.
   const spec: IncidentSpec = structuredClone(input.spec);
+  const measured = /^(measured-a9-|hand-verified-measured)/.test(spec.prompt_version);
   const unsupported = spec.objects.filter((o) => !RENDERABLE.has(o.category));
   spec.objects = spec.objects.filter((o) => RENDERABLE.has(o.category));
   const scales = new Map<string, number>();
+  const measuredScales = new Map<string, [number, number, number]>();
   for (const object of spec.objects) {
     const size = modelSize(kindOf(object), styleWord(object));
+    if (measured) {
+      // Keep the evidence's length/width and scale the proxy to it, including motorcycles.
+      measuredScales.set(object.id, [object.width_m / size.width, object.height_m ? object.height_m / size.height : object.length_m / size.length, object.length_m / size.length]);
+      continue;
+    }
     const scale = Math.min(1.35, Math.max(0.75, object.length_m / size.length));
     scales.set(object.id, scale);
     object.length_m = size.length * scale;
@@ -214,7 +228,11 @@ export function buildGeminiScene(input: {
       }
     }
   }
-  const site = { width: Math.min(400, 2 * maxX), depth: Math.min(220, 2 * maxY) };
+  for (const object of spec.static_objects ?? []) for (const [x, y] of object.footprint_m) {
+    maxX = Math.max(maxX, Math.abs(x) + 15);
+    maxY = Math.max(maxY, Math.abs(y) + 12);
+  }
+  const site = { width: 2 * Math.max(maxX, road.extent?.halfWidth ?? 0), depth: 2 * Math.max(maxY, road.extent?.halfDepth ?? 0) };
 
   let focus: [number, number, number] = [0, 0, 0];
   if (plan.crash) {
@@ -235,6 +253,8 @@ export function buildGeminiScene(input: {
       id: v.object.id,
       kind: kindOf(v.object),
       scale: scales.get(v.object.id),
+      scaleXYZ: measuredScales.get(v.object.id),
+      modelLabel: styleWord(v.object),
       poseAt: (time: number) => {
         const { p, h } = trackAt(v.track, time);
         const frames = v.object.keyframes;
@@ -273,20 +293,20 @@ export function buildGeminiScene(input: {
     id,
     title: spec.title,
     location: spec.location_guess,
-    detail: `${verified ? "Verified reconstruction" : "Codex reconstruction"} · ${vehicles.length} vehicle${vehicles.length === 1 ? "" : "s"}`,
+    detail: `${measured ? "Measured reconstruction" : verified ? "Verified reconstruction" : "Codex reconstruction"} · ${vehicles.length} vehicle${vehicles.length === 1 ? "" : "s"}`,
     duration: spec.duration_s,
     impactTime: plan.crash?.start_s ?? null,
     crashEnd: plan.crash?.end_s ?? null,
     crashVehicles: plan.crash?.participants ?? [],
     startTime: plan.crash ? Math.max(0, plan.crash.start_s - 4) : 0,
-    folder: verified ? VERIFIED_FOLDER : GEMINI_FOLDER,
+    folder: measured ? MEASURED_FOLDER : verified ? VERIFIED_FOLDER : GEMINI_FOLDER,
     created: input.created,
     sourceVideo: input.sourceVideo,
     kind: "proxy",
     vehicles,
     environment,
-    environmentSource: verified ? "Read from the footage" : "Codex scene reading",
-    basis: verified ? VERIFIED_BASIS : GEMINI_BASIS,
+    environmentSource: verified || measured ? "Read from the footage" : "Codex scene reading",
+    basis: measured ? "calibrated per-frame trajectories; inferred, occluded and extrapolated samples retain their provenance and uncertainty" : verified ? VERIFIED_BASIS : GEMINI_BASIS,
     physics: {
       wind: [spec.wind.speed_mps * Math.cos(windRad), 0, -spec.wind.speed_mps * Math.sin(windRad)],
       gradePercent: spec.road.grade_percent,
