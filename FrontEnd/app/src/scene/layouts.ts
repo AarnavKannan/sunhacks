@@ -27,9 +27,6 @@ export type VehicleMotion = {
   id: string;
   kind?: VehicleKind;
   scale?: number;
-  /** Measured ground footprint: scene-local width, height, length scale. */
-  scaleXYZ?: [number, number, number];
-  modelLabel?: string;
   poseAt: (time: number) => Pose;
 };
 

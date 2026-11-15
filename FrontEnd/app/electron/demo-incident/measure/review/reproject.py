@@ -11,7 +11,7 @@ Plan frame (spec.ts): x along road, y LEFT of +x, heading 0 = +x. The crash carr
 Mapping: X = X0 + SX * x, Y = Y0 + SY * y  (SX = -1, SY = +1 for a +x-toward-camera plan).
 Outputs land in review/out/.
 """
-import argparse, hashlib, json, math, os, re, subprocess, sys
+import argparse, json, math, os, re, subprocess, sys
 import numpy as np
 import cv2
 
@@ -25,7 +25,7 @@ import cam  # noqa: E402
 FPS = 12.5
 NF = 400
 CROP = (481, 304, 479, 300)
-KEY_FRAMES = sorted(set([0, 100, 125, 188, 212, 213, 250, 300, 350, 399] + list(range(270, 301))))
+KEY_FRAMES = [0, 100, 200, 250, 262, 270, 275, 280, 290, 300, 350, 399]
 HEIGHT = {"sedan": 1.45, "hatchback": 1.5, "suv": 1.7, "car": 1.5, "van": 2.4, "truck": 3.6, "bus": 3.2,
           "motorcycle": 1.4, "pickup": 1.8}
 GT_COLOR = {"cyan": (85, 112), "yellow": (17, 36), "green": (42, 84)}  # OpenCV hue ranges
@@ -38,40 +38,8 @@ PXGT = None
 def load_mapping(args):
     """Plan -> W constants. Prefer A5's build-measured-spec.py, else CLI / provisional defaults."""
     m = {"X0": None, "Y0": None, "SX": -1.0, "SY": 1.0, "src": "provisional"}
-    # Recover the actual build transform from matching contact observations, never by fitting
-    # the rendered van to its old fallback pose. Both files use the same source frame convention.
-    spec = json.load(open(args.spec, encoding="utf-8"))
-    metadata_path = args.spec + ".build.json"
-    if os.path.exists(metadata_path):
-        metadata = json.load(open(metadata_path, encoding="utf-8"))
-        actual_hash = hashlib.sha256(open(args.spec, "rb").read()).hexdigest()
-        if metadata.get("output", {}).get("sha256") != actual_hash:
-            raise ValueError("Build metadata does not match this spec; regenerate it before reviewing")
-        camera_path = os.path.join(MEASURE, "data", "br_camera.json")
-        if metadata.get("synthetic") is False:
-            if metadata.get("sources", {}).get("br_camera", {}).get("sha256") != hashlib.sha256(open(camera_path, "rb").read()).hexdigest():
-                raise ValueError("Calibration differs from the measured build; regenerate before reviewing")
-            camera = json.load(open(camera_path, encoding="utf-8"))["camera"]
-            if not np.allclose(camera["R_world_to_cam"], cam.R, atol=1e-12) or not np.allclose(
-                    [camera["f_px"], camera["h_m"], camera["cam_Y_m"]], [cam.f, cam.h, cam.cy0], atol=1e-12):
-                raise ValueError("cam.py/calib_joint.json disagrees with hashed br_camera.json")
-        if all(isinstance(metadata.get(key), (int, float)) and math.isfinite(metadata[key]) for key in ("X_REF", "Y_median")):
-            m.update(X0=metadata["X_REF"], Y0=metadata["Y_median"], src="build-metadata", synthetic=metadata.get("synthetic", False))
-    cp_path = os.path.join(MEASURE, "data", "crash_pair.json")
-    if m["X0"] is None and str(spec.get("prompt_version", "")).startswith("measured") and os.path.exists(cp_path):
-        cp = json.load(open(cp_path, encoding="utf-8"))
-        world_contact = cp.get("contact")
-        if world_contact is None:
-            world_contact = next((c for c in cp.get("contacts", []) if c.get("kind") == "vehicle-vehicle"), None)
-        if world_contact and world_contact.get("point"):
-            plan_contact = next((c for c in (spec.get("crash") or {}).get("contacts", [])
-                                 if c.get("a") == world_contact.get("a") and c.get("b") == world_contact.get("b")
-                                 and abs(c["t_s"] - world_contact.get("t", world_contact.get("frame", 0) / FPS)) < 1e-5), None)
-            if plan_contact:
-                m.update(X0=world_contact["point"][0] + plan_contact["x_m"],
-                         Y0=world_contact["point"][1] - plan_contact["y_m"], src="measured-contact-transform")
     p = os.path.join(INCIDENT, "build-measured-spec.py")
-    if m["X0"] is None and os.path.exists(p):
+    if os.path.exists(p):
         src = open(p, encoding="utf-8").read()
         for key, names in {"X0": ["PLAN_X0_W", "W_X0", "X0_W", "PLAN_TO_W_X0", "X0"],
                            "Y0": ["PLAN_Y0_W", "W_Y0", "Y0_W", "PLAN_TO_W_Y0", "Y_MEDIAN_W", "MEDIAN_Y_W", "Y0"],
@@ -84,8 +52,6 @@ def load_mapping(args):
     if args.ymed is not None: m["Y0"], m["src"] = args.ymed, "cli"
     if args.sx is not None: m["SX"] = args.sx
     if m["X0"] is None or m["Y0"] is None:
-        if str(spec.get("prompt_version", "")).startswith("measured"):
-            raise ValueError("Measured spec needs its real plan-to-world transform; pass --x0 and --ymed")
         m.update(fit_provisional(args), src="fitted-to-van-f0")
     return m
 
@@ -126,7 +92,7 @@ def corners_plan(x, y, hdeg, L, W):
 
 def box_img(m, obj, pose):
     x, y, hd, _ = pose
-    H = obj.get("height_m") or HEIGHT.get(obj.get("category"), 1.5)
+    H = HEIGHT.get(obj.get("category"), 1.5)
     cp = corners_plan(x, y, hd, obj["length_m"], obj["width_m"])
     X, Y = plan_to_w(m, [c[0] for c in cp], [c[1] for c in cp])
     X = np.concatenate([X, X]); Y = np.concatenate([Y, Y]); Z = np.array([0.0] * 4 + [H] * 4)
@@ -252,7 +218,6 @@ def main():
     ap.add_argument("--x0", type=float); ap.add_argument("--ymed", type=float); ap.add_argument("--sx", type=float)
     ap.add_argument("--no-video", action="store_true")
     ap.add_argument("--scale", type=int, default=2)
-    ap.add_argument("--out", help="Output directory; keeps final measured evidence separate from historical fallback checks")
     ap.add_argument("--gt", choices=["color", "px"], default="color",
                     help="color = own detection of the burned-in outlines (independent); px = data/tracks_px.json wire boxes")
     args = ap.parse_args()
@@ -261,18 +226,13 @@ def main():
     m = load_mapping(args)
     print("spec:", os.path.basename(args.spec), spec.get("prompt_version"), "| mapping:", m)
     objs = spec["objects"]
-    exact_samples = {obj["id"]: {round(k["t_s"] * FPS): k for k in obj["keyframes"]
-                     if abs(k["t_s"] * FPS - round(k["t_s"] * FPS)) < 1e-5} for obj in objs}
     S = args.scale
     if args.gt == "px":
         OUT = os.path.join(HERE, "out_px"); os.makedirs(OUT, exist_ok=True)
-    if args.out:
-        OUT = os.path.abspath(args.out); os.makedirs(OUT, exist_ok=True)
     PXGT = px_gt() if args.gt == "px" else None
     if args.gt == "px" and PXGT is None:
         sys.exit("data/tracks_px.json missing")
-    video_path = os.path.join(REPO, "demo_32s.mp4")
-    cap = cv2.VideoCapture(video_path)
+    cap = cv2.VideoCapture(os.path.join(REPO, "demo.mp4"))
     cx, cyy, cw, ch = CROP
     vw = None
     if not args.no_video:
@@ -314,17 +274,12 @@ def main():
                 pen = 0 if b[0] == want else 15  # prefer the right colour
                 if d + pen < bd:
                     best, bd, bcol = j, d + pen, b[0]
-            sample = exact_samples[o["id"]].get(f, {})
-            lines = spec.get("road", {}).get("lane_lines_forward_m", [])
-            lane = int(np.searchsorted(lines, -pose[1], side="right")) if lines and pose[1] < 0 else None
-            row = {"f": f, "id": o["id"], "cat": o.get("category"), "src": sample.get("src", "interpolated"),
-                   "sigma_m": sample.get("sigma_m"), "lane": lane,
-                   "cx": round(float(c[0]), 1), "cy": round(float(c[1]), 1),
+            row = {"f": f, "id": o["id"], "cat": o.get("category"), "cx": round(float(c[0]), 1), "cy": round(float(c[1]), 1),
                    "inside": bool(inside), "bw": round(float(bx1 - bx0), 1)}
             if best is not None:
                 gc = gtc[best]
                 dpx = math.hypot(gc[0] - c[0], gc[1] - c[1])
-                z0 = (o.get("height_m") or HEIGHT.get(o.get("category"), 1.5)) / 2
+                z0 = HEIGHT.get(o.get("category"), 1.5) / 2
                 a, b2 = to_plane(c[0], c[1], z0), to_plane(gc[0], gc[1], z0)
                 dm = math.hypot(a[0] - b2[0], a[1] - b2[1]) if a and b2 else None
                 row.update(gt=best, gt_col=bcol, color_ok=bool(bcol == want), err_px=round(float(dpx), 1),
@@ -352,16 +307,7 @@ def main():
             vw.stdin.write(sheet.tobytes())
     if vw:
         vw.stdin.close(); vw.wait()
-    cap.release()
-    if f != NF - 1 or not ok:
-        raise ValueError("Source video did not provide all 400 frames")
-    json.dump({"mapping": m, "spec_version": spec.get("prompt_version"), "frames_reviewed": NF,
-               "spec_sha256": hashlib.sha256(open(args.spec, "rb").read()).hexdigest(),
-               "video_sha256": hashlib.sha256(open(video_path, "rb").read()).hexdigest(),
-               "limitations": ["Nearest annotation residuals are diagnostics, not identity or physical-accuracy proof.",
-                               "Annotation detections include opposing traffic; unmatched counts are not crash-side recall.",
-                               "Multiple projected boxes may match the same annotation; use lane_counts.json for the manual coverage audit."],
-               "rows": rows, "unmatched_gt": unmatched_gt},
+    json.dump({"mapping": m, "spec_version": spec.get("prompt_version"), "rows": rows, "unmatched_gt": unmatched_gt},
               open(os.path.join(OUT, "errors.json"), "w"))
     summarize(rows, unmatched_gt)
 

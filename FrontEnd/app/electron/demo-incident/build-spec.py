@@ -452,6 +452,8 @@ def main():
         import traffic  # owned by the traffic agent
         background = traffic.background_objects(seed=SEED)
         source = "traffic.py"
+        # Demo shows the crash carriageway only (+x traffic, plan y < 0); the opposite side is left empty.
+        background = [o for o in background if all(k["y_m"] < 0 for k in o["keyframes"])]
     except ImportError:
         print("traffic.py not found: building crash vehicles only")
 
@@ -508,6 +510,7 @@ def main():
             "Contact at ~22.3 s is partly occluded by the van; the impulse and forces are derived from the reconstructed motion, not measured.",
             "The yellow car's spin is limited to ~30 deg here so it fits between the van and the median barrier.",
             "Background traffic is a plausible simulation matching the observed density, lanes and behaviour, not a vehicle-by-vehicle track; trucks are shortened to the viewer's maximum.",
+            "Only crash-side (+x carriageway) traffic is reconstructed; the opposite carriageway is left empty.",
             "The van's driver appears on foot near the van late in the clip; pedestrians are not reconstructed.",
         ],
     }

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 /** Vehicle classes, matching the car / van / truck labels in the tracking footage. */
-export type VehicleKind = "car" | "van" | "truck" | "motorcycle";
+export type VehicleKind = "car" | "van" | "truck";
 
 /** Passenger-car body styles seen in the reference traffic photos. */
 export type CarStyle = "sedan" | "hatchback" | "suv";
@@ -122,7 +122,7 @@ function addWheels(rig: VehicleRig, m: Materials, radius: number, track: number,
 function addLamps(body: THREE.Group, m: Materials, front: number, back: number, height: number, spread: number, wide = 0.42) {
   const headGeometry = new THREE.BoxGeometry(wide, 0.12, 0.06);
   const tailGeometry = new THREE.BoxGeometry(wide, 0.14, 0.06);
-  for (const x of spread ? [-spread, spread] : [0]) {
+  for (const x of [-spread, spread]) {
     const head = new THREE.Mesh(headGeometry, m.head);
     head.position.set(x, height, front);
     const tail = new THREE.Mesh(tailGeometry, m.tail);
@@ -384,34 +384,6 @@ function makeTruck(m: Materials) {
   return rig;
 }
 
-/** Simple two-wheel proxy; no rider pose is inferred from the traffic detections. */
-function makeMotorcycle(m: Materials) {
-  const rig = newRig();
-  const chassis = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.32, 1.35), m.trim);
-  chassis.position.y = 0.58;
-  const tank = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.35, 0.55), m.paint);
-  tank.position.set(0, 0.87, 0.25);
-  const seat = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.13, 0.65), m.rubber);
-  seat.position.set(0, 0.87, -0.38);
-  const handlebar = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.06, 0.08), m.rim);
-  handlebar.position.set(0, 1.13, 0.65);
-  rig.body.add(chassis, tank, seat, handlebar);
-  for (const z of [-0.75, 0.75]) {
-    const wheel = new THREE.Group();
-    wheel.position.set(0, 0.31, z);
-    const tyre = new THREE.Mesh(new THREE.CylinderGeometry(0.31, 0.31, 0.14, 24), m.rubber);
-    const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.21, 0.15, 8), m.rim);
-    tyre.rotation.z = hub.rotation.z = Math.PI / 2;
-    wheel.add(tyre, hub);
-    rig.root.add(wheel);
-    rig.wheels.push(wheel);
-  }
-  addLamps(rig.body, m, 0.9, -0.9, 0.9, 0, 0.14);
-  rig.wheelRadius = 0.31;
-  shadowed(rig.root);
-  return rig;
-}
-
 function hash(text: string) {
   let h = 2166136261;
   for (let i = 0; i < text.length; i += 1) h = Math.imul(h ^ text.charCodeAt(i), 16777619);
@@ -435,7 +407,6 @@ export function makeVehicle(kind: VehicleKind, color: string, id = "", label = "
   let rig: VehicleRig;
   if (kind === "van") rig = makeVan(m);
   else if (kind === "truck") rig = makeTruck(m);
-  else if (kind === "motorcycle") rig = makeMotorcycle(m);
   else rig = makeCar(m, carStyle(label, id));
   rig.head = m.head;
   rig.tail = m.tail;

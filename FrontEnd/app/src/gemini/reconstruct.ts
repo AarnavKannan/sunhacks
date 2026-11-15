@@ -4,7 +4,7 @@
 import type { SceneInfo } from "@/data/scenes";
 import { buildGeminiScene } from "@/gemini/engine";
 import type { IncidentSpec } from "@/gemini/spec";
-import { ensureKinematics, rememberSceneSource } from "@/kinematics/store";
+import { ensureKinematics, forgetKinematics } from "@/kinematics/store";
 import { useAppStore, type UploadItem } from "@/store/useAppStore";
 
 function api() {
@@ -36,9 +36,7 @@ const newSeed = () => (Math.random() * 2 ** 31) >>> 0;
 
 function build(sceneId: string, spec: IncidentSpec, seed: number, created: string, sourceVideo?: SceneInfo["sourceVideo"]) {
   const built = buildGeminiScene({ id: sceneId, spec, seed, created, sourceVideo });
-  // The kinematics are derived from the same layout playback uses, plus the spec's provenance,
-  // static objects and contacts; this also makes the next read re-store them if they changed.
-  rememberSceneSource(sceneId, spec);
+  forgetKinematics(sceneId);
   useAppStore.getState().upsertScene(built.scene);
   return built;
 }
@@ -74,7 +72,7 @@ export async function reconstructWithGemini(uploads: UploadItem[], opts: { refre
     useAppStore.getState().setGeminiJob({
       state: "done",
       sceneId,
-      message: `${analysis.known ? `Loaded the ${analysis.known.label} reconstruction (${analysis.known.version})` : analysis.cached ? "Loaded the stored Codex reading" : `Read by ${analysis.models.join(" + ")}`}: ${built.scene.vehicles.length} vehicles.${removed}`,
+      message: `${analysis.cached ? "Loaded the stored Codex reading" : analysis.models.includes("hand-verified") ? "Loaded the hand-verified reconstruction" : `Read by ${analysis.models.join(" + ")}`}: ${built.scene.vehicles.length} vehicles.${removed}`,
     });
     useAppStore.getState().openScene(sceneId);
   } catch (error) {

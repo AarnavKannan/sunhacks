@@ -1,5 +1,3 @@
-import type { StaticObject } from "@/gemini/spec";
-
 export type CollisionPose = { x: number; z: number; yaw: number };
 export type EllipseFootprint = { radiusX: number; radiusZ: number; centerZ?: number };
 export type CollisionBodyState = {
@@ -14,42 +12,6 @@ export type CollisionBodyVelocity = { velocityX: number; velocityZ: number; yawR
 export type Contact = { time: number; normalX: number; normalZ: number };
 
 type Point = { x: number; z: number };
-
-/** Fixed convex footprint in scene coordinates. Normals always point from vehicle a to object b. */
-export type StaticCollisionObject = {
-  id: string;
-  footprint: Point[];
-  height: number;
-  immovable: true;
-  inverseMass: 0;
-  velocityX: 0;
-  velocityZ: 0;
-  yawRate: 0;
-  friction: number;
-  restitution: number;
-  stiffnessNPerM: number;
-};
-
-export function staticCollisionGeometry(object: StaticObject): StaticCollisionObject {
-  return {
-    id: object.id,
-    footprint: object.footprint_m.map(([x, y]) => ({ x, z: -y })),
-    height: object.height_m,
-    immovable: true,
-    inverseMass: 0,
-    velocityX: 0,
-    velocityZ: 0,
-    yawRate: 0,
-    friction: object.friction,
-    restitution: object.restitution,
-    stiffnessNPerM: object.stiffness_n_per_m,
-  };
-}
-
-export function planNormalToScene(normalDeg: number): Point {
-  const angle = normalDeg * Math.PI / 180;
-  return { x: Math.cos(angle), z: -Math.sin(angle) };
-}
 
 const POLYGON_SIDES = 48;
 const CONTACT_STEP = 1 / 120;
@@ -117,49 +79,6 @@ function separatingAxisContact(first: Point[], second: Point[], centerDelta: Poi
   }
 
   return { normalX, normalZ };
-}
-
-/** Contact against the same fixed footprint used by the renderer (convex measured polygons). */
-export function ellipseStaticContactAt(
-  pose: CollisionPose,
-  footprint: EllipseFootprint,
-  object: StaticCollisionObject,
-): Omit<Contact, "time"> | null {
-  if (object.footprint.length < 3) return null;
-  const center = object.footprint.reduce((sum, p) => ({ x: sum.x + p.x, z: sum.z + p.z }), { x: 0, z: 0 });
-  return separatingAxisContact(ellipsePoints(pose, footprint), object.footprint, {
-    x: center.x / object.footprint.length - pose.x,
-    z: center.z / object.footprint.length - pose.z,
-  });
-}
-
-export function findFirstEllipseStaticContact(
-  vehicleAt: (time: number) => CollisionPose,
-  footprint: EllipseFootprint,
-  object: StaticCollisionObject,
-  duration: number,
-): Contact | null {
-  const at = (time: number) => {
-    const normal = ellipseStaticContactAt(vehicleAt(time), footprint, object);
-    return normal ? { time, ...normal } : null;
-  };
-  const initial = at(0);
-  if (initial) return initial;
-  for (let t = CONTACT_STEP; t < duration + CONTACT_STEP; t += CONTACT_STEP) {
-    const highTime = Math.min(t, duration);
-    if (at(highTime)) {
-      let low = Math.max(0, t - CONTACT_STEP);
-      let high = highTime;
-      for (let i = 0; i < 24; i += 1) {
-        const middle = (low + high) / 2;
-        if (at(middle)) high = middle;
-        else low = middle;
-      }
-      return at(high);
-    }
-    if (highTime === duration) break;
-  }
-  return null;
 }
 
 function contactAt(
@@ -276,44 +195,6 @@ export function resolveEllipseImpact(
       yawRate: second.yawRate - (impulse * secondLever) / secondInertia,
     },
   ];
-}
-
-/** Infinite-mass counterpart of resolveEllipseImpact; returns a zero-motion static body.
- * Replaying measured tracks never invokes this response to rewrite the observed motion.
- */
-export function resolveEllipseStaticImpact(
-  vehicle: CollisionBodyState,
-  object: StaticCollisionObject,
-  normal: Point,
-): [CollisionBodyVelocity, CollisionBodyVelocity] | null {
-  const length = Math.hypot(normal.x, normal.z);
-  if (length < 1e-12 || vehicle.massKg <= 0) return null;
-  const n = { x: normal.x / length, z: normal.z / length };
-  const r = supportOffset(vehicle.footprint, vehicle.pose.yaw, n.x, n.z);
-  const inertia = vehicle.massKg * ((vehicle.footprint.radiusX ** 2 + vehicle.footprint.radiusZ ** 2) / 3 + (vehicle.footprint.centerZ ?? 0) ** 2);
-  if (inertia <= 0) return null;
-  const contactVelocity = {
-    x: vehicle.velocityX + vehicle.yawRate * r.z,
-    z: vehicle.velocityZ - vehicle.yawRate * r.x,
-  };
-  const closing = contactVelocity.x * n.x + contactVelocity.z * n.z;
-  if (closing <= 1e-9) return null;
-  const lever = cross(r, n);
-  const inverseMass = 1 / vehicle.massKg;
-  const impulse = (1 + Math.max(0, Math.min(1, object.restitution))) * closing / (inverseMass + lever ** 2 / inertia);
-  const tangent = { x: -n.z, z: n.x };
-  const tangentLever = cross(r, tangent);
-  // Normal response changes contact tangent velocity too when the lever arms are nonzero.
-  const angularAfterNormal = vehicle.yawRate + impulse * lever / inertia;
-  const tangentSpeed = (vehicle.velocityX - impulse * n.x * inverseMass + angularAfterNormal * r.z) * tangent.x
-    + (vehicle.velocityZ - impulse * n.z * inverseMass - angularAfterNormal * r.x) * tangent.z;
-  const tangentImpulse = Math.max(-object.friction * impulse, Math.min(object.friction * impulse,
-    tangentSpeed / (inverseMass + tangentLever ** 2 / inertia)));
-  return [{
-    velocityX: vehicle.velocityX - (impulse * n.x + tangentImpulse * tangent.x) * inverseMass,
-    velocityZ: vehicle.velocityZ - (impulse * n.z + tangentImpulse * tangent.z) * inverseMass,
-    yawRate: angularAfterNormal + tangentImpulse * tangentLever / inertia,
-  }, { velocityX: 0, velocityZ: 0, yawRate: 0 }];
 }
 
 export function postImpactPosition(

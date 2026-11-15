@@ -1,0 +1,11501 @@
+{
+ "0": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "c001",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 93.8,
+    "Y": -14.5,
+    "u": 42,
+    "v": 170,
+    "centre_in": true,
+    "bbox": [
+     14,
+     126,
+     69,
+     175
+    ]
+   },
+   {
+    "id": "c002",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 125.4,
+    "Y": -18.4,
+    "u": 47,
+    "v": 124,
+    "centre_in": true,
+    "bbox": [
+     29,
+     99,
+     65,
+     126
+    ]
+   },
+   {
+    "id": "c003",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 131.8,
+    "Y": -14.8,
+    "u": 116,
+    "v": 118,
+    "centre_in": true,
+    "bbox": [
+     98,
+     94,
+     132,
+     120
+    ]
+   },
+   {
+    "id": "c004",
+    "cat": "truck",
+    "col": "grey",
+    "X": 146.4,
+    "Y": -23.3,
+    "u": 17,
+    "v": 104,
+    "centre_in": true,
+    "bbox": [
+     -19,
+     46,
+     49,
+     112
+    ]
+   },
+   {
+    "id": "c005",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 148.2,
+    "Y": -11.4,
+    "u": 183,
+    "v": 103,
+    "centre_in": true,
+    "bbox": [
+     169,
+     82,
+     198,
+     105
+    ]
+   },
+   {
+    "id": "c006",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 159.2,
+    "Y": -14.8,
+    "u": 149,
+    "v": 95,
+    "centre_in": true,
+    "bbox": [
+     135,
+     75,
+     162,
+     97
+    ]
+   },
+   {
+    "id": "c007",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 165.0,
+    "Y": -17.9,
+    "u": 116,
+    "v": 91,
+    "centre_in": true,
+    "bbox": [
+     103,
+     71,
+     130,
+     92
+    ]
+   },
+   {
+    "id": "c008",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 178.0,
+    "Y": -14.9,
+    "u": 165,
+    "v": 84,
+    "centre_in": true,
+    "bbox": [
+     152,
+     66,
+     178,
+     85
+    ]
+   },
+   {
+    "id": "c009",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 199.2,
+    "Y": -14.4,
+    "u": 185,
+    "v": 73,
+    "centre_in": true,
+    "bbox": [
+     175,
+     54,
+     195,
+     74
+    ]
+   },
+   {
+    "id": "c010",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 216.6,
+    "Y": -10.9,
+    "u": 228,
+    "v": 66,
+    "centre_in": true,
+    "bbox": [
+     219,
+     49,
+     237,
+     67
+    ]
+   },
+   {
+    "id": "c011",
+    "cat": "van",
+    "col": "grey",
+    "X": 218.1,
+    "Y": -14.2,
+    "u": 198,
+    "v": 66,
+    "centre_in": true,
+    "bbox": [
+     188,
+     47,
+     208,
+     67
+    ]
+   },
+   {
+    "id": "c012",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 246.8,
+    "Y": -14.2,
+    "u": 211,
+    "v": 56,
+    "centre_in": true,
+    "bbox": [
+     203,
+     44,
+     219,
+     57
+    ]
+   },
+   {
+    "id": "c013",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 251.5,
+    "Y": -28.7,
+    "u": 96,
+    "v": 55,
+    "centre_in": true,
+    "bbox": [
+     87,
+     44,
+     105,
+     55
+    ]
+   },
+   {
+    "id": "c014",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 277.7,
+    "Y": -13.8,
+    "u": 225,
+    "v": 49,
+    "centre_in": true,
+    "bbox": [
+     218,
+     38,
+     232,
+     49
+    ]
+   },
+   {
+    "id": "c015",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 304.1,
+    "Y": -11.0,
+    "u": 251,
+    "v": 43,
+    "centre_in": true,
+    "bbox": [
+     245,
+     33,
+     257,
+     44
+    ]
+   },
+   {
+    "id": "c016",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 330.2,
+    "Y": -25.6,
+    "u": 166,
+    "v": 38,
+    "centre_in": true,
+    "bbox": [
+     159,
+     29,
+     173,
+     39
+    ]
+   },
+   {
+    "id": "c017",
+    "cat": "truck",
+    "col": "grey",
+    "X": 433.9,
+    "Y": -21.9,
+    "u": 218,
+    "v": 26,
+    "centre_in": true,
+    "bbox": [
+     211,
+     9,
+     225,
+     26
+    ]
+   },
+   {
+    "id": "c018",
+    "cat": "van",
+    "col": "silver",
+    "X": 451.5,
+    "Y": -15.8,
+    "u": 249,
+    "v": 24,
+    "centre_in": true,
+    "bbox": [
+     244,
+     14,
+     254,
+     25
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 489.3,
+    "Y": -14.4,
+    "u": 260,
+    "v": 21,
+    "centre_in": true,
+    "bbox": [
+     256,
+     16,
+     263,
+     22
+    ]
+   },
+   {
+    "id": "c020",
+    "cat": "truck",
+    "col": "grey",
+    "X": 530.6,
+    "Y": -22.9,
+    "u": 231,
+    "v": 19,
+    "centre_in": true,
+    "bbox": [
+     226,
+     6,
+     236,
+     19
+    ]
+   },
+   {
+    "id": "c021",
+    "cat": "van",
+    "col": "silver",
+    "X": 640.6,
+    "Y": -21.7,
+    "u": 248,
+    "v": 13,
+    "centre_in": true,
+    "bbox": [
+     245,
+     6,
+     252,
+     13
+    ]
+   },
+   {
+    "id": "c022",
+    "cat": "truck",
+    "col": "silver",
+    "X": 787.4,
+    "Y": -30.2,
+    "u": 238,
+    "v": 8,
+    "centre_in": true,
+    "bbox": [
+     235,
+     0,
+     242,
+     8
+    ]
+   },
+   {
+    "id": "c023",
+    "cat": "truck",
+    "col": "silver",
+    "X": 848.5,
+    "Y": -23.7,
+    "u": 259,
+    "v": 6,
+    "centre_in": true,
+    "bbox": [
+     256,
+     -2,
+     262,
+     6
+    ]
+   },
+   {
+    "id": "c024",
+    "cat": "truck",
+    "col": "silver",
+    "X": 894.1,
+    "Y": -27.3,
+    "u": 253,
+    "v": 5,
+    "centre_in": true,
+    "bbox": [
+     250,
+     -2,
+     257,
+     5
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c001",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     16,
+     130,
+     67,
+     177
+    ]
+   },
+   {
+    "id": "c002",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     27,
+     100,
+     64,
+     127
+    ]
+   },
+   {
+    "id": "c003",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     98,
+     94,
+     132,
+     120
+    ]
+   },
+   {
+    "id": "c004",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     -24,
+     48,
+     49,
+     114
+    ]
+   },
+   {
+    "id": "c005",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     166,
+     84,
+     192,
+     106
+    ]
+   },
+   {
+    "id": "c006",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     133,
+     76,
+     161,
+     98
+    ]
+   },
+   {
+    "id": "c007",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     104,
+     70,
+     129,
+     91
+    ]
+   },
+   {
+    "id": "c008",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     152,
+     66,
+     175,
+     86
+    ]
+   },
+   {
+    "id": "c009",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     176,
+     53,
+     195,
+     74
+    ]
+   },
+   {
+    "id": "c010",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     218,
+     49,
+     237,
+     68
+    ]
+   },
+   {
+    "id": "c011",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     188,
+     47,
+     208,
+     67
+    ]
+   },
+   {
+    "id": "c012",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     203,
+     43,
+     219,
+     57
+    ]
+   },
+   {
+    "id": "c013",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     86,
+     44,
+     104,
+     55
+    ]
+   },
+   {
+    "id": "c014",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     217,
+     36,
+     231,
+     48
+    ]
+   },
+   {
+    "id": "c015",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     244,
+     34,
+     256,
+     43
+    ]
+   },
+   {
+    "id": "c016",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     159,
+     30,
+     172,
+     39
+    ]
+   },
+   {
+    "id": "c017",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     211,
+     8,
+     224,
+     27
+    ]
+   },
+   {
+    "id": "c018",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     245,
+     14,
+     254,
+     24
+    ]
+   },
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     256,
+     16,
+     263,
+     21
+    ]
+   },
+   {
+    "id": "c020",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     226,
+     4,
+     236,
+     19
+    ]
+   },
+   {
+    "id": "c021",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     246,
+     6,
+     252,
+     12
+    ]
+   },
+   {
+    "id": "c022",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     235,
+     0,
+     242,
+     8
+    ]
+   },
+   {
+    "id": "c023",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     256,
+     -1,
+     263,
+     7
+    ]
+   },
+   {
+    "id": "c024",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     251,
+     -3,
+     258,
+     5
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "50": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "c003",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 73.0,
+    "Y": -14.1,
+    "u": -22,
+    "v": 222,
+    "centre_in": false,
+    "bbox": [
+     -56,
+     178,
+     11,
+     229
+    ]
+   },
+   {
+    "id": "c005",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 92.2,
+    "Y": -14.0,
+    "u": 50,
+    "v": 174,
+    "centre_in": true,
+    "bbox": [
+     23,
+     138,
+     75,
+     178
+    ]
+   },
+   {
+    "id": "c006",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 110.0,
+    "Y": -15.3,
+    "u": 67,
+    "v": 143,
+    "centre_in": true,
+    "bbox": [
+     44,
+     114,
+     88,
+     147
+    ]
+   },
+   {
+    "id": "c007",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 101.7,
+    "Y": -18.2,
+    "u": -9,
+    "v": 156,
+    "centre_in": false,
+    "bbox": [
+     -33,
+     122,
+     15,
+     159
+    ]
+   },
+   {
+    "id": "c008",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 123.2,
+    "Y": -18.1,
+    "u": 49,
+    "v": 126,
+    "centre_in": true,
+    "bbox": [
+     29,
+     101,
+     67,
+     129
+    ]
+   },
+   {
+    "id": "c009",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 149.1,
+    "Y": -14.5,
+    "u": 142,
+    "v": 102,
+    "centre_in": true,
+    "bbox": [
+     127,
+     77,
+     156,
+     104
+    ]
+   },
+   {
+    "id": "c010",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 165.0,
+    "Y": -11.0,
+    "u": 201,
+    "v": 91,
+    "centre_in": true,
+    "bbox": [
+     187,
+     69,
+     214,
+     93
+    ]
+   },
+   {
+    "id": "c012",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 203.9,
+    "Y": -14.5,
+    "u": 186,
+    "v": 71,
+    "centre_in": true,
+    "bbox": [
+     176,
+     56,
+     197,
+     72
+    ]
+   },
+   {
+    "id": "c013",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 171.5,
+    "Y": -28.2,
+    "u": 3,
+    "v": 87,
+    "centre_in": true,
+    "bbox": [
+     -11,
+     70,
+     17,
+     88
+    ]
+   },
+   {
+    "id": "c014",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 238.4,
+    "Y": -14.3,
+    "u": 206,
+    "v": 59,
+    "centre_in": true,
+    "bbox": [
+     197,
+     46,
+     215,
+     60
+    ]
+   },
+   {
+    "id": "c015",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 217.8,
+    "Y": -10.7,
+    "u": 230,
+    "v": 66,
+    "centre_in": true,
+    "bbox": [
+     221,
+     52,
+     239,
+     67
+    ]
+   },
+   {
+    "id": "c017",
+    "cat": "truck",
+    "col": "grey",
+    "X": 333.0,
+    "Y": -21.7,
+    "u": 191,
+    "v": 38,
+    "centre_in": true,
+    "bbox": [
+     181,
+     15,
+     200,
+     39
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 369.4,
+    "Y": -14.1,
+    "u": 244,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     239,
+     25,
+     250,
+     33
+    ]
+   },
+   {
+    "id": "c020",
+    "cat": "truck",
+    "col": "grey",
+    "X": 449.0,
+    "Y": -23.2,
+    "u": 215,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     208,
+     9,
+     222,
+     25
+    ]
+   },
+   {
+    "id": "c021",
+    "cat": "van",
+    "col": "silver",
+    "X": 515.6,
+    "Y": -22.8,
+    "u": 229,
+    "v": 20,
+    "centre_in": true,
+    "bbox": [
+     224,
+     10,
+     233,
+     20
+    ]
+   },
+   {
+    "id": "c024",
+    "cat": "truck",
+    "col": "silver",
+    "X": 858.0,
+    "Y": -29.5,
+    "u": 246,
+    "v": 6,
+    "centre_in": true,
+    "bbox": [
+     241,
+     -2,
+     250,
+     6
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 715.6,
+    "Y": -22.3,
+    "u": 253,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     249,
+     -1,
+     257,
+     10
+    ]
+   },
+   {
+    "id": "c028",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 375.5,
+    "Y": -16.1,
+    "u": 235,
+    "v": 32,
+    "centre_in": true,
+    "bbox": [
+     229,
+     26,
+     240,
+     33
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 566.2,
+    "Y": -22.8,
+    "u": 236,
+    "v": 17,
+    "centre_in": true,
+    "bbox": [
+     231,
+     2,
+     241,
+     17
+    ]
+   },
+   {
+    "id": "c034",
+    "cat": "truck",
+    "col": "grey",
+    "X": 718.8,
+    "Y": -28.1,
+    "u": 237,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     233,
+     1,
+     241,
+     10
+    ]
+   },
+   {
+    "id": "c035",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 360.6,
+    "Y": -23.3,
+    "u": 191,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     186,
+     25,
+     197,
+     34
+    ]
+   },
+   {
+    "id": "c036",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 388.8,
+    "Y": -18.1,
+    "u": 227,
+    "v": 31,
+    "centre_in": true,
+    "bbox": [
+     222,
+     24,
+     232,
+     31
+    ]
+   },
+   {
+    "id": "c038",
+    "cat": "van",
+    "col": "silver",
+    "X": 176.7,
+    "Y": -14.1,
+    "u": 173,
+    "v": 84,
+    "centre_in": true,
+    "bbox": [
+     159,
+     60,
+     186,
+     86
+    ]
+   },
+   {
+    "id": "c040",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 236.3,
+    "Y": -28.5,
+    "u": 84,
+    "v": 59,
+    "centre_in": true,
+    "bbox": [
+     74,
+     46,
+     93,
+     60
+    ]
+   },
+   {
+    "id": "c041",
+    "cat": "truck",
+    "col": "silver",
+    "X": 532.4,
+    "Y": -26.7,
+    "u": 217,
+    "v": 18,
+    "centre_in": true,
+    "bbox": [
+     211,
+     6,
+     222,
+     19
+    ]
+   },
+   {
+    "id": "c043",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 104.5,
+    "Y": -16.5,
+    "u": 32,
+    "v": 151,
+    "centre_in": true,
+    "bbox": [
+     10,
+     121,
+     53,
+     154
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c005",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     25,
+     138,
+     74,
+     178
+    ]
+   },
+   {
+    "id": "c006",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     45,
+     116,
+     86,
+     147
+    ]
+   },
+   {
+    "id": "c008",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     29,
+     102,
+     66,
+     129
+    ]
+   },
+   {
+    "id": "c009",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     128,
+     76,
+     156,
+     104
+    ]
+   },
+   {
+    "id": "c010",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     190,
+     68,
+     214,
+     91
+    ]
+   },
+   {
+    "id": "c012",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     177,
+     56,
+     198,
+     71
+    ]
+   },
+   {
+    "id": "c013",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -14,
+     68,
+     14,
+     89
+    ]
+   },
+   {
+    "id": "c014",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     197,
+     48,
+     214,
+     60
+    ]
+   },
+   {
+    "id": "c015",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     221,
+     52,
+     239,
+     66
+    ]
+   },
+   {
+    "id": "c017",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     185,
+     14,
+     200,
+     38
+    ]
+   },
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     239,
+     26,
+     250,
+     35
+    ]
+   },
+   {
+    "id": "c020",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     210,
+     8,
+     221,
+     25
+    ]
+   },
+   {
+    "id": "c021",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     225,
+     10,
+     234,
+     20
+    ]
+   },
+   {
+    "id": "c024",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     243,
+     -3,
+     249,
+     4
+    ]
+   },
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     249,
+     -1,
+     257,
+     11
+    ]
+   },
+   {
+    "id": "c028",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     230,
+     26,
+     240,
+     32
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     230,
+     3,
+     239,
+     15
+    ]
+   },
+   {
+    "id": "c034",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     234,
+     0,
+     241,
+     9
+    ]
+   },
+   {
+    "id": "c035",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     186,
+     25,
+     196,
+     34
+    ]
+   },
+   {
+    "id": "c036",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     222,
+     25,
+     232,
+     31
+    ]
+   },
+   {
+    "id": "c037",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     242,
+     1,
+     249,
+     12
+    ]
+   },
+   {
+    "id": "c038",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     160,
+     60,
+     184,
+     85
+    ]
+   },
+   {
+    "id": "c040",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     74,
+     46,
+     93,
+     59
+    ]
+   },
+   {
+    "id": "c041",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     212,
+     6,
+     221,
+     18
+    ]
+   },
+   {
+    "id": "c043",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -2,
+     124,
+     50,
+     156
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "100": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "c009",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 87.8,
+    "Y": -15.0,
+    "u": 13,
+    "v": 183,
+    "centre_in": true,
+    "bbox": [
+     -16,
+     138,
+     42,
+     188
+    ]
+   },
+   {
+    "id": "c010",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 112.6,
+    "Y": -13.9,
+    "u": 98,
+    "v": 140,
+    "centre_in": true,
+    "bbox": [
+     76,
+     106,
+     120,
+     143
+    ]
+   },
+   {
+    "id": "c012",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 155.6,
+    "Y": -16.0,
+    "u": 130,
+    "v": 98,
+    "centre_in": true,
+    "bbox": [
+     114,
+     78,
+     146,
+     99
+    ]
+   },
+   {
+    "id": "c014",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 192.9,
+    "Y": -14.7,
+    "u": 178,
+    "v": 76,
+    "centre_in": true,
+    "bbox": [
+     167,
+     60,
+     189,
+     77
+    ]
+   },
+   {
+    "id": "c017",
+    "cat": "truck",
+    "col": "grey",
+    "X": 239.5,
+    "Y": -21.9,
+    "u": 143,
+    "v": 58,
+    "centre_in": true,
+    "bbox": [
+     128,
+     27,
+     156,
+     60
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 270.3,
+    "Y": -14.1,
+    "u": 220,
+    "v": 50,
+    "centre_in": true,
+    "bbox": [
+     212,
+     40,
+     227,
+     51
+    ]
+   },
+   {
+    "id": "c020",
+    "cat": "truck",
+    "col": "grey",
+    "X": 366.1,
+    "Y": -26.0,
+    "u": 178,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     169,
+     15,
+     186,
+     34
+    ]
+   },
+   {
+    "id": "c021",
+    "cat": "van",
+    "col": "silver",
+    "X": 405.2,
+    "Y": -24.9,
+    "u": 196,
+    "v": 29,
+    "centre_in": true,
+    "bbox": [
+     190,
+     17,
+     202,
+     29
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 609.2,
+    "Y": -22.4,
+    "u": 243,
+    "v": 14,
+    "centre_in": true,
+    "bbox": [
+     238,
+     1,
+     248,
+     15
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 472.2,
+    "Y": -23.2,
+    "u": 220,
+    "v": 23,
+    "centre_in": true,
+    "bbox": [
+     212,
+     6,
+     227,
+     23
+    ]
+   },
+   {
+    "id": "c038",
+    "cat": "van",
+    "col": "silver",
+    "X": 138.0,
+    "Y": -14.2,
+    "u": 132,
+    "v": 112,
+    "centre_in": true,
+    "bbox": [
+     114,
+     81,
+     150,
+     114
+    ]
+   },
+   {
+    "id": "c045",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 433.1,
+    "Y": -11.3,
+    "u": 267,
+    "v": 26,
+    "centre_in": true,
+    "bbox": [
+     263,
+     18,
+     272,
+     26
+    ]
+   },
+   {
+    "id": "c049",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 446.4,
+    "Y": -14.2,
+    "u": 256,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     251,
+     18,
+     260,
+     25
+    ]
+   },
+   {
+    "id": "c050",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 455.9,
+    "Y": -18.1,
+    "u": 239,
+    "v": 24,
+    "centre_in": true,
+    "bbox": [
+     235,
+     18,
+     243,
+     24
+    ]
+   },
+   {
+    "id": "c051",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 525.3,
+    "Y": -14.8,
+    "u": 261,
+    "v": 19,
+    "centre_in": true,
+    "bbox": [
+     258,
+     13,
+     265,
+     19
+    ]
+   },
+   {
+    "id": "c053",
+    "cat": "truck",
+    "col": "grey",
+    "X": 340.8,
+    "Y": -22.6,
+    "u": 189,
+    "v": 37,
+    "centre_in": true,
+    "bbox": [
+     179,
+     12,
+     198,
+     38
+    ]
+   },
+   {
+    "id": "c054",
+    "cat": "van",
+    "col": "grey",
+    "X": 245.9,
+    "Y": -15.6,
+    "u": 199,
+    "v": 57,
+    "centre_in": true,
+    "bbox": [
+     189,
+     40,
+     208,
+     57
+    ]
+   },
+   {
+    "id": "c056",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 320.0,
+    "Y": -28.7,
+    "u": 142,
+    "v": 40,
+    "centre_in": true,
+    "bbox": [
+     135,
+     31,
+     148,
+     40
+    ]
+   },
+   {
+    "id": "c059",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 542.7,
+    "Y": -11.2,
+    "u": 276,
+    "v": 18,
+    "centre_in": true,
+    "bbox": [
+     273,
+     12,
+     280,
+     18
+    ]
+   },
+   {
+    "id": "c060",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 498.2,
+    "Y": -10.5,
+    "u": 276,
+    "v": 21,
+    "centre_in": true,
+    "bbox": [
+     272,
+     16,
+     280,
+     21
+    ]
+   },
+   {
+    "id": "c061",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 157.2,
+    "Y": -10.7,
+    "u": 200,
+    "v": 97,
+    "centre_in": true,
+    "bbox": [
+     187,
+     77,
+     212,
+     98
+    ]
+   },
+   {
+    "id": "c062",
+    "cat": "truck",
+    "col": "grey",
+    "X": 566.2,
+    "Y": -27.6,
+    "u": 219,
+    "v": 16,
+    "centre_in": true,
+    "bbox": [
+     213,
+     6,
+     225,
+     17
+    ]
+   },
+   {
+    "id": "c063",
+    "cat": "van",
+    "col": "grey",
+    "X": 220.5,
+    "Y": -18.1,
+    "u": 163,
+    "v": 65,
+    "centre_in": true,
+    "bbox": [
+     151,
+     41,
+     175,
+     66
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 489.6,
+    "Y": -11.1,
+    "u": 273,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     269,
+     15,
+     277,
+     22
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c009",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -13,
+     143,
+     42,
+     194
+    ]
+   },
+   {
+    "id": "c010",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     76,
+     105,
+     120,
+     144
+    ]
+   },
+   {
+    "id": "c012",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     118,
+     78,
+     142,
+     99
+    ]
+   },
+   {
+    "id": "c014",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     167,
+     61,
+     189,
+     76
+    ]
+   },
+   {
+    "id": "c017",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     130,
+     28,
+     151,
+     59
+    ]
+   },
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     213,
+     40,
+     227,
+     51
+    ]
+   },
+   {
+    "id": "c020",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     171,
+     14,
+     186,
+     34
+    ]
+   },
+   {
+    "id": "c021",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     191,
+     16,
+     202,
+     29
+    ]
+   },
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     238,
+     0,
+     247,
+     15
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     214,
+     6,
+     227,
+     23
+    ]
+   },
+   {
+    "id": "c038",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     114,
+     80,
+     149,
+     113
+    ]
+   },
+   {
+    "id": "c045",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     262,
+     19,
+     271,
+     25
+    ]
+   },
+   {
+    "id": "c049",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     252,
+     18,
+     261,
+     25
+    ]
+   },
+   {
+    "id": "c050",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     235,
+     19,
+     244,
+     25
+    ]
+   },
+   {
+    "id": "c051",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     258,
+     12,
+     265,
+     18
+    ]
+   },
+   {
+    "id": "c053",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     180,
+     14,
+     195,
+     38
+    ]
+   },
+   {
+    "id": "c054",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     189,
+     41,
+     208,
+     58
+    ]
+   },
+   {
+    "id": "c056",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     138,
+     30,
+     149,
+     40
+    ]
+   },
+   {
+    "id": "c059",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     273,
+     12,
+     280,
+     18
+    ]
+   },
+   {
+    "id": "c060",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     271,
+     14,
+     278,
+     19
+    ]
+   },
+   {
+    "id": "c061",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     187,
+     78,
+     212,
+     99
+    ]
+   },
+   {
+    "id": "c062",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     216,
+     4,
+     224,
+     14
+    ]
+   },
+   {
+    "id": "c063",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     155,
+     40,
+     174,
+     66
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     270,
+     17,
+     278,
+     22
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "125": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "c010",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 80.0,
+    "Y": -14.5,
+    "u": -3,
+    "v": 202,
+    "centre_in": false,
+    "bbox": [
+     -35,
+     154,
+     27,
+     208
+    ]
+   },
+   {
+    "id": "c012",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 128.5,
+    "Y": -17.8,
+    "u": 64,
+    "v": 121,
+    "centre_in": true,
+    "bbox": [
+     45,
+     96,
+     82,
+     123
+    ]
+   },
+   {
+    "id": "c014",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 168.6,
+    "Y": -14.8,
+    "u": 157,
+    "v": 89,
+    "centre_in": true,
+    "bbox": [
+     144,
+     71,
+     169,
+     90
+    ]
+   },
+   {
+    "id": "c017",
+    "cat": "truck",
+    "col": "grey",
+    "X": 196.2,
+    "Y": -21.9,
+    "u": 106,
+    "v": 74,
+    "centre_in": true,
+    "bbox": [
+     88,
+     35,
+     124,
+     77
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 227.7,
+    "Y": -14.3,
+    "u": 202,
+    "v": 62,
+    "centre_in": true,
+    "bbox": [
+     193,
+     50,
+     211,
+     63
+    ]
+   },
+   {
+    "id": "c020",
+    "cat": "truck",
+    "col": "grey",
+    "X": 318.4,
+    "Y": -27.0,
+    "u": 152,
+    "v": 40,
+    "centre_in": true,
+    "bbox": [
+     141,
+     19,
+     162,
+     41
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 555.7,
+    "Y": -22.4,
+    "u": 236,
+    "v": 17,
+    "centre_in": true,
+    "bbox": [
+     231,
+     2,
+     242,
+     18
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 425.9,
+    "Y": -24.8,
+    "u": 202,
+    "v": 27,
+    "centre_in": true,
+    "bbox": [
+     193,
+     8,
+     211,
+     27
+    ]
+   },
+   {
+    "id": "c038",
+    "cat": "van",
+    "col": "silver",
+    "X": 114.7,
+    "Y": -14.4,
+    "u": 94,
+    "v": 137,
+    "centre_in": true,
+    "bbox": [
+     71,
+     100,
+     116,
+     140
+    ]
+   },
+   {
+    "id": "c045",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 346.2,
+    "Y": -11.0,
+    "u": 258,
+    "v": 36,
+    "centre_in": true,
+    "bbox": [
+     253,
+     27,
+     264,
+     37
+    ]
+   },
+   {
+    "id": "c049",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 362.9,
+    "Y": -14.0,
+    "u": 244,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     238,
+     26,
+     249,
+     34
+    ]
+   },
+   {
+    "id": "c050",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 389.2,
+    "Y": -18.2,
+    "u": 227,
+    "v": 31,
+    "centre_in": true,
+    "bbox": [
+     221,
+     23,
+     232,
+     31
+    ]
+   },
+   {
+    "id": "c051",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 447.6,
+    "Y": -14.7,
+    "u": 253,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     249,
+     18,
+     257,
+     25
+    ]
+   },
+   {
+    "id": "c053",
+    "cat": "truck",
+    "col": "grey",
+    "X": 297.7,
+    "Y": -22.3,
+    "u": 173,
+    "v": 44,
+    "centre_in": true,
+    "bbox": [
+     161,
+     16,
+     184,
+     46
+    ]
+   },
+   {
+    "id": "c054",
+    "cat": "van",
+    "col": "grey",
+    "X": 196.5,
+    "Y": -17.3,
+    "u": 154,
+    "v": 74,
+    "centre_in": true,
+    "bbox": [
+     141,
+     53,
+     167,
+     75
+    ]
+   },
+   {
+    "id": "c059",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 467.3,
+    "Y": -11.4,
+    "u": 270,
+    "v": 23,
+    "centre_in": true,
+    "bbox": [
+     266,
+     16,
+     274,
+     23
+    ]
+   },
+   {
+    "id": "c060",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 450.7,
+    "Y": -12.7,
+    "u": 263,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     258,
+     19,
+     268,
+     25
+    ]
+   },
+   {
+    "id": "c061",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 130.7,
+    "Y": -10.8,
+    "u": 176,
+    "v": 119,
+    "centre_in": true,
+    "bbox": [
+     159,
+     95,
+     192,
+     121
+    ]
+   },
+   {
+    "id": "c063",
+    "cat": "van",
+    "col": "grey",
+    "X": 176.3,
+    "Y": -18.7,
+    "u": 119,
+    "v": 84,
+    "centre_in": true,
+    "bbox": [
+     104,
+     55,
+     134,
+     86
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 399.7,
+    "Y": -10.9,
+    "u": 266,
+    "v": 30,
+    "centre_in": true,
+    "bbox": [
+     261,
+     22,
+     270,
+     30
+    ]
+   },
+   {
+    "id": "c065",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 362.2,
+    "Y": -25.3,
+    "u": 181,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     175,
+     26,
+     187,
+     34
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 429.9,
+    "Y": -18.5,
+    "u": 233,
+    "v": 26,
+    "centre_in": true,
+    "bbox": [
+     228,
+     20,
+     238,
+     27
+    ]
+   },
+   {
+    "id": "c067",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 277.4,
+    "Y": -30.0,
+    "u": 106,
+    "v": 48,
+    "centre_in": true,
+    "bbox": [
+     99,
+     38,
+     114,
+     49
+    ]
+   },
+   {
+    "id": "c068",
+    "cat": "truck",
+    "col": "grey",
+    "X": 532.1,
+    "Y": -29.3,
+    "u": 207,
+    "v": 18,
+    "centre_in": true,
+    "bbox": [
+     201,
+     6,
+     213,
+     19
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c010",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -35,
+     148,
+     29,
+     206
+    ]
+   },
+   {
+    "id": "c012",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     48,
+     96,
+     81,
+     123
+    ]
+   },
+   {
+    "id": "c014",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     144,
+     70,
+     169,
+     91
+    ]
+   },
+   {
+    "id": "c017",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     87,
+     36,
+     126,
+     75
+    ]
+   },
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     193,
+     51,
+     211,
+     63
+    ]
+   },
+   {
+    "id": "c020",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     141,
+     18,
+     162,
+     43
+    ]
+   },
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     232,
+     2,
+     241,
+     19
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     195,
+     8,
+     209,
+     27
+    ]
+   },
+   {
+    "id": "c038",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     71,
+     99,
+     115,
+     140
+    ]
+   },
+   {
+    "id": "c045",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     253,
+     27,
+     264,
+     36
+    ]
+   },
+   {
+    "id": "c049",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     238,
+     26,
+     248,
+     35
+    ]
+   },
+   {
+    "id": "c050",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     221,
+     23,
+     232,
+     31
+    ]
+   },
+   {
+    "id": "c051",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     249,
+     17,
+     258,
+     24
+    ]
+   },
+   {
+    "id": "c053",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     165,
+     18,
+     184,
+     45
+    ]
+   },
+   {
+    "id": "c054",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     145,
+     52,
+     166,
+     76
+    ]
+   },
+   {
+    "id": "c059",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     265,
+     17,
+     273,
+     23
+    ]
+   },
+   {
+    "id": "c060",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     258,
+     19,
+     267,
+     26
+    ]
+   },
+   {
+    "id": "c061",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     159,
+     96,
+     187,
+     120
+    ]
+   },
+   {
+    "id": "c063",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     105,
+     55,
+     130,
+     87
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     261,
+     24,
+     271,
+     31
+    ]
+   },
+   {
+    "id": "c065",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     175,
+     26,
+     186,
+     33
+    ]
+   },
+   {
+    "id": "c066",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     228,
+     20,
+     238,
+     26
+    ]
+   },
+   {
+    "id": "c067",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     99,
+     38,
+     114,
+     48
+    ]
+   },
+   {
+    "id": "c068",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     198,
+     6,
+     209,
+     18
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "150": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "c012",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 96.4,
+    "Y": -18.0,
+    "u": -22,
+    "v": 165,
+    "centre_in": false,
+    "bbox": [
+     -47,
+     132,
+     3,
+     169
+    ]
+   },
+   {
+    "id": "c014",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 144.8,
+    "Y": -14.8,
+    "u": 132,
+    "v": 106,
+    "centre_in": true,
+    "bbox": [
+     117,
+     84,
+     147,
+     107
+    ]
+   },
+   {
+    "id": "c017",
+    "cat": "truck",
+    "col": "grey",
+    "X": 153.1,
+    "Y": -22.1,
+    "u": 46,
+    "v": 99,
+    "centre_in": true,
+    "bbox": [
+     19,
+     49,
+     70,
+     103
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 190.7,
+    "Y": -14.4,
+    "u": 179,
+    "v": 77,
+    "centre_in": true,
+    "bbox": [
+     168,
+     62,
+     190,
+     78
+    ]
+   },
+   {
+    "id": "c020",
+    "cat": "truck",
+    "col": "grey",
+    "X": 273.2,
+    "Y": -28.5,
+    "u": 115,
+    "v": 49,
+    "centre_in": true,
+    "bbox": [
+     102,
+     24,
+     127,
+     50
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 505.7,
+    "Y": -22.2,
+    "u": 230,
+    "v": 20,
+    "centre_in": true,
+    "bbox": [
+     224,
+     4,
+     236,
+     21
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 379.7,
+    "Y": -25.5,
+    "u": 186,
+    "v": 32,
+    "centre_in": true,
+    "bbox": [
+     176,
+     10,
+     195,
+     32
+    ]
+   },
+   {
+    "id": "c038",
+    "cat": "van",
+    "col": "silver",
+    "X": 87.4,
+    "Y": -14.6,
+    "u": 22,
+    "v": 184,
+    "centre_in": true,
+    "bbox": [
+     -10,
+     134,
+     53,
+     189
+    ]
+   },
+   {
+    "id": "c045",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 267.2,
+    "Y": -10.9,
+    "u": 243,
+    "v": 51,
+    "centre_in": true,
+    "bbox": [
+     236,
+     39,
+     251,
+     52
+    ]
+   },
+   {
+    "id": "c049",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 282.4,
+    "Y": -13.9,
+    "u": 226,
+    "v": 48,
+    "centre_in": true,
+    "bbox": [
+     219,
+     37,
+     233,
+     48
+    ]
+   },
+   {
+    "id": "c050",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 321.5,
+    "Y": -17.9,
+    "u": 211,
+    "v": 40,
+    "centre_in": true,
+    "bbox": [
+     204,
+     31,
+     217,
+     40
+    ]
+   },
+   {
+    "id": "c051",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 367.4,
+    "Y": -14.5,
+    "u": 242,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     237,
+     25,
+     247,
+     34
+    ]
+   },
+   {
+    "id": "c053",
+    "cat": "truck",
+    "col": "grey",
+    "X": 259.2,
+    "Y": -22.3,
+    "u": 152,
+    "v": 53,
+    "centre_in": true,
+    "bbox": [
+     138,
+     21,
+     165,
+     55
+    ]
+   },
+   {
+    "id": "c054",
+    "cat": "van",
+    "col": "grey",
+    "X": 154.0,
+    "Y": -18.2,
+    "u": 98,
+    "v": 99,
+    "centre_in": true,
+    "bbox": [
+     82,
+     72,
+     115,
+     100
+    ]
+   },
+   {
+    "id": "c059",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 375.2,
+    "Y": -11.1,
+    "u": 262,
+    "v": 32,
+    "centre_in": true,
+    "bbox": [
+     256,
+     23,
+     267,
+     33
+    ]
+   },
+   {
+    "id": "c061",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 105.3,
+    "Y": -12.2,
+    "u": 116,
+    "v": 151,
+    "centre_in": true,
+    "bbox": [
+     93,
+     120,
+     139,
+     154
+    ]
+   },
+   {
+    "id": "c063",
+    "cat": "van",
+    "col": "grey",
+    "X": 138.5,
+    "Y": -18.8,
+    "u": 67,
+    "v": 111,
+    "centre_in": true,
+    "bbox": [
+     47,
+     73,
+     86,
+     114
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 314.6,
+    "Y": -11.1,
+    "u": 252,
+    "v": 41,
+    "centre_in": true,
+    "bbox": [
+     246,
+     32,
+     258,
+     42
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 362.3,
+    "Y": -18.5,
+    "u": 218,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     213,
+     26,
+     224,
+     34
+    ]
+   },
+   {
+    "id": "c068",
+    "cat": "truck",
+    "col": "grey",
+    "X": 457.3,
+    "Y": -30.0,
+    "u": 187,
+    "v": 24,
+    "centre_in": true,
+    "bbox": [
+     180,
+     9,
+     193,
+     24
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 525.6,
+    "Y": -14.1,
+    "u": 264,
+    "v": 19,
+    "centre_in": true,
+    "bbox": [
+     260,
+     13,
+     268,
+     19
+    ]
+   },
+   {
+    "id": "c072",
+    "cat": "truck",
+    "col": "silver",
+    "X": 657.5,
+    "Y": -28.1,
+    "u": 230,
+    "v": 12,
+    "centre_in": true,
+    "bbox": [
+     222,
+     2,
+     238,
+     12
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 358.1,
+    "Y": -14.4,
+    "u": 241,
+    "v": 35,
+    "centre_in": true,
+    "bbox": [
+     235,
+     25,
+     247,
+     35
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c014",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     117,
+     84,
+     147,
+     107
+    ]
+   },
+   {
+    "id": "c017",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     18,
+     48,
+     72,
+     102
+    ]
+   },
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     169,
+     61,
+     190,
+     78
+    ]
+   },
+   {
+    "id": "c020",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     105,
+     24,
+     124,
+     50
+    ]
+   },
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     226,
+     2,
+     236,
+     20
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     177,
+     10,
+     195,
+     32
+    ]
+   },
+   {
+    "id": "c038",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     -9,
+     133,
+     52,
+     189
+    ]
+   },
+   {
+    "id": "c045",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     237,
+     38,
+     251,
+     52
+    ]
+   },
+   {
+    "id": "c049",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     220,
+     36,
+     234,
+     47
+    ]
+   },
+   {
+    "id": "c050",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     205,
+     30,
+     218,
+     41
+    ]
+   },
+   {
+    "id": "c051",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     237,
+     24,
+     248,
+     33
+    ]
+   },
+   {
+    "id": "c053",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     140,
+     20,
+     163,
+     53
+    ]
+   },
+   {
+    "id": "c054",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     83,
+     72,
+     111,
+     101
+    ]
+   },
+   {
+    "id": "c059",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     257,
+     22,
+     267,
+     32
+    ]
+   },
+   {
+    "id": "c061",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     95,
+     121,
+     140,
+     152
+    ]
+   },
+   {
+    "id": "c063",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     48,
+     74,
+     84,
+     112
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     246,
+     32,
+     258,
+     40
+    ]
+   },
+   {
+    "id": "c066",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     213,
+     26,
+     224,
+     34
+    ]
+   },
+   {
+    "id": "c068",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     180,
+     8,
+     192,
+     22
+    ]
+   },
+   {
+    "id": "c070",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     119,
+     25,
+     143,
+     50
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     260,
+     15,
+     268,
+     21
+    ]
+   },
+   {
+    "id": "c072",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     225,
+     3,
+     233,
+     14
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     235,
+     26,
+     247,
+     36
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "188": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 400.4,
+    "Y": -10.9,
+    "u": 266,
+    "v": 29,
+    "centre_in": true,
+    "bbox": [
+     261,
+     22,
+     270,
+     30
+    ]
+   },
+   {
+    "id": "c014",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 101.5,
+    "Y": -14.6,
+    "u": 61,
+    "v": 156,
+    "centre_in": true,
+    "bbox": [
+     38,
+     125,
+     82,
+     160
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 140.5,
+    "Y": -14.4,
+    "u": 132,
+    "v": 110,
+    "centre_in": true,
+    "bbox": [
+     117,
+     89,
+     147,
+     111
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 433.8,
+    "Y": -22.2,
+    "u": 216,
+    "v": 26,
+    "centre_in": true,
+    "bbox": [
+     208,
+     7,
+     224,
+     27
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 307.3,
+    "Y": -27.2,
+    "u": 145,
+    "v": 42,
+    "centre_in": true,
+    "bbox": [
+     130,
+     16,
+     159,
+     44
+    ]
+   },
+   {
+    "id": "c045",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 178.2,
+    "Y": -10.9,
+    "u": 210,
+    "v": 84,
+    "centre_in": true,
+    "bbox": [
+     198,
+     65,
+     221,
+     85
+    ]
+   },
+   {
+    "id": "c049",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 191.3,
+    "Y": -13.9,
+    "u": 185,
+    "v": 77,
+    "centre_in": true,
+    "bbox": [
+     174,
+     61,
+     196,
+     78
+    ]
+   },
+   {
+    "id": "c050",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 232.0,
+    "Y": -17.6,
+    "u": 175,
+    "v": 61,
+    "centre_in": true,
+    "bbox": [
+     166,
+     49,
+     184,
+     61
+    ]
+   },
+   {
+    "id": "c053",
+    "cat": "truck",
+    "col": "grey",
+    "X": 205.8,
+    "Y": -21.9,
+    "u": 115,
+    "v": 70,
+    "centre_in": true,
+    "bbox": [
+     96,
+     29,
+     133,
+     73
+    ]
+   },
+   {
+    "id": "c054",
+    "cat": "van",
+    "col": "grey",
+    "X": 102.0,
+    "Y": -18.2,
+    "u": -8,
+    "v": 155,
+    "centre_in": false,
+    "bbox": [
+     -36,
+     114,
+     18,
+     159
+    ]
+   },
+   {
+    "id": "c059",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 247.4,
+    "Y": -11.0,
+    "u": 237,
+    "v": 56,
+    "centre_in": true,
+    "bbox": [
+     229,
+     42,
+     245,
+     57
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 212.8,
+    "Y": -10.6,
+    "u": 229,
+    "v": 68,
+    "centre_in": true,
+    "bbox": [
+     220,
+     53,
+     238,
+     69
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 262.7,
+    "Y": -18.5,
+    "u": 184,
+    "v": 52,
+    "centre_in": true,
+    "bbox": [
+     176,
+     42,
+     191,
+     53
+    ]
+   },
+   {
+    "id": "c068",
+    "cat": "truck",
+    "col": "grey",
+    "X": 367.1,
+    "Y": -29.6,
+    "u": 158,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     149,
+     15,
+     167,
+     34
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 445.4,
+    "Y": -14.6,
+    "u": 253,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     249,
+     18,
+     258,
+     25
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 244.5,
+    "Y": -14.6,
+    "u": 207,
+    "v": 57,
+    "centre_in": true,
+    "bbox": [
+     198,
+     43,
+     215,
+     58
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 478.0,
+    "Y": -18.1,
+    "u": 242,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     238,
+     16,
+     247,
+     22
+    ]
+   },
+   {
+    "id": "c075",
+    "cat": "truck",
+    "col": "grey",
+    "X": 644.9,
+    "Y": -22.6,
+    "u": 246,
+    "v": 13,
+    "centre_in": true,
+    "bbox": [
+     242,
+     0,
+     251,
+     13
+    ]
+   },
+   {
+    "id": "c076",
+    "cat": "truck",
+    "col": "grey",
+    "X": 743.5,
+    "Y": -22.5,
+    "u": 255,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     251,
+     0,
+     259,
+     9
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 593.1,
+    "Y": -10.8,
+    "u": 281,
+    "v": 15,
+    "centre_in": true,
+    "bbox": [
+     278,
+     10,
+     284,
+     15
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 714.8,
+    "Y": -12.4,
+    "u": 281,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     279,
+     6,
+     284,
+     10
+    ]
+   },
+   {
+    "id": "c080",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 535.6,
+    "Y": -20.9,
+    "u": 239,
+    "v": 18,
+    "centre_in": true,
+    "bbox": [
+     235,
+     13,
+     243,
+     18
+    ]
+   },
+   {
+    "id": "c081",
+    "cat": "van",
+    "col": "silver",
+    "X": 804.9,
+    "Y": -19.1,
+    "u": 268,
+    "v": 7,
+    "centre_in": true,
+    "bbox": [
+     265,
+     2,
+     270,
+     8
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 642.5,
+    "Y": -15.3,
+    "u": 269,
+    "v": 13,
+    "centre_in": true,
+    "bbox": [
+     266,
+     7,
+     272,
+     13
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 539.4,
+    "Y": -19.2,
+    "u": 246,
+    "v": 18,
+    "centre_in": true,
+    "bbox": [
+     242,
+     13,
+     251,
+     18
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c014",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     37,
+     126,
+     80,
+     159
+    ]
+   },
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     116,
+     88,
+     147,
+     112
+    ]
+   },
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     211,
+     5,
+     223,
+     26
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     135,
+     18,
+     152,
+     42
+    ]
+   },
+   {
+    "id": "c045",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     197,
+     64,
+     220,
+     85
+    ]
+   },
+   {
+    "id": "c049",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     174,
+     62,
+     196,
+     79
+    ]
+   },
+   {
+    "id": "c050",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     166,
+     50,
+     184,
+     62
+    ]
+   },
+   {
+    "id": "c053",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     95,
+     30,
+     134,
+     74
+    ]
+   },
+   {
+    "id": "c059",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     228,
+     42,
+     245,
+     58
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     220,
+     55,
+     239,
+     68
+    ]
+   },
+   {
+    "id": "c066",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     175,
+     42,
+     191,
+     52
+    ]
+   },
+   {
+    "id": "c068",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     149,
+     16,
+     164,
+     33
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     249,
+     18,
+     258,
+     24
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     197,
+     44,
+     213,
+     57
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     237,
+     17,
+     245,
+     23
+    ]
+   },
+   {
+    "id": "c075",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     241,
+     0,
+     250,
+     13
+    ]
+   },
+   {
+    "id": "c076",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     250,
+     0,
+     258,
+     10
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     278,
+     11,
+     284,
+     15
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     279,
+     6,
+     284,
+     9
+    ]
+   },
+   {
+    "id": "c080",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     235,
+     14,
+     243,
+     19
+    ]
+   },
+   {
+    "id": "c081",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     265,
+     2,
+     270,
+     7
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     265,
+     6,
+     272,
+     13
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     239,
+     14,
+     247,
+     19
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     261,
+     22,
+     270,
+     30
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "213": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 294.2,
+    "Y": -10.8,
+    "u": 250,
+    "v": 45,
+    "centre_in": true,
+    "bbox": [
+     243,
+     34,
+     257,
+     46
+    ]
+   },
+   {
+    "id": "c019",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 109.9,
+    "Y": -14.5,
+    "u": 82,
+    "v": 144,
+    "centre_in": true,
+    "bbox": [
+     61,
+     117,
+     102,
+     146
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 384.8,
+    "Y": -22.6,
+    "u": 202,
+    "v": 31,
+    "centre_in": true,
+    "bbox": [
+     193,
+     10,
+     211,
+     32
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 261.6,
+    "Y": -28.4,
+    "u": 107,
+    "v": 52,
+    "centre_in": true,
+    "bbox": [
+     91,
+     21,
+     122,
+     54
+    ]
+   },
+   {
+    "id": "c045",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 139.8,
+    "Y": -10.9,
+    "u": 182,
+    "v": 110,
+    "centre_in": true,
+    "bbox": [
+     167,
+     86,
+     197,
+     112
+    ]
+   },
+   {
+    "id": "c049",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 150.5,
+    "Y": -14.2,
+    "u": 148,
+    "v": 101,
+    "centre_in": true,
+    "bbox": [
+     133,
+     81,
+     162,
+     103
+    ]
+   },
+   {
+    "id": "c050",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 190.9,
+    "Y": -17.6,
+    "u": 145,
+    "v": 77,
+    "centre_in": true,
+    "bbox": [
+     134,
+     62,
+     156,
+     78
+    ]
+   },
+   {
+    "id": "c053",
+    "cat": "truck",
+    "col": "grey",
+    "X": 172.9,
+    "Y": -21.9,
+    "u": 79,
+    "v": 86,
+    "centre_in": true,
+    "bbox": [
+     54,
+     37,
+     102,
+     90
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 168.9,
+    "Y": -10.5,
+    "u": 209,
+    "v": 89,
+    "centre_in": true,
+    "bbox": [
+     197,
+     71,
+     221,
+     90
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 207.8,
+    "Y": -18.4,
+    "u": 151,
+    "v": 69,
+    "centre_in": true,
+    "bbox": [
+     141,
+     56,
+     161,
+     70
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 377.8,
+    "Y": -14.4,
+    "u": 244,
+    "v": 32,
+    "centre_in": true,
+    "bbox": [
+     239,
+     24,
+     249,
+     32
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 182.1,
+    "Y": -14.3,
+    "u": 174,
+    "v": 81,
+    "centre_in": true,
+    "bbox": [
+     162,
+     62,
+     186,
+     83
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 410.6,
+    "Y": -18.2,
+    "u": 231,
+    "v": 28,
+    "centre_in": true,
+    "bbox": [
+     226,
+     21,
+     236,
+     28
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 484.4,
+    "Y": -10.7,
+    "u": 275,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     271,
+     15,
+     278,
+     22
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 605.1,
+    "Y": -11.2,
+    "u": 280,
+    "v": 15,
+    "centre_in": true,
+    "bbox": [
+     277,
+     10,
+     283,
+     15
+    ]
+   },
+   {
+    "id": "c080",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 456.0,
+    "Y": -23.6,
+    "u": 215,
+    "v": 24,
+    "centre_in": true,
+    "bbox": [
+     210,
+     18,
+     219,
+     24
+    ]
+   },
+   {
+    "id": "c081",
+    "cat": "van",
+    "col": "silver",
+    "X": 720.3,
+    "Y": -18.5,
+    "u": 264,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     261,
+     3,
+     267,
+     10
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 579.6,
+    "Y": -15.4,
+    "u": 264,
+    "v": 16,
+    "centre_in": true,
+    "bbox": [
+     260,
+     9,
+     268,
+     16
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 505.5,
+    "Y": -23.3,
+    "u": 225,
+    "v": 20,
+    "centre_in": true,
+    "bbox": [
+     221,
+     15,
+     230,
+     20
+    ]
+   },
+   {
+    "id": "c084",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 215.2,
+    "Y": -27.7,
+    "u": 69,
+    "v": 66,
+    "centre_in": true,
+    "bbox": [
+     57,
+     51,
+     81,
+     67
+    ]
+   },
+   {
+    "id": "c086",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 181.0,
+    "Y": -16.3,
+    "u": 152,
+    "v": 82,
+    "centre_in": true,
+    "bbox": [
+     140,
+     65,
+     163,
+     83
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 470.2,
+    "Y": -14.3,
+    "u": 258,
+    "v": 23,
+    "centre_in": true,
+    "bbox": [
+     254,
+     17,
+     262,
+     23
+    ]
+   },
+   {
+    "id": "c088",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 509.9,
+    "Y": -23.1,
+    "u": 227,
+    "v": 20,
+    "centre_in": true,
+    "bbox": [
+     223,
+     14,
+     231,
+     20
+    ]
+   },
+   {
+    "id": "c089",
+    "cat": "truck",
+    "col": "grey",
+    "X": 169.9,
+    "Y": -29.5,
+    "u": -15,
+    "v": 87,
+    "centre_in": false,
+    "bbox": [
+     -39,
+     48,
+     7,
+     90
+    ]
+   },
+   {
+    "id": "c090",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 186.9,
+    "Y": -25.3,
+    "u": 60,
+    "v": 78,
+    "centre_in": true,
+    "bbox": [
+     47,
+     62,
+     72,
+     80
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 192.4,
+    "Y": -10.9,
+    "u": 217,
+    "v": 76,
+    "centre_in": true,
+    "bbox": [
+     205,
+     55,
+     229,
+     78
+    ]
+   },
+   {
+    "id": "c092",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 241.0,
+    "Y": -30.5,
+    "u": 72,
+    "v": 58,
+    "centre_in": true,
+    "bbox": [
+     61,
+     44,
+     82,
+     58
+    ]
+   },
+   {
+    "id": "c094",
+    "cat": "truck",
+    "col": "grey",
+    "X": 491.8,
+    "Y": -28.0,
+    "u": 204,
+    "v": 21,
+    "centre_in": true,
+    "bbox": [
+     198,
+     8,
+     210,
+     21
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 628.2,
+    "Y": -18.2,
+    "u": 259,
+    "v": 14,
+    "centre_in": true,
+    "bbox": [
+     255,
+     7,
+     262,
+     14
+    ]
+   },
+   {
+    "id": "c096",
+    "cat": "truck",
+    "col": "silver",
+    "X": 996.4,
+    "Y": -31.1,
+    "u": 252,
+    "v": 3,
+    "centre_in": true,
+    "bbox": [
+     246,
+     -4,
+     257,
+     3
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 285.2,
+    "Y": -28.3,
+    "u": 124,
+    "v": 47,
+    "centre_in": true,
+    "bbox": [
+     116,
+     37,
+     132,
+     47
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c019",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     62,
+     118,
+     97,
+     147
+    ]
+   },
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     194,
+     11,
+     211,
+     33
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     90,
+     21,
+     122,
+     55
+    ]
+   },
+   {
+    "id": "c045",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     167,
+     87,
+     196,
+     113
+    ]
+   },
+   {
+    "id": "c049",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     133,
+     81,
+     161,
+     103
+    ]
+   },
+   {
+    "id": "c050",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     127,
+     65,
+     151,
+     82
+    ]
+   },
+   {
+    "id": "c053",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     55,
+     37,
+     99,
+     89
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     196,
+     70,
+     221,
+     93
+    ]
+   },
+   {
+    "id": "c066",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     141,
+     58,
+     162,
+     71
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     239,
+     24,
+     249,
+     32
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     157,
+     63,
+     182,
+     83
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     226,
+     22,
+     235,
+     28
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     270,
+     16,
+     278,
+     22
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     278,
+     10,
+     284,
+     15
+    ]
+   },
+   {
+    "id": "c080",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     209,
+     18,
+     218,
+     24
+    ]
+   },
+   {
+    "id": "c081",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     261,
+     4,
+     267,
+     10
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     261,
+     9,
+     268,
+     16
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     217,
+     16,
+     225,
+     22
+    ]
+   },
+   {
+    "id": "c084",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     59,
+     52,
+     78,
+     68
+    ]
+   },
+   {
+    "id": "c086",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     139,
+     65,
+     162,
+     83
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     253,
+     18,
+     262,
+     23
+    ]
+   },
+   {
+    "id": "c088",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     221,
+     15,
+     230,
+     22
+    ]
+   },
+   {
+    "id": "c090",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     47,
+     63,
+     68,
+     81
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     206,
+     57,
+     228,
+     79
+    ]
+   },
+   {
+    "id": "c092",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     61,
+     44,
+     82,
+     57
+    ]
+   },
+   {
+    "id": "c094",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     198,
+     9,
+     209,
+     23
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     255,
+     8,
+     262,
+     15
+    ]
+   },
+   {
+    "id": "c096",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     249,
+     -4,
+     254,
+     2
+    ]
+   },
+   {
+    "id": "c097",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     117,
+     38,
+     130,
+     48
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     243,
+     34,
+     257,
+     46
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "250": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 174.4,
+    "Y": -11.1,
+    "u": 205,
+    "v": 86,
+    "centre_in": true,
+    "bbox": [
+     191,
+     67,
+     219,
+     87
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 306.6,
+    "Y": -22.5,
+    "u": 176,
+    "v": 43,
+    "centre_in": true,
+    "bbox": [
+     164,
+     16,
+     187,
+     44
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 201.8,
+    "Y": -28.5,
+    "u": 46,
+    "v": 71,
+    "centre_in": true,
+    "bbox": [
+     23,
+     31,
+     66,
+     75
+    ]
+   },
+   {
+    "id": "c045",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 104.6,
+    "Y": -11.1,
+    "u": 137,
+    "v": 152,
+    "centre_in": true,
+    "bbox": [
+     114,
+     119,
+     159,
+     155
+    ]
+   },
+   {
+    "id": "c049",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 95.4,
+    "Y": -14.7,
+    "u": 43,
+    "v": 167,
+    "centre_in": true,
+    "bbox": [
+     18,
+     134,
+     66,
+     171
+    ]
+   },
+   {
+    "id": "c050",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 141.6,
+    "Y": -17.4,
+    "u": 92,
+    "v": 108,
+    "centre_in": true,
+    "bbox": [
+     77,
+     88,
+     107,
+     110
+    ]
+   },
+   {
+    "id": "c053",
+    "cat": "truck",
+    "col": "grey",
+    "X": 129.5,
+    "Y": -22.1,
+    "u": -1,
+    "v": 119,
+    "centre_in": false,
+    "bbox": [
+     -40,
+     53,
+     34,
+     127
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 129.3,
+    "Y": -10.6,
+    "u": 177,
+    "v": 120,
+    "centre_in": true,
+    "bbox": [
+     161,
+     96,
+     193,
+     122
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 146.0,
+    "Y": -18.2,
+    "u": 87,
+    "v": 105,
+    "centre_in": true,
+    "bbox": [
+     71,
+     85,
+     102,
+     106
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 277.9,
+    "Y": -14.4,
+    "u": 220,
+    "v": 49,
+    "centre_in": true,
+    "bbox": [
+     213,
+     38,
+     228,
+     49
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 126.9,
+    "Y": -14.8,
+    "u": 108,
+    "v": 123,
+    "centre_in": true,
+    "bbox": [
+     89,
+     95,
+     126,
+     125
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 305.7,
+    "Y": -17.9,
+    "u": 206,
+    "v": 43,
+    "centre_in": true,
+    "bbox": [
+     199,
+     33,
+     212,
+     43
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 329.1,
+    "Y": -11.0,
+    "u": 255,
+    "v": 39,
+    "centre_in": true,
+    "bbox": [
+     249,
+     29,
+     261,
+     39
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 449.5,
+    "Y": -10.9,
+    "u": 271,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     267,
+     18,
+     275,
+     25
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 481.2,
+    "Y": -15.1,
+    "u": 256,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     251,
+     14,
+     260,
+     22
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 422.9,
+    "Y": -24.8,
+    "u": 202,
+    "v": 27,
+    "centre_in": true,
+    "bbox": [
+     197,
+     21,
+     207,
+     27
+    ]
+   },
+   {
+    "id": "c086",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 132.4,
+    "Y": -17.9,
+    "u": 69,
+    "v": 117,
+    "centre_in": true,
+    "bbox": [
+     51,
+     93,
+     87,
+     119
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 365.5,
+    "Y": -14.5,
+    "u": 241,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     236,
+     25,
+     247,
+     34
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 149.6,
+    "Y": -11.3,
+    "u": 186,
+    "v": 102,
+    "centre_in": true,
+    "bbox": [
+     170,
+     74,
+     201,
+     104
+    ]
+   },
+   {
+    "id": "c094",
+    "cat": "truck",
+    "col": "grey",
+    "X": 390.6,
+    "Y": -27.6,
+    "u": 178,
+    "v": 30,
+    "centre_in": true,
+    "bbox": [
+     170,
+     14,
+     185,
+     31
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 532.9,
+    "Y": -17.9,
+    "u": 250,
+    "v": 19,
+    "centre_in": true,
+    "bbox": [
+     246,
+     11,
+     254,
+     19
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 224.9,
+    "Y": -28.6,
+    "u": 72,
+    "v": 63,
+    "centre_in": true,
+    "bbox": [
+     61,
+     51,
+     81,
+     63
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 435.6,
+    "Y": -23.9,
+    "u": 209,
+    "v": 26,
+    "centre_in": true,
+    "bbox": [
+     204,
+     20,
+     214,
+     26
+    ]
+   },
+   {
+    "id": "c106",
+    "cat": "truck",
+    "col": "grey",
+    "X": 151.8,
+    "Y": -21.6,
+    "u": 50,
+    "v": 100,
+    "centre_in": true,
+    "bbox": [
+     27,
+     45,
+     71,
+     105
+    ]
+   },
+   {
+    "id": "c107",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 1112.8,
+    "Y": -27.6,
+    "u": 264,
+    "v": 1,
+    "centre_in": true,
+    "bbox": [
+     262,
+     -1,
+     266,
+     1
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 576.7,
+    "Y": -17.4,
+    "u": 257,
+    "v": 16,
+    "centre_in": true,
+    "bbox": [
+     253,
+     8,
+     260,
+     16
+    ]
+   },
+   {
+    "id": "c109",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 668.4,
+    "Y": -25.2,
+    "u": 240,
+    "v": 12,
+    "centre_in": true,
+    "bbox": [
+     237,
+     8,
+     243,
+     12
+    ]
+   },
+   {
+    "id": "c110",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 373.3,
+    "Y": -12.6,
+    "u": 253,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     248,
+     26,
+     258,
+     33
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     164,
+     17,
+     184,
+     44
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     21,
+     30,
+     65,
+     75
+    ]
+   },
+   {
+    "id": "c045",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     113,
+     118,
+     158,
+     154
+    ]
+   },
+   {
+    "id": "c049",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     18,
+     134,
+     66,
+     172
+    ]
+   },
+   {
+    "id": "c050",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     20,
+     108,
+     60,
+     136
+    ]
+   },
+   {
+    "id": "c053",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     -41,
+     54,
+     28,
+     129
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     160,
+     96,
+     194,
+     125
+    ]
+   },
+   {
+    "id": "c066",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     64,
+     88,
+     92,
+     110
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     212,
+     40,
+     226,
+     50
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     89,
+     96,
+     124,
+     128
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     198,
+     33,
+     210,
+     42
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     250,
+     30,
+     262,
+     40
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     266,
+     18,
+     274,
+     24
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     251,
+     14,
+     260,
+     23
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     196,
+     20,
+     205,
+     27
+    ]
+   },
+   {
+    "id": "c086",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     24,
+     104,
+     63,
+     133
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     236,
+     26,
+     246,
+     34
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     171,
+     75,
+     199,
+     104
+    ]
+   },
+   {
+    "id": "c094",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     170,
+     15,
+     184,
+     32
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     246,
+     11,
+     254,
+     18
+    ]
+   },
+   {
+    "id": "c097",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     61,
+     52,
+     80,
+     63
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     204,
+     19,
+     213,
+     25
+    ]
+   },
+   {
+    "id": "c106",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     -38,
+     56,
+     27,
+     130
+    ]
+   },
+   {
+    "id": "c107",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     263,
+     -1,
+     266,
+     1
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     252,
+     7,
+     260,
+     14
+    ]
+   },
+   {
+    "id": "c109",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     238,
+     6,
+     243,
+     9
+    ]
+   },
+   {
+    "id": "c110",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     247,
+     26,
+     258,
+     33
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     191,
+     67,
+     219,
+     87
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "270": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 121.9,
+    "Y": -15.7,
+    "u": 84,
+    "v": 128,
+    "centre_in": true,
+    "bbox": [
+     61,
+     101,
+     107,
+     131
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 265.8,
+    "Y": -22.1,
+    "u": 158,
+    "v": 51,
+    "centre_in": true,
+    "bbox": [
+     143,
+     20,
+     171,
+     53
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 173.0,
+    "Y": -28.5,
+    "u": 2,
+    "v": 86,
+    "centre_in": true,
+    "bbox": [
+     -27,
+     38,
+     28,
+     90
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 119.7,
+    "Y": -10.6,
+    "u": 167,
+    "v": 131,
+    "centre_in": true,
+    "bbox": [
+     149,
+     105,
+     184,
+     134
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 111.6,
+    "Y": -18.2,
+    "u": 18,
+    "v": 141,
+    "centre_in": true,
+    "bbox": [
+     -2,
+     115,
+     38,
+     143
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 234.2,
+    "Y": -14.2,
+    "u": 205,
+    "v": 60,
+    "centre_in": true,
+    "bbox": [
+     197,
+     47,
+     214,
+     61
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 99.0,
+    "Y": -14.7,
+    "u": 52,
+    "v": 161,
+    "centre_in": true,
+    "bbox": [
+     28,
+     124,
+     76,
+     165
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 252.2,
+    "Y": -17.8,
+    "u": 184,
+    "v": 55,
+    "centre_in": true,
+    "bbox": [
+     175,
+     43,
+     192,
+     55
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 262.1,
+    "Y": -11.2,
+    "u": 240,
+    "v": 52,
+    "centre_in": true,
+    "bbox": [
+     232,
+     40,
+     247,
+     53
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 372.1,
+    "Y": -10.9,
+    "u": 263,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     257,
+     25,
+     268,
+     33
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 427.4,
+    "Y": -15.2,
+    "u": 248,
+    "v": 27,
+    "centre_in": true,
+    "bbox": [
+     243,
+     18,
+     254,
+     27
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 384.2,
+    "Y": -25.4,
+    "u": 187,
+    "v": 31,
+    "centre_in": true,
+    "bbox": [
+     182,
+     24,
+     193,
+     31
+    ]
+   },
+   {
+    "id": "c086",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 94.9,
+    "Y": -17.8,
+    "u": -24,
+    "v": 168,
+    "centre_in": false,
+    "bbox": [
+     -50,
+     134,
+     1,
+     172
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 304.6,
+    "Y": -15.0,
+    "u": 224,
+    "v": 43,
+    "centre_in": true,
+    "bbox": [
+     217,
+     33,
+     231,
+     43
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 136.6,
+    "Y": -11.0,
+    "u": 178,
+    "v": 113,
+    "centre_in": true,
+    "bbox": [
+     161,
+     83,
+     194,
+     116
+    ]
+   },
+   {
+    "id": "c094",
+    "cat": "truck",
+    "col": "grey",
+    "X": 328.4,
+    "Y": -26.7,
+    "u": 158,
+    "v": 39,
+    "centre_in": true,
+    "bbox": [
+     149,
+     19,
+     167,
+     39
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 484.0,
+    "Y": -17.8,
+    "u": 245,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     240,
+     14,
+     249,
+     22
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 196.4,
+    "Y": -28.6,
+    "u": 38,
+    "v": 74,
+    "centre_in": true,
+    "bbox": [
+     26,
+     60,
+     49,
+     75
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 401.0,
+    "Y": -25.0,
+    "u": 195,
+    "v": 29,
+    "centre_in": true,
+    "bbox": [
+     190,
+     23,
+     200,
+     29
+    ]
+   },
+   {
+    "id": "c106",
+    "cat": "truck",
+    "col": "grey",
+    "X": 127.5,
+    "Y": -21.5,
+    "u": 3,
+    "v": 121,
+    "centre_in": true,
+    "bbox": [
+     -35,
+     56,
+     37,
+     129
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 516.0,
+    "Y": -17.5,
+    "u": 250,
+    "v": 20,
+    "centre_in": true,
+    "bbox": [
+     246,
+     10,
+     254,
+     20
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 784.8,
+    "Y": -22.7,
+    "u": 257,
+    "v": 8,
+    "centre_in": true,
+    "bbox": [
+     254,
+     -1,
+     261,
+     8
+    ]
+   },
+   {
+    "id": "c115",
+    "cat": "truck",
+    "col": "grey",
+    "X": 152.7,
+    "Y": -27.9,
+    "u": -31,
+    "v": 99,
+    "centre_in": false,
+    "bbox": [
+     -70,
+     42,
+     3,
+     106
+    ]
+   },
+   {
+    "id": "c116",
+    "cat": "truck",
+    "col": "grey",
+    "X": 706.8,
+    "Y": -23.8,
+    "u": 248,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     244,
+     0,
+     252,
+     11
+    ]
+   },
+   {
+    "id": "c118",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 88.2,
+    "Y": -13.2,
+    "u": 57,
+    "v": 182,
+    "centre_in": true,
+    "bbox": [
+     25,
+     143,
+     86,
+     188
+    ]
+   },
+   {
+    "id": "c120",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 936.2,
+    "Y": -24.1,
+    "u": 263,
+    "v": 4,
+    "centre_in": true,
+    "bbox": [
+     261,
+     2,
+     265,
+     4
+    ]
+   },
+   {
+    "id": "c122",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 117.7,
+    "Y": -18.7,
+    "u": 26,
+    "v": 133,
+    "centre_in": true,
+    "bbox": [
+     7,
+     106,
+     44,
+     135
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     145,
+     18,
+     172,
+     52
+    ]
+   },
+   {
+    "id": "c030",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     -26,
+     36,
+     27,
+     90
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     148,
+     107,
+     184,
+     133
+    ]
+   },
+   {
+    "id": "c066",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     -2,
+     115,
+     36,
+     143
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     197,
+     46,
+     214,
+     60
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     27,
+     125,
+     72,
+     165
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     175,
+     43,
+     192,
+     55
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     233,
+     40,
+     248,
+     53
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     258,
+     25,
+     268,
+     32
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     244,
+     16,
+     254,
+     27
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     182,
+     23,
+     192,
+     30
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     218,
+     34,
+     231,
+     43
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     163,
+     83,
+     193,
+     115
+    ]
+   },
+   {
+    "id": "c094",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     151,
+     18,
+     168,
+     37
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     241,
+     14,
+     250,
+     23
+    ]
+   },
+   {
+    "id": "c097",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     26,
+     60,
+     49,
+     74
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     190,
+     22,
+     200,
+     29
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     246,
+     12,
+     254,
+     22
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     254,
+     -3,
+     262,
+     9
+    ]
+   },
+   {
+    "id": "c114",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     238,
+     -2,
+     244,
+     6
+    ]
+   },
+   {
+    "id": "c116",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     244,
+     1,
+     251,
+     11
+    ]
+   },
+   {
+    "id": "c117",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     40,
+     118,
+     84,
+     152
+    ]
+   },
+   {
+    "id": "c118",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     34,
+     143,
+     80,
+     185
+    ]
+   },
+   {
+    "id": "c120",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     260,
+     2,
+     265,
+     5
+    ]
+   },
+   {
+    "id": "c122",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -18,
+     114,
+     30,
+     147
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     61,
+     101,
+     107,
+     131
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "279": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 104.2,
+    "Y": -13.0,
+    "u": 98,
+    "v": 152,
+    "centre_in": true,
+    "bbox": [
+     53,
+     121,
+     143,
+     155
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 248.9,
+    "Y": -22.1,
+    "u": 147,
+    "v": 56,
+    "centre_in": true,
+    "bbox": [
+     131,
+     22,
+     162,
+     58
+    ]
+   },
+   {
+    "id": "c030",
+    "cat": "truck",
+    "col": "grey",
+    "X": 160.6,
+    "Y": -28.5,
+    "u": -22,
+    "v": 93,
+    "centre_in": false,
+    "bbox": [
+     -54,
+     42,
+     7,
+     98
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 116.5,
+    "Y": -10.5,
+    "u": 163,
+    "v": 135,
+    "centre_in": true,
+    "bbox": [
+     145,
+     108,
+     181,
+     138
+    ]
+   },
+   {
+    "id": "c066",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 98.3,
+    "Y": -18.2,
+    "u": -20,
+    "v": 162,
+    "centre_in": false,
+    "bbox": [
+     -45,
+     132,
+     4,
+     165
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 217.3,
+    "Y": -14.2,
+    "u": 197,
+    "v": 66,
+    "centre_in": true,
+    "bbox": [
+     188,
+     52,
+     207,
+     67
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 89.3,
+    "Y": -14.4,
+    "u": 32,
+    "v": 180,
+    "centre_in": true,
+    "bbox": [
+     4,
+     139,
+     58,
+     184
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 230.0,
+    "Y": -18.0,
+    "u": 170,
+    "v": 61,
+    "centre_in": true,
+    "bbox": [
+     161,
+     49,
+     180,
+     62
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 238.1,
+    "Y": -11.2,
+    "u": 233,
+    "v": 59,
+    "centre_in": true,
+    "bbox": [
+     224,
+     45,
+     241,
+     60
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 340.4,
+    "Y": -10.8,
+    "u": 259,
+    "v": 37,
+    "centre_in": true,
+    "bbox": [
+     253,
+     29,
+     264,
+     37
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 403.6,
+    "Y": -15.2,
+    "u": 245,
+    "v": 29,
+    "centre_in": true,
+    "bbox": [
+     239,
+     19,
+     250,
+     29
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 366.3,
+    "Y": -25.6,
+    "u": 180,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     175,
+     26,
+     186,
+     33
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 278.8,
+    "Y": -15.4,
+    "u": 214,
+    "v": 48,
+    "centre_in": true,
+    "bbox": [
+     206,
+     37,
+     221,
+     49
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 132.5,
+    "Y": -10.9,
+    "u": 175,
+    "v": 117,
+    "centre_in": true,
+    "bbox": [
+     158,
+     86,
+     191,
+     120
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 463.3,
+    "Y": -17.7,
+    "u": 242,
+    "v": 23,
+    "centre_in": true,
+    "bbox": [
+     237,
+     15,
+     247,
+     24
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 184.3,
+    "Y": -28.5,
+    "u": 20,
+    "v": 80,
+    "centre_in": true,
+    "bbox": [
+     7,
+     65,
+     33,
+     81
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 384.1,
+    "Y": -25.2,
+    "u": 189,
+    "v": 31,
+    "centre_in": true,
+    "bbox": [
+     183,
+     24,
+     194,
+     31
+    ]
+   },
+   {
+    "id": "c106",
+    "cat": "truck",
+    "col": "grey",
+    "X": 122.6,
+    "Y": -21.5,
+    "u": -9,
+    "v": 127,
+    "centre_in": false,
+    "bbox": [
+     -49,
+     58,
+     27,
+     135
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 497.0,
+    "Y": -17.6,
+    "u": 247,
+    "v": 21,
+    "centre_in": true,
+    "bbox": [
+     243,
+     11,
+     252,
+     21
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 769.6,
+    "Y": -23.0,
+    "u": 256,
+    "v": 8,
+    "centre_in": true,
+    "bbox": [
+     252,
+     -1,
+     259,
+     9
+    ]
+   },
+   {
+    "id": "c118",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 79.9,
+    "Y": -13.2,
+    "u": 31,
+    "v": 202,
+    "centre_in": true,
+    "bbox": [
+     1,
+     158,
+     59,
+     209
+    ]
+   },
+   {
+    "id": "c120",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 930.8,
+    "Y": -24.5,
+    "u": 262,
+    "v": 4,
+    "centre_in": true,
+    "bbox": [
+     259,
+     2,
+     264,
+     5
+    ]
+   },
+   {
+    "id": "c122",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 107.9,
+    "Y": -18.6,
+    "u": 2,
+    "v": 146,
+    "centre_in": true,
+    "bbox": [
+     -20,
+     117,
+     24,
+     149
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 816.2,
+    "Y": -29.8,
+    "u": 242,
+    "v": 7,
+    "centre_in": true,
+    "bbox": [
+     238,
+     -2,
+     245,
+     7
+    ]
+   },
+   {
+    "id": "c124",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 95.7,
+    "Y": -16.3,
+    "u": 10,
+    "v": 167,
+    "centre_in": true,
+    "bbox": [
+     -17,
+     138,
+     35,
+     171
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     134,
+     22,
+     156,
+     59
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     145,
+     108,
+     180,
+     136
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     189,
+     50,
+     208,
+     67
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -1,
+     137,
+     54,
+     179
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     161,
+     49,
+     180,
+     63
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     224,
+     45,
+     241,
+     60
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     253,
+     28,
+     264,
+     37
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     239,
+     19,
+     250,
+     29
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     176,
+     25,
+     186,
+     32
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     208,
+     38,
+     222,
+     49
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     160,
+     85,
+     191,
+     120
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     238,
+     15,
+     246,
+     23
+    ]
+   },
+   {
+    "id": "c097",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     8,
+     65,
+     34,
+     81
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     183,
+     24,
+     194,
+     31
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     243,
+     14,
+     252,
+     22
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     253,
+     1,
+     260,
+     9
+    ]
+   },
+   {
+    "id": "c114",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     237,
+     -2,
+     244,
+     6
+    ]
+   },
+   {
+    "id": "c117",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     60,
+     120,
+     107,
+     158
+    ]
+   },
+   {
+    "id": "c118",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -4,
+     158,
+     58,
+     206
+    ]
+   },
+   {
+    "id": "c120",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     260,
+     0,
+     264,
+     3
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     237,
+     -1,
+     244,
+     9
+    ]
+   },
+   {
+    "id": "c124",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     -15,
+     140,
+     36,
+     173
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     53,
+     121,
+     144,
+     155
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "284": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 96.2,
+    "Y": -10.0,
+    "u": 144,
+    "v": 166,
+    "centre_in": true,
+    "bbox": [
+     98,
+     132,
+     188,
+     171
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 239.8,
+    "Y": -22.1,
+    "u": 141,
+    "v": 58,
+    "centre_in": true,
+    "bbox": [
+     124,
+     24,
+     157,
+     61
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 115.0,
+    "Y": -10.5,
+    "u": 161,
+    "v": 137,
+    "centre_in": true,
+    "bbox": [
+     143,
+     110,
+     179,
+     140
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 208.6,
+    "Y": -14.2,
+    "u": 192,
+    "v": 69,
+    "centre_in": true,
+    "bbox": [
+     182,
+     55,
+     202,
+     70
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 84.8,
+    "Y": -14.4,
+    "u": 18,
+    "v": 190,
+    "centre_in": true,
+    "bbox": [
+     -12,
+     147,
+     47,
+     195
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 218.3,
+    "Y": -18.0,
+    "u": 162,
+    "v": 65,
+    "centre_in": true,
+    "bbox": [
+     153,
+     52,
+     172,
+     66
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 226.4,
+    "Y": -11.2,
+    "u": 229,
+    "v": 63,
+    "centre_in": true,
+    "bbox": [
+     220,
+     49,
+     237,
+     64
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 324.0,
+    "Y": -10.7,
+    "u": 256,
+    "v": 40,
+    "centre_in": true,
+    "bbox": [
+     250,
+     31,
+     262,
+     40
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 390.5,
+    "Y": -15.2,
+    "u": 242,
+    "v": 30,
+    "centre_in": true,
+    "bbox": [
+     237,
+     21,
+     248,
+     31
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 356.3,
+    "Y": -25.7,
+    "u": 176,
+    "v": 35,
+    "centre_in": true,
+    "bbox": [
+     170,
+     27,
+     182,
+     35
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 265.2,
+    "Y": -15.6,
+    "u": 207,
+    "v": 52,
+    "centre_in": true,
+    "bbox": [
+     199,
+     40,
+     215,
+     52
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 130.7,
+    "Y": -10.9,
+    "u": 174,
+    "v": 119,
+    "centre_in": true,
+    "bbox": [
+     157,
+     87,
+     190,
+     121
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 452.2,
+    "Y": -17.7,
+    "u": 241,
+    "v": 24,
+    "centre_in": true,
+    "bbox": [
+     236,
+     16,
+     245,
+     25
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 177.7,
+    "Y": -28.6,
+    "u": 9,
+    "v": 83,
+    "centre_in": true,
+    "bbox": [
+     -4,
+     68,
+     22,
+     84
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 374.5,
+    "Y": -25.2,
+    "u": 185,
+    "v": 32,
+    "centre_in": true,
+    "bbox": [
+     179,
+     25,
+     191,
+     32
+    ]
+   },
+   {
+    "id": "c106",
+    "cat": "truck",
+    "col": "grey",
+    "X": 119.8,
+    "Y": -21.5,
+    "u": -16,
+    "v": 130,
+    "centre_in": false,
+    "bbox": [
+     -58,
+     60,
+     21,
+     138
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 489.2,
+    "Y": -17.6,
+    "u": 246,
+    "v": 21,
+    "centre_in": true,
+    "bbox": [
+     242,
+     12,
+     251,
+     22
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 761.0,
+    "Y": -23.1,
+    "u": 255,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     251,
+     -1,
+     258,
+     9
+    ]
+   },
+   {
+    "id": "c118",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 74.5,
+    "Y": -12.8,
+    "u": 21,
+    "v": 218,
+    "centre_in": true,
+    "bbox": [
+     -9,
+     170,
+     48,
+     225
+    ]
+   },
+   {
+    "id": "c120",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 927.8,
+    "Y": -24.8,
+    "u": 261,
+    "v": 5,
+    "centre_in": true,
+    "bbox": [
+     258,
+     2,
+     264,
+     5
+    ]
+   },
+   {
+    "id": "c122",
+    "cat": "hatchback",
+    "col": "grey",
+    "X": 101.4,
+    "Y": -18.6,
+    "u": -17,
+    "v": 156,
+    "centre_in": false,
+    "bbox": [
+     -42,
+     125,
+     6,
+     160
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 793.8,
+    "Y": -28.7,
+    "u": 243,
+    "v": 8,
+    "centre_in": true,
+    "bbox": [
+     239,
+     -1,
+     246,
+     8
+    ]
+   },
+   {
+    "id": "c124",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 87.4,
+    "Y": -16.4,
+    "u": -19,
+    "v": 183,
+    "centre_in": false,
+    "bbox": [
+     -49,
+     152,
+     9,
+     189
+    ]
+   },
+   {
+    "id": "c125",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 183.6,
+    "Y": -29.3,
+    "u": 11,
+    "v": 80,
+    "centre_in": true,
+    "bbox": [
+     -2,
+     63,
+     24,
+     81
+    ]
+   },
+   {
+    "id": "c126",
+    "cat": "truck",
+    "col": "silver",
+    "X": 868.6,
+    "Y": -23.7,
+    "u": 260,
+    "v": 6,
+    "centre_in": true,
+    "bbox": [
+     257,
+     -2,
+     264,
+     6
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     126,
+     23,
+     156,
+     60
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     142,
+     110,
+     178,
+     140
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     182,
+     57,
+     201,
+     71
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -30,
+     156,
+     30,
+     208
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     152,
+     50,
+     170,
+     66
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     218,
+     50,
+     235,
+     62
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     251,
+     32,
+     263,
+     40
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     237,
+     20,
+     248,
+     31
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     169,
+     28,
+     181,
+     35
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     200,
+     42,
+     215,
+     51
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     156,
+     86,
+     190,
+     123
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     235,
+     16,
+     245,
+     25
+    ]
+   },
+   {
+    "id": "c097",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     -5,
+     68,
+     21,
+     84
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     180,
+     24,
+     191,
+     31
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     242,
+     12,
+     251,
+     21
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     251,
+     -1,
+     258,
+     9
+    ]
+   },
+   {
+    "id": "c114",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     235,
+     0,
+     242,
+     8
+    ]
+   },
+   {
+    "id": "c118",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -30,
+     168,
+     36,
+     220
+    ]
+   },
+   {
+    "id": "c120",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     260,
+     2,
+     264,
+     5
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     240,
+     -1,
+     246,
+     9
+    ]
+   },
+   {
+    "id": "c125",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -16,
+     68,
+     15,
+     85
+    ]
+   },
+   {
+    "id": "c126",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     257,
+     -2,
+     264,
+     7
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     98,
+     132,
+     188,
+     171
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "288": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 89.9,
+    "Y": -9.1,
+    "u": 152,
+    "v": 179,
+    "centre_in": true,
+    "bbox": [
+     120,
+     142,
+     185,
+     184
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 232.8,
+    "Y": -22.2,
+    "u": 135,
+    "v": 60,
+    "centre_in": true,
+    "bbox": [
+     117,
+     25,
+     152,
+     63
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 113.9,
+    "Y": -10.5,
+    "u": 160,
+    "v": 139,
+    "centre_in": true,
+    "bbox": [
+     142,
+     111,
+     178,
+     141
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 202.0,
+    "Y": -14.3,
+    "u": 188,
+    "v": 72,
+    "centre_in": true,
+    "bbox": [
+     178,
+     57,
+     198,
+     73
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 81.8,
+    "Y": -14.4,
+    "u": 7,
+    "v": 197,
+    "centre_in": true,
+    "bbox": [
+     -25,
+     153,
+     37,
+     203
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 209.3,
+    "Y": -18.1,
+    "u": 156,
+    "v": 69,
+    "centre_in": true,
+    "bbox": [
+     145,
+     55,
+     166,
+     70
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 217.8,
+    "Y": -11.2,
+    "u": 225,
+    "v": 66,
+    "centre_in": true,
+    "bbox": [
+     216,
+     51,
+     234,
+     67
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 311.5,
+    "Y": -10.7,
+    "u": 254,
+    "v": 42,
+    "centre_in": true,
+    "bbox": [
+     248,
+     32,
+     260,
+     42
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 380.0,
+    "Y": -15.2,
+    "u": 241,
+    "v": 32,
+    "centre_in": true,
+    "bbox": [
+     235,
+     22,
+     246,
+     32
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 348.4,
+    "Y": -25.8,
+    "u": 172,
+    "v": 36,
+    "centre_in": true,
+    "bbox": [
+     166,
+     28,
+     178,
+     36
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 254.7,
+    "Y": -15.7,
+    "u": 202,
+    "v": 54,
+    "centre_in": true,
+    "bbox": [
+     194,
+     42,
+     210,
+     55
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 129.6,
+    "Y": -10.9,
+    "u": 173,
+    "v": 120,
+    "centre_in": true,
+    "bbox": [
+     156,
+     88,
+     190,
+     123
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 443.6,
+    "Y": -17.6,
+    "u": 239,
+    "v": 25,
+    "centre_in": true,
+    "bbox": [
+     234,
+     16,
+     244,
+     25
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 172.5,
+    "Y": -28.6,
+    "u": 0,
+    "v": 86,
+    "centre_in": true,
+    "bbox": [
+     -14,
+     70,
+     14,
+     87
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 366.9,
+    "Y": -25.3,
+    "u": 182,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     177,
+     26,
+     188,
+     33
+    ]
+   },
+   {
+    "id": "c106",
+    "cat": "truck",
+    "col": "grey",
+    "X": 114.1,
+    "Y": -21.5,
+    "u": -32,
+    "v": 137,
+    "centre_in": false,
+    "bbox": [
+     -78,
+     64,
+     7,
+     147
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 482.8,
+    "Y": -17.7,
+    "u": 245,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     240,
+     12,
+     250,
+     22
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 754.0,
+    "Y": -23.1,
+    "u": 254,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     250,
+     -1,
+     258,
+     9
+    ]
+   },
+   {
+    "id": "c118",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 69.8,
+    "Y": -12.6,
+    "u": 7,
+    "v": 233,
+    "centre_in": true,
+    "bbox": [
+     -31,
+     182,
+     43,
+     242
+    ]
+   },
+   {
+    "id": "c120",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 925.4,
+    "Y": -25.1,
+    "u": 260,
+    "v": 5,
+    "centre_in": true,
+    "bbox": [
+     257,
+     2,
+     263,
+     5
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 776.0,
+    "Y": -27.9,
+    "u": 243,
+    "v": 8,
+    "centre_in": true,
+    "bbox": [
+     240,
+     -1,
+     246,
+     8
+    ]
+   },
+   {
+    "id": "c125",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 179.7,
+    "Y": -29.3,
+    "u": 5,
+    "v": 82,
+    "centre_in": true,
+    "bbox": [
+     -10,
+     65,
+     19,
+     83
+    ]
+   },
+   {
+    "id": "c126",
+    "cat": "truck",
+    "col": "silver",
+    "X": 865.4,
+    "Y": -23.8,
+    "u": 260,
+    "v": 6,
+    "centre_in": true,
+    "bbox": [
+     256,
+     -2,
+     263,
+     6
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     118,
+     24,
+     152,
+     63
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     142,
+     111,
+     178,
+     140
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     178,
+     58,
+     198,
+     72
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -30,
+     150,
+     32,
+     198
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     146,
+     56,
+     166,
+     70
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     215,
+     49,
+     233,
+     66
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     249,
+     34,
+     261,
+     43
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     236,
+     20,
+     247,
+     31
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     165,
+     28,
+     177,
+     37
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     193,
+     44,
+     209,
+     55
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     156,
+     87,
+     190,
+     124
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     234,
+     16,
+     244,
+     25
+    ]
+   },
+   {
+    "id": "c097",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -14,
+     68,
+     14,
+     86
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     179,
+     26,
+     190,
+     33
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     241,
+     12,
+     250,
+     22
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     251,
+     0,
+     258,
+     9
+    ]
+   },
+   {
+    "id": "c114",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     235,
+     -1,
+     242,
+     8
+    ]
+   },
+   {
+    "id": "c120",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     259,
+     0,
+     262,
+     3
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     241,
+     -1,
+     248,
+     9
+    ]
+   },
+   {
+    "id": "c126",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     257,
+     -2,
+     263,
+     6
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     120,
+     142,
+     185,
+     184
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     69,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "291": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 80.6,
+    "Y": -10.4,
+    "u": 102,
+    "v": 201,
+    "centre_in": true,
+    "bbox": [
+     68,
+     130,
+     134,
+     208
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 84.0,
+    "Y": -7.1,
+    "u": 188,
+    "v": 193,
+    "centre_in": true,
+    "bbox": [
+     135,
+     155,
+     241,
+     196
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 227.6,
+    "Y": -22.2,
+    "u": 131,
+    "v": 62,
+    "centre_in": true,
+    "bbox": [
+     112,
+     26,
+     149,
+     65
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 113.2,
+    "Y": -10.5,
+    "u": 159,
+    "v": 140,
+    "centre_in": true,
+    "bbox": [
+     141,
+     112,
+     177,
+     142
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 197.2,
+    "Y": -14.3,
+    "u": 185,
+    "v": 74,
+    "centre_in": true,
+    "bbox": [
+     174,
+     59,
+     195,
+     75
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 79.8,
+    "Y": -14.4,
+    "u": -1,
+    "v": 203,
+    "centre_in": false,
+    "bbox": [
+     -34,
+     157,
+     30,
+     208
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 202.8,
+    "Y": -18.1,
+    "u": 151,
+    "v": 72,
+    "centre_in": true,
+    "bbox": [
+     140,
+     57,
+     161,
+     72
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 211.8,
+    "Y": -11.2,
+    "u": 223,
+    "v": 68,
+    "centre_in": true,
+    "bbox": [
+     213,
+     53,
+     232,
+     69
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 302.6,
+    "Y": -10.7,
+    "u": 253,
+    "v": 44,
+    "centre_in": true,
+    "bbox": [
+     246,
+     34,
+     259,
+     44
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 372.3,
+    "Y": -15.2,
+    "u": 239,
+    "v": 33,
+    "centre_in": true,
+    "bbox": [
+     233,
+     22,
+     245,
+     33
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 342.5,
+    "Y": -25.9,
+    "u": 169,
+    "v": 36,
+    "centre_in": true,
+    "bbox": [
+     163,
+     29,
+     175,
+     37
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 247.2,
+    "Y": -15.8,
+    "u": 198,
+    "v": 56,
+    "centre_in": true,
+    "bbox": [
+     189,
+     44,
+     206,
+     57
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 128.9,
+    "Y": -10.8,
+    "u": 173,
+    "v": 121,
+    "centre_in": true,
+    "bbox": [
+     156,
+     88,
+     190,
+     123
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 437.4,
+    "Y": -17.6,
+    "u": 239,
+    "v": 26,
+    "centre_in": true,
+    "bbox": [
+     234,
+     17,
+     243,
+     26
+    ]
+   },
+   {
+    "id": "c097",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 168.7,
+    "Y": -28.6,
+    "u": -7,
+    "v": 88,
+    "centre_in": false,
+    "bbox": [
+     -21,
+     72,
+     7,
+     89
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 361.2,
+    "Y": -25.3,
+    "u": 180,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     174,
+     27,
+     186,
+     34
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 477.9,
+    "Y": -17.7,
+    "u": 244,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     239,
+     12,
+     249,
+     22
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 748.7,
+    "Y": -23.1,
+    "u": 254,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     250,
+     -1,
+     257,
+     9
+    ]
+   },
+   {
+    "id": "c118",
+    "cat": "sedan",
+    "col": "grey",
+    "X": 66.2,
+    "Y": -12.6,
+    "u": -9,
+    "v": 246,
+    "centre_in": false,
+    "bbox": [
+     -49,
+     192,
+     29,
+     256
+    ]
+   },
+   {
+    "id": "c120",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 923.6,
+    "Y": -25.5,
+    "u": 259,
+    "v": 5,
+    "centre_in": true,
+    "bbox": [
+     256,
+     2,
+     262,
+     5
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 762.7,
+    "Y": -27.4,
+    "u": 243,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     240,
+     -1,
+     246,
+     9
+    ]
+   },
+   {
+    "id": "c125",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 176.8,
+    "Y": -29.3,
+    "u": 0,
+    "v": 83,
+    "centre_in": false,
+    "bbox": [
+     -15,
+     66,
+     14,
+     85
+    ]
+   },
+   {
+    "id": "c126",
+    "cat": "truck",
+    "col": "silver",
+    "X": 863.0,
+    "Y": -24.0,
+    "u": 259,
+    "v": 6,
+    "centre_in": true,
+    "bbox": [
+     256,
+     -2,
+     263,
+     6
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     112,
+     24,
+     148,
+     65
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     139,
+     112,
+     177,
+     143
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     174,
+     59,
+     195,
+     76
+    ]
+   },
+   {
+    "id": "c073",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     -36,
+     154,
+     25,
+     199
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     140,
+     56,
+     161,
+     72
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     211,
+     51,
+     231,
+     68
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     246,
+     35,
+     258,
+     44
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     233,
+     22,
+     245,
+     33
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     161,
+     30,
+     174,
+     38
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     189,
+     45,
+     206,
+     56
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     155,
+     89,
+     190,
+     124
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     234,
+     17,
+     244,
+     26
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     173,
+     27,
+     185,
+     34
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     239,
+     12,
+     248,
+     23
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     248,
+     -1,
+     256,
+     9
+    ]
+   },
+   {
+    "id": "c114",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     233,
+     -3,
+     240,
+     8
+    ]
+   },
+   {
+    "id": "c120",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     258,
+     1,
+     262,
+     3
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     240,
+     -2,
+     246,
+     8
+    ]
+   },
+   {
+    "id": "c126",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     256,
+     -2,
+     262,
+     6
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "interpolated",
+    "bbox": [
+     75,
+     155,
+     182,
+     195
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     68,
+     130,
+     134,
+     208
+    ]
+   }
+  ]
+ },
+ "300": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 75.2,
+    "Y": -10.8,
+    "u": 78,
+    "v": 216,
+    "centre_in": true,
+    "bbox": [
+     35,
+     140,
+     117,
+     224
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 80.0,
+    "Y": -9.1,
+    "u": 133,
+    "v": 203,
+    "centre_in": true,
+    "bbox": [
+     80,
+     160,
+     185,
+     209
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 212.5,
+    "Y": -22.5,
+    "u": 115,
+    "v": 67,
+    "centre_in": true,
+    "bbox": [
+     94,
+     28,
+     136,
+     71
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 111.6,
+    "Y": -10.5,
+    "u": 158,
+    "v": 142,
+    "centre_in": true,
+    "bbox": [
+     139,
+     113,
+     176,
+     144
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 184.2,
+    "Y": -14.4,
+    "u": 175,
+    "v": 80,
+    "centre_in": true,
+    "bbox": [
+     163,
+     64,
+     186,
+     81
+    ]
+   },
+   {
+    "id": "c073",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 74.1,
+    "Y": -14.7,
+    "u": -33,
+    "v": 219,
+    "centre_in": false,
+    "bbox": [
+     -68,
+     169,
+     1,
+     226
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 184.4,
+    "Y": -18.1,
+    "u": 135,
+    "v": 80,
+    "centre_in": true,
+    "bbox": [
+     123,
+     64,
+     146,
+     81
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 196.0,
+    "Y": -11.2,
+    "u": 216,
+    "v": 75,
+    "centre_in": true,
+    "bbox": [
+     205,
+     58,
+     226,
+     76
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 277.8,
+    "Y": -10.6,
+    "u": 248,
+    "v": 49,
+    "centre_in": true,
+    "bbox": [
+     241,
+     38,
+     255,
+     49
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 349.1,
+    "Y": -15.1,
+    "u": 235,
+    "v": 36,
+    "centre_in": true,
+    "bbox": [
+     229,
+     25,
+     241,
+     36
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 325.1,
+    "Y": -26.5,
+    "u": 158,
+    "v": 39,
+    "centre_in": true,
+    "bbox": [
+     152,
+     31,
+     165,
+     39
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 226.0,
+    "Y": -16.2,
+    "u": 184,
+    "v": 63,
+    "centre_in": true,
+    "bbox": [
+     174,
+     49,
+     193,
+     64
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 127.3,
+    "Y": -10.8,
+    "u": 171,
+    "v": 123,
+    "centre_in": true,
+    "bbox": [
+     154,
+     90,
+     188,
+     125
+    ]
+   },
+   {
+    "id": "c095",
+    "cat": "van",
+    "col": "red",
+    "X": 420.0,
+    "Y": -17.4,
+    "u": 237,
+    "v": 27,
+    "centre_in": true,
+    "bbox": [
+     231,
+     18,
+     242,
+     28
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 344.3,
+    "Y": -25.3,
+    "u": 174,
+    "v": 36,
+    "centre_in": true,
+    "bbox": [
+     168,
+     29,
+     180,
+     37
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 462.4,
+    "Y": -17.9,
+    "u": 241,
+    "v": 23,
+    "centre_in": true,
+    "bbox": [
+     236,
+     13,
+     246,
+     24
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 732.8,
+    "Y": -22.9,
+    "u": 253,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     249,
+     0,
+     256,
+     10
+    ]
+   },
+   {
+    "id": "c120",
+    "cat": "sedan",
+    "col": "silver",
+    "X": 918.2,
+    "Y": -26.6,
+    "u": 256,
+    "v": 5,
+    "centre_in": true,
+    "bbox": [
+     253,
+     2,
+     260,
+     5
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 723.2,
+    "Y": -26.4,
+    "u": 242,
+    "v": 10,
+    "centre_in": true,
+    "bbox": [
+     239,
+     0,
+     246,
+     10
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     96,
+     27,
+     135,
+     71
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     139,
+     112,
+     176,
+     144
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     163,
+     65,
+     184,
+     82
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     123,
+     64,
+     146,
+     82
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     206,
+     56,
+     226,
+     74
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     241,
+     38,
+     254,
+     48
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     228,
+     22,
+     239,
+     36
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     152,
+     32,
+     166,
+     41
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     175,
+     51,
+     193,
+     63
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     154,
+     89,
+     188,
+     125
+    ]
+   },
+   {
+    "id": "c095",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     234,
+     18,
+     244,
+     27
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     167,
+     28,
+     179,
+     37
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     237,
+     12,
+     246,
+     23
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     246,
+     0,
+     254,
+     9
+    ]
+   },
+   {
+    "id": "c114",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     230,
+     -1,
+     237,
+     9
+    ]
+   },
+   {
+    "id": "c120",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     253,
+     2,
+     258,
+     5
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     240,
+     0,
+     246,
+     8
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     44,
+     160,
+     150,
+     209
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     35,
+     140,
+     117,
+     224
+    ]
+   }
+  ]
+ },
+ "320": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 68.2,
+    "Y": -11.3,
+    "u": 38,
+    "v": 239,
+    "centre_in": true,
+    "bbox": [
+     -10,
+     155,
+     83,
+     250
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 73.0,
+    "Y": -9.7,
+    "u": 101,
+    "v": 223,
+    "centre_in": true,
+    "bbox": [
+     42,
+     176,
+     157,
+     231
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 181.5,
+    "Y": -23.3,
+    "u": 74,
+    "v": 81,
+    "centre_in": true,
+    "bbox": [
+     47,
+     35,
+     98,
+     86
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 109.3,
+    "Y": -10.4,
+    "u": 156,
+    "v": 145,
+    "centre_in": true,
+    "bbox": [
+     136,
+     116,
+     174,
+     148
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 160.4,
+    "Y": -14.5,
+    "u": 153,
+    "v": 94,
+    "centre_in": true,
+    "bbox": [
+     140,
+     75,
+     166,
+     96
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 149.5,
+    "Y": -18.1,
+    "u": 93,
+    "v": 102,
+    "centre_in": true,
+    "bbox": [
+     78,
+     82,
+     108,
+     103
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 171.3,
+    "Y": -11.3,
+    "u": 201,
+    "v": 88,
+    "centre_in": true,
+    "bbox": [
+     189,
+     68,
+     213,
+     89
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 234.3,
+    "Y": -10.5,
+    "u": 237,
+    "v": 60,
+    "centre_in": true,
+    "bbox": [
+     229,
+     48,
+     246,
+     61
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 298.8,
+    "Y": -15.0,
+    "u": 223,
+    "v": 44,
+    "centre_in": true,
+    "bbox": [
+     215,
+     31,
+     230,
+     45
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 288.9,
+    "Y": -27.8,
+    "u": 130,
+    "v": 46,
+    "centre_in": true,
+    "bbox": [
+     122,
+     37,
+     138,
+     46
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 187.5,
+    "Y": -17.2,
+    "u": 147,
+    "v": 79,
+    "centre_in": true,
+    "bbox": [
+     135,
+     62,
+     159,
+     80
+    ]
+   },
+   {
+    "id": "c091",
+    "cat": "van",
+    "col": "grey",
+    "X": 125.3,
+    "Y": -10.8,
+    "u": 169,
+    "v": 125,
+    "centre_in": true,
+    "bbox": [
+     151,
+     91,
+     188,
+     127
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 308.5,
+    "Y": -25.7,
+    "u": 155,
+    "v": 42,
+    "centre_in": true,
+    "bbox": [
+     148,
+     34,
+     162,
+     42
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 415.7,
+    "Y": -18.2,
+    "u": 232,
+    "v": 28,
+    "centre_in": true,
+    "bbox": [
+     226,
+     16,
+     237,
+     28
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 696.1,
+    "Y": -22.5,
+    "u": 251,
+    "v": 11,
+    "centre_in": true,
+    "bbox": [
+     247,
+     0,
+     255,
+     11
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 638.5,
+    "Y": -25.2,
+    "u": 237,
+    "v": 13,
+    "centre_in": true,
+    "bbox": [
+     233,
+     2,
+     241,
+     13
+    ]
+   },
+   {
+    "id": "c129",
+    "cat": "van",
+    "col": "red",
+    "X": 359.4,
+    "Y": -17.8,
+    "u": 221,
+    "v": 34,
+    "centre_in": true,
+    "bbox": [
+     215,
+     23,
+     228,
+     35
+    ]
+   },
+   {
+    "id": "c130",
+    "cat": "truck",
+    "col": "silver",
+    "X": 468.5,
+    "Y": -22.5,
+    "u": 222,
+    "v": 23,
+    "centre_in": true,
+    "bbox": [
+     216,
+     9,
+     228,
+     23
+    ]
+   },
+   {
+    "id": "c131",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 486.0,
+    "Y": -18.0,
+    "u": 244,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     240,
+     16,
+     248,
+     22
+    ]
+   },
+   {
+    "id": "c132",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 642.6,
+    "Y": -14.8,
+    "u": 270,
+    "v": 13,
+    "centre_in": true,
+    "bbox": [
+     267,
+     8,
+     273,
+     13
+    ]
+   },
+   {
+    "id": "c133",
+    "cat": "van",
+    "col": "silver",
+    "X": 686.4,
+    "Y": -10.9,
+    "u": 285,
+    "v": 11,
+    "centre_in": true,
+    "bbox": [
+     282,
+     4,
+     288,
+     11
+    ]
+   },
+   {
+    "id": "c134",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 752.3,
+    "Y": -16.6,
+    "u": 271,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     269,
+     6,
+     274,
+     9
+    ]
+   },
+   {
+    "id": "c135",
+    "cat": "truck",
+    "col": "silver",
+    "X": 795.5,
+    "Y": -28.1,
+    "u": 244,
+    "v": 8,
+    "centre_in": true,
+    "bbox": [
+     240,
+     -1,
+     248,
+     8
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     50,
+     34,
+     97,
+     85
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     136,
+     114,
+     176,
+     147
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     142,
+     74,
+     165,
+     97
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     77,
+     85,
+     108,
+     104
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     189,
+     69,
+     212,
+     88
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     229,
+     48,
+     246,
+     60
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     216,
+     23,
+     230,
+     43
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     123,
+     37,
+     138,
+     46
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     138,
+     63,
+     160,
+     77
+    ]
+   },
+   {
+    "id": "c091",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     151,
+     91,
+     188,
+     128
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     150,
+     32,
+     163,
+     41
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     228,
+     16,
+     238,
+     27
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     248,
+     1,
+     255,
+     11
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     234,
+     1,
+     241,
+     11
+    ]
+   },
+   {
+    "id": "c129",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     215,
+     22,
+     227,
+     35
+    ]
+   },
+   {
+    "id": "c130",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     216,
+     9,
+     227,
+     23
+    ]
+   },
+   {
+    "id": "c131",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     241,
+     16,
+     248,
+     21
+    ]
+   },
+   {
+    "id": "c132",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     267,
+     9,
+     273,
+     14
+    ]
+   },
+   {
+    "id": "c133",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     281,
+     5,
+     288,
+     13
+    ]
+   },
+   {
+    "id": "c134",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     269,
+     6,
+     274,
+     9
+    ]
+   },
+   {
+    "id": "c135",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     241,
+     0,
+     248,
+     9
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "occluded-rest",
+    "bbox": [
+     -11,
+     173,
+     55,
+     226
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     -10,
+     155,
+     83,
+     250
+    ]
+   }
+  ]
+ },
+ "350": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 62.6,
+    "Y": -11.6,
+    "u": 4,
+    "v": 262,
+    "centre_in": true,
+    "bbox": [
+     -50,
+     169,
+     53,
+     274
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 67.4,
+    "Y": -10.0,
+    "u": 72,
+    "v": 243,
+    "centre_in": true,
+    "bbox": [
+     9,
+     191,
+     134,
+     251
+    ]
+   },
+   {
+    "id": "c026",
+    "cat": "truck",
+    "col": "silver",
+    "X": 142.0,
+    "Y": -23.6,
+    "u": 4,
+    "v": 108,
+    "centre_in": true,
+    "bbox": [
+     -32,
+     48,
+     37,
+     115
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 105.5,
+    "Y": -10.4,
+    "u": 151,
+    "v": 151,
+    "centre_in": true,
+    "bbox": [
+     131,
+     121,
+     170,
+     154
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 133.4,
+    "Y": -14.5,
+    "u": 122,
+    "v": 116,
+    "centre_in": true,
+    "bbox": [
+     106,
+     93,
+     138,
+     118
+    ]
+   },
+   {
+    "id": "c074",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 116.0,
+    "Y": -18.3,
+    "u": 28,
+    "v": 135,
+    "centre_in": true,
+    "bbox": [
+     8,
+     109,
+     48,
+     138
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 152.2,
+    "Y": -12.0,
+    "u": 178,
+    "v": 100,
+    "centre_in": true,
+    "bbox": [
+     163,
+     78,
+     193,
+     102
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 190.5,
+    "Y": -10.5,
+    "u": 221,
+    "v": 77,
+    "centre_in": true,
+    "bbox": [
+     210,
+     62,
+     231,
+     78
+    ]
+   },
+   {
+    "id": "c082",
+    "cat": "van",
+    "col": "silver",
+    "X": 230.0,
+    "Y": -15.0,
+    "u": 197,
+    "v": 62,
+    "centre_in": true,
+    "bbox": [
+     187,
+     45,
+     207,
+     62
+    ]
+   },
+   {
+    "id": "c083",
+    "cat": "hatchback",
+    "col": "white",
+    "X": 237.8,
+    "Y": -28.4,
+    "u": 87,
+    "v": 59,
+    "centre_in": true,
+    "bbox": [
+     77,
+     47,
+     96,
+     59
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 149.4,
+    "Y": -18.1,
+    "u": 93,
+    "v": 102,
+    "centre_in": true,
+    "bbox": [
+     78,
+     81,
+     108,
+     103
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 256.9,
+    "Y": -26.7,
+    "u": 116,
+    "v": 53,
+    "centre_in": true,
+    "bbox": [
+     108,
+     43,
+     125,
+     54
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 334.4,
+    "Y": -17.7,
+    "u": 216,
+    "v": 38,
+    "centre_in": true,
+    "bbox": [
+     209,
+     24,
+     223,
+     38
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 638.1,
+    "Y": -22.3,
+    "u": 246,
+    "v": 13,
+    "centre_in": true,
+    "bbox": [
+     242,
+     2,
+     251,
+     13
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 526.2,
+    "Y": -23.2,
+    "u": 229,
+    "v": 19,
+    "centre_in": true,
+    "bbox": [
+     224,
+     5,
+     234,
+     19
+    ]
+   },
+   {
+    "id": "c129",
+    "cat": "van",
+    "col": "red",
+    "X": 281.5,
+    "Y": -18.0,
+    "u": 196,
+    "v": 48,
+    "centre_in": true,
+    "bbox": [
+     187,
+     34,
+     204,
+     48
+    ]
+   },
+   {
+    "id": "c130",
+    "cat": "truck",
+    "col": "silver",
+    "X": 410.4,
+    "Y": -22.3,
+    "u": 211,
+    "v": 28,
+    "centre_in": true,
+    "bbox": [
+     204,
+     12,
+     218,
+     29
+    ]
+   },
+   {
+    "id": "c131",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 410.9,
+    "Y": -18.2,
+    "u": 231,
+    "v": 28,
+    "centre_in": true,
+    "bbox": [
+     226,
+     22,
+     236,
+     28
+    ]
+   },
+   {
+    "id": "c132",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 551.1,
+    "Y": -14.7,
+    "u": 264,
+    "v": 17,
+    "centre_in": true,
+    "bbox": [
+     261,
+     11,
+     268,
+     18
+    ]
+   },
+   {
+    "id": "c133",
+    "cat": "van",
+    "col": "silver",
+    "X": 595.3,
+    "Y": -11.0,
+    "u": 280,
+    "v": 15,
+    "centre_in": true,
+    "bbox": [
+     277,
+     7,
+     284,
+     15
+    ]
+   },
+   {
+    "id": "c134",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 623.9,
+    "Y": -17.2,
+    "u": 261,
+    "v": 14,
+    "centre_in": true,
+    "bbox": [
+     258,
+     10,
+     265,
+     14
+    ]
+   },
+   {
+    "id": "c143",
+    "cat": "truck",
+    "col": "silver",
+    "X": 618.2,
+    "Y": -26.9,
+    "u": 229,
+    "v": 14,
+    "centre_in": true,
+    "bbox": [
+     224,
+     4,
+     234,
+     14
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c026",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     -49,
+     48,
+     36,
+     118
+    ]
+   },
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     130,
+     120,
+     170,
+     154
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     105,
+     94,
+     138,
+     116
+    ]
+   },
+   {
+    "id": "c074",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     8,
+     108,
+     48,
+     139
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     169,
+     76,
+     193,
+     100
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     209,
+     63,
+     230,
+     78
+    ]
+   },
+   {
+    "id": "c082",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     187,
+     38,
+     206,
+     62
+    ]
+   },
+   {
+    "id": "c083",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     77,
+     48,
+     96,
+     60
+    ]
+   },
+   {
+    "id": "c087",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     77,
+     82,
+     104,
+     104
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     108,
+     43,
+     125,
+     54
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     210,
+     22,
+     222,
+     39
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     241,
+     1,
+     250,
+     14
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "interpolated",
+    "bbox": [
+     224,
+     6,
+     234,
+     20
+    ]
+   },
+   {
+    "id": "c129",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     188,
+     34,
+     203,
+     51
+    ]
+   },
+   {
+    "id": "c130",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     204,
+     12,
+     218,
+     28
+    ]
+   },
+   {
+    "id": "c131",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     227,
+     22,
+     236,
+     28
+    ]
+   },
+   {
+    "id": "c132",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     261,
+     12,
+     268,
+     18
+    ]
+   },
+   {
+    "id": "c133",
+    "cls": "van",
+    "src": "interpolated",
+    "bbox": [
+     277,
+     6,
+     284,
+     15
+    ]
+   },
+   {
+    "id": "c134",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     261,
+     8,
+     267,
+     13
+    ]
+   },
+   {
+    "id": "c142",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     233,
+     4,
+     242,
+     15
+    ]
+   },
+   {
+    "id": "c143",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     225,
+     4,
+     234,
+     14
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "occluded-rest",
+    "bbox": [
+     -11,
+     173,
+     55,
+     226
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     -50,
+     169,
+     53,
+     274
+    ]
+   }
+  ]
+ },
+ "399": {
+  "spec": [
+   {
+    "id": "white-van",
+    "cat": "van",
+    "col": "white",
+    "X": 62.6,
+    "Y": -11.6,
+    "u": 3,
+    "v": 262,
+    "centre_in": true,
+    "bbox": [
+     -52,
+     169,
+     53,
+     274
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cat": "hatchback",
+    "col": "yellow",
+    "X": 67.4,
+    "Y": -10.0,
+    "u": 74,
+    "v": 243,
+    "centre_in": true,
+    "bbox": [
+     10,
+     191,
+     136,
+     251
+    ]
+   },
+   {
+    "id": "c064",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 101.4,
+    "Y": -10.4,
+    "u": 144,
+    "v": 157,
+    "centre_in": true,
+    "bbox": [
+     123,
+     126,
+     165,
+     160
+    ]
+   },
+   {
+    "id": "c071",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 113.6,
+    "Y": -14.5,
+    "u": 89,
+    "v": 139,
+    "centre_in": true,
+    "bbox": [
+     68,
+     111,
+     109,
+     141
+    ]
+   },
+   {
+    "id": "c077",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 129.7,
+    "Y": -13.6,
+    "u": 131,
+    "v": 120,
+    "centre_in": true,
+    "bbox": [
+     114,
+     94,
+     146,
+     122
+    ]
+   },
+   {
+    "id": "c078",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 150.1,
+    "Y": -10.7,
+    "u": 194,
+    "v": 102,
+    "centre_in": true,
+    "bbox": [
+     180,
+     82,
+     209,
+     103
+    ]
+   },
+   {
+    "id": "c087",
+    "cat": "hatchback",
+    "col": "purple",
+    "X": 111.4,
+    "Y": -19.6,
+    "u": -6,
+    "v": 141,
+    "centre_in": false,
+    "bbox": [
+     -28,
+     113,
+     15,
+     144
+    ]
+   },
+   {
+    "id": "c103",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 174.4,
+    "Y": -25.4,
+    "u": 40,
+    "v": 85,
+    "centre_in": true,
+    "bbox": [
+     27,
+     70,
+     52,
+     86
+    ]
+   },
+   {
+    "id": "c108",
+    "cat": "van",
+    "col": "silver",
+    "X": 232.6,
+    "Y": -18.2,
+    "u": 170,
+    "v": 61,
+    "centre_in": true,
+    "bbox": [
+     160,
+     40,
+     180,
+     61
+    ]
+   },
+   {
+    "id": "c113",
+    "cat": "truck",
+    "col": "silver",
+    "X": 535.4,
+    "Y": -22.4,
+    "u": 234,
+    "v": 18,
+    "centre_in": true,
+    "bbox": [
+     228,
+     5,
+     239,
+     19
+    ]
+   },
+   {
+    "id": "c123",
+    "cat": "truck",
+    "col": "silver",
+    "X": 411.5,
+    "Y": -22.5,
+    "u": 210,
+    "v": 28,
+    "centre_in": true,
+    "bbox": [
+     201,
+     10,
+     218,
+     29
+    ]
+   },
+   {
+    "id": "c129",
+    "cat": "van",
+    "col": "red",
+    "X": 186.5,
+    "Y": -18.4,
+    "u": 133,
+    "v": 79,
+    "centre_in": true,
+    "bbox": [
+     120,
+     57,
+     146,
+     80
+    ]
+   },
+   {
+    "id": "c130",
+    "cat": "truck",
+    "col": "silver",
+    "X": 300.4,
+    "Y": -21.7,
+    "u": 178,
+    "v": 44,
+    "centre_in": true,
+    "bbox": [
+     168,
+     21,
+     188,
+     44
+    ]
+   },
+   {
+    "id": "c131",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 280.9,
+    "Y": -17.8,
+    "u": 197,
+    "v": 48,
+    "centre_in": true,
+    "bbox": [
+     189,
+     38,
+     204,
+     48
+    ]
+   },
+   {
+    "id": "c132",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 407.9,
+    "Y": -14.6,
+    "u": 248,
+    "v": 29,
+    "centre_in": true,
+    "bbox": [
+     244,
+     20,
+     253,
+     29
+    ]
+   },
+   {
+    "id": "c134",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 484.6,
+    "Y": -17.8,
+    "u": 245,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     241,
+     16,
+     249,
+     22
+    ]
+   },
+   {
+    "id": "c147",
+    "cat": "truck",
+    "col": "silver",
+    "X": 749.8,
+    "Y": -22.3,
+    "u": 256,
+    "v": 9,
+    "centre_in": true,
+    "bbox": [
+     252,
+     0,
+     259,
+     9
+    ]
+   },
+   {
+    "id": "c154",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 560.0,
+    "Y": -19.5,
+    "u": 247,
+    "v": 17,
+    "centre_in": true,
+    "bbox": [
+     244,
+     12,
+     251,
+     17
+    ]
+   },
+   {
+    "id": "c155",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 341.6,
+    "Y": -26.1,
+    "u": 168,
+    "v": 37,
+    "centre_in": true,
+    "bbox": [
+     162,
+     30,
+     174,
+     37
+    ]
+   },
+   {
+    "id": "c157",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 570.3,
+    "Y": -16.4,
+    "u": 260,
+    "v": 16,
+    "centre_in": true,
+    "bbox": [
+     256,
+     12,
+     263,
+     16
+    ]
+   },
+   {
+    "id": "c158",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 565.1,
+    "Y": -10.6,
+    "u": 280,
+    "v": 17,
+    "centre_in": true,
+    "bbox": [
+     277,
+     12,
+     283,
+     17
+    ]
+   },
+   {
+    "id": "c161",
+    "cat": "van",
+    "col": "silver",
+    "X": 161.0,
+    "Y": -14.8,
+    "u": 151,
+    "v": 94,
+    "centre_in": true,
+    "bbox": [
+     136,
+     62,
+     165,
+     96
+    ]
+   },
+   {
+    "id": "c166",
+    "cat": "hatchback",
+    "col": "silver",
+    "X": 475.1,
+    "Y": -22.5,
+    "u": 223,
+    "v": 22,
+    "centre_in": true,
+    "bbox": [
+     219,
+     17,
+     227,
+     23
+    ]
+   }
+  ],
+  "measured": [
+   {
+    "id": "c064",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     123,
+     126,
+     165,
+     160
+    ]
+   },
+   {
+    "id": "c071",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     70,
+     110,
+     108,
+     141
+    ]
+   },
+   {
+    "id": "c077",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     111,
+     89,
+     151,
+     121
+    ]
+   },
+   {
+    "id": "c078",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     183,
+     82,
+     208,
+     103
+    ]
+   },
+   {
+    "id": "c103",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     27,
+     68,
+     54,
+     86
+    ]
+   },
+   {
+    "id": "c108",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     160,
+     40,
+     180,
+     61
+    ]
+   },
+   {
+    "id": "c113",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     230,
+     4,
+     239,
+     18
+    ]
+   },
+   {
+    "id": "c123",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     203,
+     8,
+     218,
+     28
+    ]
+   },
+   {
+    "id": "c129",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     123,
+     57,
+     145,
+     79
+    ]
+   },
+   {
+    "id": "c130",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     171,
+     20,
+     192,
+     43
+    ]
+   },
+   {
+    "id": "c131",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     190,
+     37,
+     205,
+     49
+    ]
+   },
+   {
+    "id": "c132",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     244,
+     18,
+     254,
+     27
+    ]
+   },
+   {
+    "id": "c134",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     242,
+     15,
+     249,
+     20
+    ]
+   },
+   {
+    "id": "c147",
+    "cls": "truck",
+    "src": "measured",
+    "bbox": [
+     253,
+     -1,
+     260,
+     9
+    ]
+   },
+   {
+    "id": "c154",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     245,
+     12,
+     252,
+     16
+    ]
+   },
+   {
+    "id": "c155",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     162,
+     29,
+     174,
+     37
+    ]
+   },
+   {
+    "id": "c157",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     255,
+     12,
+     262,
+     16
+    ]
+   },
+   {
+    "id": "c158",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     277,
+     11,
+     284,
+     18
+    ]
+   },
+   {
+    "id": "c161",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     137,
+     56,
+     164,
+     95
+    ]
+   },
+   {
+    "id": "c166",
+    "cls": "car",
+    "src": "measured",
+    "bbox": [
+     220,
+     16,
+     228,
+     22
+    ]
+   },
+   {
+    "id": "yellow-car",
+    "cls": "car",
+    "src": "occluded-rest",
+    "bbox": [
+     -11,
+     173,
+     55,
+     226
+    ]
+   },
+   {
+    "id": "white-van",
+    "cls": "van",
+    "src": "measured",
+    "bbox": [
+     -52,
+     169,
+     53,
+     274
+    ]
+   }
+  ]
+ }
+}

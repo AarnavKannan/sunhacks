@@ -13,23 +13,3 @@ venv/
 
 # Step cache. The generated scene package is kept.
 pipeline/.cache/
-
-# Reconstruct review caches and superseded local diagnostics; source and final evidence stay tracked.
-FrontEnd/app/electron/demo-incident/measure/review_tracks/tiles.npy
-FrontEnd/app/electron/demo-incident/measure/review_tracks/early_clean*.json
-FrontEnd/app/electron/demo-incident/measure/review_tracks/early_world*
-FrontEnd/app/electron/demo-incident/measure/review_tracks/reproduced_clean.json
-FrontEnd/app/electron/demo-incident/measure/review_spec/browser-geometry.js
-FrontEnd/app/tests/playback-compare-*.png
-FrontEnd/app/tests/playback-overview-*.png
-FrontEnd/app/tests/playback-source-*.png
-FrontEnd/app/tests/playback-render-status.json
-# Duplicate raw captures/diagnostics are reproducible from the tracked clip. Keep final
-# source/viewer comparisons, overviews, manual census overlays and correction evidence.
-FrontEnd/app/tests/final-playback/playback-source-*.png
-FrontEnd/app/tests/fixture-playback/
-FrontEnd/app/electron/demo-incident/measure/review_tracks/eye/source_f*.png
-FrontEnd/app/electron/demo-incident/measure/review_tracks/detect_f*.png
-FrontEnd/app/electron/demo-incident/measure/review_tracks/detections_*.png
-FrontEnd/app/electron/demo-incident/measure/review_crash/*diagnostic*.png
-FrontEnd/app/electron/demo-incident/measure/review_crash/*diagnostic*.jpg

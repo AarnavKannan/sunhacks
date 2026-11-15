@@ -154,7 +154,7 @@ export function resolveEnvironment(environment: SceneEnvironment): EnvPack {
 // ---------------------------------------------------------------------------
 // Texture loading
 
-const BASE = `${import.meta.env?.BASE_URL ?? "/"}textures/`;
+const BASE = `${import.meta.env.BASE_URL}textures/`;
 const textureLoader = new THREE.TextureLoader();
 const textureCache = new Map<string, THREE.Texture>();
 
@@ -283,14 +283,6 @@ export type Surfaces = {
   paintYellow: THREE.Material;
   ground: THREE.Material;
 };
-
-/** Measured median materials; a snow-covered grass verge must not become a tall hedge. */
-export function fixedObjectMaterial(material: string, surfaces: Surfaces): THREE.Material {
-  if (/hedge|bush/.test(material)) return new THREE.MeshStandardMaterial({ color: 0x4e5940, roughness: 1, flatShading: true });
-  if (/grass|vegetation|snow/.test(material)) return surfaces.island;
-  if (/steel|metal/.test(material)) return surfaces.metal;
-  return surfaces.concrete;
-}
 
 export function createSurfaces(pack: EnvPack): Surfaces {
   const groundTint = linear(pack.ground.tint);
@@ -534,8 +526,6 @@ function fbm(x: number, z: number) {
 const TERRAIN_SIZE = 1400;
 
 export function buildSurroundings(group: THREE.Group, pack: EnvPack, surfaces: Surfaces, site: Site, obstacles: Obstacle[]) {
-  const terrainWidth = Math.max(TERRAIN_SIZE, site.width + 400);
-  const terrainDepth = Math.max(TERRAIN_SIZE, site.depth + 400);
   const clearance = (x: number, z: number) => {
     const siteDx = Math.abs(x) - site.width / 2;
     const siteDz = Math.abs(z) - site.depth / 2;
@@ -549,7 +539,7 @@ export function buildSurroundings(group: THREE.Group, pack: EnvPack, surfaces: S
   };
 
   const segments = 180;
-  const terrainGeometry = new THREE.PlaneGeometry(terrainWidth, terrainDepth, segments, segments);
+  const terrainGeometry = new THREE.PlaneGeometry(TERRAIN_SIZE, TERRAIN_SIZE, segments, segments);
   terrainGeometry.rotateX(-Math.PI / 2);
   const positions = terrainGeometry.getAttribute("position");
   for (let i = 0; i < positions.count; i += 1) {
@@ -568,8 +558,8 @@ export function buildSurroundings(group: THREE.Group, pack: EnvPack, surfaces: S
   const trunks: THREE.Matrix4[] = [];
   const dummy = new THREE.Object3D();
   for (let attempt = 0; attempt < 6000 && broadleaf.length + conifer.length < 520 * pack.treeDensity; attempt += 1) {
-    const x = (random() - 0.5) * terrainWidth * 0.8;
-    const z = (random() - 0.5) * terrainDepth * 0.8;
+    const x = (random() - 0.5) * TERRAIN_SIZE * 0.8;
+    const z = (random() - 0.5) * TERRAIN_SIZE * 0.8;
     const room = clearance(x, z);
     if (room < 7) continue;
     // Denser in clumps, sparse in open fields.

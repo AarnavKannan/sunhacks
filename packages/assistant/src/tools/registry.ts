@@ -28,14 +28,11 @@ const timeRefShape = {
   t_s: z.number().optional().describe("Absolute seconds from the start of the footage"),
   event: z.string().optional().describe('Event type to measure from: "crash_start", "crash_end", "brake", ...'),
   offset_s: z.number().optional().describe("Seconds after the event (negative = before). Only with event"),
-  frame: z.number().int().optional().describe("Source video frame index (t = frame / fps, e.g. frame 100 at 12.5 fps = 8 s). Use instead of t_s when the user gives a frame number"),
 };
-type TimeRefArgs = { t_s?: number; event?: string; offset_s?: number; frame?: number };
-const timeRefOk = (v: TimeRefArgs) =>
-  [v.t_s, v.event, v.frame].filter((x) => x !== undefined).length <= 1 && !(v.offset_s !== undefined && v.event === undefined);
-const TIME_REF_MSG = "Give one of t_s, event (with an optional offset_s) or frame, or none for the current playhead";
+type TimeRefArgs = { t_s?: number; event?: string; offset_s?: number };
+const timeRefOk = (v: TimeRefArgs) => !(v.t_s !== undefined && v.event !== undefined) && !(v.offset_s !== undefined && v.event === undefined);
+const TIME_REF_MSG = "Give t_s, or event with an optional offset_s, or neither for the current playhead";
 function toTimeRef(v: TimeRefArgs): TimeRef | undefined {
-  if (v.frame !== undefined) return { frame: v.frame };
   if (v.t_s !== undefined) return { t_s: v.t_s };
   if (v.event !== undefined) return { event: v.event, ...(v.offset_s !== undefined ? { offset_s: v.offset_s } : {}) };
   return undefined;
@@ -223,10 +220,10 @@ export const TOOLS: ToolDef[] = [
     name: "timeline_seek",
     title: "timeline.seek",
     description:
-      'Move the playhead (the source video moves with it). Give one of: t_s (seconds from start); event with optional offset_s ("3 s before the crash" → event "crash_start", offset_s -3; "after the crash" → event "crash_end"); frame (source video frame index, t = frame / fps); or relative_s (step from the current time, negative = back).',
+      'Move the playhead (the source video moves with it). Give one of: t_s (seconds from start); event with optional offset_s ("3 s before the crash" → event "crash_start", offset_s -3; "after the crash" → event "crash_end"); or relative_s (step from the current time, negative = back).',
     input: z
       .object({ ...timeRefShape, relative_s: z.number().optional() })
-      .refine((v) => [v.t_s, v.event, v.frame, v.relative_s].filter((x) => x !== undefined).length === 1, "Give exactly one of t_s, event, frame, relative_s")
+      .refine((v) => [v.t_s, v.event, v.relative_s].filter((x) => x !== undefined).length === 1, "Give exactly one of t_s, event, relative_s")
       .refine(timeRefOk, "offset_s only goes with event"),
     readOnly: true,
     run: (ctl, a) => ctl.seek(a.relative_s !== undefined ? { relative_s: a.relative_s } : toTimeRef(a)!),
@@ -253,7 +250,7 @@ export const TOOLS: ToolDef[] = [
     name: "kinematics_query",
     title: "kinematics.query",
     description:
-      'Read one object\'s reconstructed motion at one moment from the per-frame database: position, velocity (vector), speed (m/s, mph, km/h), acceleration (negative = slowing, also in g), heading (compass), yaw_rate, forces (mass, net force and, where available, its breakdown: tyre_road = braking/accelerating/steering through the tyres, drag = air incl. wind, rolling, grade = slope, contact = the impact; plus any separately reported source-force estimates). Static objects (the median divider; ids from scene_describe) are valid entity ids: they never move, so velocity, acceleration and net force are exactly zero. Results include frame (source video frame index; t = frame / fps), src (measured / interpolated / occluded-rest / ... / static) and contact_with (ids touching it at that frame). Time: t_s, frame, or event + offset_s ("3 s before the crash" → event "crash_start", offset_s -3), or omit for the playhead. Doesn\'t move the playhead. This and kinematics_series are the ONLY sources for motion numbers you tell the user.',
+      'Read one object\'s reconstructed motion at one moment from the per-frame database: position, velocity (vector), speed (m/s, mph, km/h), acceleration (negative = slowing, also in g), heading (compass), yaw_rate, forces (mass, net force and, where available, its breakdown: tyre_road = braking/accelerating/steering through the tyres, drag = air incl. wind, rolling, grade = slope, contact = the impact; plus what Gemini itself read off the footage). Time: t_s, or event + offset_s ("3 s before the crash" → event "crash_start", offset_s -3), or omit for the playhead. Doesn\'t move the playhead. This and kinematics_series are the ONLY sources for motion numbers you tell the user.',
     input: z
       .object({ entity_id: z.string(), ...timeRefShape, fields: fields.default(["speed"]) })
       .refine(timeRefOk, TIME_REF_MSG),
@@ -264,7 +261,7 @@ export const TOOLS: ToolDef[] = [
     name: "kinematics_series",
     title: "kinematics.series",
     description:
-      "Read an object's motion over a time window, sampled every step_s seconds (at most 60 samples). Use for 'how did its speed change', 'top speed in the last 3 seconds before the crash', 'when did it start slowing'. Times are absolute seconds; get the crash times from scene_describe. Works for static objects too (constant position, zero motion).",
+      "Read an object's motion over a time window, sampled every step_s seconds (at most 60 samples). Use for 'how did its speed change', 'top speed in the last 3 seconds before the crash', 'when did it start slowing'. Times are absolute seconds; get the crash times from scene_describe.",
     input: z
       .object({
         entity_id: z.string(),
@@ -282,25 +279,16 @@ export const TOOLS: ToolDef[] = [
     name: "crash_forces",
     title: "crash.forces",
     description:
-      "The crash in forces and momentum, for every vehicle involved: speed just before and just after the impact, change in velocity (delta-v), impulse (N·s) and the direction it pushed, average impact force over an assumed contact pulse, the slide afterwards (distance, time, mean tyre force), the closing speed, and any separately reported source-force estimates. Use for 'how hard did they hit', 'what force hit the Toyota', 'delta-v', 'how far did it slide after'. The only source for crash-force numbers.",
+      "The crash in forces and momentum, for every vehicle involved: speed just before and just after the impact, change in velocity (delta-v), impulse (N·s) and the direction it pushed, average impact force over an assumed contact pulse, the slide afterwards (distance, time, mean tyre force), the closing speed, and the forces Gemini read off the footage. Use for 'how hard did they hit', 'what force hit the Toyota', 'delta-v', 'how far did it slide after'. The only source for crash-force numbers.",
     input: z.object({}),
     readOnly: true,
     run: (ctl) => ctl.crashForces(),
   }),
   tool({
-    name: "query_contacts",
-    title: "query.contacts",
-    description:
-      "Every contact in the reconstruction, vehicle-vehicle and vehicle-static (e.g. a car hitting the median divider), plus the fixed objects and the frame grid. Each contact: the two ids (a, b), frame (source video frame index; t_s = frame / fps), world point, unit normal pointing from a to b, impulse_ns (N·s along the normal) and impulse (vector on b from a = impulse_ns × normal), and derived (mass × delta-v from the stored vectors, as a cross-check). Impulse fields are null when unidentifiable, not zero; retain source notes and caveats about inferred contacts. Static objects (the divider) never move and are immovable: only the vehicle's motion changes. Use for 'did it hit the divider', 'where / when did they touch', 'how hard was the impact with the median', 'which way was the contact pushing'.",
-    input: z.object({}),
-    readOnly: true,
-    run: (ctl) => ctl.queryContacts(),
-  }),
-  tool({
     name: "measure_distance",
     title: "measure.distance",
     description:
-      "Straight-line distance in meters and feet between two things at one moment. a and b are each an entity id (vehicles or static objects like the median divider; a divider's position is its footprint centroid) or a world point [x,y,z]. Time as in kinematics_query (default: the playhead).",
+      "Straight-line distance in meters and feet between two things at one moment. a and b are each an entity id or a world point [x,y,z]. Time as in kinematics_query (default: the playhead).",
     input: z.object({ a: target, b: target, ...timeRefShape }).refine(timeRefOk, TIME_REF_MSG),
     readOnly: true,
     run: (ctl, a) => ctl.measureDistance(a.a as string | Vec3, a.b as string | Vec3, toTimeRef(a)),

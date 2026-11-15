@@ -1,0 +1,6522 @@
+{
+ "spec_lines": [
+  4.228,
+  7.87,
+  11.341,
+  14.985,
+  18.76,
+  22.043,
+  25.068
+ ],
+ "vehicles": {
+  "white-van": {
+   "category": "van",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.0004999222656492108,
+    309
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "yellow-car": {
+   "category": "hatchback",
+   "spec_frames": [
+    151,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     255,
+     1,
+     2
+    ],
+    [
+     280,
+     2,
+     1
+    ],
+    [
+     291,
+     1,
+     0
+    ],
+    [
+     300,
+     0,
+     1
+    ]
+   ],
+   "spec_changes": [
+    [
+     255,
+     1,
+     2,
+     0
+    ],
+    [
+     280,
+     2,
+     1,
+     0
+    ],
+    [
+     291,
+     1,
+     0,
+     0
+    ],
+    [
+     300,
+     0,
+     1,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    151,
+    399
+   ],
+   "meas_changes": [
+    [
+     255,
+     1,
+     2,
+     0
+    ],
+    [
+     280,
+     2,
+     1,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     255,
+     1,
+     2,
+     0
+    ],
+    [
+     280,
+     2,
+     1,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299
+   ],
+   "max_lat_dev": [
+    3.0580000000000007,
+    318
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {
+    "291": "interpolated",
+    "292": "measured",
+    "293": "interpolated"
+   },
+   "matched": [
+    [
+     255,
+     255,
+     1,
+     2
+    ],
+    [
+     280,
+     280,
+     2,
+     1
+    ]
+   ],
+   "missing": [],
+   "invented": [
+    [
+     291,
+     1,
+     0,
+     0
+    ],
+    [
+     300,
+     0,
+     1,
+     0
+    ]
+   ],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c001": {
+   "category": "sedan",
+   "spec_frames": [
+    0,
+    12
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    12
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    11
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c002": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    327
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    16
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    13
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c003": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    327
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    46
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    42
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c004": {
+   "category": "truck",
+   "spec_frames": [
+    0,
+    3
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    3
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    0
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c005": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    64
+   ],
+   "spec_changes_raw": [
+    [
+     25,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     25,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    64
+   ],
+   "meas_changes": [
+    [
+     25,
+     1,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     25,
+     1,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    64
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     25,
+     25,
+     1,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c006": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    50
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    50
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    50
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c007": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    359
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    49
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    49
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c008": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    366
+   ],
+   "spec_changes_raw": [
+    [
+     16,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     16,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    66
+   ],
+   "meas_changes": [
+    [
+     16,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     15,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    66
+   ],
+   "field_vs_y_mismatch": 1,
+   "src_at": {},
+   "matched": [
+    [
+     16,
+     16,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c009": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    104
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    104
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c010": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    392
+   ],
+   "spec_changes_raw": [
+    [
+     81,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     81,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    126
+   ],
+   "meas_changes": [
+    [
+     81,
+     1,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     81,
+     1,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    124
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     81,
+     81,
+     1,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c011": {
+   "category": "van",
+   "spec_frames": [
+    0,
+    7
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    7
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    5
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c012": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     102,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     102,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    145
+   ],
+   "meas_changes": [
+    [
+     102,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     102,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    145
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     102,
+     102,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c013": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    51
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    47
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c014": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    206
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    206
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c015": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    94
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    94
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    93
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c016": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    43
+   ],
+   "spec_changes_raw": [
+    [
+     16,
+     5,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     16,
+     5,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    43
+   ],
+   "meas_changes": [
+    [
+     16,
+     5,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     16,
+     5,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    40
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     16,
+     16,
+     5,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c017": {
+   "category": "truck",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    163
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    153
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c018": {
+   "category": "van",
+   "spec_frames": [
+    0,
+    37
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [
+    [
+     1,
+     31,
+     "line 2 (2|3)",
+     -320.8
+    ]
+   ],
+   "meas_frames": [
+    0,
+    37
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    37
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c019": {
+   "category": "hatchback",
+   "spec_frames": [
+    0,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    239
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    236
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c020": {
+   "category": "truck",
+   "spec_frames": [
+    0,
+    172
+   ],
+   "spec_changes_raw": [
+    [
+     54,
+     4,
+     5
+    ],
+    [
+     123,
+     5,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     54,
+     4,
+     5,
+     0
+    ],
+    [
+     123,
+     5,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    172
+   ],
+   "meas_changes": [
+    [
+     54,
+     4,
+     5,
+     0
+    ],
+    [
+     123,
+     5,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     54,
+     4,
+     5,
+     0
+    ],
+    [
+     123,
+     5,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    170
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     54,
+     54,
+     4,
+     5
+    ],
+    [
+     123,
+     123,
+     5,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c021": {
+   "category": "van",
+   "spec_frames": [
+    0,
+    100
+   ],
+   "spec_changes_raw": [
+    [
+     75,
+     4,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     75,
+     4,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     66,
+     81,
+     "line 4 (4|5)",
+     -366.9
+    ]
+   ],
+   "meas_frames": [
+    0,
+    100
+   ],
+   "meas_changes": [
+    [
+     75,
+     4,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     75,
+     4,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    98
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     75,
+     75,
+     4,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c022": {
+   "category": "truck",
+   "spec_frames": [
+    0,
+    5
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    5
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    1
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c023": {
+   "category": "truck",
+   "spec_frames": [
+    0,
+    3
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    3
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    2
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c024": {
+   "category": "truck",
+   "spec_frames": [
+    0,
+    72
+   ],
+   "spec_changes_raw": [
+    [
+     56,
+     6,
+     7
+    ]
+   ],
+   "spec_changes": [
+    [
+     56,
+     6,
+     7,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    0,
+    72
+   ],
+   "meas_changes": [
+    [
+     56,
+     6,
+     7,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     56,
+     6,
+     7,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    70
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     56,
+     56,
+     6,
+     7
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c026": {
+   "category": "truck",
+   "spec_frames": [
+    3,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     341,
+     4,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     341,
+     4,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     317,
+     399,
+     "line 4 (4|5)",
+     -38.6
+    ]
+   ],
+   "meas_frames": [
+    3,
+    354
+   ],
+   "meas_changes": [
+    [
+     341,
+     4,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     340,
+     4,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    352
+   ],
+   "field_vs_y_mismatch": 1,
+   "src_at": {},
+   "matched": [
+    [
+     341,
+     341,
+     4,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c027": {
+   "category": "truck",
+   "spec_frames": [
+    4,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    4,
+    9
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    6
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c028": {
+   "category": "hatchback",
+   "spec_frames": [
+    4,
+    51
+   ],
+   "spec_changes_raw": [
+    [
+     12,
+     2,
+     3
+    ],
+    [
+     29,
+     3,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     12,
+     2,
+     3,
+     0
+    ],
+    [
+     29,
+     3,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     4,
+     51,
+     "line 2 (2|3)",
+     -335.2
+    ]
+   ],
+   "meas_frames": [
+    4,
+    51
+   ],
+   "meas_changes": [
+    [
+     12,
+     2,
+     3,
+     0
+    ],
+    [
+     29,
+     3,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     12,
+     2,
+     3,
+     0
+    ],
+    [
+     29,
+     3,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    51
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     12,
+     12,
+     2,
+     3
+    ],
+    [
+     29,
+     29,
+     3,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c030": {
+   "category": "truck",
+   "spec_frames": [
+    8,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     108,
+     4,
+     5
+    ],
+    [
+     186,
+     5,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     108,
+     4,
+     5,
+     0
+    ],
+    [
+     186,
+     5,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     101,
+     112,
+     "line 4 (4|5)",
+     -365.0
+    ]
+   ],
+   "meas_frames": [
+    8,
+    274
+   ],
+   "meas_changes": [
+    [
+     108,
+     4,
+     5,
+     0
+    ],
+    [
+     186,
+     5,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     108,
+     4,
+     5,
+     0
+    ],
+    [
+     186,
+     5,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    273
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     108,
+     108,
+     4,
+     5
+    ],
+    [
+     186,
+     186,
+     5,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c033": {
+   "category": "hatchback",
+   "spec_frames": [
+    27,
+    43
+   ],
+   "spec_changes_raw": [
+    [
+     35,
+     2,
+     1
+    ],
+    [
+     42,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     35,
+     2,
+     1,
+     0
+    ],
+    [
+     42,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     27,
+     43,
+     "line 1 (1|2)",
+     -126.8
+    ]
+   ],
+   "meas_frames": [
+    27,
+    43
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41
+   ],
+   "max_lat_dev": [
+    0.4800000000000013,
+    43
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {
+    "35": "interpolated",
+    "36": "interpolated",
+    "37": "measured"
+   },
+   "matched": [],
+   "missing": [],
+   "invented": [
+    [
+     35,
+     2,
+     1,
+     0
+    ],
+    [
+     42,
+     1,
+     2,
+     0
+    ]
+   ],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c034": {
+   "category": "truck",
+   "spec_frames": [
+    28,
+    75
+   ],
+   "spec_changes_raw": [
+    [
+     68,
+     6,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     68,
+     6,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    28,
+    75
+   ],
+   "meas_changes": [
+    [
+     68,
+     6,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     68,
+     6,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    64
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     68,
+     68,
+     6,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c035": {
+   "category": "hatchback",
+   "spec_frames": [
+    30,
+    96
+   ],
+   "spec_changes_raw": [
+    [
+     33,
+     5,
+     4
+    ]
+   ],
+   "spec_changes": [
+    [
+     33,
+     5,
+     4,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     30,
+     52,
+     "line 4 (4|5)",
+     -288.9
+    ]
+   ],
+   "meas_frames": [
+    30,
+    96
+   ],
+   "meas_changes": [
+    [
+     33,
+     5,
+     4,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     33,
+     5,
+     4,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    95
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     33,
+     33,
+     5,
+     4
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c036": {
+   "category": "hatchback",
+   "spec_frames": [
+    33,
+    77
+   ],
+   "spec_changes_raw": [
+    [
+     77,
+     3,
+     4
+    ]
+   ],
+   "spec_changes": [
+    [
+     77,
+     3,
+     4,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    33,
+    77
+   ],
+   "meas_changes": [
+    [
+     77,
+     3,
+     4,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     77,
+     3,
+     4,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    76
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     77,
+     77,
+     3,
+     4
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c038": {
+   "category": "van",
+   "spec_frames": [
+    42,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    42,
+    155
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    152
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c040": {
+   "category": "hatchback",
+   "spec_frames": [
+    43,
+    395
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    43,
+    92
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    90
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c041": {
+   "category": "truck",
+   "spec_frames": [
+    44,
+    60
+   ],
+   "spec_changes_raw": [
+    [
+     54,
+     5,
+     6
+    ],
+    [
+     58,
+     6,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     54,
+     5,
+     5,
+     1
+    ]
+   ],
+   "line_sits": [
+    [
+     47,
+     60,
+     "line 5 (5|6)",
+     -429.0
+    ]
+   ],
+   "meas_frames": [
+    44,
+    60
+   ],
+   "meas_changes": [
+    [
+     54,
+     5,
+     5,
+     1
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     54,
+     5,
+     5,
+     1
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    56
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    1,
+    1
+   ]
+  },
+  "c043": {
+   "category": "hatchback",
+   "spec_frames": [
+    50,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [
+    [
+     303,
+     331,
+     "line 2 (2|3)",
+     225.2
+    ]
+   ],
+   "meas_frames": [
+    50,
+    62
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.37100000000000044,
+    50
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c044": {
+   "category": "hatchback",
+   "spec_frames": [
+    51,
+    380
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    51,
+    72
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.14000000000000234,
+    59
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c045": {
+   "category": "hatchback",
+   "spec_frames": [
+    51,
+    260
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    51,
+    260
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    260
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c046": {
+   "category": "sedan",
+   "spec_frames": [
+    52,
+    97
+   ],
+   "spec_changes_raw": [
+    [
+     60,
+     6,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     60,
+     6,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     53,
+     66,
+     "line 5 (5|6)",
+     -301.3
+    ]
+   ],
+   "meas_frames": [
+    52,
+    97
+   ],
+   "meas_changes": [
+    [
+     60,
+     6,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     60,
+     6,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    92
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     60,
+     60,
+     6,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c048": {
+   "category": "hatchback",
+   "spec_frames": [
+    56,
+    96
+   ],
+   "spec_changes_raw": [
+    [
+     89,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     89,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    56,
+    96
+   ],
+   "meas_changes": [
+    [
+     89,
+     1,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     89,
+     1,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    95
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     89,
+     89,
+     1,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c049": {
+   "category": "hatchback",
+   "spec_frames": [
+    57,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    57,
+    259
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    259
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c050": {
+   "category": "hatchback",
+   "spec_frames": [
+    57,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    57,
+    261
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    258
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c051": {
+   "category": "hatchback",
+   "spec_frames": [
+    58,
+    152
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    58,
+    152
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    152
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c052": {
+   "category": "hatchback",
+   "spec_frames": [
+    58,
+    82
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    58,
+    82
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    80
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c053": {
+   "category": "truck",
+   "spec_frames": [
+    60,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    60,
+    251
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    241
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c054": {
+   "category": "van",
+   "spec_frames": [
+    65,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     110,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     110,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    65,
+    186
+   ],
+   "meas_changes": [
+    [
+     110,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     110,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    186
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     110,
+     110,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c055": {
+   "category": "van",
+   "spec_frames": [
+    66,
+    96
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    66,
+    96
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    96
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c056": {
+   "category": "hatchback",
+   "spec_frames": [
+    66,
+    113
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    66,
+    113
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    112
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c058": {
+   "category": "hatchback",
+   "spec_frames": [
+    75,
+    89
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    75,
+    89
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    88
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c059": {
+   "category": "hatchback",
+   "spec_frames": [
+    79,
+    200
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    79,
+    200
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    199
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c060": {
+   "category": "hatchback",
+   "spec_frames": [
+    81,
+    128
+   ],
+   "spec_changes_raw": [
+    [
+     83,
+     2,
+     1
+    ],
+    [
+     125,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     83,
+     2,
+     1,
+     0
+    ],
+    [
+     125,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    81,
+    128
+   ],
+   "meas_changes": [
+    [
+     83,
+     2,
+     1,
+     0
+    ],
+    [
+     125,
+     1,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     83,
+     2,
+     1,
+     0
+    ],
+    [
+     125,
+     1,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    127
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     83,
+     83,
+     2,
+     1
+    ],
+    [
+     125,
+     125,
+     1,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c061": {
+   "category": "hatchback",
+   "spec_frames": [
+    93,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     157,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     157,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    93,
+    179
+   ],
+   "meas_changes": [
+    [
+     157,
+     1,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     157,
+     1,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    176
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     157,
+     157,
+     1,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c062": {
+   "category": "truck",
+   "spec_frames": [
+    93,
+    124
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    93,
+    124
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    121
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c063": {
+   "category": "van",
+   "spec_frames": [
+    95,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    95,
+    172
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    172
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c064": {
+   "category": "hatchback",
+   "spec_frames": [
+    99,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    99,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    396
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c065": {
+   "category": "hatchback",
+   "spec_frames": [
+    101,
+    129
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    101,
+    129
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    129
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c066": {
+   "category": "hatchback",
+   "spec_frames": [
+    105,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    105,
+    274
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.254999999999999,
+    274
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c067": {
+   "category": "hatchback",
+   "spec_frames": [
+    110,
+    127
+   ],
+   "spec_changes_raw": [
+    [
+     118,
+     6,
+     7
+    ]
+   ],
+   "spec_changes": [
+    [
+     118,
+     6,
+     7,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     111,
+     127,
+     "line 6 (outer edge)",
+     -196.5
+    ]
+   ],
+   "meas_frames": [
+    110,
+    127
+   ],
+   "meas_changes": [
+    [
+     118,
+     6,
+     7,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     118,
+     6,
+     7,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    118
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     118,
+     118,
+     6,
+     7
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c068": {
+   "category": "truck",
+   "spec_frames": [
+    110,
+    191
+   ],
+   "spec_changes_raw": [
+    [
+     133,
+     6,
+     7
+    ],
+    [
+     153,
+     7,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     133,
+     6,
+     7,
+     0
+    ],
+    [
+     153,
+     7,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     128,
+     161,
+     "line 6 (outer edge)",
+     -377.3
+    ]
+   ],
+   "meas_frames": [
+    110,
+    191
+   ],
+   "meas_changes": [
+    [
+     133,
+     6,
+     7,
+     0
+    ],
+    [
+     153,
+     7,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     133,
+     6,
+     7,
+     0
+    ],
+    [
+     153,
+     7,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    191
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     133,
+     133,
+     6,
+     7
+    ],
+    [
+     153,
+     153,
+     7,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c071": {
+   "category": "hatchback",
+   "spec_frames": [
+    134,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    134,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    395
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c072": {
+   "category": "truck",
+   "spec_frames": [
+    134,
+    169
+   ],
+   "spec_changes_raw": [
+    [
+     169,
+     6,
+     7
+    ]
+   ],
+   "spec_changes": [
+    [
+     169,
+     6,
+     7,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    134,
+    169
+   ],
+   "meas_changes": [
+    [
+     169,
+     6,
+     7,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     169,
+     6,
+     7,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    162
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     169,
+     169,
+     6,
+     7
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c073": {
+   "category": "hatchback",
+   "spec_frames": [
+    143,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    143,
+    291
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.4200000000000017,
+    223
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c074": {
+   "category": "hatchback",
+   "spec_frames": [
+    151,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    151,
+    370
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    367
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c075": {
+   "category": "truck",
+   "spec_frames": [
+    151,
+    200
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    151,
+    200
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    198
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c076": {
+   "category": "truck",
+   "spec_frames": [
+    151,
+    211
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    151,
+    211
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    207
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c077": {
+   "category": "hatchback",
+   "spec_frames": [
+    165,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     367,
+     1,
+     2
+    ]
+   ],
+   "spec_changes": [
+    [
+     367,
+     1,
+     2,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     359,
+     378,
+     "line 1 (1|2)",
+     -49.8
+    ]
+   ],
+   "meas_frames": [
+    165,
+    399
+   ],
+   "meas_changes": [
+    [
+     367,
+     1,
+     2,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     367,
+     1,
+     2,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    398
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     367,
+     367,
+     1,
+     2
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c078": {
+   "category": "hatchback",
+   "spec_frames": [
+    171,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [
+    [
+     175,
+     189,
+     "line 1 (1|2)",
+     -646.5
+    ]
+   ],
+   "meas_frames": [
+    171,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    397
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c080": {
+   "category": "hatchback",
+   "spec_frames": [
+    175,
+    221
+   ],
+   "spec_changes_raw": [
+    [
+     176,
+     3,
+     4
+    ],
+    [
+     213,
+     4,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     176,
+     3,
+     4,
+     0
+    ],
+    [
+     213,
+     4,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    175,
+    221
+   ],
+   "meas_changes": [
+    [
+     176,
+     3,
+     4,
+     0
+    ],
+    [
+     213,
+     4,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     176,
+     3,
+     4,
+     0
+    ],
+    [
+     213,
+     4,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    218
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     176,
+     176,
+     3,
+     4
+    ],
+    [
+     213,
+     213,
+     4,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c081": {
+   "category": "van",
+   "spec_frames": [
+    178,
+    236
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    178,
+    236
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    235
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c082": {
+   "category": "van",
+   "spec_frames": [
+    182,
+    395
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    182,
+    395
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    392
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c083": {
+   "category": "hatchback",
+   "spec_frames": [
+    187,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     191,
+     3,
+     4
+    ],
+    [
+     220,
+     4,
+     5
+    ],
+    [
+     306,
+     5,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     191,
+     3,
+     4,
+     0
+    ],
+    [
+     220,
+     4,
+     5,
+     0
+    ],
+    [
+     306,
+     5,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     213,
+     235,
+     "line 4 (4|5)",
+     -391.1
+    ]
+   ],
+   "meas_frames": [
+    187,
+    392
+   ],
+   "meas_changes": [
+    [
+     189,
+     3,
+     4,
+     0
+    ],
+    [
+     220,
+     4,
+     5,
+     0
+    ],
+    [
+     306,
+     5,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     189,
+     3,
+     4,
+     0
+    ],
+    [
+     220,
+     4,
+     5,
+     0
+    ],
+    [
+     306,
+     5,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [
+    189,
+    190
+   ],
+   "max_lat_dev": [
+    0.41999999999999993,
+    188
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {
+    "189": "interpolated",
+    "190": "interpolated"
+   },
+   "matched": [
+    [
+     189,
+     191,
+     3,
+     4
+    ],
+    [
+     220,
+     220,
+     4,
+     5
+    ],
+    [
+     306,
+     306,
+     5,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [
+    [
+     189,
+     191,
+     3,
+     4
+    ]
+   ],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c084": {
+   "category": "sedan",
+   "spec_frames": [
+    190,
+    231
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    190,
+    231
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    228
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c086": {
+   "category": "hatchback",
+   "spec_frames": [
+    198,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     207,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     207,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     198,
+     225,
+     "line 2 (2|3)",
+     -89.2
+    ]
+   ],
+   "meas_frames": [
+    198,
+    262
+   ],
+   "meas_changes": [
+    [
+     207,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     207,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    260
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     207,
+     207,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c087": {
+   "category": "hatchback",
+   "spec_frames": [
+    198,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     299,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     299,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     291,
+     305,
+     "line 2 (2|3)",
+     -135.7
+    ]
+   ],
+   "meas_frames": [
+    198,
+    394
+   ],
+   "meas_changes": [
+    [
+     299,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     299,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    392
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     299,
+     299,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c088": {
+   "category": "hatchback",
+   "spec_frames": [
+    199,
+    244
+   ],
+   "spec_changes_raw": [
+    [
+     204,
+     5,
+     4
+    ]
+   ],
+   "spec_changes": [
+    [
+     204,
+     5,
+     4,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    199,
+    244
+   ],
+   "meas_changes": [
+    [
+     204,
+     5,
+     4,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     204,
+     5,
+     4,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.020000000000003126,
+    222
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     204,
+     204,
+     5,
+     4
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c089": {
+   "category": "truck",
+   "spec_frames": [
+    201,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    201,
+    207
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    207
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c090": {
+   "category": "hatchback",
+   "spec_frames": [
+    201,
+    235
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    201,
+    235
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.360000000000003,
+    235
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c091": {
+   "category": "van",
+   "spec_frames": [
+    201,
+    348
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    201,
+    348
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    348
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c092": {
+   "category": "hatchback",
+   "spec_frames": [
+    201,
+    226
+   ],
+   "spec_changes_raw": [
+    [
+     202,
+     6,
+     7
+    ]
+   ],
+   "spec_changes": [
+    [
+     202,
+     6,
+     7,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    201,
+    226
+   ],
+   "meas_changes": [
+    [
+     202,
+     6,
+     7,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     202,
+     6,
+     7,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    221
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     202,
+     202,
+     6,
+     7
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c094": {
+   "category": "truck",
+   "spec_frames": [
+    202,
+    274
+   ],
+   "spec_changes_raw": [
+    [
+     268,
+     6,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     268,
+     6,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     261,
+     273,
+     "line 5 (5|6)",
+     -243.0
+    ]
+   ],
+   "meas_frames": [
+    202,
+    274
+   ],
+   "meas_changes": [
+    [
+     268,
+     6,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     268,
+     6,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    271
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     268,
+     268,
+     6,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c095": {
+   "category": "van",
+   "spec_frames": [
+    202,
+    315
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    202,
+    315
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    315
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c096": {
+   "category": "truck",
+   "spec_frames": [
+    202,
+    228
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    202,
+    228
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    219
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c097": {
+   "category": "hatchback",
+   "spec_frames": [
+    203,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    203,
+    289
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    286
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c099": {
+   "category": "sedan",
+   "spec_frames": [
+    217,
+    246
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    217,
+    246
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    246
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c101": {
+   "category": "sedan",
+   "spec_frames": [
+    218,
+    231
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    218,
+    231
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    230
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c103": {
+   "category": "hatchback",
+   "spec_frames": [
+    221,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     247,
+     4,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     247,
+     4,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     338,
+     360,
+     "line 5 (5|6)",
+     -163.6
+    ]
+   ],
+   "meas_frames": [
+    221,
+    399
+   ],
+   "meas_changes": [
+    [
+     247,
+     4,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     247,
+     4,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.6599999999999984,
+    222
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     247,
+     247,
+     4,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c104": {
+   "category": "hatchback",
+   "spec_frames": [
+    228,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    228,
+    238
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    238
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c105": {
+   "category": "hatchback",
+   "spec_frames": [
+    229,
+    237
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    229,
+    237
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    237
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c106": {
+   "category": "truck",
+   "spec_frames": [
+    231,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    231,
+    253
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    249
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c107": {
+   "category": "sedan",
+   "spec_frames": [
+    233,
+    263
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    233,
+    263
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    260
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c108": {
+   "category": "van",
+   "spec_frames": [
+    236,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    236,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    397
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c109": {
+   "category": "hatchback",
+   "spec_frames": [
+    238,
+    264
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    238,
+    264
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    260
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c110": {
+   "category": "hatchback",
+   "spec_frames": [
+    245,
+    261
+   ],
+   "spec_changes_raw": [
+    [
+     250,
+     2,
+     1
+    ]
+   ],
+   "spec_changes": [
+    [
+     250,
+     2,
+     1,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     246,
+     261,
+     "line 1 (1|2)",
+     -266.0
+    ]
+   ],
+   "meas_frames": [
+    245,
+    261
+   ],
+   "meas_changes": [
+    [
+     250,
+     2,
+     1,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     250,
+     2,
+     1,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    246
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     250,
+     250,
+     2,
+     1
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c113": {
+   "category": "truck",
+   "spec_frames": [
+    251,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    251,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    396
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c115": {
+   "category": "truck",
+   "spec_frames": [
+    255,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    255,
+    260
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    0.0,
+    260
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c116": {
+   "category": "truck",
+   "spec_frames": [
+    258,
+    276
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [
+    [
+     258,
+     276,
+     "line 4 (4|5)",
+     -618.5
+    ]
+   ],
+   "meas_frames": [
+    258,
+    276
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    271
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c118": {
+   "category": "sedan",
+   "spec_frames": [
+    262,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     264,
+     1,
+     2
+    ],
+    [
+     286,
+     2,
+     1
+    ]
+   ],
+   "spec_changes": [
+    [
+     264,
+     1,
+     2,
+     0
+    ],
+    [
+     286,
+     2,
+     1,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     282,
+     399,
+     "line 1 (1|2)",
+     87.9
+    ]
+   ],
+   "meas_frames": [
+    262,
+    286
+   ],
+   "meas_changes": [
+    [
+     264,
+     1,
+     2,
+     0
+    ],
+    [
+     286,
+     2,
+     1,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     264,
+     1,
+     2,
+     0
+    ],
+    [
+     286,
+     2,
+     1,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    282
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     264,
+     264,
+     1,
+     2
+    ],
+    [
+     286,
+     286,
+     2,
+     1
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c120": {
+   "category": "sedan",
+   "spec_frames": [
+    264,
+    300
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    264,
+    300
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    294
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c122": {
+   "category": "hatchback",
+   "spec_frames": [
+    267,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    267,
+    272
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    271
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c123": {
+   "category": "truck",
+   "spec_frames": [
+    274,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     279,
+     7,
+     6
+    ],
+    [
+     296,
+     6,
+     5
+    ],
+    [
+     345,
+     5,
+     4
+    ]
+   ],
+   "spec_changes": [
+    [
+     279,
+     7,
+     6,
+     0
+    ],
+    [
+     296,
+     6,
+     5,
+     0
+    ],
+    [
+     345,
+     5,
+     4,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    274,
+    399
+   ],
+   "meas_changes": [
+    [
+     279,
+     7,
+     6,
+     0
+    ],
+    [
+     296,
+     6,
+     5,
+     0
+    ],
+    [
+     345,
+     5,
+     4,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     279,
+     7,
+     6,
+     0
+    ],
+    [
+     296,
+     6,
+     5,
+     0
+    ],
+    [
+     345,
+     5,
+     4,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    393
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     279,
+     279,
+     7,
+     6
+    ],
+    [
+     296,
+     296,
+     6,
+     5
+    ],
+    [
+     345,
+     345,
+     5,
+     4
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c124": {
+   "category": "hatchback",
+   "spec_frames": [
+    275,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     309,
+     3,
+     2
+    ],
+    [
+     346,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     309,
+     3,
+     2,
+     0
+    ],
+    [
+     346,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     275,
+     399,
+     "line 2 (2|3)",
+     95.4
+    ]
+   ],
+   "meas_frames": [
+    275,
+    282
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    280
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [
+    [
+     309,
+     3,
+     2,
+     0
+    ],
+    [
+     346,
+     2,
+     3,
+     0
+    ]
+   ],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c125": {
+   "category": "sedan",
+   "spec_frames": [
+    280,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    280,
+    284
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    282
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c126": {
+   "category": "truck",
+   "spec_frames": [
+    282,
+    299
+   ],
+   "spec_changes_raw": [
+    [
+     283,
+     4,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     283,
+     4,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    282,
+    299
+   ],
+   "meas_changes": [
+    [
+     283,
+     4,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     283,
+     4,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    299
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     283,
+     283,
+     4,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c129": {
+   "category": "van",
+   "spec_frames": [
+    301,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    301,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    399
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c130": {
+   "category": "truck",
+   "spec_frames": [
+    301,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    301,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    384
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c131": {
+   "category": "hatchback",
+   "spec_frames": [
+    301,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    301,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    399
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c132": {
+   "category": "hatchback",
+   "spec_frames": [
+    301,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    301,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    397
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c133": {
+   "category": "van",
+   "spec_frames": [
+    301,
+    398
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    301,
+    398
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    398
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c134": {
+   "category": "hatchback",
+   "spec_frames": [
+    301,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [
+    [
+     324,
+     341,
+     "line 2 (2|3)",
+     -601.2
+    ]
+   ],
+   "meas_frames": [
+    301,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    398
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c135": {
+   "category": "truck",
+   "spec_frames": [
+    305,
+    326
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    305,
+    326
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    325
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c136": {
+   "category": "van",
+   "spec_frames": [
+    307,
+    313
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    307,
+    313
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    313
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c139": {
+   "category": "truck",
+   "spec_frames": [
+    330,
+    334
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    330,
+    334
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    331
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c140": {
+   "category": "sedan",
+   "spec_frames": [
+    332,
+    347
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    332,
+    347
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    347
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c143": {
+   "category": "truck",
+   "spec_frames": [
+    339,
+    393
+   ],
+   "spec_changes_raw": [
+    [
+     349,
+     5,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     349,
+     5,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     339,
+     359,
+     "line 5 (5|6)",
+     -524.4
+    ]
+   ],
+   "meas_frames": [
+    339,
+    393
+   ],
+   "meas_changes": [
+    [
+     349,
+     5,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     349,
+     5,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    387
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     349,
+     349,
+     5,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c145": {
+   "category": "hatchback",
+   "spec_frames": [
+    351,
+    394
+   ],
+   "spec_changes_raw": [
+    [
+     389,
+     4,
+     5
+    ]
+   ],
+   "spec_changes": [
+    [
+     389,
+     4,
+     5,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    351,
+    394
+   ],
+   "meas_changes": [
+    [
+     389,
+     4,
+     5,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     389,
+     4,
+     5,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    392
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     389,
+     389,
+     4,
+     5
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c146": {
+   "category": "hatchback",
+   "spec_frames": [
+    351,
+    397
+   ],
+   "spec_changes_raw": [
+    [
+     353,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     353,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     351,
+     363,
+     "line 2 (2|3)",
+     -621.4
+    ]
+   ],
+   "meas_frames": [
+    351,
+    397
+   ],
+   "meas_changes": [
+    [
+     353,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     353,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    397
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     353,
+     353,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c147": {
+   "category": "truck",
+   "spec_frames": [
+    351,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    351,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    399
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c148": {
+   "category": "hatchback",
+   "spec_frames": [
+    353,
+    379
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    353,
+    379
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    378
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c149": {
+   "category": "hatchback",
+   "spec_frames": [
+    354,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    354,
+    362
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    362
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c152": {
+   "category": "hatchback",
+   "spec_frames": [
+    358,
+    394
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    358,
+    394
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    393
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c153": {
+   "category": "truck",
+   "spec_frames": [
+    361,
+    398
+   ],
+   "spec_changes_raw": [
+    [
+     373,
+     5,
+     6
+    ]
+   ],
+   "spec_changes": [
+    [
+     373,
+     5,
+     6,
+     0
+    ]
+   ],
+   "line_sits": [],
+   "meas_frames": [
+    361,
+    398
+   ],
+   "meas_changes": [
+    [
+     373,
+     5,
+     6,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     373,
+     5,
+     6,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    392
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [
+    [
+     373,
+     373,
+     5,
+     6
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c154": {
+   "category": "hatchback",
+   "spec_frames": [
+    363,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     373,
+     3,
+     4
+    ],
+    [
+     390,
+     4,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     373,
+     3,
+     4,
+     0
+    ],
+    [
+     390,
+     4,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     363,
+     399,
+     "line 3 (3|4)",
+     -500.0
+    ]
+   ],
+   "meas_frames": [
+    363,
+    399
+   ],
+   "meas_changes": [
+    [
+     373,
+     3,
+     4,
+     0
+    ],
+    [
+     390,
+     4,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     372,
+     3,
+     4,
+     0
+    ],
+    [
+     390,
+     4,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    399
+   ],
+   "field_vs_y_mismatch": 1,
+   "src_at": {},
+   "matched": [
+    [
+     373,
+     373,
+     3,
+     4
+    ],
+    [
+     390,
+     390,
+     4,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c155": {
+   "category": "hatchback",
+   "spec_frames": [
+    364,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [
+    [
+     366,
+     377,
+     "line 5 (5|6)",
+     -328.6
+    ]
+   ],
+   "meas_frames": [
+    364,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    399
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c156": {
+   "category": "van",
+   "spec_frames": [
+    368,
+    398
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    368,
+    398
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    398
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c157": {
+   "category": "hatchback",
+   "spec_frames": [
+    372,
+    399
+   ],
+   "spec_changes_raw": [
+    [
+     397,
+     2,
+     3
+    ]
+   ],
+   "spec_changes": [
+    [
+     397,
+     2,
+     3,
+     0
+    ]
+   ],
+   "line_sits": [
+    [
+     386,
+     399,
+     "line 2 (2|3)",
+     -475.8
+    ]
+   ],
+   "meas_frames": [
+    372,
+    399
+   ],
+   "meas_changes": [
+    [
+     390,
+     2,
+     3,
+     0
+    ]
+   ],
+   "meas_field_changes": [
+    [
+     390,
+     2,
+     3,
+     0
+    ]
+   ],
+   "lane_mismatch_frames": [
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396
+   ],
+   "max_lat_dev": [
+    0.5199999999999996,
+    396
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {
+    "390": "measured",
+    "391": "measured",
+    "392": "measured"
+   },
+   "matched": [
+    [
+     390,
+     397,
+     2,
+     3
+    ]
+   ],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [
+    [
+     390,
+     397,
+     2,
+     3
+    ]
+   ],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c158": {
+   "category": "hatchback",
+   "spec_frames": [
+    372,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    372,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    396
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c160": {
+   "category": "van",
+   "spec_frames": [
+    374,
+    398
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    374,
+    398
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    398
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c161": {
+   "category": "van",
+   "spec_frames": [
+    376,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    376,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    398
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c162": {
+   "category": "hatchback",
+   "spec_frames": [
+    379,
+    392
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    379,
+    392
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    8.881784197001252e-16,
+    391
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c164": {
+   "category": "hatchback",
+   "spec_frames": [
+    384,
+    397
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    384,
+    397
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    1.7763568394002505e-15,
+    397
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  },
+  "c166": {
+   "category": "hatchback",
+   "spec_frames": [
+    388,
+    399
+   ],
+   "spec_changes_raw": [],
+   "spec_changes": [],
+   "line_sits": [],
+   "meas_frames": [
+    388,
+    399
+   ],
+   "meas_changes": [],
+   "meas_field_changes": [],
+   "lane_mismatch_frames": [],
+   "max_lat_dev": [
+    3.552713678800501e-15,
+    399
+   ],
+   "field_vs_y_mismatch": 0,
+   "src_at": {},
+   "matched": [],
+   "missing": [],
+   "invented": [],
+   "changes_outside_measured_span": [],
+   "shifted": [],
+   "flicker": [
+    0,
+    0
+   ]
+  }
+ },
+ "dropped_measured_ids": [
+  "c025",
+  "c031",
+  "c037",
+  "c070",
+  "c093",
+  "c114",
+  "c117",
+  "c142"
+ ],
+ "dropped_with_changes": {
+  "c025": {
+   "frames": [
+    3,
+    13
+   ],
+   "changes": [
+    [
+     10,
+     2,
+     1,
+     0
+    ]
+   ]
+  }
+ },
+ "yellow_lane_sequence": [
+  {
+   "from_f": 151,
+   "to_f": 254,
+   "lane": 1,
+   "note": "Centre-based lane; see per-frame lanes_occupied for footprint straddling."
+  },
+  {
+   "from_f": 255,
+   "to_f": 279,
+   "lane": 2,
+   "note": "Centre-based lane; see per-frame lanes_occupied for footprint straddling."
+  },
+  {
+   "from_f": 280,
+   "to_f": 399,
+   "lane": 1,
+   "note": "Centre-based lane; see per-frame lanes_occupied for footprint straddling."
+  }
+ ]
+}

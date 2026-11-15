@@ -1,152 +1,192 @@
 {
   "passed": true,
-  "spec": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\electron\\demo-incident\\incident-spec.json",
-  "vehicles": 78,
-  "impactTime": 22.3,
-  "crashEnd": 24,
+  "spec": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\electron\\demo-incident\\incident-spec.json",
+  "vehicles": 133,
+  "impactTime": 23.28,
+  "crashEnd": 31.92,
   "crashVehicles": [
     "yellow-car",
     "white-van"
   ],
-  "startTime": 18.3,
+  "startTime": 19.28,
   "crashPoint": [
-    12.514,
+    12.805,
     0,
-    2.4135
+    3.952
   ],
   "removed": [],
   "notes": [
     "Positions are interpolated between reported observations and held outside them. Occlusions and uncalibrated footage limit accuracy; contact and forces are not independently measured."
   ],
   "kinematics": {
-    "frames": 46593,
-    "fullFrames": 140244,
-    "maxSpeed_mps": 30.7958
+    "frames": 42931,
+    "fullFrames": 127813,
+    "maxSpeed_mps": 61.6892
   },
   "laneSpeeds": {
-    "with z~3.6": {
-      "vehicles": 12,
-      "meanSpeedBefore_mps": 11.99,
-      "meanSpeedAfter_mps": 4.47
+    "with z~9.1": {
+      "vehicles": 9,
+      "meanSpeedBefore_mps": 19.59,
+      "meanSpeedAfter_mps": 13.02
     },
-    "with z~7.3": {
-      "vehicles": 15,
-      "meanSpeedBefore_mps": 9.71,
-      "meanSpeedAfter_mps": 7.48
+    "with z~5.5": {
+      "vehicles": 9,
+      "meanSpeedBefore_mps": 16.08,
+      "meanSpeedAfter_mps": 7.27
     },
-    "against z~-12.8": {
-      "vehicles": 2,
-      "meanSpeedBefore_mps": 22.76,
-      "meanSpeedAfter_mps": 22.67
-    },
-    "against z~-9.1": {
-      "vehicles": 2,
-      "meanSpeedBefore_mps": 24.37,
-      "meanSpeedAfter_mps": 25.49
-    },
-    "against z~-5.5": {
+    "with z~12.8": {
       "vehicles": 4,
-      "meanSpeedBefore_mps": 29.74,
-      "meanSpeedAfter_mps": 29.06
+      "meanSpeedBefore_mps": 15.26,
+      "meanSpeedAfter_mps": 10.64
     },
-    "with z~0.0": {
+    "with z~14.6": {
       "vehicles": 2,
       "meanSpeedBefore_mps": null,
-      "meanSpeedAfter_mps": 4.42
+      "meanSpeedAfter_mps": 15.04
+    },
+    "with z~20.1": {
+      "vehicles": 5,
+      "meanSpeedBefore_mps": 16.13,
+      "meanSpeedAfter_mps": 15.35
+    },
+    "with z~1.8": {
+      "vehicles": 5,
+      "meanSpeedBefore_mps": 9.77,
+      "meanSpeedAfter_mps": 1.88
+    },
+    "with z~3.6": {
+      "vehicles": 4,
+      "meanSpeedBefore_mps": 11.78,
+      "meanSpeedAfter_mps": 9.71
+    },
+    "against z~9.1": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 8.3,
+      "meanSpeedAfter_mps": null
+    },
+    "with z~18.3": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 19.03,
+      "meanSpeedAfter_mps": 19.03
+    },
+    "with z~7.3": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 20.77,
+      "meanSpeedAfter_mps": 20.69
+    },
+    "with z~10.9": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 12.47,
+      "meanSpeedAfter_mps": 8.76
+    },
+    "with z~16.4": {
+      "vehicles": 2,
+      "meanSpeedBefore_mps": 21.53,
+      "meanSpeedAfter_mps": 8.92
+    },
+    "against z~1.8": {
+      "vehicles": 1,
+      "meanSpeedBefore_mps": null,
+      "meanSpeedAfter_mps": 0.12
+    },
+    "against z~5.5": {
+      "vehicles": 1,
+      "meanSpeedBefore_mps": null,
+      "meanSpeedAfter_mps": 0.79
     }
   },
   "crashMotion": {
     "yellow-car": {
-      "visibleFrom": 10.733333,
-      "visibleTo": 59.9,
-      "maxSpeedBeforeImpact_mps": 13.33,
-      "speedAtImpact_mps": 13.07,
-      "speedAt24_mps": 0
+      "visibleFrom": 12.1,
+      "visibleTo": 31.9,
+      "maxSpeedBeforeImpact_mps": 61.69,
+      "speedAtImpact_mps": 44.21,
+      "speedAt24_mps": 7.48
     },
     "white-van": {
       "visibleFrom": 0,
-      "visibleTo": 59.9,
-      "maxSpeedBeforeImpact_mps": 0,
-      "speedAtImpact_mps": 0,
-      "speedAt24_mps": 0.04
+      "visibleTo": 31.9,
+      "maxSpeedBeforeImpact_mps": 0.09,
+      "speedAtImpact_mps": 0.18,
+      "speedAt24_mps": 7.66
     }
   },
   "times": [
     {
       "t": 0,
-      "visible": 21,
-      "hidden": 57,
+      "visible": 25,
+      "hidden": 108,
       "finite": true,
       "crash": {
         "yellow-car": {
-          "x": -140,
-          "z": 6.67,
-          "yawDeg": 90,
+          "x": -456.46,
+          "z": 6.25,
+          "yawDeg": 90.1,
           "hidden": true
         },
         "white-van": {
-          "x": 15,
-          "z": 2.92,
-          "yawDeg": 90,
+          "x": 14.5,
+          "z": 5.57,
+          "yawDeg": 89.5,
           "hidden": false
         }
       }
     },
     {
       "t": 15,
-      "visible": 24,
-      "hidden": 54,
+      "visible": 42,
+      "hidden": 91,
       "finite": true,
       "crash": {
         "yellow-car": {
-          "x": -84.36,
-          "z": 6.67,
-          "yawDeg": 90,
+          "x": -307.38,
+          "z": 6.12,
+          "yawDeg": 90.2,
           "hidden": false
         },
         "white-van": {
-          "x": 15,
-          "z": 2.92,
-          "yawDeg": 90,
+          "x": 14.5,
+          "z": 5.57,
+          "yawDeg": 89.5,
           "hidden": false
         }
       }
     },
     {
       "t": 21.5,
-      "visible": 24,
-      "hidden": 54,
+      "visible": 52,
+      "hidden": 81,
       "finite": true,
       "crash": {
         "yellow-car": {
-          "x": -0.01,
-          "z": 5.02,
-          "yawDeg": 107.8,
+          "x": -29.56,
+          "z": 10.94,
+          "yawDeg": 106.6,
           "hidden": false
         },
         "white-van": {
-          "x": 15,
-          "z": 2.92,
-          "yawDeg": 90,
+          "x": 14.5,
+          "z": 5.57,
+          "yawDeg": 89.5,
           "hidden": false
         }
       }
     },
     {
       "t": 22.4,
-      "visible": 24,
-      "hidden": 54,
+      "visible": 53,
+      "hidden": 80,
       "finite": true,
       "crash": {
         "yellow-car": {
-          "x": 10.81,
-          "z": 1.69,
-          "yawDeg": 105.4,
+          "x": -7.54,
+          "z": 7.7,
+          "yawDeg": 170,
           "hidden": false
         },
         "white-van": {
-          "x": 15.24,
-          "z": 2.92,
+          "x": 14.5,
+          "z": 5.57,
           "yawDeg": 89.5,
           "hidden": false
         }
@@ -154,40 +194,40 @@
     },
     {
       "t": 24,
-      "visible": 27,
-      "hidden": 51,
+      "visible": 53,
+      "hidden": 80,
       "finite": true,
       "crash": {
         "yellow-car": {
-          "x": 12.55,
-          "z": 1.55,
-          "yawDeg": 77.1,
+          "x": 15.06,
+          "z": 4.28,
+          "yawDeg": 55,
           "hidden": false
         },
         "white-van": {
-          "x": 19.08,
-          "z": 2.75,
-          "yawDeg": 81.7,
+          "x": 19.81,
+          "z": 5.95,
+          "yawDeg": 84.5,
           "hidden": false
         }
       }
     },
     {
       "t": 30,
-      "visible": 27,
-      "hidden": 51,
+      "visible": 66,
+      "hidden": 67,
       "finite": true,
       "crash": {
         "yellow-car": {
-          "x": 12.55,
-          "z": 1.55,
-          "yawDeg": 77.1,
+          "x": 27.7,
+          "z": 5.16,
+          "yawDeg": 54.9,
           "hidden": false
         },
         "white-van": {
-          "x": 19.08,
-          "z": 2.75,
-          "yawDeg": 81.7,
+          "x": 32.46,
+          "z": 6.84,
+          "yawDeg": 84.4,
           "hidden": false
         }
       }
@@ -198,17 +238,17 @@
     {
       "t": 15,
       "wide": true,
-      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-overview-15.png",
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\tests\\demo-overview-15.png",
       "camera": {
         "position": [
-          -6.818490107204859,
+          -6.527490107204859,
           90,
-          48
+          59.176
         ],
         "target": [
-          12.514,
+          12.805,
           0,
-          2.4135
+          3.952
         ],
         "clamped": true
       }
@@ -216,17 +256,17 @@
     {
       "t": 15,
       "wide": false,
-      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-15.png",
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\tests\\demo-crash-15.png",
       "camera": {
         "position": [
-          -29.486,
+          -29.195,
           20,
-          28.413499999999996
+          29.951999999999998
         ],
         "target": [
-          8.514,
+          8.805,
           0,
-          2.4135
+          3.952
         ],
         "clamped": false
       }
@@ -234,17 +274,17 @@
     {
       "t": 21.5,
       "wide": false,
-      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-21_5.png",
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\tests\\demo-crash-21_5.png",
       "camera": {
         "position": [
-          -29.486,
+          -29.195,
           20,
-          28.413499999999996
+          29.951999999999998
         ],
         "target": [
-          8.514,
+          8.805,
           0,
-          2.4135
+          3.952
         ],
         "clamped": false
       }
@@ -252,17 +292,17 @@
     {
       "t": 22.4,
       "wide": false,
-      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-22_4.png",
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\tests\\demo-crash-22_4.png",
       "camera": {
         "position": [
-          -29.486,
+          -29.195,
           20,
-          28.413499999999996
+          29.951999999999998
         ],
         "target": [
-          8.514,
+          8.805,
           0,
-          2.4135
+          3.952
         ],
         "clamped": false
       }
@@ -270,17 +310,17 @@
     {
       "t": 24,
       "wide": false,
-      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-24.png",
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\tests\\demo-crash-24.png",
       "camera": {
         "position": [
-          -29.486,
+          -29.195,
           20,
-          28.413499999999996
+          29.951999999999998
         ],
         "target": [
-          8.514,
+          8.805,
           0,
-          2.4135
+          3.952
         ],
         "clamped": false
       }
@@ -288,17 +328,17 @@
     {
       "t": 30,
       "wide": false,
-      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks\\FrontEnd\\app\\tests\\demo-crash-30.png",
+      "file": "C:\\Users\\anvit\\.t3\\projects\\sunhacks-testing\\FrontEnd\\app\\tests\\demo-crash-30.png",
       "camera": {
         "position": [
-          -29.486,
+          -29.195,
           20,
-          28.413499999999996
+          29.951999999999998
         ],
         "target": [
-          8.514,
+          8.805,
           0,
-          2.4135
+          3.952
         ],
         "clamped": false
       }

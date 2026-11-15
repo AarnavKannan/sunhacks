@@ -4,9 +4,9 @@ import json, math, os, random
 here = os.path.dirname(os.path.abspath(__file__))
 random.seed(3)
 FPS = 12.5
-cal = json.load(open(os.path.join(here, "..", "data", "br_camera.json")))
-json.dump({"synthetic": True, "lines_Y": cal["lines_Y"]}, open(os.path.join(here, "br_camera.json"), "w"), indent=1)
-L = cal["lines_Y"]
+cal = json.load(open(os.path.join(here, "..", "data", "calib_joint.json")))
+json.dump({"lines": cal["lines"]}, open(os.path.join(here, "br_camera.json"), "w"), indent=1)
+L = cal["lines"]
 cl = sorted((v for k, v in L.items() if k.startswith("L")), reverse=True)
 rl = sorted(v for k, v in L.items() if k.startswith("R") and "barrier" not in k)
 toward = [(a + b) / 2 for a, b in zip(cl, cl[1:])][:3]
@@ -28,7 +28,7 @@ def track(i, cls, lane_y, sx, x0, f0, speed):
         hd = 0.0 if sx > 0 else 180.0
         samples.append({"f": f, "t": f / FPS, "x": round(x, 3), "y": round(lane_y + random.gauss(0, 0.05), 3), "heading_deg": hd,
                         "speed_mps": speed, "vx": sx * speed, "vy": 0.0, "ax": 0.0, "ay": 0.0, "yaw_rate_dps": 0.0,
-                        "fx_n": 0.0, "fy_n": 0.0, "cause": "coasting", "sigma_m": 0.4, "src": "measured"})
+                        "fx_n": 0.0, "fy_n": 0.0, "cause": "coasting", "sigma_m": 0.4, "src": "synthetic"})
         x += sx * speed / FPS
     paint, hexv = random.choice(PAINTS)
     return {"id": f"t{i:03d}", "class": cls, "paint": paint, "paint_hex": hexv, "crash": False,
@@ -62,7 +62,7 @@ for f in range(400):
                 "speed_mps": abs(vx_van), "vx": vx_van, "vy": 0.0, "ax": 0.0, "ay": 0.0, "yaw_rate_dps": 0.0,
                 "fx_n": (-120000.0 if CF <= f < CF + 2 else (13000.0 if f < CF + 8 and f >= CF + 2 else 0.0)), "fy_n": 0.0,
                 "cause": "impact" if CF <= f < CF + 2 else ("braking" if f >= CF + 2 and f < CF + 8 else "coasting"),
-                "sigma_m": 0.2, "src": "measured"})
+                "sigma_m": 0.2, "src": "synthetic"})
     if f < 200:
         continue
     # yellow car: lane 2 at 25 m/s, drifting toward lane 1, hits the van's rear at f=CF
@@ -80,27 +80,12 @@ for f in range(400):
         hd = 200.0 + 30 * min(1.0, tau / 1.5)
         cause, fx = ("impact", 120000.0) if f < CF + 2 else ("sliding", 7000.0 if sp > 0 else 0.0)
     car.append({"f": f, "t": f / FPS, "x": round(x, 3), "y": round(y, 3), "heading_deg": hd, "speed_mps": sp, "vx": -sp, "vy": 0.0,
-                "ax": 0.0, "ay": 0.0, "yaw_rate_dps": 0.0, "fx_n": fx, "fy_n": 0.0, "cause": cause, "sigma_m": 0.2, "src": "measured"})
-json.dump({"synthetic": True, "tracks": tracks}, open(os.path.join(here, "tracks_world.json"), "w"))
+                "ax": 0.0, "ay": 0.0, "yaw_rate_dps": 0.0, "fx_n": fx, "fy_n": 0.0, "cause": cause, "sigma_m": 0.2, "src": "synthetic"})
+json.dump({"tracks": tracks}, open(os.path.join(here, "tracks_world.json"), "w"))
 veh = lambda cls, paint, hexv, L, W, M, s: {"class": cls, "paint": paint, "paint_hex": hexv, "crash": True, "length_m": L, "width_m": W, "mass_kg": M, "samples": s}
-json.dump({"synthetic": True, "vehicles": {"white-van": veh("van", "white", "#f2f2f0", 5.4, 2.05, 2500, van),
+json.dump({"vehicles": {"white-van": veh("van", "white", "#f2f2f0", 5.4, 2.05, 2500, van),
                         "yellow-car": veh("car", "yellow", "#e8c21a", 4.3, 1.8, 1350, car)},
-           "contacts": [{"a": "yellow-car", "b": "white-van", "kind": "vehicle-vehicle", "source": "inferred", "sigma_s": 0.08, "note": "SYNTHETIC integration contact", "frame": CF, "t": CF / FPS, "point": [62.3, toward[0] - 0.8], "normal_deg": 180.0, "impulse_ns": 9000.0,
-                       "peak_force_n": 120000.0, "duration_s": 0.12},
-                        {"a": "yellow-car", "b": "synthetic-divider", "frame": 305, "W": [60, toward[0] + 0.8], "normal_W": [0, 1],
-                         "kind": "vehicle-static", "impulse_ns": 3000, "source": "inferred", "sigma_s": 0.16,
-                         "note": "SYNTHETIC vehicle-static contact, not evidence about the real clip"}]},
+           "contact": {"frame": CF, "t": CF / FPS, "point": [62.3, toward[0] - 0.8], "normal_deg": 180.0, "impulse_ns": 9000.0,
+                       "peak_force_n": 120000.0, "duration_s": 0.12}},
           open(os.path.join(here, "crash_pair.json"), "w"))
 print("synthetic:", len(tracks), "tracks")
-
-# Deliberately synthetic geometry, independent of the measured divider file.
-json.dump({"id": "synthetic-divider", "kind": "median_divider", "label": "SYNTHETIC low median verge",
-           "footprint_W": [[55, toward[0] + 0.8], [160, toward[0] + 0.8], [160, -5], [55, -5]],
-           "height_m": 0.15, "material": "snow_covered_grass_verge", "friction": 0.35,
-           "restitution": 0.05, "stiffness_n_per_m": 300000, "source": "inferred", "sigma_m": 0.2,
-           "immovable": True, "note": "SYNTHETIC integration geometry; not a source-footage measurement",
-           "related_objects": [{"id": "synthetic-barrier", "kind": "barrier", "label": "SYNTHETIC concrete barrier",
-                                "footprint_W": [[55, -5], [320, -5], [320, -4.7], [55, -4.7]], "height_m": 0.54,
-                                "material": "concrete_barrier", "friction": 0.5, "restitution": 0.15,
-                                "stiffness_n_per_m": 5e6, "source": "inferred", "sigma_m": 0.2,
-                                "note": "SYNTHETIC integration geometry"}]}, open(os.path.join(here, "divider.json"), "w"), indent=2)

@@ -1,7 +1,6 @@
 import type {
   CameraPreset,
   CameraState,
-  ContactsReport,
   CrashForces,
   EntityMatch,
   ExportJob,
@@ -79,8 +78,6 @@ export interface SceneController {
   measureDistance(a: MeasureTarget, b: MeasureTarget, at?: TimeRef): Promise<Measurement>;
   /** Momentum change, impulse and impact force for each vehicle in the crash. Throws when there's no crash. */
   crashForces(): Promise<CrashForces>;
-  /** Every contact (vehicle-vehicle and vehicle-static), the fixed objects (median divider) and the frame grid. */
-  queryContacts(): Promise<ContactsReport>;
 
   // Annotations and UI
   addMarker(label: string, target: { point: Vec3 } | { entity_id: string }): Promise<Marker>;

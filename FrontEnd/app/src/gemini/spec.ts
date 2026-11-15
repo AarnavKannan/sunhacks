@@ -43,51 +43,7 @@ export type ObjectCategory = (typeof OBJECT_CATEGORIES)[number];
 export const FORCE_CAUSES = ["braking", "accelerating", "steering", "impact", "sliding", "rolling_resistance", "drag", "coasting", "other"] as const;
 export type ForceCause = (typeof FORCE_CAUSES)[number];
 
-/**
- * Provenance of a keyframe (measured reconstructions). Absent = an ordinary measured/model sample.
- * "measured": observed in the source frame. "interpolated": between observed samples (detection gap).
- * "occluded-rest": object hidden but known to be at rest (e.g. the wreck after its annotation is lost).
- * "out-of-view-extrapolated": object has left the camera; continued from its last measured motion.
- * "edge-extrapolated": background track extended along its own lane from its first/last observed
- * velocity to the drawn road ends, so it does not pop in/out mid-road. Never a lane change.
- */
-export const SAMPLE_SOURCES = ["measured", "interpolated", "occluded-rest", "out-of-view-extrapolated", "edge-extrapolated"] as const;
-export type SampleSource = (typeof SAMPLE_SOURCES)[number];
-
-export type Keyframe = {
-  t_s: number;
-  x_m: number;
-  y_m: number;
-  heading_deg: number;
-  speed_mps: number;
-  /** Measured reconstructions only. */
-  src?: SampleSource;
-  /** 1-sigma position uncertainty, metres (measured reconstructions only). */
-  sigma_m?: number;
-};
-
-/**
- * A fixed scene object that vehicles can hit (e.g. the bushy median divider). Plan frame, metres.
- * Immovable: zero velocity/acceleration at every time; contacts with it act on the vehicle only.
- */
-export type StaticObject = {
-  id: string;
-  kind: "median_divider" | "barrier" | "other";
-  label: string;
-  /** Ground footprint polygon, plan frame (x, y) metres, counter-clockwise, not closed. */
-  footprint_m: [number, number][];
-  height_m: number;
-  /** Rendering/material description, e.g. "hedge_over_steel_barrier". */
-  material: string;
-  /** Contact parameters for vehicle-static contact. */
-  friction: number;
-  restitution: number;
-  stiffness_n_per_m: number;
-  immovable: true;
-  source: "measured" | "inferred";
-  sigma_m: number;
-  note: string;
-};
+export type Keyframe = { t_s: number; x_m: number; y_m: number; heading_deg: number; speed_mps: number };
 
 /** A force Gemini read off the footage, plan frame, newtons. */
 export type ForceSample = { t_s: number; fx_n: number; fy_n: number; cause: ForceCause; note: string };
@@ -104,7 +60,7 @@ export type SpecObject = {
   involvement: "crash" | "background";
   length_m: number;
   width_m: number;
-  /** Optional measured cuboid height; absent for older/model-estimated scenes. */
+  /** Measured body height (verified reconstructions only); the renderer uses its class default otherwise. */
   height_m?: number;
   mass_kg: number;
   visible_from_s: number;
@@ -136,23 +92,39 @@ export type LaneHint = {
 };
 
 export type Contact = {
-  /** Object ids; `b` may be a StaticObject id (then kind = "vehicle-static"). */
+  /** Always a vehicle. */
   a: string;
+  /** A vehicle, or (kind "vehicle-static") a static object's id. */
   b: string;
   t_s: number;
   x_m: number;
   y_m: number;
   /** Normal from a to b, plan degrees. */
   normal_deg: number;
-  /** Measured reconstructions only (all optional). */
   kind?: "vehicle-vehicle" | "vehicle-static";
-  /** Source video frame index of first contact (t_s = frame / fps). */
+  /** Source video frame of the contact (verified reconstructions). */
   frame?: number;
-  /** Impulse magnitude, N·s, along the normal (on b from a; static objects do not move). */
   impulse_ns?: number;
   source?: "measured" | "inferred";
   sigma_s?: number;
   note?: string;
+};
+
+/** Fixed scenery a vehicle can hit (median verge, barrier, hedge). Plan frame, counter-clockwise footprint. */
+export type StaticObject = {
+  id: string;
+  kind: "median_divider" | "barrier" | "other";
+  label: string;
+  footprint_m: [number, number][];
+  height_m: number;
+  material: string;
+  friction: number;
+  restitution: number;
+  stiffness_n_per_m: number;
+  immovable: true;
+  source: "measured" | "inferred";
+  sigma_m: number;
+  note: string;
 };
 
 export type IncidentSpec = {
@@ -193,7 +165,7 @@ export type IncidentSpec = {
   wind: { toward_deg: number; speed_mps: number };
   crash: { start_s: number; end_s: number; kind: string; description: string; participants: string[]; contacts: Contact[] } | null;
   objects: SpecObject[];
-  /** Fixed collision objects (measured reconstructions only), e.g. the median divider. */
+  /** Verified reconstructions only: immovable scenery the crash vehicles can touch. */
   static_objects?: StaticObject[];
   /** Anything Gemini wasn't sure about, shown to the user and stored for audit. */
   caveats: string[];
@@ -464,8 +436,6 @@ function keyframes(raw: unknown, duration: number): Keyframe[] {
       y_m: clamp(y, -2000, 2000),
       heading_deg: finite(k.heading_deg, 0),
       speed_mps: clamp(finite(k.speed_mps, 0), 0, MAX_SPEED),
-      ...(SAMPLE_SOURCES.includes(k.src as SampleSource) ? { src: k.src as SampleSource } : {}),
-      ...(typeof k.sigma_m === "number" && Number.isFinite(k.sigma_m) && k.sigma_m >= 0 ? { sigma_m: k.sigma_m } : {}),
     });
   }
   out.sort((a, b) => a.t_s - b.t_s);
@@ -488,25 +458,91 @@ function forces(raw: unknown, duration: number): ForceSample[] {
     .sort((a, b) => a.t_s - b.t_s);
 }
 
+/** Painted line offsets from the median: finite, >= 0, strictly increasing, 2..16 values; otherwise dropped. */
+function laneLines(raw: unknown): number[] | undefined {
+  if (!Array.isArray(raw) || raw.length < 2 || raw.length > 16) return undefined;
+  if (!raw.every((v, i) => typeof v === "number" && Number.isFinite(v) && v >= 0 && (i === 0 || v > raw[i - 1]))) return undefined;
+  return raw.slice() as number[];
+}
+
+/** Twice the signed area of a plan polygon: positive when counter-clockwise. */
+const signedArea2 = (pts: [number, number][]) =>
+  pts.reduce((sum, [x, y], i) => {
+    const [nx, ny] = pts[(i + 1) % pts.length];
+    return sum + x * ny - nx * y;
+  }, 0);
+
+function staticObjects(raw: unknown, used: Set<string>): StaticObject[] {
+  if (!Array.isArray(raw)) return [];
+  const out: StaticObject[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const o = item as Record<string, unknown>;
+    const pts = (Array.isArray(o.footprint_m) ? o.footprint_m : [])
+      .filter((p): p is [number, number] => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1]))
+      .map(([x, y]) => [clamp(x, -5000, 5000), clamp(y, -5000, 5000)] as [number, number]);
+    if (pts.length < 3) continue;
+    const area2 = signedArea2(pts);
+    if (Math.abs(area2) < 1e-6) continue;
+    if (area2 < 0) pts.reverse();
+    // Ids share one namespace with the vehicles: a contact's b must name exactly one thing.
+    const id = text(o.id);
+    if (!id || used.has(id)) continue;
+    used.add(id);
+    out.push({
+      id,
+      kind: pick(o.kind, ["median_divider", "barrier", "other"] as const, "other"),
+      label: text(o.label, id),
+      footprint_m: pts,
+      height_m: clamp(finite(o.height_m, 0.5), 0.01, 10),
+      material: text(o.material, "concrete"),
+      friction: clamp(finite(o.friction, 0.5), 0, 2),
+      restitution: clamp(finite(o.restitution, 0.1), 0, 1),
+      stiffness_n_per_m: clamp(finite(o.stiffness_n_per_m, 1e6), 1e3, 1e9),
+      immovable: true,
+      source: o.source === "measured" ? "measured" : "inferred",
+      sigma_m: clamp(finite(o.sigma_m, 0.3), 0, 50),
+      note: text(o.note),
+    });
+  }
+  return out;
+}
+
+/** Contacts from pass 1 or pass 2. `a` must be a vehicle; `b` a vehicle or a static object. */
+function contacts(raw: unknown, resolveId: (raw: unknown) => string | null, statics: Set<string>, duration: number, fallbackT: number): Contact[] {
+  const out: Contact[] = [];
+  for (const rawContact of Array.isArray(raw) ? raw : []) {
+    if (!rawContact || typeof rawContact !== "object") continue;
+    const r = rawContact as Record<string, unknown>;
+    const a = resolveId(r.a);
+    const staticB = statics.has(text(r.b)) ? text(r.b) : null;
+    const b = staticB ?? resolveId(r.b);
+    if (!a || !b || a === b) continue;
+    const contact: Contact = {
+      a,
+      b,
+      t_s: clamp(finite(r.t_s, fallbackT), 0, duration),
+      x_m: finite(r.x_m, 0),
+      y_m: finite(r.y_m, 0),
+      normal_deg: finite(r.normal_deg, Number.NaN),
+      kind: staticB ? "vehicle-static" : "vehicle-vehicle",
+    };
+    if (typeof r.frame === "number" && Number.isFinite(r.frame)) contact.frame = Math.round(r.frame);
+    if (typeof r.impulse_ns === "number" && Number.isFinite(r.impulse_ns)) contact.impulse_ns = Math.abs(r.impulse_ns);
+    if (r.source === "measured" || r.source === "inferred") contact.source = r.source;
+    if (typeof r.sigma_s === "number" && Number.isFinite(r.sigma_s)) contact.sigma_s = Math.max(0, r.sigma_s);
+    if (text(r.note)) contact.note = text(r.note);
+    out.push(contact);
+  }
+  return out;
+}
+
 function slug(value: string, used: Set<string>) {
   const base = value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 24) || "object";
   let id = base;
   for (let n = 2; used.has(id); n++) id = `${base}-${n}`;
   used.add(id);
   return id;
-}
-
-function measuredLaneLines(raw: unknown): number[] | undefined {
-  if (!Array.isArray(raw) || raw.length < 2 || raw.length > 16) return undefined;
-  if (!raw.every((v) => typeof v === "number" && Number.isFinite(v) && v >= 0 && v <= 200)) return undefined;
-  return raw.every((v, i) => i === 0 || v > raw[i - 1]) ? [...raw] : undefined;
-}
-
-function restingPose(raw: unknown): SpecObject["rest"] {
-  if (!raw || typeof raw !== "object") return null;
-  const rest = raw as Record<string, unknown>;
-  if (typeof rest.x_m !== "number" || typeof rest.y_m !== "number" || !Number.isFinite(rest.x_m) || !Number.isFinite(rest.y_m)) return null;
-  return { x_m: rest.x_m, y_m: rest.y_m, heading_deg: finite(rest.heading_deg, 0) };
 }
 
 /** Validates pass 1 (and optionally merges pass 2) into a spec the engine can run. Throws if unusable. */
@@ -517,8 +553,6 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
   if (duration < 1) throw new Error("Codex couldn't tell how long the footage is.");
 
   const road = (p.road ?? {}) as Record<string, unknown>;
-  const forwardLines = measuredLaneLines(road.lane_lines_forward_m);
-  const backwardLines = measuredLaneLines(road.lane_lines_backward_m);
   const used = new Set<string>();
   const idMap = new Map<string, string>();
   const objects: SpecObject[] = [];
@@ -535,7 +569,12 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
     const length = finite(o.length_m, defaults.length);
     const width = finite(o.width_m, defaults.width);
     const mass = finite(o.mass_kg, defaults.mass);
+    const height = finite(o.height_m, Number.NaN);
+    const rest = o.rest as Record<string, unknown> | null | undefined;
     const hex = text(o.color_hex);
+    // Measured articulated trucks run to 16.5 m and ~40 t, beyond the ±40 % rule for the rigid-truck default.
+    const maxLength = category === "truck" ? 16.6 : defaults.length * 1.4;
+    const maxMass = category === "truck" ? 40000 : defaults.mass * 2;
     objects.push({
       id,
       label: text(o.label, `${text(o.color_name)} ${category}`.trim()),
@@ -546,80 +585,34 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
       model: text(o.model) || null,
       involvement: o.involvement === "crash" ? "crash" : "background",
       // Keep sizes within ±40 % of the class norm: a wrong guess must not make a car look like a bus.
-      length_m: clamp(length, defaults.length * 0.6, defaults.length * 1.4),
+      length_m: clamp(length, defaults.length * 0.6, maxLength),
       width_m: clamp(width, defaults.width * 0.6, defaults.width * 1.4),
-      ...(typeof o.height_m === "number" && Number.isFinite(o.height_m) && o.height_m > 0 ? { height_m: clamp(o.height_m, 0.3, 6) } : {}),
-      mass_kg: clamp(mass, defaults.mass * 0.5, defaults.mass * 2),
+      ...(Number.isFinite(height) ? { height_m: clamp(height, 0.3, 4.5) } : {}),
+      mass_kg: clamp(mass, defaults.mass * 0.5, maxMass),
       visible_from_s: clamp(finite(o.visible_from_s, frames[0].t_s), 0, duration),
       visible_to_s: clamp(finite(o.visible_to_s, frames.at(-1)!.t_s), 0, duration),
       keyframes: frames,
-      forces: forces(o.forces, duration),
-      rest: restingPose(o.rest),
+      forces: [],
+      rest:
+        rest && typeof rest === "object" && Number.isFinite(rest.x_m) && Number.isFinite(rest.y_m)
+          ? { x_m: rest.x_m as number, y_m: rest.y_m as number, heading_deg: finite(rest.heading_deg, 0) }
+          : null,
       confidence: clamp(finite(o.confidence, 0.5), 0, 1),
     });
   }
   if (objects.length === 0) throw new Error("Codex didn't find any vehicles to reconstruct.");
 
-  const staticObjects: StaticObject[] = [];
-  for (const raw of Array.isArray(p.static_objects) ? p.static_objects : []) {
-    if (!raw || typeof raw !== "object") continue;
-    const footprint: [number, number][] = Array.isArray(raw.footprint_m) ? raw.footprint_m
-      .filter((point: unknown) => Array.isArray(point) && point.length === 2 && point.every((v: unknown) => typeof v === "number" && Number.isFinite(v)))
-      .map((point: number[]) => [clamp(point[0], -2000, 2000), clamp(point[1], -2000, 2000)]) : [];
-    if (footprint.length > 1 && footprint[0][0] === footprint.at(-1)![0] && footprint[0][1] === footprint.at(-1)![1]) footprint.pop();
-    const area = footprint.reduce((sum, point, i) => {
-      const next = footprint[(i + 1) % footprint.length];
-      return sum + point[0] * next[1] - next[0] * point[1];
-    }, 0);
-    if (footprint.length < 3 || footprint.length > 64 || Math.abs(area) < 1e-6) continue;
-    if (area < 0) footprint.reverse();
-    const originalId = text(raw.id) || text(raw.label) || "static-object";
-    // A malformed static object must not steal an existing vehicle's contact identity.
-    if (idMap.has(originalId)) continue;
-    const id = slug(originalId, used);
-    idMap.set(originalId, id);
-    staticObjects.push({
-      id, kind: pick(raw.kind, ["median_divider", "barrier", "other"] as const, "other"),
-      label: text(raw.label, "Fixed object"), footprint_m: footprint,
-      height_m: clamp(finite(raw.height_m, 0.5), 0, 20), material: text(raw.material, "unknown"),
-      friction: clamp(finite(raw.friction, 0.5), 0, 2), restitution: clamp(finite(raw.restitution, 0.1), 0, 1),
-      stiffness_n_per_m: clamp(finite(raw.stiffness_n_per_m, 1e6), 1, 1e9), immovable: true,
-      source: pick(raw.source, ["measured", "inferred"] as const, "inferred"),
-      sigma_m: Math.max(0, finite(raw.sigma_m, 1)), note: text(raw.note),
-    });
-  }
-
   const resolveId = (raw: unknown) => {
     const value = text(raw);
     return idMap.get(value) ?? (objects.some((o) => o.id === value) ? value : null);
   };
-  const resolveVehicleId = (raw: unknown) => {
-    const id = resolveId(raw);
-    return objects.some((object) => object.id === id) ? id : null;
-  };
-  const contactList = (raw: unknown, defaultTime: number): Contact[] => {
-    if (!Array.isArray(raw)) return [];
-    return raw.flatMap((contact): Contact[] => {
-      const a = resolveVehicleId(contact?.a), b = resolveId(contact?.b);
-      if (!a || !b || a === b) return [];
-      const fixed = staticObjects.some((object) => object.id === b);
-      return [{
-        a, b, t_s: clamp(finite(contact.t_s, defaultTime), 0, duration),
-        x_m: finite(contact.x_m, 0), y_m: finite(contact.y_m, 0), normal_deg: finite(contact.normal_deg, Number.NaN),
-        ...(fixed || contact.kind ? { kind: fixed ? "vehicle-static" as const : "vehicle-vehicle" as const } : {}),
-        ...(typeof contact.frame === "number" && Number.isInteger(contact.frame) && contact.frame >= 0 ? { frame: contact.frame } : {}),
-        ...(typeof contact.impulse_ns === "number" && Number.isFinite(contact.impulse_ns) && contact.impulse_ns >= 0 ? { impulse_ns: contact.impulse_ns } : {}),
-        ...(contact.source === "measured" || contact.source === "inferred" ? { source: contact.source } : {}),
-        ...(typeof contact.sigma_s === "number" && Number.isFinite(contact.sigma_s) && contact.sigma_s >= 0 ? { sigma_s: contact.sigma_s } : {}),
-        ...(typeof contact.note === "string" ? { note: contact.note } : {}),
-      }];
-    }).sort((a, b) => a.t_s - b.t_s);
-  };
+  const statics = staticObjects(p.static_objects, used);
+  const staticIds = new Set(statics.map((s) => s.id));
 
   let crash: IncidentSpec["crash"] = null;
   const c = p.crash as Record<string, unknown> | null | undefined;
   if (c && typeof c === "object") {
-    const participants = (Array.isArray(c.participants) ? c.participants : []).map(resolveVehicleId).filter((id): id is string => !!id);
+    const participants = (Array.isArray(c.participants) ? c.participants : []).map(resolveId).filter((id): id is string => !!id);
     const start = clamp(finite(c.start_s, Number.NaN), 0, duration);
     if (participants.length > 0 && Number.isFinite(start)) {
       crash = {
@@ -628,7 +621,7 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
         kind: text(c.kind, "collision"),
         description: text(c.description),
         participants: [...new Set(participants)],
-        contacts: contactList(c.contacts, start),
+        contacts: contacts(c.contacts, resolveId, staticIds, duration, start),
       };
     }
   }
@@ -641,7 +634,8 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
     const q = pass2 as Record<string, any>;
     crash.start_s = clamp(finite(q.start_s, crash.start_s), 0, duration);
     crash.end_s = clamp(finite(q.end_s, crash.end_s), crash.start_s, duration);
-    if (Array.isArray(q.contacts)) crash.contacts = contactList(q.contacts, crash.start_s);
+    const pass2Contacts = contacts(q.contacts, resolveId, staticIds, duration, crash.start_s);
+    if (pass2Contacts.length) crash.contacts = pass2Contacts;
     for (const rawParticipant of Array.isArray(q.participants) ? q.participants : []) {
       const object = objects.find((o) => o.id === resolveId(rawParticipant?.id));
       if (!object) continue;
@@ -653,16 +647,22 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
         object.keyframes = [...object.keyframes.filter((k) => k.t_s < from - 0.3 || k.t_s > to + 0.3), ...dense].sort((x, y) => x.t_s - y.t_s);
       }
       object.forces = forces(rawParticipant.forces, duration);
-      object.rest = restingPose(rawParticipant.rest) ?? object.rest;
+      const rest = rawParticipant.rest;
+      if (rest && typeof rest === "object" && Number.isFinite(rest.x_m) && Number.isFinite(rest.y_m)) {
+        object.rest = { x_m: rest.x_m, y_m: rest.y_m, heading_deg: finite(rest.heading_deg, 0) };
+      }
     }
     for (const v of Array.isArray(q.caveats) ? q.caveats : []) if (text(v)) caveats.push(text(v));
   }
-  if (crash && crash.contacts.length === 0 && crash.participants.length >= 2) {
+  if (crash) crash.contacts.sort((x, y) => x.t_s - y.t_s);
+  if (crash && !crash.contacts.some((k) => k.kind === "vehicle-vehicle") && crash.participants.length >= 2) {
     // No contact list: assume the first two participants meet at the crash start.
-    crash.contacts.push({ a: crash.participants[0], b: crash.participants[1], t_s: crash.start_s, x_m: Number.NaN, y_m: Number.NaN, normal_deg: Number.NaN });
+    crash.contacts.push({ a: crash.participants[0], b: crash.participants[1], t_s: crash.start_s, x_m: Number.NaN, y_m: Number.NaN, normal_deg: Number.NaN, kind: "vehicle-vehicle", source: "inferred" });
   }
 
   const wind = (p.wind ?? {}) as Record<string, unknown>;
+  const forwardLines = laneLines(road.lane_lines_forward_m);
+  const backwardLines = laneLines(road.lane_lines_backward_m);
   return {
     prompt_version: PROMPT_VERSION,
     title: text(p.title, "Reconstructed incident"),
@@ -682,7 +682,7 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
       kind: pick(road.kind, ROAD_KINDS, "straight"),
       region: pick(road.region, REGIONS, "US"),
       road_class: pick(road.road_class, ROAD_CLASSES, "arterial"),
-      lanes_each_way: forwardLines ? forwardLines.length - 1 : clamp(Math.round(finite(road.lanes_each_way, 1)), 1, 5),
+      lanes_each_way: clamp(Math.round(finite(road.lanes_each_way, 1)), 1, 6),
       cross_lanes_each_way: clamp(Math.round(finite(road.cross_lanes_each_way, 1)), 1, 4),
       surface: pick(road.surface, SURFACES, "dry"),
       grade_percent: clamp(finite(road.grade_percent, 0), -12, 12),
@@ -693,7 +693,7 @@ export function sanitizeSpec(pass1: unknown, pass2?: unknown): IncidentSpec {
     wind: { toward_deg: finite(wind.toward_deg, 0), speed_mps: clamp(finite(wind.speed_mps, 0), 0, 40) },
     crash,
     objects,
-    ...(staticObjects.length ? { static_objects: staticObjects } : {}),
+    ...(statics.length ? { static_objects: statics } : {}),
     caveats,
   };
 }
