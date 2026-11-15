@@ -53,6 +53,7 @@ export const LEFT_PANEL = { default: 400, min: 300, max: 640 };
 export const RIGHT_PANEL = { default: 384, min: 300, max: 720 };
 /** Width of a collapsed panel's rail (px). */
 export const LEFT_RAIL = 60;
+export const RIGHT_RAIL = 60;
 /** The 3D view keeps at least this much width when panels are dragged wider (px). */
 const MIN_VIEWER = 360;
 
@@ -266,7 +267,7 @@ export const useAppStore = create<Store>((set, get) => ({
   setAssistantOpen: (assistantOpen) => set({ assistantOpen }),
   setLeftWidth: (width) => {
     const { rightWidth, assistantOpen } = get();
-    const leftWidth = clampWidth(width, LEFT_PANEL, assistantOpen ? rightWidth : 48);
+    const leftWidth = clampWidth(width, LEFT_PANEL, assistantOpen ? rightWidth : RIGHT_RAIL);
     saveWidth("reconstruct.leftWidth", leftWidth);
     set({ leftWidth });
   },

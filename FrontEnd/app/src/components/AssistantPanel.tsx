@@ -2,7 +2,7 @@ import { hasModel, interruptTurn, sendMessage } from "@/assistant/bridge";
 import { useChatStore, type ChatItem, type ToolChip } from "@/assistant/chatStore";
 import type { AssistantEffort } from "@/electron.d";
 import { ResizeHandle } from "@/components/ResizeHandle";
-import { useAppStore } from "@/store/useAppStore";
+import { RIGHT_RAIL, useAppStore } from "@/store/useAppStore";
 import { ArrowUp, Check, ChevronDown, CircleAlert, Loader2, PanelRightClose, PanelRightOpen, Sparkles, Square, Trash2, X, Zap } from "lucide-react";
 import { useVoiceHotkey, VoiceButton } from "@/voice";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -67,6 +67,7 @@ export function AssistantPanel() {
   const setOpen = useAppStore((state) => state.setAssistantOpen);
   const width = useAppStore((state) => state.rightWidth);
   const setWidth = useAppStore((state) => state.setRightWidth);
+  const isResizing = useAppStore((state) => state.resizing);
   const setResizing = useAppStore((state) => state.setResizing);
   const items = useChatStore((state) => state.items);
   const status = useChatStore((state) => state.status);
@@ -104,106 +105,127 @@ export function AssistantPanel() {
 
   submitRef.current = submit;
 
-  if (!open) {
-    return (
-      <aside className="flex w-[48px] shrink-0 flex-col items-center gap-3 border-l border-white/10 bg-[#0b0b0c] pt-3 text-white/70">
-        <button type="button" aria-label="Open the assistant" title="Open the assistant" className="rounded-full p-2 hover:bg-white/10 hover:text-white" onClick={() => setOpen(true)}>
-          <PanelRightOpen size={18} />
-        </button>
-        <Sparkles size={18} className="text-[#d97757]" />
-      </aside>
-    );
-  }
+  // Same collapse model as the left panel: one mounted aside, translateX to a rail.
+  // Remounting a separate 48px rail was what caused the black flash.
+  const hiddenX = width - RIGHT_RAIL;
 
   return (
-    <aside className="relative flex shrink-0 flex-col border-l border-white/10 bg-[#0b0b0c] text-white" style={{ width }}>
-      <ResizeHandle edge="left" width={width} onResize={setWidth} onResizingChange={setResizing} label="Resize the assistant" dark />
-      <header className="flex items-center gap-2 px-4 pt-3 pb-2">
-        <Sparkles size={16} className="text-[#d97757]" />
-        <span className="text-sm font-medium">Assistant</span>
-        <span className="min-w-0 flex-1 truncate text-xs text-white/40" title={statusText}>
-          {status === "starting" ? "Starting…" : status === "error" ? statusText : ""}
-        </span>
-        <button
-          type="button"
-          aria-label="Clear the conversation view"
-          title="Clear the conversation view"
-          disabled={items.length === 0 || busy}
-          className="rounded-full p-1.5 text-white/50 hover:bg-white/10 hover:text-white disabled:opacity-30"
-          onClick={clear}
-        >
-          <Trash2 size={15} />
-        </button>
-        <button type="button" aria-label="Hide the assistant" className="rounded-full p-1.5 text-white/50 hover:bg-white/10 hover:text-white" onClick={() => setOpen(false)}>
-          <PanelRightClose size={16} />
-        </button>
-      </header>
-
-      <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-3">
-        {items.length === 0 ? (
-          <EmptyState onPick={(text) => submit(text)} desktop={desktop} />
-        ) : (
-          items.map((item) => <Message key={item.id} item={item} />)
+    <>
+      <div
+        aria-hidden
+        className={`h-full shrink-0 ${isResizing ? "" : "transition-[width] duration-200 ease-in-out"}`}
+        style={{ width: open ? width : RIGHT_RAIL }}
+      />
+      <aside
+        style={{ width, transform: `translateX(${open ? 0 : hiddenX}px)` }}
+        className={`absolute inset-y-0 right-0 z-30 flex flex-col border-l border-white/10 bg-[#0b0b0c] text-white shadow-[-4px_0_24px_rgba(0,0,0,0.35)] ${
+          isResizing ? "" : "transition-transform duration-200 ease-in-out"
+        }`}
+      >
+        {open && (
+          <ResizeHandle edge="left" width={width} onResize={setWidth} onResizingChange={setResizing} label="Resize the assistant" dark />
         )}
-        {partial && <div className="ml-auto max-w-[85%] rounded-2xl bg-white/5 px-3 py-2 text-sm text-white/50 italic">{partial}</div>}
-      </div>
+        <header className="flex items-center gap-2 px-3 pt-3 pb-2">
+          <button
+            type="button"
+            aria-label={open ? "Hide the assistant" : "Show the assistant"}
+            title={open ? "Hide the assistant" : "Show the assistant"}
+            className="rounded-full p-2 text-white/70 hover:bg-white/10 hover:text-white"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <PanelRightClose size={18} /> : <PanelRightOpen size={18} />}
+          </button>
+          {open && (
+            <>
+              <Sparkles size={16} className="shrink-0 text-[#d97757]" />
+              <span className="text-sm font-medium">Assistant</span>
+              <span className="min-w-0 flex-1 truncate text-xs text-white/40" title={statusText}>
+                {status === "starting" ? "Starting…" : status === "error" ? statusText : ""}
+              </span>
+              <button
+                type="button"
+                aria-label="Clear the conversation view"
+                title="Clear the conversation view"
+                disabled={items.length === 0 || busy}
+                className="rounded-full p-1.5 text-white/50 hover:bg-white/10 hover:text-white disabled:opacity-30"
+                onClick={clear}
+              >
+                <Trash2 size={15} />
+              </button>
+            </>
+          )}
+        </header>
 
-      <div className="px-3 pb-3">
-        <div className="rounded-2xl border border-white/10 bg-[#1f1f21] focus-within:border-white/25">
-          <textarea
-            ref={inputRef}
-            value={draft}
-            rows={2}
-            onChange={(event) => setDraft(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
-                event.preventDefault();
-                submit();
-              }
-            }}
-            placeholder={desktop ? `Ask about the crash, or hold ${hotkey} to talk` : "Quick commands: pause, top view, zoom in…"}
-            className="block max-h-40 min-h-[52px] w-full resize-none bg-transparent px-4 pt-3 text-sm text-white outline-none placeholder:text-white/35"
-          />
-          <div className="flex items-center gap-1 px-2 pb-2">
-            <ModelPicker disabled={busy || !desktop} />
-            <div className="flex-1" />
-            <VoiceButton
-              disabled={busy}
-              onPartial={setPartial}
-              onTranscript={(text) => {
-                setPartial("");
-                if (text.trim()) submit(text);
-              }}
-            />
-            {busy ? (
-              <button
-                type="button"
-                aria-label="Stop"
-                title="Stop"
-                onClick={() => void interruptTurn()}
-                className="grid h-8 w-8 place-items-center rounded-full bg-white text-black hover:bg-white/85"
-              >
-                <Square size={12} fill="currentColor" />
-              </button>
-            ) : (
-              <button
-                type="button"
-                aria-label="Send"
-                title="Send (Enter)"
-                disabled={!draft.trim()}
-                onClick={() => submit()}
-                className="grid h-8 w-8 place-items-center rounded-full bg-white text-black hover:bg-white/85 disabled:bg-white/15 disabled:text-white/40"
-              >
-                <ArrowUp size={16} />
-              </button>
-            )}
-          </div>
-        </div>
-        <p className="mt-2 px-1 text-[11px] leading-snug text-white/35">
-          Answers come from the reconstruction only and are estimates, not measured facts.
-        </p>
-      </div>
-    </aside>
+        {open && (
+          <>
+            <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-3">
+              {items.length === 0 ? (
+                <EmptyState onPick={(text) => submit(text)} desktop={desktop} />
+              ) : (
+                items.map((item) => <Message key={item.id} item={item} />)
+              )}
+              {partial && <div className="ml-auto max-w-[85%] rounded-2xl bg-white/5 px-3 py-2 text-sm text-white/50 italic">{partial}</div>}
+            </div>
+
+            <div className="px-3 pb-3">
+              <div className="rounded-2xl border border-white/10 bg-[#1f1f21] focus-within:border-white/25">
+                <textarea
+                  ref={inputRef}
+                  value={draft}
+                  rows={2}
+                  onChange={(event) => setDraft(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+                      event.preventDefault();
+                      submit();
+                    }
+                  }}
+                  placeholder={desktop ? `Ask about the crash, or hold ${hotkey} to talk` : "Quick commands: pause, top view, zoom in…"}
+                  className="block max-h-40 min-h-[52px] w-full resize-none bg-transparent px-4 pt-3 text-sm text-white outline-none placeholder:text-white/35"
+                />
+                <div className="flex items-center gap-1 px-2 pb-2">
+                  <ModelPicker disabled={busy || !desktop} />
+                  <div className="flex-1" />
+                  <VoiceButton
+                    disabled={busy}
+                    onPartial={setPartial}
+                    onTranscript={(text) => {
+                      setPartial("");
+                      if (text.trim()) submit(text);
+                    }}
+                  />
+                  {busy ? (
+                    <button
+                      type="button"
+                      aria-label="Stop"
+                      title="Stop"
+                      onClick={() => void interruptTurn()}
+                      className="grid h-8 w-8 place-items-center rounded-full bg-white text-black hover:bg-white/85"
+                    >
+                      <Square size={12} fill="currentColor" />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      aria-label="Send"
+                      title="Send (Enter)"
+                      disabled={!draft.trim()}
+                      onClick={() => submit()}
+                      className="grid h-8 w-8 place-items-center rounded-full bg-white text-black hover:bg-white/85 disabled:bg-white/15 disabled:text-white/40"
+                    >
+                      <ArrowUp size={16} />
+                    </button>
+                  )}
+                </div>
+              </div>
+              <p className="mt-2 px-1 text-[11px] leading-snug text-white/35">
+                Answers come from the reconstruction only and are estimates, not measured facts.
+              </p>
+            </div>
+          </>
+        )}
+      </aside>
+    </>
   );
 }
 

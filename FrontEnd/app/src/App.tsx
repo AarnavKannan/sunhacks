@@ -119,7 +119,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="flex h-full w-full overflow-hidden bg-black">
+    <div className="relative flex h-full w-full overflow-hidden bg-black">
       <div className="relative h-full min-w-0 flex-1 overflow-hidden">
         <Viewport />
         {view === "viewer" && (
