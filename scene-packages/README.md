@@ -1,6 +1,6 @@
 # Scene package
 
-The desktop app and the MCP tools load a **folder**. There is no server and no database. `incident-demo` is the package for `demo.mp4`. Vehicle tracks are measured from the class-colored boxes in that video, then smoothed. They are not authored paths.
+The desktop app and the MCP tools load a **folder**. There is no server and no database. `incident-demo` is the package for `data/demo.mp4`. Vehicle tracks are measured from the class-colored boxes in that video, then smoothed. They are not authored paths.
 
 Regenerate it from the repo root with:
 
@@ -9,11 +9,11 @@ pipeline/.venv/bin/reconstruct build
 pipeline/.venv/bin/reconstruct validate scene-packages/incident-demo
 ```
 
-JSON Schema in [`schema/`](../schema/) is the source of truth. The pipeline checks every write with those schemas and with the matching Pydantic models. TypeScript types for the app live in [`shared/scene-types/index.ts`](../shared/scene-types/index.ts).
+JSON Schema in [`schema/`](../schema/) is the source of truth. The pipeline checks every write with those schemas and with the matching Pydantic models. TypeScript types for the app live in [`packages/scene-types/index.ts`](../packages/scene-types/index.ts).
 
 ## This clip has an accident
 
-`demo.mp4` is one minute of Autobahn traffic with a **multi-vehicle incident** on carriageway B (most visible in `cam_br`). Vehicles brake, stop, and collide; debris is visible in the mosaic.
+`data/demo.mp4` is one minute of Autobahn traffic with a **multi-vehicle incident** on carriageway B (most visible in `cam_br`). Vehicles brake, stop, and collide; debris is visible in the mosaic.
 
 - `manifest.json` sets `impact_time_s` from the earliest detected impact
 - `events.json` includes `impact`, and may include `brake` / `rest`, plus lane changes and passes
@@ -36,7 +36,7 @@ incident-demo/
   vehicles/car.ply       # one blob per class, shared by every entity of that class
   vehicles/van.ply
   vehicles/truck.ply
-  sources/mosaic.mp4     # copy of demo.mp4, so the folder stands alone
+  sources/mosaic.mp4     # copy of data/demo.mp4, so the folder stands alone
 ```
 
 `dims_m` is the proxy box if a class splat is not enough. Length is local +X, height local +Y, width local +Z. The vehicle position is the center of that box, so the bottom sits on the ground.

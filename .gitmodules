@@ -1,12 +1,12 @@
-[submodule "OpenSplat"]
-	path = OpenSplat
+[submodule "vendor/OpenSplat"]
+	path = vendor/OpenSplat
 	url = https://github.com/WebODM/OpenSplat.git
-[submodule "multiple-view-dynamic-reconstruction"]
-	path = multiple-view-dynamic-reconstruction
+[submodule "vendor/multiple-view-dynamic-reconstruction"]
+	path = vendor/multiple-view-dynamic-reconstruction
 	url = https://github.com/ljjTYJR/multiple-view-dynamic-reconstruction.git
-[submodule "vggt"]
-	path = vggt
+[submodule "vendor/vggt"]
+	path = vendor/vggt
 	url = https://github.com/facebookresearch/vggt.git
-[submodule "hex"]
-	path = hex
+[submodule "vendor/hex"]
+	path = vendor/hex
 	url = https://github.com/anomalyco/hex.git
