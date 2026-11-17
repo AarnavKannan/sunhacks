@@ -14,11 +14,12 @@ def repo_root() -> Path:
                 continue
             seen.add(candidate)
             if (candidate / "schema" / "manifest.schema.json").is_file() and (
-                candidate / "demo.mp4"
+                candidate / "data" / "demo.mp4"
             ).is_file():
                 return candidate
     raise FileNotFoundError(
-        "Could not find the repository root (expected schema/manifest.schema.json and demo.mp4)."
+        "Could not find the repository root "
+        "(expected schema/manifest.schema.json and data/demo.mp4)."
     )
 
 
